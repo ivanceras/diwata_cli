@@ -1,4 +1,6 @@
 #![deny(warnings)]
+#![feature(plugin)]
+#![feature(custom_attribute)]
 extern crate diwata_intel as intel;
 extern crate diwata_server as server;
 extern crate futures;
@@ -7,6 +9,8 @@ extern crate rustorm;
 extern crate serde;
 extern crate serde_json;
 extern crate structopt;
+#[macro_use]
+extern crate structopt_derive;
 
 use structopt::StructOpt;
 
@@ -33,8 +37,8 @@ use rustorm::Rows;
 use rustorm::TableName;
 use serde::Serialize;
 use server::context::Context;
-use server::Opt;
 use server::ServiceError;
+use std::process::Command;
 use std::sync::{Arc, Mutex};
 
 const HTML: &'static str = include_str!("../public/static/inline-cli.html");
@@ -494,9 +498,7 @@ fn create_response<B: Serialize>(body: Result<B, ServiceError>) -> Response {
     }
 }
 
-pub fn run(address: Option<String>, port: Option<u16>) {
-    let ip = address.unwrap();
-    let port = port.unwrap();
+pub fn run(ip: &str, port: u16) {
     let addr = format!("{}:{}", ip, port).parse().unwrap();
     let server = Server::new();
     let instance = Instance::new(server);
@@ -505,6 +507,76 @@ pub fn run(address: Option<String>, port: Option<u16>) {
         .unwrap()
         .run()
         .unwrap();
+}
+
+// The following functions are adapted from `cargo doc`.
+// If OK, they return the command line used to launch the browser, if there is a
+// failure, they return the command lines tried.
+#[cfg(not(any(target_os = "windows", target_os = "macos")))]
+fn open_browser(uri: &str) -> Result<&'static str, Vec<&'static str>> {
+    use std::env;
+
+    let mut methods = Vec::new();
+    // trying $BROWSER
+    match env::var("BROWSER") {
+        Ok(name) => match Command::new(name).arg(uri).status() {
+            Ok(_) => return Ok("$BROWSER"),
+            Err(_) => methods.push("$BROWSER"),
+        },
+        Err(_) => (), // Do nothing here if $BROWSER is not found
+    }
+
+    for m in ["xdg-open", "gnome-open", "kde-open"].iter() {
+        match Command::new(m).arg(uri).status() {
+            Ok(_) => return Ok(m),
+            Err(_) => methods.push(m),
+        }
+    }
+
+    Err(methods)
+}
+
+#[cfg(target_os = "windows")]
+fn open_browser(uri: &str) -> Result<&'static str, Vec<&'static str>> {
+    match Command::new("cmd").arg("/C").arg(uri).status() {
+        Ok(_) => return Ok("cmd /C"),
+        Err(_) => return Err(vec!["cmd /C"]),
+    };
+}
+
+#[cfg(target_os = "macos")]
+fn open_browser(uri: &str) -> Result<&'static str, Vec<&'static str>> {
+    match Command::new("open").arg(uri).status() {
+        Ok(_) => return Ok("open"),
+        Err(_) => return Err(vec!["open"]),
+    };
+}
+
+#[derive(StructOpt, Debug)]
+#[structopt(name = "diwata", about = "A user friendly database interface")]
+pub struct Opt {
+    #[structopt(
+        short = "u",
+        long = "db-url",
+        help = "Database url to connect to, when set all data is exposed without login needed in the client side"
+    )]
+    pub db_url: Option<String>,
+    #[structopt(
+        short = "a",
+        long = "address",
+        help = "The address the server would listen, default is 0.0.0.0",
+        default_value = "0.0.0.0"
+    )]
+    pub address: String,
+    #[structopt(
+        short = "p",
+        long = "port",
+        help = "What port this server would listen to, default is 8000",
+        default_value = "8000"
+    )]
+    pub port: u16,
+    #[structopt(short = "o", long = "open", help = "open a browser")]
+    pub open: bool,
 }
 
 fn main() {
@@ -516,5 +588,11 @@ fn main() {
             Err(_) => println!("unable to set db_url"),
         }
     }
-    run(opt.address, opt.port);
+    let ip = opt.address;
+    let port = opt.port;
+    let uri = format!("http://{}:{}", ip, port);
+    if opt.open {
+        open_browser(&uri).unwrap();
+    }
+    run(&ip, port);
 }

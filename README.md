@@ -1,2 +1,1 @@
-This is for crates.io publishing
-using a precompiled static html files
+# Access your database in a user-friendly ui in the browser
