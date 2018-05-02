@@ -1,13 +1,11 @@
+#![deny(warnings)]
 extern crate diwata_intel as intel;
 extern crate diwata_server as server;
 extern crate futures;
 extern crate hyper;
 extern crate rustorm;
-extern crate serde_json;
-#[macro_use]
 extern crate serde;
-#[macro_use]
-extern crate structopt_derive;
+extern crate serde_json;
 extern crate structopt;
 
 use structopt::StructOpt;
@@ -37,9 +35,6 @@ use serde::Serialize;
 use server::context::Context;
 use server::Opt;
 use server::ServiceError;
-use std::fs::File;
-use std::io::prelude::*;
-use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
 
 const HTML: &'static str = include_str!("../public/static/inline-cli.html");
