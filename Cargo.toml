@@ -1,7 +1,7 @@
 
 [package]
 name = "diwata_cli"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Jovansonlee Cesar <ivanceras@gmail.com>"]
 license = "MIT"
 description = "Command line for diwata"
@@ -14,6 +14,7 @@ structopt = "0.1"
 structopt-derive = "0.1"
 hyper = "0.11"
 futures = "0.1.14"
+open = "1.2"
 
 [dependencies.diwata_intel]
 path = "../intel"

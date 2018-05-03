@@ -11,6 +11,7 @@ extern crate serde_json;
 extern crate structopt;
 #[macro_use]
 extern crate structopt_derive;
+extern crate open;
 
 use structopt::StructOpt;
 
@@ -38,7 +39,6 @@ use rustorm::TableName;
 use serde::Serialize;
 use server::context::Context;
 use server::ServiceError;
-use std::process::Command;
 use std::sync::{Arc, Mutex};
 
 const HTML: &'static str = include_str!("../public/static/inline-cli.html");
@@ -509,47 +509,11 @@ pub fn run(ip: &str, port: u16) {
         .unwrap();
 }
 
-// The following functions are adapted from `cargo doc`.
-// If OK, they return the command line used to launch the browser, if there is a
-// failure, they return the command lines tried.
-#[cfg(not(any(target_os = "windows", target_os = "macos")))]
-fn open_browser(uri: &str) -> Result<&'static str, Vec<&'static str>> {
-    use std::env;
-
-    let mut methods = Vec::new();
-    // trying $BROWSER
-    match env::var("BROWSER") {
-        Ok(name) => match Command::new(name).arg(uri).status() {
-            Ok(_) => return Ok("$BROWSER"),
-            Err(_) => methods.push("$BROWSER"),
-        },
-        Err(_) => (), // Do nothing here if $BROWSER is not found
+fn open_browser(uri: &str) {
+    match open::that(uri) {
+        Ok(_) => println!("browser launched"),
+        Err(e) => println!("unable to open a browser {}", e),
     }
-
-    for m in ["xdg-open", "gnome-open", "kde-open"].iter() {
-        match Command::new(m).arg(uri).status() {
-            Ok(_) => return Ok(m),
-            Err(_) => methods.push(m),
-        }
-    }
-
-    Err(methods)
-}
-
-#[cfg(target_os = "windows")]
-fn open_browser(uri: &str) -> Result<&'static str, Vec<&'static str>> {
-    match Command::new("cmd").arg("/C").arg(uri).status() {
-        Ok(_) => return Ok("cmd /C"),
-        Err(_) => return Err(vec!["cmd /C"]),
-    };
-}
-
-#[cfg(target_os = "macos")]
-fn open_browser(uri: &str) -> Result<&'static str, Vec<&'static str>> {
-    match Command::new("open").arg(uri).status() {
-        Ok(_) => return Ok("open"),
-        Err(_) => return Err(vec!["open"]),
-    };
 }
 
 #[derive(StructOpt, Debug)]
@@ -589,10 +553,15 @@ fn main() {
         }
     }
     let ip = opt.address;
+    let address = match &*ip {
+        "0.0.0.0" => "localhost",
+        _ => &ip,
+    };
     let port = opt.port;
-    let uri = format!("http://{}:{}", ip, port);
+    let uri = format!("http://{}:{}", address, port);
+    println!("uri: {}", uri);
     if opt.open {
-        open_browser(&uri).unwrap();
+        open_browser(&uri);
     }
     run(&ip, port);
 }
