@@ -4,9 +4,9 @@ cd ../elm-webclient/
 
 cd ../
 
-rsync -vahP --delete public/ ./diwata_cli/public/
+rsync -vahP --delete public/ ./cli/public/
 
-cd diwata_cli/
+cd cli/
 
 rsync -vahP ./static/ ./public/static/
 
