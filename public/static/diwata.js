@@ -24029,7 +24029,11 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$view = F2(
 			});
 		return A2(
 			_elm_lang$html$Html$div,
-			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('dropdown-display'),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: A3(_ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton, styles, list, model),
