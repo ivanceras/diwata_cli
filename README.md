@@ -17,3 +17,18 @@ You can then open it by issuing the command
 ```
 diwata_cli --db-url sqlite://sakila.db  -p 80001 --open
 ```
+
+```
+USAGE:
+    diwata_cli [OPTIONS]
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -a, --address <address>    The address the server would listen, default is 0.0.0.0 [default: 0.0.0.0]
+    -u, --db-url <db_url>      Database url to connect to, when set all data is exposed without login needed in the
+                               client side
+    -p, --port <port>          What port this server would listen to, default is 8000 [default: 8000]
+```

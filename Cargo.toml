@@ -17,11 +17,11 @@ futures = "0.1.14"
 open = "1.2"
 
 [dependencies.diwata_intel]
-path = "../intel"
+#path = "../intel"
 version = "0.1"
 
 [dependencies.diwata_server]
-path = "../server"
+#path = "../server"
 version = "0.1"
 
 [dependencies.rustorm]
