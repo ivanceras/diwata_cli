@@ -1,7 +1,7 @@
 
 [package]
 name = "diwata_cli"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Jovansonlee Cesar <ivanceras@gmail.com>"]
 license = "MIT"
 description = "Command line for diwata"
@@ -17,11 +17,9 @@ futures = "0.1.14"
 open = "1.2"
 
 [dependencies.diwata_intel]
-#path = "../intel"
 version = "0.1"
 
 [dependencies.diwata_server]
-#path = "../server"
 version = "0.1"
 
 [dependencies.rustorm]
