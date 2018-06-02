@@ -8985,6 +8985,27 @@ var _abadi199$dateparser$DateParser$parse = F3(
 				_abadi199$dateparser$Pattern$parse(pattern)));
 	});
 
+
+var _coreytrampe$elm_vendor$Native_Vendor = function(elm) {
+
+    //  http://davidwalsh.name/vendor-prefix
+    var styles = window.getComputedStyle(document.documentElement, '');
+    var vendorPrefix = (Array.prototype.slice
+        .call(styles)
+        .join('')
+        .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+    )[1];
+
+    return  { prefix: vendorPrefix };
+}();
+
+var _coreytrampe$elm_vendor$Vendor$Unknown = {ctor: 'Unknown'};
+var _coreytrampe$elm_vendor$Vendor$O = {ctor: 'O'};
+var _coreytrampe$elm_vendor$Vendor$MS = {ctor: 'MS'};
+var _coreytrampe$elm_vendor$Vendor$Webkit = {ctor: 'Webkit'};
+var _coreytrampe$elm_vendor$Vendor$Moz = {ctor: 'Moz'};
+var _coreytrampe$elm_vendor$Vendor$prefix = _elm_lang$core$Native_Utils.eq(_coreytrampe$elm_vendor$Native_Vendor.prefix, 'webkit') ? _coreytrampe$elm_vendor$Vendor$Webkit : (_elm_lang$core$Native_Utils.eq(_coreytrampe$elm_vendor$Native_Vendor.prefix, 'moz') ? _coreytrampe$elm_vendor$Vendor$Moz : (_elm_lang$core$Native_Utils.eq(_coreytrampe$elm_vendor$Native_Vendor.prefix, 'ms') ? _coreytrampe$elm_vendor$Vendor$MS : (_elm_lang$core$Native_Utils.eq(_coreytrampe$elm_vendor$Native_Vendor.prefix, 'o') ? _coreytrampe$elm_vendor$Vendor$O : _coreytrampe$elm_vendor$Vendor$Unknown)));
+
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrap;
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrapWithFlags;
 
@@ -13745,10 +13766,6 @@ return {
 
 }();
 
-var _elm_lang$core$Process$kill = _elm_lang$core$Native_Scheduler.kill;
-var _elm_lang$core$Process$sleep = _elm_lang$core$Native_Scheduler.sleep;
-var _elm_lang$core$Process$spawn = _elm_lang$core$Native_Scheduler.spawn;
-
 var _elm_lang$core$Regex$split = _elm_lang$core$Native_Regex.split;
 var _elm_lang$core$Regex$replace = _elm_lang$core$Native_Regex.replace;
 var _elm_lang$core$Regex$find = _elm_lang$core$Native_Regex.find;
@@ -13765,6 +13782,866 @@ var _elm_lang$core$Regex$AtMost = function (a) {
 	return {ctor: 'AtMost', _0: a};
 };
 var _elm_lang$core$Regex$All = {ctor: 'All'};
+
+var _elm_lang$core$Native_Bitwise = function() {
+
+return {
+	and: F2(function and(a, b) { return a & b; }),
+	or: F2(function or(a, b) { return a | b; }),
+	xor: F2(function xor(a, b) { return a ^ b; }),
+	complement: function complement(a) { return ~a; },
+	shiftLeftBy: F2(function(offset, a) { return a << offset; }),
+	shiftRightBy: F2(function(offset, a) { return a >> offset; }),
+	shiftRightZfBy: F2(function(offset, a) { return a >>> offset; })
+};
+
+}();
+
+var _elm_lang$core$Bitwise$shiftRightZfBy = _elm_lang$core$Native_Bitwise.shiftRightZfBy;
+var _elm_lang$core$Bitwise$shiftRightBy = _elm_lang$core$Native_Bitwise.shiftRightBy;
+var _elm_lang$core$Bitwise$shiftLeftBy = _elm_lang$core$Native_Bitwise.shiftLeftBy;
+var _elm_lang$core$Bitwise$complement = _elm_lang$core$Native_Bitwise.complement;
+var _elm_lang$core$Bitwise$xor = _elm_lang$core$Native_Bitwise.xor;
+var _elm_lang$core$Bitwise$or = _elm_lang$core$Native_Bitwise.or;
+var _elm_lang$core$Bitwise$and = _elm_lang$core$Native_Bitwise.and;
+
+var _elm_community$string_extra$String_Extra$accentRegex = function () {
+	var matches = {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: '[à-æ]', _1: 'a'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: '[À-Æ]', _1: 'A'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'ç', _1: 'c'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'Ç', _1: 'C'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: '[è-ë]', _1: 'e'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: '[È-Ë]', _1: 'E'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: '[ì-ï]', _1: 'i'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: '[Ì-Ï]', _1: 'I'},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'ñ', _1: 'n'},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'Ñ', _1: 'N'},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: '[ò-ö]', _1: 'o'},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: '[Ò-Ö]', _1: 'O'},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: '[ù-ü]', _1: 'u'},
+														_1: {
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: '[Ù-Ü]', _1: 'U'},
+															_1: {
+																ctor: '::',
+																_0: {ctor: '_Tuple2', _0: 'ý', _1: 'y'},
+																_1: {
+																	ctor: '::',
+																	_0: {ctor: '_Tuple2', _0: 'ÿ', _1: 'y'},
+																	_1: {
+																		ctor: '::',
+																		_0: {ctor: '_Tuple2', _0: 'Ý', _1: 'Y'},
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	};
+	return A2(
+		_elm_lang$core$List$map,
+		function (_p0) {
+			var _p1 = _p0;
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Regex$regex(_p1._0),
+				_1: _p1._1
+			};
+		},
+		matches);
+}();
+var _elm_community$string_extra$String_Extra$removeAccents = function (string) {
+	if (_elm_lang$core$String$isEmpty(string)) {
+		return string;
+	} else {
+		var do_regex_to_remove_acents = function (_p2) {
+			var _p3 = _p2;
+			return A3(
+				_elm_lang$core$Regex$replace,
+				_elm_lang$core$Regex$All,
+				_p3._0,
+				function (_p4) {
+					return _p3._1;
+				});
+		};
+		return A3(_elm_lang$core$List$foldl, do_regex_to_remove_acents, string, _elm_community$string_extra$String_Extra$accentRegex);
+	}
+};
+var _elm_community$string_extra$String_Extra$nonEmpty = function (string) {
+	return _elm_lang$core$String$isEmpty(string) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(string);
+};
+var _elm_community$string_extra$String_Extra$replacementCodePoint = 65533;
+var _elm_community$string_extra$String_Extra$toCodePoints = function (string) {
+	var allCodeUnits = A2(
+		_elm_lang$core$List$map,
+		_elm_lang$core$Char$toCode,
+		_elm_lang$core$String$toList(string));
+	var combineAndReverse = F2(
+		function (codeUnits, accumulated) {
+			combineAndReverse:
+			while (true) {
+				var _p5 = codeUnits;
+				if (_p5.ctor === '[]') {
+					return accumulated;
+				} else {
+					var _p9 = _p5._0;
+					var _p8 = _p5._1;
+					if ((_elm_lang$core$Native_Utils.cmp(_p9, 0) > -1) && (_elm_lang$core$Native_Utils.cmp(_p9, 55295) < 1)) {
+						var _v3 = _p8,
+							_v4 = {ctor: '::', _0: _p9, _1: accumulated};
+						codeUnits = _v3;
+						accumulated = _v4;
+						continue combineAndReverse;
+					} else {
+						if ((_elm_lang$core$Native_Utils.cmp(_p9, 55296) > -1) && (_elm_lang$core$Native_Utils.cmp(_p9, 56319) < 1)) {
+							var _p6 = _p8;
+							if (_p6.ctor === '[]') {
+								return {ctor: '::', _0: _elm_community$string_extra$String_Extra$replacementCodePoint, _1: accumulated};
+							} else {
+								var _p7 = _p6._0;
+								if ((_elm_lang$core$Native_Utils.cmp(_p7, 56320) > -1) && (_elm_lang$core$Native_Utils.cmp(_p7, 57343) < 1)) {
+									var codePoint = (65536 + ((_p9 - 55296) * 1024)) + (_p7 - 56320);
+									var _v6 = _p6._1,
+										_v7 = {ctor: '::', _0: codePoint, _1: accumulated};
+									codeUnits = _v6;
+									accumulated = _v7;
+									continue combineAndReverse;
+								} else {
+									var _v8 = _p8,
+										_v9 = {ctor: '::', _0: _elm_community$string_extra$String_Extra$replacementCodePoint, _1: accumulated};
+									codeUnits = _v8;
+									accumulated = _v9;
+									continue combineAndReverse;
+								}
+							}
+						} else {
+							if ((_elm_lang$core$Native_Utils.cmp(_p9, 57344) > -1) && (_elm_lang$core$Native_Utils.cmp(_p9, 65535) < 1)) {
+								var _v10 = _p8,
+									_v11 = {ctor: '::', _0: _p9, _1: accumulated};
+								codeUnits = _v10;
+								accumulated = _v11;
+								continue combineAndReverse;
+							} else {
+								var _v12 = _p8,
+									_v13 = {ctor: '::', _0: _elm_community$string_extra$String_Extra$replacementCodePoint, _1: accumulated};
+								codeUnits = _v12;
+								accumulated = _v13;
+								continue combineAndReverse;
+							}
+						}
+					}
+				}
+			}
+		});
+	return _elm_lang$core$List$reverse(
+		A2(
+			combineAndReverse,
+			allCodeUnits,
+			{ctor: '[]'}));
+};
+var _elm_community$string_extra$String_Extra$fromCodePoints = function (allCodePoints) {
+	var splitAndReverse = F2(
+		function (codePoints, accumulated) {
+			splitAndReverse:
+			while (true) {
+				var _p10 = codePoints;
+				if (_p10.ctor === '[]') {
+					return accumulated;
+				} else {
+					var _p12 = _p10._1;
+					var _p11 = _p10._0;
+					if ((_elm_lang$core$Native_Utils.cmp(_p11, 0) > -1) && (_elm_lang$core$Native_Utils.cmp(_p11, 55295) < 1)) {
+						var _v15 = _p12,
+							_v16 = {ctor: '::', _0: _p11, _1: accumulated};
+						codePoints = _v15;
+						accumulated = _v16;
+						continue splitAndReverse;
+					} else {
+						if ((_elm_lang$core$Native_Utils.cmp(_p11, 65536) > -1) && (_elm_lang$core$Native_Utils.cmp(_p11, 1114111) < 1)) {
+							var subtracted = _p11 - 65536;
+							var leading = (subtracted >> 10) + 55296;
+							var trailing = (subtracted & 1023) + 56320;
+							var _v17 = _p12,
+								_v18 = {
+								ctor: '::',
+								_0: trailing,
+								_1: {ctor: '::', _0: leading, _1: accumulated}
+							};
+							codePoints = _v17;
+							accumulated = _v18;
+							continue splitAndReverse;
+						} else {
+							if ((_elm_lang$core$Native_Utils.cmp(_p11, 57344) > -1) && (_elm_lang$core$Native_Utils.cmp(_p11, 65535) < 1)) {
+								var _v19 = _p12,
+									_v20 = {ctor: '::', _0: _p11, _1: accumulated};
+								codePoints = _v19;
+								accumulated = _v20;
+								continue splitAndReverse;
+							} else {
+								var _v21 = _p12,
+									_v22 = {ctor: '::', _0: _elm_community$string_extra$String_Extra$replacementCodePoint, _1: accumulated};
+								codePoints = _v21;
+								accumulated = _v22;
+								continue splitAndReverse;
+							}
+						}
+					}
+				}
+			}
+		});
+	var allCodeUnits = _elm_lang$core$List$reverse(
+		A2(
+			splitAndReverse,
+			allCodePoints,
+			{ctor: '[]'}));
+	return _elm_lang$core$String$fromList(
+		A2(_elm_lang$core$List$map, _elm_lang$core$Char$fromCode, allCodeUnits));
+};
+var _elm_community$string_extra$String_Extra$fromFloat = _elm_lang$core$Basics$toString;
+var _elm_community$string_extra$String_Extra$fromInt = _elm_lang$core$Basics$toString;
+var _elm_community$string_extra$String_Extra$leftOfBack = F2(
+	function (pattern, string) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			'',
+			A2(
+				_elm_lang$core$Maybe$map,
+				A2(_elm_lang$core$Basics$flip, _elm_lang$core$String$left, string),
+				_elm_lang$core$List$head(
+					_elm_lang$core$List$reverse(
+						A2(_elm_lang$core$String$indexes, pattern, string)))));
+	});
+var _elm_community$string_extra$String_Extra$rightOfBack = F2(
+	function (pattern, string) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			'',
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (_p13) {
+					return A3(
+						_elm_lang$core$Basics$flip,
+						_elm_lang$core$String$dropLeft,
+						string,
+						A2(
+							F2(
+								function (x, y) {
+									return x + y;
+								}),
+							_elm_lang$core$String$length(pattern),
+							_p13));
+				},
+				_elm_lang$core$List$head(
+					_elm_lang$core$List$reverse(
+						A2(_elm_lang$core$String$indexes, pattern, string)))));
+	});
+var _elm_community$string_extra$String_Extra$firstResultHelp = F2(
+	function ($default, list) {
+		firstResultHelp:
+		while (true) {
+			var _p14 = list;
+			if (_p14.ctor === '[]') {
+				return $default;
+			} else {
+				if (_p14._0.ctor === 'Just') {
+					return _p14._0._0;
+				} else {
+					var _v24 = $default,
+						_v25 = _p14._1;
+					$default = _v24;
+					list = _v25;
+					continue firstResultHelp;
+				}
+			}
+		}
+	});
+var _elm_community$string_extra$String_Extra$firstResult = function (list) {
+	return A2(_elm_community$string_extra$String_Extra$firstResultHelp, '', list);
+};
+var _elm_community$string_extra$String_Extra$leftOf = F2(
+	function (pattern, string) {
+		return A2(
+			_elm_lang$core$String$join,
+			'',
+			A2(
+				_elm_lang$core$List$map,
+				function (_p15) {
+					return _elm_community$string_extra$String_Extra$firstResult(
+						function (_) {
+							return _.submatches;
+						}(_p15));
+				},
+				A3(
+					_elm_lang$core$Regex$find,
+					_elm_lang$core$Regex$AtMost(1),
+					_elm_lang$core$Regex$regex(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'^(.*?)',
+							_elm_lang$core$Regex$escape(pattern))),
+					string)));
+	});
+var _elm_community$string_extra$String_Extra$rightOf = F2(
+	function (pattern, string) {
+		return A2(
+			_elm_lang$core$String$join,
+			'',
+			A2(
+				_elm_lang$core$List$map,
+				function (_p16) {
+					return _elm_community$string_extra$String_Extra$firstResult(
+						function (_) {
+							return _.submatches;
+						}(_p16));
+				},
+				A3(
+					_elm_lang$core$Regex$find,
+					_elm_lang$core$Regex$AtMost(1),
+					_elm_lang$core$Regex$regex(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Regex$escape(pattern),
+							'(.*)$')),
+					string)));
+	});
+var _elm_community$string_extra$String_Extra$pluralize = F3(
+	function (singular, plural, count) {
+		return _elm_lang$core$Native_Utils.eq(count, 1) ? A2(_elm_lang$core$Basics_ops['++'], '1 ', singular) : A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(count),
+			A2(_elm_lang$core$Basics_ops['++'], ' ', plural));
+	});
+var _elm_community$string_extra$String_Extra$stripTags = function (string) {
+	return A4(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		_elm_lang$core$Regex$regex('<\\/?[^>]+>'),
+		_elm_lang$core$Basics$always(''),
+		string);
+};
+var _elm_community$string_extra$String_Extra$toSentenceHelper = F3(
+	function (lastPart, sentence, list) {
+		toSentenceHelper:
+		while (true) {
+			var _p17 = list;
+			if (_p17.ctor === '[]') {
+				return sentence;
+			} else {
+				if (_p17._1.ctor === '[]') {
+					return A2(
+						_elm_lang$core$Basics_ops['++'],
+						sentence,
+						A2(_elm_lang$core$Basics_ops['++'], lastPart, _p17._0));
+				} else {
+					var _v27 = lastPart,
+						_v28 = A2(
+						_elm_lang$core$Basics_ops['++'],
+						sentence,
+						A2(_elm_lang$core$Basics_ops['++'], ', ', _p17._0)),
+						_v29 = _p17._1;
+					lastPart = _v27;
+					sentence = _v28;
+					list = _v29;
+					continue toSentenceHelper;
+				}
+			}
+		}
+	});
+var _elm_community$string_extra$String_Extra$toSentenceBaseCase = function (list) {
+	var _p18 = list;
+	_v30_2:
+	do {
+		if (_p18.ctor === '::') {
+			if (_p18._1.ctor === '[]') {
+				return _p18._0;
+			} else {
+				if (_p18._1._1.ctor === '[]') {
+					return A2(
+						_elm_lang$core$Basics_ops['++'],
+						_p18._0,
+						A2(_elm_lang$core$Basics_ops['++'], ' and ', _p18._1._0));
+				} else {
+					break _v30_2;
+				}
+			}
+		} else {
+			break _v30_2;
+		}
+	} while(false);
+	return '';
+};
+var _elm_community$string_extra$String_Extra$toSentenceOxford = function (list) {
+	var _p19 = list;
+	if (((_p19.ctor === '::') && (_p19._1.ctor === '::')) && (_p19._1._1.ctor === '::')) {
+		return A3(
+			_elm_community$string_extra$String_Extra$toSentenceHelper,
+			', and ',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_p19._0,
+				A2(_elm_lang$core$Basics_ops['++'], ', ', _p19._1._0)),
+			{ctor: '::', _0: _p19._1._1._0, _1: _p19._1._1._1});
+	} else {
+		return _elm_community$string_extra$String_Extra$toSentenceBaseCase(list);
+	}
+};
+var _elm_community$string_extra$String_Extra$toSentence = function (list) {
+	var _p20 = list;
+	if (((_p20.ctor === '::') && (_p20._1.ctor === '::')) && (_p20._1._1.ctor === '::')) {
+		return A3(
+			_elm_community$string_extra$String_Extra$toSentenceHelper,
+			' and ',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_p20._0,
+				A2(_elm_lang$core$Basics_ops['++'], ', ', _p20._1._0)),
+			{ctor: '::', _0: _p20._1._1._0, _1: _p20._1._1._1});
+	} else {
+		return _elm_community$string_extra$String_Extra$toSentenceBaseCase(list);
+	}
+};
+var _elm_community$string_extra$String_Extra$ellipsisWith = F3(
+	function (howLong, append, string) {
+		return (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$String$length(string),
+			howLong) < 1) ? string : A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(
+				_elm_lang$core$String$left,
+				howLong - _elm_lang$core$String$length(append),
+				string),
+			append);
+	});
+var _elm_community$string_extra$String_Extra$ellipsis = F2(
+	function (howLong, string) {
+		return A3(_elm_community$string_extra$String_Extra$ellipsisWith, howLong, '...', string);
+	});
+var _elm_community$string_extra$String_Extra$countOccurrences = F2(
+	function (needle, haystack) {
+		return (_elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$String$length(needle),
+			0) || _elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$String$length(haystack),
+			0)) ? 0 : _elm_lang$core$List$length(
+			A2(_elm_lang$core$String$indexes, needle, haystack));
+	});
+var _elm_community$string_extra$String_Extra$unindent = function (multilineSting) {
+	var isNotWhitespace = function ($char) {
+		return (!_elm_lang$core$Native_Utils.eq(
+			$char,
+			_elm_lang$core$Native_Utils.chr(' '))) && (!_elm_lang$core$Native_Utils.eq(
+			$char,
+			_elm_lang$core$Native_Utils.chr('\t')));
+	};
+	var countLeadingWhitespace = F2(
+		function (count, line) {
+			countLeadingWhitespace:
+			while (true) {
+				var _p21 = _elm_lang$core$String$uncons(line);
+				if (_p21.ctor === 'Nothing') {
+					return count;
+				} else {
+					var _p23 = _p21._0._1;
+					var _p22 = _p21._0._0;
+					switch (_p22.valueOf()) {
+						case ' ':
+							var _v35 = count + 1,
+								_v36 = _p23;
+							count = _v35;
+							line = _v36;
+							continue countLeadingWhitespace;
+						case '\t':
+							var _v37 = count + 1,
+								_v38 = _p23;
+							count = _v37;
+							line = _v38;
+							continue countLeadingWhitespace;
+						default:
+							return count;
+					}
+				}
+			}
+		});
+	var lines = _elm_lang$core$String$lines(multilineSting);
+	var minLead = A2(
+		_elm_lang$core$Maybe$withDefault,
+		0,
+		_elm_lang$core$List$minimum(
+			A2(
+				_elm_lang$core$List$map,
+				countLeadingWhitespace(0),
+				A2(
+					_elm_lang$core$List$filter,
+					_elm_lang$core$String$any(isNotWhitespace),
+					lines))));
+	return A2(
+		_elm_lang$core$String$join,
+		'\n',
+		A2(
+			_elm_lang$core$List$map,
+			_elm_lang$core$String$dropLeft(minLead),
+			lines));
+};
+var _elm_community$string_extra$String_Extra$dasherize = function (string) {
+	return _elm_lang$core$String$toLower(
+		A4(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$All,
+			_elm_lang$core$Regex$regex('[_-\\s]+'),
+			_elm_lang$core$Basics$always('-'),
+			A4(
+				_elm_lang$core$Regex$replace,
+				_elm_lang$core$Regex$All,
+				_elm_lang$core$Regex$regex('([A-Z])'),
+				function (_p24) {
+					return A2(
+						_elm_lang$core$String$append,
+						'-',
+						function (_) {
+							return _.match;
+						}(_p24));
+				},
+				_elm_lang$core$String$trim(string))));
+};
+var _elm_community$string_extra$String_Extra$underscored = function (string) {
+	return _elm_lang$core$String$toLower(
+		A4(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$All,
+			_elm_lang$core$Regex$regex('[_-\\s]+'),
+			_elm_lang$core$Basics$always('_'),
+			A4(
+				_elm_lang$core$Regex$replace,
+				_elm_lang$core$Regex$All,
+				_elm_lang$core$Regex$regex('([a-z\\d])([A-Z]+)'),
+				function (_p25) {
+					return A2(
+						_elm_lang$core$String$join,
+						'_',
+						A2(
+							_elm_lang$core$List$filterMap,
+							_elm_lang$core$Basics$identity,
+							function (_) {
+								return _.submatches;
+							}(_p25)));
+				},
+				_elm_lang$core$String$trim(string))));
+};
+var _elm_community$string_extra$String_Extra$unsurround = F2(
+	function (wrap, string) {
+		if (A2(_elm_lang$core$String$startsWith, wrap, string) && A2(_elm_lang$core$String$endsWith, wrap, string)) {
+			var length = _elm_lang$core$String$length(wrap);
+			return A2(
+				_elm_lang$core$String$dropRight,
+				length,
+				A2(_elm_lang$core$String$dropLeft, length, string));
+		} else {
+			return string;
+		}
+	});
+var _elm_community$string_extra$String_Extra$unquote = function (string) {
+	return A2(_elm_community$string_extra$String_Extra$unsurround, '\"', string);
+};
+var _elm_community$string_extra$String_Extra$surround = F2(
+	function (wrap, string) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			wrap,
+			A2(_elm_lang$core$Basics_ops['++'], string, wrap));
+	});
+var _elm_community$string_extra$String_Extra$quote = function (string) {
+	return A2(_elm_community$string_extra$String_Extra$surround, '\"', string);
+};
+var _elm_community$string_extra$String_Extra$camelize = function (string) {
+	return A4(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		_elm_lang$core$Regex$regex('[-_\\s]+(.)?'),
+		function (_p26) {
+			var _p27 = _p26;
+			var _p28 = _p27.submatches;
+			if ((_p28.ctor === '::') && (_p28._0.ctor === 'Just')) {
+				return _elm_lang$core$String$toUpper(_p28._0._0);
+			} else {
+				return '';
+			}
+		},
+		_elm_lang$core$String$trim(string));
+};
+var _elm_community$string_extra$String_Extra$isBlank = function (string) {
+	return A2(
+		_elm_lang$core$Regex$contains,
+		_elm_lang$core$Regex$regex('^\\s*$'),
+		string);
+};
+var _elm_community$string_extra$String_Extra$clean = function (string) {
+	return _elm_lang$core$String$trim(
+		A4(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$All,
+			_elm_lang$core$Regex$regex('\\s\\s+'),
+			_elm_lang$core$Basics$always(' '),
+			string));
+};
+var _elm_community$string_extra$String_Extra$softBreakRegexp = function (width) {
+	return _elm_lang$core$Regex$regex(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'.{1,',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(width),
+				'}(\\s+|$)|\\S+?(\\s+|$)')));
+};
+var _elm_community$string_extra$String_Extra$softEllipsis = F2(
+	function (howLong, string) {
+		return (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$String$length(string),
+			howLong) < 1) ? string : A3(
+			_elm_lang$core$Basics$flip,
+			_elm_lang$core$String$append,
+			'...',
+			A4(
+				_elm_lang$core$Regex$replace,
+				_elm_lang$core$Regex$All,
+				_elm_lang$core$Regex$regex('([\\.,;:\\s])+$'),
+				_elm_lang$core$Basics$always(''),
+				A2(
+					_elm_lang$core$String$join,
+					'',
+					A2(
+						_elm_lang$core$List$map,
+						function (_) {
+							return _.match;
+						},
+						A3(
+							_elm_lang$core$Regex$find,
+							_elm_lang$core$Regex$AtMost(1),
+							_elm_community$string_extra$String_Extra$softBreakRegexp(howLong),
+							string)))));
+	});
+var _elm_community$string_extra$String_Extra$softBreak = F2(
+	function (width, string) {
+		return (_elm_lang$core$Native_Utils.cmp(width, 0) < 1) ? {ctor: '[]'} : A2(
+			_elm_lang$core$List$map,
+			function (_) {
+				return _.match;
+			},
+			A3(
+				_elm_lang$core$Regex$find,
+				_elm_lang$core$Regex$All,
+				_elm_community$string_extra$String_Extra$softBreakRegexp(width),
+				string));
+	});
+var _elm_community$string_extra$String_Extra$softWrapWith = F3(
+	function (width, separator, string) {
+		return A2(
+			_elm_lang$core$String$join,
+			separator,
+			A2(_elm_community$string_extra$String_Extra$softBreak, width, string));
+	});
+var _elm_community$string_extra$String_Extra$softWrap = F2(
+	function (width, string) {
+		return A3(_elm_community$string_extra$String_Extra$softWrapWith, width, '\n', string);
+	});
+var _elm_community$string_extra$String_Extra$breaker = F3(
+	function (width, string, acc) {
+		breaker:
+		while (true) {
+			var _p29 = string;
+			if (_p29 === '') {
+				return _elm_lang$core$List$reverse(acc);
+			} else {
+				var _v42 = width,
+					_v43 = A2(_elm_lang$core$String$dropLeft, width, string),
+					_v44 = {
+					ctor: '::',
+					_0: A3(_elm_lang$core$String$slice, 0, width, string),
+					_1: acc
+				};
+				width = _v42;
+				string = _v43;
+				acc = _v44;
+				continue breaker;
+			}
+		}
+	});
+var _elm_community$string_extra$String_Extra$break = F2(
+	function (width, string) {
+		return (_elm_lang$core$Native_Utils.eq(width, 0) || _elm_lang$core$Native_Utils.eq(string, '')) ? {
+			ctor: '::',
+			_0: string,
+			_1: {ctor: '[]'}
+		} : A3(
+			_elm_community$string_extra$String_Extra$breaker,
+			width,
+			string,
+			{ctor: '[]'});
+	});
+var _elm_community$string_extra$String_Extra$wrapWith = F3(
+	function (width, separator, string) {
+		return A2(
+			_elm_lang$core$String$join,
+			separator,
+			A2(_elm_community$string_extra$String_Extra$break, width, string));
+	});
+var _elm_community$string_extra$String_Extra$wrap = F2(
+	function (width, string) {
+		return A3(_elm_community$string_extra$String_Extra$wrapWith, width, '\n', string);
+	});
+var _elm_community$string_extra$String_Extra$replaceSlice = F4(
+	function (substitution, start, end, string) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			A3(_elm_lang$core$String$slice, 0, start, string),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				substitution,
+				A3(
+					_elm_lang$core$String$slice,
+					end,
+					_elm_lang$core$String$length(string),
+					string)));
+	});
+var _elm_community$string_extra$String_Extra$insertAt = F3(
+	function (insert, pos, string) {
+		return A4(_elm_community$string_extra$String_Extra$replaceSlice, insert, pos, pos, string);
+	});
+var _elm_community$string_extra$String_Extra$replace = F3(
+	function (search, substitution, string) {
+		return A4(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$All,
+			_elm_lang$core$Regex$regex(
+				_elm_lang$core$Regex$escape(search)),
+			function (_p30) {
+				return substitution;
+			},
+			string);
+	});
+var _elm_community$string_extra$String_Extra$changeCase = F2(
+	function (mutator, word) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			'',
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (_p31) {
+					var _p32 = _p31;
+					return A2(
+						_elm_lang$core$String$cons,
+						mutator(_p32._0),
+						_p32._1);
+				},
+				_elm_lang$core$String$uncons(word)));
+	});
+var _elm_community$string_extra$String_Extra$toSentenceCase = function (word) {
+	return A2(_elm_community$string_extra$String_Extra$changeCase, _elm_lang$core$Char$toUpper, word);
+};
+var _elm_community$string_extra$String_Extra$toTitleCase = function (ws) {
+	var uppercaseMatch = A3(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		_elm_lang$core$Regex$regex('\\w+'),
+		function (_p33) {
+			return _elm_community$string_extra$String_Extra$toSentenceCase(
+				function (_) {
+					return _.match;
+				}(_p33));
+		});
+	return A4(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		_elm_lang$core$Regex$regex('^([a-z])|\\s+([a-z])'),
+		function (_p34) {
+			return uppercaseMatch(
+				function (_) {
+					return _.match;
+				}(_p34));
+		},
+		ws);
+};
+var _elm_community$string_extra$String_Extra$classify = function (string) {
+	return _elm_community$string_extra$String_Extra$toSentenceCase(
+		A3(
+			_elm_community$string_extra$String_Extra$replace,
+			' ',
+			'',
+			_elm_community$string_extra$String_Extra$camelize(
+				A4(
+					_elm_lang$core$Regex$replace,
+					_elm_lang$core$Regex$All,
+					_elm_lang$core$Regex$regex('[\\W_]'),
+					_elm_lang$core$Basics$always(' '),
+					string))));
+};
+var _elm_community$string_extra$String_Extra$humanize = function (string) {
+	return _elm_community$string_extra$String_Extra$toSentenceCase(
+		_elm_lang$core$String$toLower(
+			_elm_lang$core$String$trim(
+				A4(
+					_elm_lang$core$Regex$replace,
+					_elm_lang$core$Regex$All,
+					_elm_lang$core$Regex$regex('_id$|[-_\\s]+'),
+					_elm_lang$core$Basics$always(' '),
+					A4(
+						_elm_lang$core$Regex$replace,
+						_elm_lang$core$Regex$All,
+						_elm_lang$core$Regex$regex('[A-Z]'),
+						function (_p35) {
+							return A2(
+								_elm_lang$core$String$append,
+								'-',
+								function (_) {
+									return _.match;
+								}(_p35));
+						},
+						string)))));
+};
+var _elm_community$string_extra$String_Extra$decapitalize = function (word) {
+	return A2(_elm_community$string_extra$String_Extra$changeCase, _elm_lang$core$Char$toLower, word);
+};
+
+var _elm_lang$core$Process$kill = _elm_lang$core$Native_Scheduler.kill;
+var _elm_lang$core$Process$sleep = _elm_lang$core$Native_Scheduler.sleep;
+var _elm_lang$core$Process$spawn = _elm_lang$core$Native_Scheduler.spawn;
 
 var _elm_lang$dom$Native_Dom = function() {
 
@@ -16449,6 +17326,18 @@ var _rluiten$elm_date_extra$Date_Extra_Config_Config_en_us$config = {
 	format: {date: '%-m/%-d/%Y', longDate: '%A, %B %d, %Y', time: '%-H:%M %p', longTime: '%-H:%M:%S %p', dateTime: '%-m/%-d/%Y %-I:%M %p', firstDayOfWeek: _elm_lang$core$Date$Sun}
 };
 
+var _mgold$elm_date_format$Date_Local$greek = {
+	date: {
+		months: {jan: 'Ιανουαρίου', feb: 'Φεβρουαρίου', mar: 'Μαρτίου', apr: 'Απριλίου', may: 'Μαΐου', jun: 'Ιουνίου', jul: 'Ιουλίου', aug: 'Αυγούστου', sep: 'Σεπτεμβρίου', oct: 'Οκτωβρίου', nov: 'Νοεμβρίου', dec: 'Δεκεμβρίου'},
+		monthsAbbrev: {jan: 'Ιαν', feb: 'Φεβ', mar: 'Μαρ', apr: 'Απρ', may: 'Μαϊ', jun: 'Ιουν', jul: 'Ιουλ', aug: 'Αυγ', sep: 'Σεπ', oct: 'Οκτ', nov: 'Νοε', dec: 'Δεκ'},
+		wdays: {mon: 'Δευτέρα', tue: 'Τρίτη', wed: 'Τετάρτη', thu: 'Πέμπτη', fri: 'Παρασκευή', sat: 'Σάββατο', sun: 'Κυριακή'},
+		wdaysAbbrev: {mon: 'Δευ', tue: 'Τρι', wed: 'Τετ', thu: 'Πεμ', fri: 'Παρ', sat: 'Σαβ', sun: 'Κυρ'},
+		defaultFormat: _elm_lang$core$Maybe$Nothing
+	},
+	time: {am: 'πμ', pm: 'μμ', defaultFormat: _elm_lang$core$Maybe$Nothing},
+	timeZones: _elm_lang$core$Maybe$Nothing,
+	defaultFormat: _elm_lang$core$Maybe$Nothing
+};
 var _mgold$elm_date_format$Date_Local$brazilian = {
 	date: {
 		months: {jan: 'Janeiro', feb: 'Fevereiro', mar: 'Março', apr: 'Abril', may: 'Maio', jun: 'Junho', jul: 'Julho', aug: 'Agosto', sep: 'Setembro', oct: 'Outubro', nov: 'Novembro', dec: 'Dezembro'},
@@ -18083,6 +18972,20 @@ var _ivanceras$diwata$Data_DataContainer$LinkNew = {ctor: 'LinkNew'};
 var _ivanceras$diwata$Data_DataContainer$LinkExisting = {ctor: 'LinkExisting'};
 var _ivanceras$diwata$Data_DataContainer$Unlink = {ctor: 'Unlink'};
 
+var _ivanceras$diwata$Data_DatabaseName$DatabaseName = F2(
+	function (a, b) {
+		return {name: a, description: b};
+	});
+var _ivanceras$diwata$Data_DatabaseName$decoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'description',
+	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'name',
+		_elm_lang$core$Json_Decode$string,
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_ivanceras$diwata$Data_DatabaseName$DatabaseName)));
+
 var _ivanceras$diwata$Data_Window_ColumnName$completeName = function (column_name) {
 	var _p0 = column_name.table;
 	if (_p0.ctor === 'Just') {
@@ -18930,8 +19833,8 @@ var _ivanceras$diwata$Data_Window_Field$firstColumnName = function (field) {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Data.Window.Field',
 				{
-					start: {line: 220, column: 13},
-					end: {line: 225, column: 55}
+					start: {line: 226, column: 13},
+					end: {line: 231, column: 55}
 				},
 				_p6)('This is unreachable!');
 		}
@@ -18963,8 +19866,8 @@ var _ivanceras$diwata$Data_Window_Field$forceInt = function (value) {
 		return _elm_lang$core$Native_Utils.crashCase(
 			'Data.Window.Field',
 			{
-				start: {line: 182, column: 5},
-				end: {line: 187, column: 49}
+				start: {line: 188, column: 5},
+				end: {line: 193, column: 49}
 			},
 			_p11)('this shouldn\'t happend');
 	}
@@ -18984,8 +19887,8 @@ var _ivanceras$diwata$Data_Window_Field$dataType = function (field) {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Data.Window.Field',
 				{
-					start: {line: 145, column: 13},
-					end: {line: 150, column: 63}
+					start: {line: 151, column: 13},
+					end: {line: 156, column: 63}
 				},
 				_p14)('Compound must have data type');
 		}
@@ -19012,8 +19915,8 @@ var _ivanceras$diwata$Data_Window_Field$cast = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Data.Window.Field',
 					{
-						start: {line: 160, column: 5},
-						end: {line: 177, column: 80}
+						start: {line: 166, column: 5},
+						end: {line: 183, column: 80}
 					},
 					_p16)(
 					A2(
@@ -19123,6 +20026,8 @@ var _ivanceras$diwata$Data_Window_Field$Field = F6(
 	function (a, b, c, d, e, f) {
 		return {name: a, description: b, info: c, isPrimary: d, columnDetail: e, controlWidget: f};
 	});
+var _ivanceras$diwata$Data_Window_Field$OneOne = {ctor: 'OneOne'};
+var _ivanceras$diwata$Data_Window_Field$Detail = {ctor: 'Detail'};
 var _ivanceras$diwata$Data_Window_Field$Compound = function (a) {
 	return {ctor: 'Compound', _0: a};
 };
@@ -19205,6 +20110,11 @@ var _ivanceras$diwata$Data_Window_Tab$recordId = F2(
 			},
 			pkFields);
 		return _ivanceras$diwata$Data_Window_Record$RecordId(primaryValues);
+	});
+var _ivanceras$diwata$Data_Window_Tab$getRecordIdString = F2(
+	function (record, tab) {
+		return _ivanceras$diwata$Data_Window_Record$idToString(
+			A2(_ivanceras$diwata$Data_Window_Tab$recordId, record, tab));
 	});
 var _ivanceras$diwata$Data_Window_Tab$columnNames = function (tab) {
 	return A2(_elm_lang$core$List$map, _ivanceras$diwata$Data_Window_Field$columnName, tab.fields);
@@ -19323,7 +20233,7 @@ var _ivanceras$diwata$Data_Window$tagDecoder = A2(_elm_lang$core$Json_Decode$map
 
 var _ivanceras$diwata$Data_Window_GroupedWindow$matchWindowName = F2(
 	function (searchText, windowName) {
-		return A2(_elm_lang$core$String$startsWith, searchText, windowName.name) || A2(_elm_lang$core$String$startsWith, searchText, windowName.tableName.name);
+		return A2(_elm_lang$core$String$startsWith, searchText, windowName.name) || A2(_elm_lang$core$String$contains, searchText, windowName.tableName.name);
 	});
 var _ivanceras$diwata$Data_Window_GroupedWindow$matchWindowNames = F2(
 	function (searchText, windowNames) {
@@ -19915,1161 +20825,6 @@ var _ivanceras$diwata$Data_WindowArena$parseArenaArgs = function (url) {
 			}),
 		_ivanceras$diwata$Data_WindowArena$default,
 		pairs);
-};
-
-var _ivanceras$diwata$Route$routeToString = function (page) {
-	var pieces = function () {
-		var _p0 = page;
-		switch (_p0.ctor) {
-			case 'WindowArena':
-				return {
-					ctor: '::',
-					_0: _ivanceras$diwata$Data_WindowArena$argToString(_p0._0),
-					_1: {ctor: '[]'}
-				};
-			case 'Login':
-				return {
-					ctor: '::',
-					_0: 'login',
-					_1: {ctor: '[]'}
-				};
-			default:
-				return {
-					ctor: '::',
-					_0: 'logout',
-					_1: {ctor: '[]'}
-				};
-		}
-	}();
-	var cleanPieces = A2(
-		_elm_lang$core$List$filter,
-		function (_p1) {
-			return !_elm_lang$core$String$isEmpty(_p1);
-		},
-		pieces);
-	return (_elm_lang$core$Native_Utils.cmp(
-		_elm_lang$core$List$length(cleanPieces),
-		0) > 0) ? A2(
-		_elm_lang$core$Basics_ops['++'],
-		'#/',
-		A2(_elm_lang$core$String$join, '/', cleanPieces)) : '';
-};
-var _ivanceras$diwata$Route$href = function (route) {
-	return _elm_lang$html$Html_Attributes$href(
-		_ivanceras$diwata$Route$routeToString(route));
-};
-var _ivanceras$diwata$Route$modifyUrl = function (_p2) {
-	return _elm_lang$navigation$Navigation$modifyUrl(
-		_ivanceras$diwata$Route$routeToString(_p2));
-};
-var _ivanceras$diwata$Route$Logout = {ctor: 'Logout'};
-var _ivanceras$diwata$Route$Login = {ctor: 'Login'};
-var _ivanceras$diwata$Route$route = _evancz$url_parser$UrlParser$oneOf(
-	{
-		ctor: '::',
-		_0: A2(
-			_evancz$url_parser$UrlParser$map,
-			_ivanceras$diwata$Route$Login,
-			_evancz$url_parser$UrlParser$s('login')),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_evancz$url_parser$UrlParser$map,
-				_ivanceras$diwata$Route$Logout,
-				_evancz$url_parser$UrlParser$s('logout')),
-			_1: {ctor: '[]'}
-		}
-	});
-var _ivanceras$diwata$Route$WindowArena = function (a) {
-	return {ctor: 'WindowArena', _0: a};
-};
-var _ivanceras$diwata$Route$fromLocation = function (location) {
-	if (_elm_lang$core$String$isEmpty(location.hash)) {
-		return _elm_lang$core$Maybe$Just(
-			_ivanceras$diwata$Route$WindowArena(_ivanceras$diwata$Data_WindowArena$default));
-	} else {
-		var arenaArgs = _ivanceras$diwata$Data_WindowArena$parseArenaArgs(location.hash);
-		var _p3 = arenaArgs.tableName;
-		if (_p3.ctor === 'Just') {
-			return _elm_lang$core$Maybe$Just(
-				_ivanceras$diwata$Route$WindowArena(arenaArgs));
-		} else {
-			return A2(_evancz$url_parser$UrlParser$parseHash, _ivanceras$diwata$Route$route, location);
-		}
-	}
-};
-
-var _ivanceras$diwata$Views_Page$bodyId = 'page-body';
-var _ivanceras$diwata$Views_Page$isActive = F2(
-	function (page, route) {
-		var _p0 = {ctor: '_Tuple2', _0: page, _1: route};
-		_v0_2:
-		do {
-			if (_p0.ctor === '_Tuple2') {
-				switch (_p0._0.ctor) {
-					case 'WindowArena':
-						if (_p0._1.ctor === 'WindowArena') {
-							return true;
-						} else {
-							break _v0_2;
-						}
-					case 'Login':
-						if (_p0._1.ctor === 'Login') {
-							return true;
-						} else {
-							break _v0_2;
-						}
-					default:
-						break _v0_2;
-				}
-			} else {
-				break _v0_2;
-			}
-		} while(false);
-		return false;
-	});
-var _ivanceras$diwata$Views_Page$navbarLink = F3(
-	function (page, route, linkContent) {
-		return A2(
-			_elm_lang$html$Html$li,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$classList(
-					{
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'nav-item', _1: true},
-						_1: {
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'active',
-								_1: A2(_ivanceras$diwata$Views_Page$isActive, page, route)
-							},
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$a,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('nav-link'),
-						_1: {
-							ctor: '::',
-							_0: _ivanceras$diwata$Route$href(route),
-							_1: {ctor: '[]'}
-						}
-					},
-					linkContent),
-				_1: {ctor: '[]'}
-			});
-	});
-var _ivanceras$diwata$Views_Page$viewFooter = A2(
-	_elm_lang$html$Html$footer,
-	{ctor: '[]'},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('container'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$a,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('logo-font'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$href('/'),
-							_1: {ctor: '[]'}
-						}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('diwata'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('attribution'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(' An interactive user-friendly database interface '),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$a,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$href('https://copyleft.no'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Copyleft'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('. Code & design licensed under Apache2.'),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}),
-		_1: {ctor: '[]'}
-	});
-var _ivanceras$diwata$Views_Page$viewSignIn = F2(
-	function (page, user) {
-		var linkTo = _ivanceras$diwata$Views_Page$navbarLink(page);
-		return {
-			ctor: '::',
-			_0: A2(
-				linkTo,
-				_ivanceras$diwata$Route$Login,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Sign in'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		};
-	});
-var _ivanceras$diwata$Views_Page$viewHeader = F3(
-	function (page, user, isLoading) {
-		return A2(
-			_elm_lang$html$Html$nav,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('navbar navbar-light'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('container'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$a,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('navbar-brand'),
-								_1: {
-									ctor: '::',
-									_0: _ivanceras$diwata$Route$href(
-										_ivanceras$diwata$Route$WindowArena(_ivanceras$diwata$Data_WindowArena$default)),
-									_1: {ctor: '[]'}
-								}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Diwata'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _ivanceras$diwata$Views_Page$frame = F4(
-	function (isLoading, user, page, content) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('page-frame'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A3(_ivanceras$diwata$Views_Page$viewHeader, page, user, isLoading),
-				_1: {
-					ctor: '::',
-					_0: content,
-					_1: {
-						ctor: '::',
-						_0: _ivanceras$diwata$Views_Page$viewFooter,
-						_1: {ctor: '[]'}
-					}
-				}
-			});
-	});
-var _ivanceras$diwata$Views_Page$NewWindow = {ctor: 'NewWindow'};
-var _ivanceras$diwata$Views_Page$Profile = function (a) {
-	return {ctor: 'Profile', _0: a};
-};
-var _ivanceras$diwata$Views_Page$Settings = {ctor: 'Settings'};
-var _ivanceras$diwata$Views_Page$Login = {ctor: 'Login'};
-var _ivanceras$diwata$Views_Page$WindowArena = {ctor: 'WindowArena'};
-var _ivanceras$diwata$Views_Page$Other = {ctor: 'Other'};
-
-var _ivanceras$diwata$Page_Errored$view = F2(
-	function (session, _p0) {
-		var _p1 = _p0;
-		return A2(
-			_elm_lang$html$Html$main_,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('content'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('container'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-						_1: {ctor: '[]'}
-					}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$h1,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Error Loading Page'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('row'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$p,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(_p1._0.errorMessage),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			});
-	});
-var _ivanceras$diwata$Page_Errored$Model = F2(
-	function (a, b) {
-		return {activePage: a, errorMessage: b};
-	});
-var _ivanceras$diwata$Page_Errored$PageLoadError = function (a) {
-	return {ctor: 'PageLoadError', _0: a};
-};
-var _ivanceras$diwata$Page_Errored$pageLoadError = F2(
-	function (activePage, errorMessage) {
-		var _p2 = A2(
-			_elm_lang$core$Debug$log,
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				'pageLoadError, Error loading page',
-				_elm_lang$core$Basics$toString(activePage)),
-			errorMessage);
-		return _ivanceras$diwata$Page_Errored$PageLoadError(
-			{activePage: activePage, errorMessage: errorMessage});
-	});
-
-var _ivanceras$diwata$Ports$storeSession = _elm_lang$core$Native_Platform.outgoingPort(
-	'storeSession',
-	function (v) {
-		return (v.ctor === 'Nothing') ? null : v._0;
-	});
-var _ivanceras$diwata$Ports$onSessionChange = _elm_lang$core$Native_Platform.incomingPort('onSessionChange', _elm_lang$core$Json_Decode$value);
-
-var _ivanceras$diwata$Settings$setDbUrl = F2(
-	function (settings, dbUrl) {
-		return _elm_lang$core$Native_Utils.update(
-			settings,
-			{
-				dbUrl: _elm_lang$core$Maybe$Just(dbUrl)
-			});
-	});
-var _ivanceras$diwata$Settings$Settings = F3(
-	function (a, b, c) {
-		return {dbUrl: a, apiEndPoint: b, grouped: c};
-	});
-var _ivanceras$diwata$Settings$decoder = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'grouped',
-	_elm_lang$core$Json_Decode$bool,
-	A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'api_endpoint',
-		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-		A3(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'db_url',
-			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_ivanceras$diwata$Settings$Settings))));
-var _ivanceras$diwata$Settings$fromJson = function (json) {
-	var settings = A2(_elm_lang$core$Json_Decode$decodeValue, _ivanceras$diwata$Settings$decoder, json);
-	var _p0 = settings;
-	if (_p0.ctor === 'Ok') {
-		return _p0._0;
-	} else {
-		return A2(
-			_elm_lang$core$Native_Utils.crash(
-				'Settings',
-				{
-					start: {line: 39, column: 13},
-					end: {line: 39, column: 24}
-				}),
-			'Decoding settings should not be error',
-			_p0._0);
-	}
-};
-
-var _ivanceras$diwata$Request_Helpers$apiUrl = F2(
-	function (settings, str) {
-		var apiEndPoint = settings.apiEndPoint;
-		var _p0 = apiEndPoint;
-		if (_p0.ctor === 'Just') {
-			return A2(_elm_lang$core$Basics_ops['++'], _p0._0, str);
-		} else {
-			return str;
-		}
-	});
-
-var _ivanceras$diwata$Request_Window_Records$header = F2(
-	function (settings, request) {
-		var dbUrl = settings.dbUrl;
-		var _p0 = dbUrl;
-		if (_p0.ctor === 'Just') {
-			return A3(_lukewestby$elm_http_builder$HttpBuilder$withHeader, 'db_url', _p0._0, request);
-		} else {
-			return request;
-		}
-	});
-var _ivanceras$diwata$Request_Window_Records$listPageWithQuery = F4(
-	function (settings, maybeToken, tableName, query) {
-		var queryStr = _ivanceras$diwata$Data_Query$mainQueryToString(query);
-		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-			A2(
-				_ivanceras$diwata$Data_AuthToken$withAuthorization,
-				maybeToken,
-				A2(
-					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
-					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
-					A2(
-						_ivanceras$diwata$Request_Window_Records$header,
-						settings,
-						_lukewestby$elm_http_builder$HttpBuilder$get(
-							A2(
-								_ivanceras$diwata$Request_Helpers$apiUrl,
-								settings,
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									'/data/',
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
-										A2(_elm_lang$core$Basics_ops['++'], '/', queryStr)))))))));
-	});
-var _ivanceras$diwata$Request_Window_Records$lookups = F3(
-	function (settings, maybeToken, tableName) {
-		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-			A2(
-				_ivanceras$diwata$Data_AuthToken$withAuthorization,
-				maybeToken,
-				A2(
-					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
-					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Lookup$decoder),
-					A2(
-						_ivanceras$diwata$Request_Window_Records$header,
-						settings,
-						_lukewestby$elm_http_builder$HttpBuilder$get(
-							A2(
-								_ivanceras$diwata$Request_Helpers$apiUrl,
-								settings,
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									'/lookup_all/',
-									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName))))))));
-	});
-var _ivanceras$diwata$Request_Window_Records$lookupPage = F4(
-	function (settings, page, maybeToken, tableName) {
-		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-			A2(
-				_ivanceras$diwata$Data_AuthToken$withAuthorization,
-				maybeToken,
-				A2(
-					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
-					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
-					A2(
-						_ivanceras$diwata$Request_Window_Records$header,
-						settings,
-						_lukewestby$elm_http_builder$HttpBuilder$get(
-							A2(
-								_ivanceras$diwata$Request_Helpers$apiUrl,
-								settings,
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									'/lookup/',
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
-										A2(
-											_elm_lang$core$Basics_ops['++'],
-											'/',
-											_elm_lang$core$Basics$toString(page))))))))));
-	});
-var _ivanceras$diwata$Request_Window_Records$fetchSelected = F3(
-	function (settings, tableName, selectedRow) {
-		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-			A2(
-				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
-				_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_RecordDetail$decoder),
-				A2(
-					_ivanceras$diwata$Request_Window_Records$header,
-					settings,
-					_lukewestby$elm_http_builder$HttpBuilder$get(
-						A2(
-							_ivanceras$diwata$Request_Helpers$apiUrl,
-							settings,
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								'/select/',
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
-									A2(_elm_lang$core$Basics_ops['++'], '/', selectedRow))))))));
-	});
-var _ivanceras$diwata$Request_Window_Records$fetchHasManyRecords = F5(
-	function (settings, tableName, selectedRow, hasManyTable, hasManyPage) {
-		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-			A2(
-				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
-				_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
-				A2(
-					_ivanceras$diwata$Request_Window_Records$header,
-					settings,
-					_lukewestby$elm_http_builder$HttpBuilder$get(
-						A2(
-							_ivanceras$diwata$Request_Helpers$apiUrl,
-							settings,
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								'/has_many_select/',
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										'/',
-										A2(
-											_elm_lang$core$Basics_ops['++'],
-											selectedRow,
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												'/',
-												A2(
-													_elm_lang$core$Basics_ops['++'],
-													_ivanceras$diwata$Data_Window_TableName$tableNameToString(hasManyTable),
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														'/page/',
-														_elm_lang$core$Basics$toString(hasManyPage)))))))))))));
-	});
-var _ivanceras$diwata$Request_Window_Records$fetchIndirectRecords = F5(
-	function (settings, tableName, selectedRow, hasManyTable, hasManyPage) {
-		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-			A2(
-				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
-				_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
-				A2(
-					_ivanceras$diwata$Request_Window_Records$header,
-					settings,
-					_lukewestby$elm_http_builder$HttpBuilder$get(
-						A2(
-							_ivanceras$diwata$Request_Helpers$apiUrl,
-							settings,
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								'/indirect_select/',
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										'/',
-										A2(
-											_elm_lang$core$Basics_ops['++'],
-											selectedRow,
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												'/',
-												A2(
-													_elm_lang$core$Basics_ops['++'],
-													_ivanceras$diwata$Data_Window_TableName$tableNameToString(hasManyTable),
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														'/page/',
-														_elm_lang$core$Basics$toString(hasManyPage)))))))))))));
-	});
-var _ivanceras$diwata$Request_Window_Records$delete = F4(
-	function (settings, tableName, recordId, token) {
-		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-			A2(
-				_ivanceras$diwata$Data_AuthToken$withAuthorization,
-				_elm_lang$core$Maybe$Just(token),
-				A2(
-					_ivanceras$diwata$Request_Window_Records$header,
-					settings,
-					_lukewestby$elm_http_builder$HttpBuilder$delete(
-						A2(
-							_ivanceras$diwata$Request_Helpers$apiUrl,
-							settings,
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								'/window/',
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										'/data/',
-										_ivanceras$diwata$Data_Window_Record$idToString(recordId)))))))));
-	});
-
-var _ivanceras$diwata$Request_User$dbUrl = function (settings) {
-	var expect = _elm_lang$http$Http$expectJson(_elm_lang$core$Json_Decode$string);
-	return _elm_lang$http$Http$toTask(
-		_elm_lang$http$Http$getString(
-			A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/db_url')));
-};
-var _ivanceras$diwata$Request_User$login = function (settings) {
-	var _p0 = A2(_elm_lang$core$Debug$log, 'settings: ', settings);
-	var expect = _elm_lang$http$Http$expectJson(
-		_elm_lang$core$Json_Decode$succeed(true));
-	return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-		A2(
-			_lukewestby$elm_http_builder$HttpBuilder$withExpect,
-			expect,
-			A2(
-				_ivanceras$diwata$Request_Window_Records$header,
-				settings,
-				_lukewestby$elm_http_builder$HttpBuilder$get(
-					A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/test')))));
-};
-
-var _rtfeldman$elm_validate$Validate$ifInvalid = F2(
-	function (test, error) {
-		var validator = function (subject) {
-			return test(subject) ? {
-				ctor: '::',
-				_0: error,
-				_1: {ctor: '[]'}
-			} : {ctor: '[]'};
-		};
-		return validator;
-	});
-var _rtfeldman$elm_validate$Validate$isValidEmail = function () {
-	var validEmail = _elm_lang$core$Regex$caseInsensitive(
-		_elm_lang$core$Regex$regex('^[a-zA-Z0-9.!#$%&\'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'));
-	return _elm_lang$core$Regex$contains(validEmail);
-}();
-var _rtfeldman$elm_validate$Validate$ifInvalidEmail = _rtfeldman$elm_validate$Validate$ifInvalid(
-	function (_p0) {
-		return !_rtfeldman$elm_validate$Validate$isValidEmail(_p0);
-	});
-var _rtfeldman$elm_validate$Validate$isNothing = function (subject) {
-	var _p1 = subject;
-	if (_p1.ctor === 'Just') {
-		return false;
-	} else {
-		return true;
-	}
-};
-var _rtfeldman$elm_validate$Validate$ifNothing = _rtfeldman$elm_validate$Validate$ifInvalid(_rtfeldman$elm_validate$Validate$isNothing);
-var _rtfeldman$elm_validate$Validate$ifEmptySet = _rtfeldman$elm_validate$Validate$ifInvalid(_elm_lang$core$Set$isEmpty);
-var _rtfeldman$elm_validate$Validate$ifEmptyDict = _rtfeldman$elm_validate$Validate$ifInvalid(_elm_lang$core$Dict$isEmpty);
-var _rtfeldman$elm_validate$Validate$ifNotInt = F2(
-	function (error, subject) {
-		var _p2 = _elm_lang$core$String$toInt(subject);
-		if (_p2.ctor === 'Ok') {
-			return {ctor: '[]'};
-		} else {
-			return {
-				ctor: '::',
-				_0: error,
-				_1: {ctor: '[]'}
-			};
-		}
-	});
-var _rtfeldman$elm_validate$Validate$lacksNonWhitespaceChars = _elm_lang$core$Regex$regex('^\\s*$');
-var _rtfeldman$elm_validate$Validate$ifBlank = _rtfeldman$elm_validate$Validate$ifInvalid(
-	_elm_lang$core$Regex$contains(_rtfeldman$elm_validate$Validate$lacksNonWhitespaceChars));
-var _rtfeldman$elm_validate$Validate$any = F2(
-	function (validators, subject) {
-		any:
-		while (true) {
-			var _p3 = validators;
-			if (_p3.ctor === '[]') {
-				return true;
-			} else {
-				var _p4 = _p3._0(subject);
-				if (_p4.ctor === '[]') {
-					var _v4 = _p3._1,
-						_v5 = subject;
-					validators = _v4;
-					subject = _v5;
-					continue any;
-				} else {
-					return false;
-				}
-			}
-		}
-	});
-var _rtfeldman$elm_validate$Validate$eager = F2(
-	function (validators, subject) {
-		eager:
-		while (true) {
-			var _p5 = validators;
-			if (_p5.ctor === '[]') {
-				return _elm_lang$core$Maybe$Nothing;
-			} else {
-				var _p6 = _p5._0(subject);
-				if (_p6.ctor === '[]') {
-					var _v8 = _p5._1,
-						_v9 = subject;
-					validators = _v8;
-					subject = _v9;
-					continue eager;
-				} else {
-					return _elm_lang$core$Maybe$Just(_p6._0);
-				}
-			}
-		}
-	});
-var _rtfeldman$elm_validate$Validate$all = function (validators) {
-	var validator = function (subject) {
-		var accumulateErrors = F2(
-			function (currentValidator, totalErrors) {
-				return A2(
-					_elm_lang$core$Basics_ops['++'],
-					totalErrors,
-					currentValidator(subject));
-			});
-		return A3(
-			_elm_lang$core$List$foldl,
-			accumulateErrors,
-			{ctor: '[]'},
-			validators);
-	};
-	return validator;
-};
-
-var _ivanceras$diwata$Views_Form$control = F3(
-	function (element, attributes, children) {
-		return A2(
-			_elm_lang$html$Html$fieldset,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('form-group'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					element,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('form-control'),
-						_1: attributes
-					},
-					children),
-				_1: {ctor: '[]'}
-			});
-	});
-var _ivanceras$diwata$Views_Form$viewErrors = function (errors) {
-	return A2(
-		_elm_lang$html$Html$ul,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('error-messages'),
-			_1: {ctor: '[]'}
-		},
-		A2(
-			_elm_lang$core$List$map,
-			function (_p0) {
-				var _p1 = _p0;
-				return A2(
-					_elm_lang$html$Html$li,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(_p1._1),
-						_1: {ctor: '[]'}
-					});
-			},
-			errors));
-};
-var _ivanceras$diwata$Views_Form$textarea = _ivanceras$diwata$Views_Form$control(_elm_lang$html$Html$textarea);
-var _ivanceras$diwata$Views_Form$input = function (attrs) {
-	return A2(
-		_ivanceras$diwata$Views_Form$control,
-		_elm_lang$html$Html$input,
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$type_('text'),
-				_1: {ctor: '[]'}
-			},
-			attrs));
-};
-var _ivanceras$diwata$Views_Form$password = function (attrs) {
-	return A2(
-		_ivanceras$diwata$Views_Form$control,
-		_elm_lang$html$Html$input,
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$type_('password'),
-				_1: {ctor: '[]'}
-			},
-			attrs));
-};
-
-var _ivanceras$diwata$Page_Login$optionalError = function (fieldName) {
-	var errorToString = function (errorMessage) {
-		return A2(
-			_elm_lang$core$String$join,
-			' ',
-			{
-				ctor: '::',
-				_0: fieldName,
-				_1: {
-					ctor: '::',
-					_0: errorMessage,
-					_1: {ctor: '[]'}
-				}
-			});
-	};
-	return A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-		fieldName,
-		_elm_lang$core$Json_Decode$list(
-			A2(_elm_lang$core$Json_Decode$map, errorToString, _elm_lang$core$Json_Decode$string)),
-		{ctor: '[]'});
-};
-var _ivanceras$diwata$Page_Login$errorsDecoder = A2(
-	_ivanceras$diwata$Page_Login$optionalError,
-	'dbUrl',
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(
-		function (dbUrl) {
-			return _elm_lang$core$List$concat(
-				{
-					ctor: '::',
-					_0: dbUrl,
-					_1: {ctor: '[]'}
-				});
-		}));
-var _ivanceras$diwata$Page_Login$initialModel = function (settings) {
-	return {
-		errors: {ctor: '[]'},
-		dbUrl: '',
-		settings: settings
-	};
-};
-var _ivanceras$diwata$Page_Login$Model = F3(
-	function (a, b, c) {
-		return {errors: a, dbUrl: b, settings: c};
-	});
-var _ivanceras$diwata$Page_Login$LoginCompleted = function (a) {
-	return {ctor: 'LoginCompleted', _0: a};
-};
-var _ivanceras$diwata$Page_Login$SetDbUrl = function (a) {
-	return {ctor: 'SetDbUrl', _0: a};
-};
-var _ivanceras$diwata$Page_Login$SubmitForm = {ctor: 'SubmitForm'};
-var _ivanceras$diwata$Page_Login$viewForm = A2(
-	_elm_lang$html$Html$form,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Events$onSubmit(_ivanceras$diwata$Page_Login$SubmitForm),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_ivanceras$diwata$Views_Form$input,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('form-control-lg'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$placeholder('db url'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onInput(_ivanceras$diwata$Page_Login$SetDbUrl),
-						_1: {ctor: '[]'}
-					}
-				}
-			},
-			{ctor: '[]'}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$button,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary pull-xs-right'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Connect'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		}
-	});
-var _ivanceras$diwata$Page_Login$view = F2(
-	function (session, model) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('auth-page'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('container page'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('row'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('col-md-6 offset-md-3 col-xs-12'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$h1,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('text-xs-center'),
-												_1: {ctor: '[]'}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Sign in'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _ivanceras$diwata$Views_Form$viewErrors(model.errors),
-											_1: {
-												ctor: '::',
-												_0: _ivanceras$diwata$Page_Login$viewForm,
-												_1: {ctor: '[]'}
-											}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _ivanceras$diwata$Page_Login$SetSettings = function (a) {
-	return {ctor: 'SetSettings', _0: a};
-};
-var _ivanceras$diwata$Page_Login$NoOp = {ctor: 'NoOp'};
-var _ivanceras$diwata$Page_Login$Password = {ctor: 'Password'};
-var _ivanceras$diwata$Page_Login$Email = {ctor: 'Email'};
-var _ivanceras$diwata$Page_Login$validate = _rtfeldman$elm_validate$Validate$all(
-	{
-		ctor: '::',
-		_0: function (_p0) {
-			return A2(
-				_rtfeldman$elm_validate$Validate$ifBlank,
-				A2(_ivanceras$diwata$Util_ops['=>'], _ivanceras$diwata$Page_Login$Email, 'dbUrl can\'t be blank.'),
-				function (_) {
-					return _.dbUrl;
-				}(_p0));
-		},
-		_1: {ctor: '[]'}
-	});
-var _ivanceras$diwata$Page_Login$Form = {ctor: 'Form'};
-var _ivanceras$diwata$Page_Login$update = F2(
-	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
-			case 'SubmitForm':
-				var _p2 = _ivanceras$diwata$Page_Login$validate(model);
-				if (_p2.ctor === '[]') {
-					return A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						A2(
-							_ivanceras$diwata$Util_ops['=>'],
-							_elm_lang$core$Native_Utils.update(
-								model,
-								{
-									errors: {ctor: '[]'}
-								}),
-							A2(
-								_elm_lang$http$Http$send,
-								_ivanceras$diwata$Page_Login$LoginCompleted,
-								_ivanceras$diwata$Request_User$login(model.settings))),
-						_ivanceras$diwata$Page_Login$NoOp);
-				} else {
-					return A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						A2(
-							_ivanceras$diwata$Util_ops['=>'],
-							_elm_lang$core$Native_Utils.update(
-								model,
-								{errors: _p2}),
-							_elm_lang$core$Platform_Cmd$none),
-						_ivanceras$diwata$Page_Login$NoOp);
-				}
-			case 'SetDbUrl':
-				var _p3 = _p1._0;
-				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{
-								dbUrl: _p3,
-								settings: A2(_ivanceras$diwata$Settings$setDbUrl, model.settings, _p3)
-							}),
-						_elm_lang$core$Platform_Cmd$none),
-					_ivanceras$diwata$Page_Login$NoOp);
-			default:
-				if (_p1._0.ctor === 'Err') {
-					var errorMessages = function () {
-						var _p4 = _p1._0._0;
-						if (_p4.ctor === 'BadStatus') {
-							return A2(
-								_elm_lang$core$Result$withDefault,
-								{ctor: '[]'},
-								A2(
-									_elm_lang$core$Json_Decode$decodeString,
-									A2(_elm_lang$core$Json_Decode$field, 'errors', _ivanceras$diwata$Page_Login$errorsDecoder),
-									_p4._0.body));
-						} else {
-							return {
-								ctor: '::',
-								_0: 'unable to process registration',
-								_1: {ctor: '[]'}
-							};
-						}
-					}();
-					return A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						A2(
-							_ivanceras$diwata$Util_ops['=>'],
-							_elm_lang$core$Native_Utils.update(
-								model,
-								{
-									errors: A2(
-										_elm_lang$core$List$map,
-										function (errorMessage) {
-											return A2(_ivanceras$diwata$Util_ops['=>'], _ivanceras$diwata$Page_Login$Form, errorMessage);
-										},
-										errorMessages)
-								}),
-							_elm_lang$core$Platform_Cmd$none),
-						_ivanceras$diwata$Page_Login$NoOp);
-				} else {
-					return A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						A2(
-							_ivanceras$diwata$Util_ops['=>'],
-							model,
-							_elm_lang$core$Platform_Cmd$batch(
-								{
-									ctor: '::',
-									_0: _ivanceras$diwata$Route$modifyUrl(
-										_ivanceras$diwata$Route$WindowArena(_ivanceras$diwata$Data_WindowArena$default)),
-									_1: {ctor: '[]'}
-								})),
-						_ivanceras$diwata$Page_Login$SetSettings(model.settings));
-				}
-		}
-	});
-
-var _ivanceras$diwata$Page_NotFound$view = function (session) {
-	return A2(
-		_elm_lang$html$Html$main_,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('content'),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('container'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-					_1: {ctor: '[]'}
-				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$h1,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Not Found'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		});
 };
 
 var _j_panasiuk$elm_ionicons$Ionicon_Internal$toRgbaString = function (_p0) {
@@ -23449,6 +23204,1200 @@ var _j_panasiuk$elm_ionicons$Ionicon$aperture = _j_panasiuk$elm_ionicons$Ionicon
 var _j_panasiuk$elm_ionicons$Ionicon$alert = _j_panasiuk$elm_ionicons$Ionicon_Internal$p('M320,480H192v-96h128V480zM304,320h-96L192,32h128L304,320z');
 var _j_panasiuk$elm_ionicons$Ionicon$alertCircled = _j_panasiuk$elm_ionicons$Ionicon_Internal$p('M476.7,422.2L270.1,72.7c-2.9-5-8.3-8.7-14.1-8.7c-5.9,0-11.3,3.7-14.1,8.7L35.3,422.2c-2.8,5-4.8,13-1.9,17.9c2.9,4.9,8.2,7.9,14,7.9h417.1c5.8,0,11.1-3,14-7.9C481.5,435.2,479.5,427.1,476.7,422.2zM288,400h-64v-48h64V400zM288,320h-64V176h64V320z');
 
+var _ivanceras$diwata$Route$routeToString = function (page) {
+	var pieces = function () {
+		var _p0 = page;
+		switch (_p0.ctor) {
+			case 'WindowArena':
+				return {
+					ctor: '::',
+					_0: _ivanceras$diwata$Data_WindowArena$argToString(_p0._0),
+					_1: {ctor: '[]'}
+				};
+			case 'Login':
+				return {
+					ctor: '::',
+					_0: 'login',
+					_1: {ctor: '[]'}
+				};
+			default:
+				return {
+					ctor: '::',
+					_0: 'logout',
+					_1: {ctor: '[]'}
+				};
+		}
+	}();
+	var cleanPieces = A2(
+		_elm_lang$core$List$filter,
+		function (_p1) {
+			return !_elm_lang$core$String$isEmpty(_p1);
+		},
+		pieces);
+	return (_elm_lang$core$Native_Utils.cmp(
+		_elm_lang$core$List$length(cleanPieces),
+		0) > 0) ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		'#/',
+		A2(_elm_lang$core$String$join, '/', cleanPieces)) : '';
+};
+var _ivanceras$diwata$Route$href = function (route) {
+	return _elm_lang$html$Html_Attributes$href(
+		_ivanceras$diwata$Route$routeToString(route));
+};
+var _ivanceras$diwata$Route$modifyUrl = function (_p2) {
+	return _elm_lang$navigation$Navigation$modifyUrl(
+		_ivanceras$diwata$Route$routeToString(_p2));
+};
+var _ivanceras$diwata$Route$Logout = {ctor: 'Logout'};
+var _ivanceras$diwata$Route$Login = {ctor: 'Login'};
+var _ivanceras$diwata$Route$route = _evancz$url_parser$UrlParser$oneOf(
+	{
+		ctor: '::',
+		_0: A2(
+			_evancz$url_parser$UrlParser$map,
+			_ivanceras$diwata$Route$Login,
+			_evancz$url_parser$UrlParser$s('login')),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_evancz$url_parser$UrlParser$map,
+				_ivanceras$diwata$Route$Logout,
+				_evancz$url_parser$UrlParser$s('logout')),
+			_1: {ctor: '[]'}
+		}
+	});
+var _ivanceras$diwata$Route$WindowArena = function (a) {
+	return {ctor: 'WindowArena', _0: a};
+};
+var _ivanceras$diwata$Route$fromLocation = function (location) {
+	if (_elm_lang$core$String$isEmpty(location.hash)) {
+		return _elm_lang$core$Maybe$Just(
+			_ivanceras$diwata$Route$WindowArena(_ivanceras$diwata$Data_WindowArena$default));
+	} else {
+		var arenaArgs = _ivanceras$diwata$Data_WindowArena$parseArenaArgs(location.hash);
+		var _p3 = arenaArgs.tableName;
+		if (_p3.ctor === 'Just') {
+			return _elm_lang$core$Maybe$Just(
+				_ivanceras$diwata$Route$WindowArena(arenaArgs));
+		} else {
+			return A2(_evancz$url_parser$UrlParser$parseHash, _ivanceras$diwata$Route$route, location);
+		}
+	}
+};
+
+var _ivanceras$diwata$Views_Page$bodyId = 'page-body';
+var _ivanceras$diwata$Views_Page$isActive = F2(
+	function (page, route) {
+		var _p0 = {ctor: '_Tuple2', _0: page, _1: route};
+		_v0_2:
+		do {
+			if (_p0.ctor === '_Tuple2') {
+				switch (_p0._0.ctor) {
+					case 'WindowArena':
+						if (_p0._1.ctor === 'WindowArena') {
+							return true;
+						} else {
+							break _v0_2;
+						}
+					case 'Login':
+						if (_p0._1.ctor === 'Login') {
+							return true;
+						} else {
+							break _v0_2;
+						}
+					default:
+						break _v0_2;
+				}
+			} else {
+				break _v0_2;
+			}
+		} while(false);
+		return false;
+	});
+var _ivanceras$diwata$Views_Page$navbarLink = F3(
+	function (page, route, linkContent) {
+		return A2(
+			_elm_lang$html$Html$li,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'nav-item', _1: true},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'active',
+								_1: A2(_ivanceras$diwata$Views_Page$isActive, page, route)
+							},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('nav-link'),
+						_1: {
+							ctor: '::',
+							_0: _ivanceras$diwata$Route$href(route),
+							_1: {ctor: '[]'}
+						}
+					},
+					linkContent),
+				_1: {ctor: '[]'}
+			});
+	});
+var _ivanceras$diwata$Views_Page$viewFooter = A2(
+	_elm_lang$html$Html$footer,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('container'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('logo-font'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href('/'),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('diwata'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$span,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('attribution'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(' An interactive user-friendly database interface '),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$a,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$href('https://copyleft.no'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Copyleft'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('. Code & design licensed under Apache2.'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _ivanceras$diwata$Views_Page$viewSignIn = F2(
+	function (page, user) {
+		var linkTo = _ivanceras$diwata$Views_Page$navbarLink(page);
+		return {
+			ctor: '::',
+			_0: A2(
+				linkTo,
+				_ivanceras$diwata$Route$Login,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Sign in'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		};
+	});
+var _ivanceras$diwata$Views_Page$viewHeader = F3(
+	function (page, user, isLoading) {
+		return A2(
+			_elm_lang$html$Html$nav,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('navbar navbar-light'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('container'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('navbar-brand'),
+								_1: {
+									ctor: '::',
+									_0: _ivanceras$diwata$Route$href(
+										_ivanceras$diwata$Route$WindowArena(_ivanceras$diwata$Data_WindowArena$default)),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Diwata'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _ivanceras$diwata$Views_Page$viewLoadingIndicator = function () {
+	var iconSize = 30;
+	var iconColor = _ivanceras$diwata$Constant$iconColor;
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('selected-record-loading-indicator spin animated fadeIn'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(_j_panasiuk$elm_ionicons$Ionicon$loadA, iconSize, iconColor),
+			_1: {ctor: '[]'}
+		});
+}();
+var _ivanceras$diwata$Views_Page$frame = F4(
+	function (isLoading, user, page, content) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('page-frame'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A3(_ivanceras$diwata$Views_Page$viewHeader, page, user, isLoading),
+				_1: {
+					ctor: '::',
+					_0: A2(_ivanceras$diwata$Util$viewIf, isLoading, _ivanceras$diwata$Views_Page$viewLoadingIndicator),
+					_1: {
+						ctor: '::',
+						_0: content,
+						_1: {
+							ctor: '::',
+							_0: _ivanceras$diwata$Views_Page$viewFooter,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+	});
+var _ivanceras$diwata$Views_Page$NewWindow = {ctor: 'NewWindow'};
+var _ivanceras$diwata$Views_Page$Profile = function (a) {
+	return {ctor: 'Profile', _0: a};
+};
+var _ivanceras$diwata$Views_Page$Settings = {ctor: 'Settings'};
+var _ivanceras$diwata$Views_Page$Login = {ctor: 'Login'};
+var _ivanceras$diwata$Views_Page$WindowArena = {ctor: 'WindowArena'};
+var _ivanceras$diwata$Views_Page$Other = {ctor: 'Other'};
+
+var _ivanceras$diwata$Page_Errored$view = F2(
+	function (session, _p0) {
+		var _p1 = _p0;
+		return A2(
+			_elm_lang$html$Html$main_,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id('content'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('container'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h1,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Error Loading Page'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('row'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$p,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(_p1._0.errorMessage),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _ivanceras$diwata$Page_Errored$Model = F2(
+	function (a, b) {
+		return {activePage: a, errorMessage: b};
+	});
+var _ivanceras$diwata$Page_Errored$PageLoadError = function (a) {
+	return {ctor: 'PageLoadError', _0: a};
+};
+var _ivanceras$diwata$Page_Errored$pageLoadError = F2(
+	function (activePage, errorMessage) {
+		var _p2 = A2(
+			_elm_lang$core$Debug$log,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'pageLoadError, Error loading page',
+				_elm_lang$core$Basics$toString(activePage)),
+			errorMessage);
+		return _ivanceras$diwata$Page_Errored$PageLoadError(
+			{activePage: activePage, errorMessage: errorMessage});
+	});
+
+var _ivanceras$diwata$Ports$storeSession = _elm_lang$core$Native_Platform.outgoingPort(
+	'storeSession',
+	function (v) {
+		return (v.ctor === 'Nothing') ? null : v._0;
+	});
+var _ivanceras$diwata$Ports$onSessionChange = _elm_lang$core$Native_Platform.incomingPort('onSessionChange', _elm_lang$core$Json_Decode$value);
+
+var _ivanceras$diwata$Settings$setDbName = F2(
+	function (settings, dbName) {
+		return _elm_lang$core$Native_Utils.update(
+			settings,
+			{dbName: dbName});
+	});
+var _ivanceras$diwata$Settings$setDbUrl = F2(
+	function (settings, dbUrl) {
+		return _elm_lang$core$Native_Utils.update(
+			settings,
+			{
+				dbUrl: _elm_lang$core$Maybe$Just(dbUrl)
+			});
+	});
+var _ivanceras$diwata$Settings$Settings = F4(
+	function (a, b, c, d) {
+		return {dbUrl: a, dbName: b, apiEndPoint: c, grouped: d};
+	});
+var _ivanceras$diwata$Settings$decoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'grouped',
+	_elm_lang$core$Json_Decode$bool,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'api_endpoint',
+		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'db_name',
+			_elm_lang$core$Json_Decode$nullable(_ivanceras$diwata$Data_DatabaseName$decoder),
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'db_url',
+				_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_ivanceras$diwata$Settings$Settings)))));
+var _ivanceras$diwata$Settings$fromJson = function (json) {
+	var settings = A2(_elm_lang$core$Json_Decode$decodeValue, _ivanceras$diwata$Settings$decoder, json);
+	var _p0 = settings;
+	if (_p0.ctor === 'Ok') {
+		return _p0._0;
+	} else {
+		return A2(
+			_elm_lang$core$Native_Utils.crash(
+				'Settings',
+				{
+					start: {line: 47, column: 13},
+					end: {line: 47, column: 24}
+				}),
+			'Decoding settings should not be error',
+			_p0._0);
+	}
+};
+
+var _ivanceras$diwata$Request_Helpers$apiUrl = F2(
+	function (settings, str) {
+		var apiEndPoint = settings.apiEndPoint;
+		var _p0 = apiEndPoint;
+		if (_p0.ctor === 'Just') {
+			return A2(_elm_lang$core$Basics_ops['++'], _p0._0, str);
+		} else {
+			return str;
+		}
+	});
+
+var _ivanceras$diwata$Request_Window_Records$header = F2(
+	function (settings, request) {
+		var dbUrl = settings.dbUrl;
+		var _p0 = dbUrl;
+		if (_p0.ctor === 'Just') {
+			return A3(_lukewestby$elm_http_builder$HttpBuilder$withHeader, 'db_url', _p0._0, request);
+		} else {
+			return request;
+		}
+	});
+var _ivanceras$diwata$Request_Window_Records$listPageWithQuery = F4(
+	function (settings, maybeToken, tableName, query) {
+		var queryStr = _ivanceras$diwata$Data_Query$mainQueryToString(query);
+		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_ivanceras$diwata$Data_AuthToken$withAuthorization,
+				maybeToken,
+				A2(
+					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
+					A2(
+						_ivanceras$diwata$Request_Window_Records$header,
+						settings,
+						_lukewestby$elm_http_builder$HttpBuilder$get(
+							A2(
+								_ivanceras$diwata$Request_Helpers$apiUrl,
+								settings,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'/data/',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
+										A2(_elm_lang$core$Basics_ops['++'], '/', queryStr)))))))));
+	});
+var _ivanceras$diwata$Request_Window_Records$lookups = F3(
+	function (settings, maybeToken, tableName) {
+		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_ivanceras$diwata$Data_AuthToken$withAuthorization,
+				maybeToken,
+				A2(
+					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Lookup$decoder),
+					A2(
+						_ivanceras$diwata$Request_Window_Records$header,
+						settings,
+						_lukewestby$elm_http_builder$HttpBuilder$get(
+							A2(
+								_ivanceras$diwata$Request_Helpers$apiUrl,
+								settings,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'/lookup_all/',
+									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName))))))));
+	});
+var _ivanceras$diwata$Request_Window_Records$lookupPage = F4(
+	function (settings, page, maybeToken, tableName) {
+		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_ivanceras$diwata$Data_AuthToken$withAuthorization,
+				maybeToken,
+				A2(
+					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
+					A2(
+						_ivanceras$diwata$Request_Window_Records$header,
+						settings,
+						_lukewestby$elm_http_builder$HttpBuilder$get(
+							A2(
+								_ivanceras$diwata$Request_Helpers$apiUrl,
+								settings,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'/lookup/',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'/',
+											_elm_lang$core$Basics$toString(page))))))))));
+	});
+var _ivanceras$diwata$Request_Window_Records$fetchSelected = F3(
+	function (settings, tableName, selectedRow) {
+		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+				_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_RecordDetail$decoder),
+				A2(
+					_ivanceras$diwata$Request_Window_Records$header,
+					settings,
+					_lukewestby$elm_http_builder$HttpBuilder$get(
+						A2(
+							_ivanceras$diwata$Request_Helpers$apiUrl,
+							settings,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'/select/',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
+									A2(_elm_lang$core$Basics_ops['++'], '/', selectedRow))))))));
+	});
+var _ivanceras$diwata$Request_Window_Records$fetchHasManyRecords = F5(
+	function (settings, tableName, selectedRow, hasManyTable, query) {
+		var queryStr = _ivanceras$diwata$Data_Query$mainQueryToString(query);
+		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+				_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
+				A2(
+					_ivanceras$diwata$Request_Window_Records$header,
+					settings,
+					_lukewestby$elm_http_builder$HttpBuilder$get(
+						A2(
+							_ivanceras$diwata$Request_Helpers$apiUrl,
+							settings,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'/has_many_select/',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'/',
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											selectedRow,
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												'/',
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													_ivanceras$diwata$Data_Window_TableName$tableNameToString(hasManyTable),
+													A2(_elm_lang$core$Basics_ops['++'], '/', queryStr))))))))))));
+	});
+var _ivanceras$diwata$Request_Window_Records$fetchIndirectRecords = F5(
+	function (settings, tableName, selectedRow, hasManyTable, query) {
+		var queryStr = _ivanceras$diwata$Data_Query$mainQueryToString(query);
+		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+				_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
+				A2(
+					_ivanceras$diwata$Request_Window_Records$header,
+					settings,
+					_lukewestby$elm_http_builder$HttpBuilder$get(
+						A2(
+							_ivanceras$diwata$Request_Helpers$apiUrl,
+							settings,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'/indirect_select/',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'/',
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											selectedRow,
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												'/',
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													_ivanceras$diwata$Data_Window_TableName$tableNameToString(hasManyTable),
+													A2(_elm_lang$core$Basics_ops['++'], '/', queryStr))))))))))));
+	});
+var _ivanceras$diwata$Request_Window_Records$delete = F4(
+	function (settings, tableName, recordId, token) {
+		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_ivanceras$diwata$Data_AuthToken$withAuthorization,
+				_elm_lang$core$Maybe$Just(token),
+				A2(
+					_ivanceras$diwata$Request_Window_Records$header,
+					settings,
+					_lukewestby$elm_http_builder$HttpBuilder$delete(
+						A2(
+							_ivanceras$diwata$Request_Helpers$apiUrl,
+							settings,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'/window/',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName),
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'/data/',
+										_ivanceras$diwata$Data_Window_Record$idToString(recordId)))))))));
+	});
+
+var _ivanceras$diwata$Request_Auth$dbName = function (settings) {
+	var expect = _elm_lang$http$Http$expectJson(
+		_elm_lang$core$Json_Decode$nullable(_ivanceras$diwata$Data_DatabaseName$decoder));
+	return _elm_lang$http$Http$toTask(
+		_lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+				expect,
+				A2(
+					_ivanceras$diwata$Request_Window_Records$header,
+					settings,
+					_lukewestby$elm_http_builder$HttpBuilder$get(
+						A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/database_name'))))));
+};
+var _ivanceras$diwata$Request_Auth$dbUrl = function (settings) {
+	return _elm_lang$http$Http$toTask(
+		_elm_lang$http$Http$getString(
+			A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/db_url')));
+};
+var _ivanceras$diwata$Request_Auth$login = function (settings) {
+	var _p0 = A2(_elm_lang$core$Debug$log, 'settings: ', settings);
+	var expect = _elm_lang$http$Http$expectJson(
+		_elm_lang$core$Json_Decode$succeed(true));
+	return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+		A2(
+			_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+			expect,
+			A2(
+				_ivanceras$diwata$Request_Window_Records$header,
+				settings,
+				_lukewestby$elm_http_builder$HttpBuilder$get(
+					A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/test')))));
+};
+
+var _rtfeldman$elm_validate$Validate$ifInvalid = F2(
+	function (test, error) {
+		var validator = function (subject) {
+			return test(subject) ? {
+				ctor: '::',
+				_0: error,
+				_1: {ctor: '[]'}
+			} : {ctor: '[]'};
+		};
+		return validator;
+	});
+var _rtfeldman$elm_validate$Validate$isValidEmail = function () {
+	var validEmail = _elm_lang$core$Regex$caseInsensitive(
+		_elm_lang$core$Regex$regex('^[a-zA-Z0-9.!#$%&\'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'));
+	return _elm_lang$core$Regex$contains(validEmail);
+}();
+var _rtfeldman$elm_validate$Validate$ifInvalidEmail = _rtfeldman$elm_validate$Validate$ifInvalid(
+	function (_p0) {
+		return !_rtfeldman$elm_validate$Validate$isValidEmail(_p0);
+	});
+var _rtfeldman$elm_validate$Validate$isNothing = function (subject) {
+	var _p1 = subject;
+	if (_p1.ctor === 'Just') {
+		return false;
+	} else {
+		return true;
+	}
+};
+var _rtfeldman$elm_validate$Validate$ifNothing = _rtfeldman$elm_validate$Validate$ifInvalid(_rtfeldman$elm_validate$Validate$isNothing);
+var _rtfeldman$elm_validate$Validate$ifEmptySet = _rtfeldman$elm_validate$Validate$ifInvalid(_elm_lang$core$Set$isEmpty);
+var _rtfeldman$elm_validate$Validate$ifEmptyDict = _rtfeldman$elm_validate$Validate$ifInvalid(_elm_lang$core$Dict$isEmpty);
+var _rtfeldman$elm_validate$Validate$ifNotInt = F2(
+	function (error, subject) {
+		var _p2 = _elm_lang$core$String$toInt(subject);
+		if (_p2.ctor === 'Ok') {
+			return {ctor: '[]'};
+		} else {
+			return {
+				ctor: '::',
+				_0: error,
+				_1: {ctor: '[]'}
+			};
+		}
+	});
+var _rtfeldman$elm_validate$Validate$lacksNonWhitespaceChars = _elm_lang$core$Regex$regex('^\\s*$');
+var _rtfeldman$elm_validate$Validate$ifBlank = _rtfeldman$elm_validate$Validate$ifInvalid(
+	_elm_lang$core$Regex$contains(_rtfeldman$elm_validate$Validate$lacksNonWhitespaceChars));
+var _rtfeldman$elm_validate$Validate$any = F2(
+	function (validators, subject) {
+		any:
+		while (true) {
+			var _p3 = validators;
+			if (_p3.ctor === '[]') {
+				return true;
+			} else {
+				var _p4 = _p3._0(subject);
+				if (_p4.ctor === '[]') {
+					var _v4 = _p3._1,
+						_v5 = subject;
+					validators = _v4;
+					subject = _v5;
+					continue any;
+				} else {
+					return false;
+				}
+			}
+		}
+	});
+var _rtfeldman$elm_validate$Validate$eager = F2(
+	function (validators, subject) {
+		eager:
+		while (true) {
+			var _p5 = validators;
+			if (_p5.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p6 = _p5._0(subject);
+				if (_p6.ctor === '[]') {
+					var _v8 = _p5._1,
+						_v9 = subject;
+					validators = _v8;
+					subject = _v9;
+					continue eager;
+				} else {
+					return _elm_lang$core$Maybe$Just(_p6._0);
+				}
+			}
+		}
+	});
+var _rtfeldman$elm_validate$Validate$all = function (validators) {
+	var validator = function (subject) {
+		var accumulateErrors = F2(
+			function (currentValidator, totalErrors) {
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					totalErrors,
+					currentValidator(subject));
+			});
+		return A3(
+			_elm_lang$core$List$foldl,
+			accumulateErrors,
+			{ctor: '[]'},
+			validators);
+	};
+	return validator;
+};
+
+var _ivanceras$diwata$Views_Form$control = F3(
+	function (element, attributes, children) {
+		return A2(
+			_elm_lang$html$Html$fieldset,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('form-group'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					element,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('form-control'),
+						_1: attributes
+					},
+					children),
+				_1: {ctor: '[]'}
+			});
+	});
+var _ivanceras$diwata$Views_Form$viewErrors = function (errors) {
+	return A2(
+		_elm_lang$html$Html$ul,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('error-messages'),
+			_1: {ctor: '[]'}
+		},
+		A2(
+			_elm_lang$core$List$map,
+			function (_p0) {
+				var _p1 = _p0;
+				return A2(
+					_elm_lang$html$Html$li,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(_p1._1),
+						_1: {ctor: '[]'}
+					});
+			},
+			errors));
+};
+var _ivanceras$diwata$Views_Form$textarea = _ivanceras$diwata$Views_Form$control(_elm_lang$html$Html$textarea);
+var _ivanceras$diwata$Views_Form$input = function (attrs) {
+	return A2(
+		_ivanceras$diwata$Views_Form$control,
+		_elm_lang$html$Html$input,
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$type_('text'),
+				_1: {ctor: '[]'}
+			},
+			attrs));
+};
+var _ivanceras$diwata$Views_Form$password = function (attrs) {
+	return A2(
+		_ivanceras$diwata$Views_Form$control,
+		_elm_lang$html$Html$input,
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$type_('password'),
+				_1: {ctor: '[]'}
+			},
+			attrs));
+};
+
+var _ivanceras$diwata$Page_Login$optionalError = function (fieldName) {
+	var errorToString = function (errorMessage) {
+		return A2(
+			_elm_lang$core$String$join,
+			' ',
+			{
+				ctor: '::',
+				_0: fieldName,
+				_1: {
+					ctor: '::',
+					_0: errorMessage,
+					_1: {ctor: '[]'}
+				}
+			});
+	};
+	return A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		fieldName,
+		_elm_lang$core$Json_Decode$list(
+			A2(_elm_lang$core$Json_Decode$map, errorToString, _elm_lang$core$Json_Decode$string)),
+		{ctor: '[]'});
+};
+var _ivanceras$diwata$Page_Login$errorsDecoder = A2(
+	_ivanceras$diwata$Page_Login$optionalError,
+	'dbUrl',
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(
+		function (dbUrl) {
+			return _elm_lang$core$List$concat(
+				{
+					ctor: '::',
+					_0: dbUrl,
+					_1: {ctor: '[]'}
+				});
+		}));
+var _ivanceras$diwata$Page_Login$initialModel = function (settings) {
+	return {
+		errors: {ctor: '[]'},
+		dbUrl: '',
+		settings: settings
+	};
+};
+var _ivanceras$diwata$Page_Login$Model = F3(
+	function (a, b, c) {
+		return {errors: a, dbUrl: b, settings: c};
+	});
+var _ivanceras$diwata$Page_Login$LoginCompleted = function (a) {
+	return {ctor: 'LoginCompleted', _0: a};
+};
+var _ivanceras$diwata$Page_Login$SetDbUrl = function (a) {
+	return {ctor: 'SetDbUrl', _0: a};
+};
+var _ivanceras$diwata$Page_Login$SubmitForm = {ctor: 'SubmitForm'};
+var _ivanceras$diwata$Page_Login$viewForm = A2(
+	_elm_lang$html$Html$form,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Events$onSubmit(_ivanceras$diwata$Page_Login$SubmitForm),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_ivanceras$diwata$Views_Form$input,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('form-control-lg'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$placeholder('db url'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onInput(_ivanceras$diwata$Page_Login$SetDbUrl),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary pull-xs-right'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Connect'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
+var _ivanceras$diwata$Page_Login$view = F2(
+	function (session, model) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('auth-page'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('container page'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('row'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('col-md-6 offset-md-3 col-xs-12'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$h1,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('text-xs-center'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Sign in'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _ivanceras$diwata$Views_Form$viewErrors(model.errors),
+											_1: {
+												ctor: '::',
+												_0: _ivanceras$diwata$Page_Login$viewForm,
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _ivanceras$diwata$Page_Login$SetSettings = function (a) {
+	return {ctor: 'SetSettings', _0: a};
+};
+var _ivanceras$diwata$Page_Login$NoOp = {ctor: 'NoOp'};
+var _ivanceras$diwata$Page_Login$Password = {ctor: 'Password'};
+var _ivanceras$diwata$Page_Login$Email = {ctor: 'Email'};
+var _ivanceras$diwata$Page_Login$validate = _rtfeldman$elm_validate$Validate$all(
+	{
+		ctor: '::',
+		_0: function (_p0) {
+			return A2(
+				_rtfeldman$elm_validate$Validate$ifBlank,
+				A2(_ivanceras$diwata$Util_ops['=>'], _ivanceras$diwata$Page_Login$Email, 'dbUrl can\'t be blank.'),
+				function (_) {
+					return _.dbUrl;
+				}(_p0));
+		},
+		_1: {ctor: '[]'}
+	});
+var _ivanceras$diwata$Page_Login$Form = {ctor: 'Form'};
+var _ivanceras$diwata$Page_Login$update = F2(
+	function (msg, model) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
+			case 'SubmitForm':
+				var _p2 = _ivanceras$diwata$Page_Login$validate(model);
+				if (_p2.ctor === '[]') {
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						A2(
+							_ivanceras$diwata$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{
+									errors: {ctor: '[]'}
+								}),
+							A2(
+								_elm_lang$http$Http$send,
+								_ivanceras$diwata$Page_Login$LoginCompleted,
+								_ivanceras$diwata$Request_Auth$login(model.settings))),
+						_ivanceras$diwata$Page_Login$NoOp);
+				} else {
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						A2(
+							_ivanceras$diwata$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{errors: _p2}),
+							_elm_lang$core$Platform_Cmd$none),
+						_ivanceras$diwata$Page_Login$NoOp);
+				}
+			case 'SetDbUrl':
+				var _p3 = _p1._0;
+				return A2(
+					_ivanceras$diwata$Util_ops['=>'],
+					A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								dbUrl: _p3,
+								settings: A2(_ivanceras$diwata$Settings$setDbUrl, model.settings, _p3)
+							}),
+						_elm_lang$core$Platform_Cmd$none),
+					_ivanceras$diwata$Page_Login$NoOp);
+			default:
+				if (_p1._0.ctor === 'Err') {
+					var errorMessages = function () {
+						var _p4 = _p1._0._0;
+						if (_p4.ctor === 'BadStatus') {
+							return A2(
+								_elm_lang$core$Result$withDefault,
+								{ctor: '[]'},
+								A2(
+									_elm_lang$core$Json_Decode$decodeString,
+									A2(_elm_lang$core$Json_Decode$field, 'errors', _ivanceras$diwata$Page_Login$errorsDecoder),
+									_p4._0.body));
+						} else {
+							return {
+								ctor: '::',
+								_0: 'unable to process registration',
+								_1: {ctor: '[]'}
+							};
+						}
+					}();
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						A2(
+							_ivanceras$diwata$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{
+									errors: A2(
+										_elm_lang$core$List$map,
+										function (errorMessage) {
+											return A2(_ivanceras$diwata$Util_ops['=>'], _ivanceras$diwata$Page_Login$Form, errorMessage);
+										},
+										errorMessages)
+								}),
+							_elm_lang$core$Platform_Cmd$none),
+						_ivanceras$diwata$Page_Login$NoOp);
+				} else {
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						A2(
+							_ivanceras$diwata$Util_ops['=>'],
+							model,
+							_elm_lang$core$Platform_Cmd$batch(
+								{
+									ctor: '::',
+									_0: _ivanceras$diwata$Route$modifyUrl(
+										_ivanceras$diwata$Route$WindowArena(_ivanceras$diwata$Data_WindowArena$default)),
+									_1: {ctor: '[]'}
+								})),
+						_ivanceras$diwata$Page_Login$SetSettings(model.settings));
+				}
+		}
+	});
+
+var _ivanceras$diwata$Page_NotFound$view = function (session) {
+	return A2(
+		_elm_lang$html$Html$main_,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('content'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('container'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Not Found'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+
 var _ivanceras$diwata$Request_Window$list = F2(
 	function (settings, maybeToken) {
 		var expect = _elm_lang$http$Http$expectJson(
@@ -23753,47 +24702,6 @@ var _ivanceras$diwata$Views_Errors$view = F2(
 				}));
 	});
 
-var _ivanceras$diwata$Request_Window_DataUpdate$updateTab = F4(
-	function (settings, maybeToken, tableName, container) {
-		var jsonBody = _ivanceras$diwata$Data_DataContainer$containerEncoder(container);
-		var _p0 = A2(_elm_lang$core$Debug$log, 'sending: ', jsonBody);
-		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-			A2(
-				_ivanceras$diwata$Data_AuthToken$withAuthorization,
-				maybeToken,
-				A2(
-					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
-					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
-					A2(
-						_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
-						jsonBody,
-						_lukewestby$elm_http_builder$HttpBuilder$post(
-							A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/tab_changeset/'))))));
-	});
-var _ivanceras$diwata$Request_Window_DataUpdate$updateRecord = F4(
-	function (settings, maybeToken, tableName, recordChangeset) {
-		var jsonBody = _ivanceras$diwata$Data_DataContainer$changesetEncoder(recordChangeset);
-		var _p1 = A2(_elm_lang$core$Debug$log, 'sending: ', jsonBody);
-		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
-			A2(
-				_ivanceras$diwata$Data_AuthToken$withAuthorization,
-				maybeToken,
-				A2(
-					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
-					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_RecordDetail$decoder),
-					A2(
-						_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
-						jsonBody,
-						_lukewestby$elm_http_builder$HttpBuilder$post(
-							A2(
-								_ivanceras$diwata$Request_Helpers$apiUrl,
-								settings,
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									'/record_changeset/',
-									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName))))))));
-	});
-
 var _ivanceras$diwata$Widgets_DropdownDisplay$estimatedListHeight = function (list) {
 	var optionLen = _elm_lang$core$List$length(list);
 	var optionHeight = 30.0;
@@ -23857,16 +24765,20 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$init = F3(
 			selected: selected,
 			scroll: A2(_ivanceras$diwata$Util$Scroll, 0, 0),
 			alignment: alignment,
-			width: width
+			width: width,
+			containerScroll: A2(_ivanceras$diwata$Util$Scroll, 0, 0)
 		};
 	});
 var _ivanceras$diwata$Widgets_DropdownDisplay$getSelected = function (model) {
 	return model.selected;
 };
-var _ivanceras$diwata$Widgets_DropdownDisplay$Model = F5(
-	function (a, b, c, d, e) {
-		return {opened: a, selected: b, scroll: c, alignment: d, width: e};
+var _ivanceras$diwata$Widgets_DropdownDisplay$Model = F6(
+	function (a, b, c, d, e, f) {
+		return {opened: a, selected: b, scroll: c, alignment: d, width: e, containerScroll: f};
 	});
+var _ivanceras$diwata$Widgets_DropdownDisplay$ContainerScrollChanged = function (a) {
+	return {ctor: 'ContainerScrollChanged', _0: a};
+};
 var _ivanceras$diwata$Widgets_DropdownDisplay$DropdownScrolled = function (a) {
 	return {ctor: 'DropdownScrolled', _0: a};
 };
@@ -24018,11 +24930,22 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$viewOption = F2(
 	});
 var _ivanceras$diwata$Widgets_DropdownDisplay$viewDropdown = F3(
 	function (styles, list, model) {
+		var padTop = 2;
+		var _p19 = function () {
+			var _p20 = _coreytrampe$elm_vendor$Vendor$prefix;
+			if (_p20.ctor === 'Webkit') {
+				return {ctor: '_Tuple2', _0: (0 - model.containerScroll.top) + padTop, _1: 0 - model.containerScroll.left};
+			} else {
+				return {ctor: '_Tuple2', _0: padTop, _1: 0};
+			}
+		}();
+		var marginTop = _p19._0;
+		var marginLeft = _p19._1;
 		var sorted = A2(
 			_elm_lang$core$List$sortBy,
-			function (_p19) {
-				var _p20 = _p19;
-				return _elm_lang$core$String$toLower(_p20._1);
+			function (_p21) {
+				var _p22 = _p21;
+				return _elm_lang$core$String$toLower(_p22._1);
 			},
 			list);
 		var pkWidth = _ivanceras$diwata$Widgets_DropdownDisplay$calcPkWidth(sorted);
@@ -24038,7 +24961,28 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$viewDropdown = F3(
 					_1: {
 						ctor: '::',
 						_0: styles,
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'margin-top',
+										_1: _ivanceras$diwata$Util$px(marginTop)
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: 'margin-left',
+											_1: _ivanceras$diwata$Util$px(marginLeft)
+										},
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			},
@@ -24064,8 +25008,8 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$update = F2(
 	function (msg, model) {
 		update:
 		while (true) {
-			var _p21 = msg;
-			switch (_p21.ctor) {
+			var _p23 = msg;
+			switch (_p23.ctor) {
 				case 'ToggleDropdown':
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
@@ -24084,19 +25028,26 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$update = F2(
 					var newModel = _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							selected: _elm_lang$core$Maybe$Just(_p21._0)
+							selected: _elm_lang$core$Maybe$Just(_p23._0)
 						});
-					var _v9 = _ivanceras$diwata$Widgets_DropdownDisplay$CloseDropdown,
-						_v10 = newModel;
-					msg = _v9;
-					model = _v10;
+					var _v10 = _ivanceras$diwata$Widgets_DropdownDisplay$CloseDropdown,
+						_v11 = newModel;
+					msg = _v10;
+					model = _v11;
 					continue update;
+				case 'DropdownScrolled':
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{scroll: _p23._0}),
+						_elm_lang$core$Platform_Cmd$none);
 				default:
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{scroll: _p21._0}),
+							{containerScroll: _p23._0, opened: false}),
 						_elm_lang$core$Platform_Cmd$none);
 			}
 		}
@@ -24105,14 +25056,14 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$ToggleDropdown = {ctor: 'ToggleDro
 var _ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton = F3(
 	function (styles, list, model) {
 		var selectedValue = function () {
-			var _p22 = model.selected;
-			if (_p22.ctor === 'Just') {
+			var _p24 = model.selected;
+			if (_p24.ctor === 'Just') {
 				return _elm_lang$core$List$head(
 					A2(
 						_elm_lang$core$List$filter,
-						function (_p23) {
-							var _p24 = _p23;
-							return _elm_lang$core$Native_Utils.eq(_p24._0, _p22._0);
+						function (_p25) {
+							var _p26 = _p25;
+							return _elm_lang$core$Native_Utils.eq(_p26._0, _p24._0);
 						},
 						list));
 			} else {
@@ -24120,25 +25071,25 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton = F3(
 			}
 		}();
 		var selectedDisplay = function () {
-			var _p25 = selectedValue;
-			if (_p25.ctor === 'Just') {
-				var _p28 = _p25._0._0;
-				var _p27 = _p25._0._1;
+			var _p27 = selectedValue;
+			if (_p27.ctor === 'Just') {
+				var _p30 = _p27._0._0;
+				var _p29 = _p27._0._1;
 				var choiceWidth = _ivanceras$diwata$Widgets_DropdownDisplay$choiceCharWidth(list);
 				var choicePadded = A3(
 					_elm_lang$core$String$padLeft,
 					choiceWidth,
 					_elm_lang$core$Native_Utils.chr(' '),
-					_p27);
-				var pkString = _ivanceras$diwata$Data_Window_Value$valueToString(_p28);
+					_p29);
+				var pkString = _ivanceras$diwata$Data_Window_Value$valueToString(_p30);
 				var pkWidth = _ivanceras$diwata$Widgets_DropdownDisplay$pkCharWidth(list);
 				var pkPadded = A3(
 					_elm_lang$core$String$padLeft,
 					pkWidth,
 					_elm_lang$core$Native_Utils.chr(' '),
 					pkString);
-				var _p26 = _p28;
-				if (_p26.ctor === 'Uuid') {
+				var _p28 = _p30;
+				if (_p28.ctor === 'Uuid') {
 					return A2(
 						_elm_lang$core$Basics_ops['++'],
 						choicePadded,
@@ -24147,7 +25098,7 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton = F3(
 					return A2(
 						_elm_lang$core$Basics_ops['++'],
 						pkPadded,
-						A2(_elm_lang$core$Basics_ops['++'], '  |  ', _p27));
+						A2(_elm_lang$core$Basics_ops['++'], '  |  ', _p29));
 				}
 			} else {
 				return '';
@@ -24578,8 +25529,8 @@ var _ivanceras$diwata$Views_Window_Field$listRecordToListString = F2(
 						return _elm_lang$core$Native_Utils.crashCase(
 							'Views.Window.Field',
 							{
-								start: {line: 713, column: 21},
-								end: {line: 718, column: 73}
+								start: {line: 717, column: 21},
+								end: {line: 722, column: 73}
 							},
 							_p2)('Only 1 pk is supported for now');
 					}
@@ -24603,26 +25554,25 @@ var _ivanceras$diwata$Views_Window_Field$listRecordToListString = F2(
 			},
 			lookupRecords);
 	});
-var _ivanceras$diwata$Views_Window_Field$dropdownPageRequestNeeded = F2(
-	function (lookup, model) {
-		var _p4 = _ivanceras$diwata$Views_Window_Field$dropdownModel(model);
-		if (_p4.ctor === 'Just') {
-			var _p5 = _ivanceras$diwata$Data_Window_Field$dropdownInfo(model.field);
-			if (_p5.ctor === 'Just') {
-				var _p7 = _p5._0;
-				var sourceTable = _p7.source;
-				var _p6 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, sourceTable, lookup);
-				var page = _p6._0;
-				var recordList = _p6._1;
-				var list = A2(_ivanceras$diwata$Views_Window_Field$listRecordToListString, _p7, recordList);
-				return (A2(_ivanceras$diwata$Widgets_DropdownDisplay$pageRequestNeeded, list, _p4._0) && (!A2(_ivanceras$diwata$Data_Window_Lookup$hasReachedLastPage, sourceTable, lookup))) ? _elm_lang$core$Maybe$Just(sourceTable) : _elm_lang$core$Maybe$Nothing;
-			} else {
-				return _elm_lang$core$Maybe$Nothing;
-			}
+var _ivanceras$diwata$Views_Window_Field$dropdownPageRequestNeeded = function (model) {
+	var _p4 = _ivanceras$diwata$Views_Window_Field$dropdownModel(model);
+	if (_p4.ctor === 'Just') {
+		var _p5 = _ivanceras$diwata$Data_Window_Field$dropdownInfo(model.field);
+		if (_p5.ctor === 'Just') {
+			var _p7 = _p5._0;
+			var sourceTable = _p7.source;
+			var _p6 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, sourceTable, model.lookup);
+			var page = _p6._0;
+			var recordList = _p6._1;
+			var list = A2(_ivanceras$diwata$Views_Window_Field$listRecordToListString, _p7, recordList);
+			return (A2(_ivanceras$diwata$Widgets_DropdownDisplay$pageRequestNeeded, list, _p4._0) && (!A2(_ivanceras$diwata$Data_Window_Lookup$hasReachedLastPage, sourceTable, model.lookup))) ? _elm_lang$core$Maybe$Just(sourceTable) : _elm_lang$core$Maybe$Nothing;
 		} else {
 			return _elm_lang$core$Maybe$Nothing;
 		}
-	});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
 var _ivanceras$diwata$Views_Window_Field$valueToString = function (maybeValue) {
 	var _p8 = maybeValue;
 	if (_p8.ctor === 'Just') {
@@ -24670,7 +25620,11 @@ var _ivanceras$diwata$Views_Window_Field$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {tab: a, field: b, presentation: c, record: d, value: e, widget: f, editValue: g, dropdownInfo: h, allotedTabWidth: i, isFocused: j};
+										return function (k) {
+											return function (l) {
+												return {tab: a, field: b, presentation: c, record: d, value: e, widget: f, editValue: g, dropdownInfo: h, allotedTabWidth: i, isFocused: j, containerScroll: k, lookup: l};
+											};
+										};
 									};
 								};
 							};
@@ -24680,6 +25634,12 @@ var _ivanceras$diwata$Views_Window_Field$Model = function (a) {
 			};
 		};
 	};
+};
+var _ivanceras$diwata$Views_Window_Field$LookupChanged = function (a) {
+	return {ctor: 'LookupChanged', _0: a};
+};
+var _ivanceras$diwata$Views_Window_Field$ContainerScrollChanged = function (a) {
+	return {ctor: 'ContainerScrollChanged', _0: a};
 };
 var _ivanceras$diwata$Views_Window_Field$FieldBlurred = {ctor: 'FieldBlurred'};
 var _ivanceras$diwata$Views_Window_Field$FieldFocused = {ctor: 'FieldFocused'};
@@ -24721,8 +25681,8 @@ var _ivanceras$diwata$Views_Window_Field$viewDatePicker = F2(
 						return _elm_lang$core$Native_Utils.crashCase(
 							'Views.Window.Field',
 							{
-								start: {line: 781, column: 21},
-								end: {line: 795, column: 93}
+								start: {line: 785, column: 21},
+								end: {line: 799, column: 93}
 							},
 							_p14)(
 							A2(
@@ -24781,105 +25741,103 @@ var _ivanceras$diwata$Views_Window_Field$DropdownDisplayMsg = F2(
 	function (a, b) {
 		return {ctor: 'DropdownDisplayMsg', _0: a, _1: b};
 	});
-var _ivanceras$diwata$Views_Window_Field$viewWidget = F2(
-	function (lookup, model) {
-		var _p17 = model.widget;
-		switch (_p17.ctor) {
-			case 'HtmlWidget':
-				return _p17._0;
-			case 'FixDropdown':
-				var _p18 = _p17._0;
-				return A2(
-					_elm_lang$html$Html$map,
-					_ivanceras$diwata$Views_Window_Field$FixDropdownMsg(_p18),
-					_ivanceras$diwata$Widgets_FixDropdown$view(_p18));
-			default:
-				var _p28 = _p17._0;
-				var dropdownInfo = function () {
-					var _p19 = model.dropdownInfo;
-					if (_p19.ctor === 'Just') {
-						return _p19._0;
-					} else {
-						return _elm_lang$core$Native_Utils.crashCase(
-							'Views.Window.Field',
-							{
-								start: {line: 164, column: 21},
-								end: {line: 169, column: 77}
-							},
-							_p19)('There should be dropdown info here');
-					}
-				}();
-				var sourceTable = dropdownInfo.source;
-				var _p21 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, sourceTable, lookup);
-				var page = _p21._0;
-				var recordList = _p21._1;
-				var list = A2(_ivanceras$diwata$Views_Window_Field$listRecordToListString, dropdownInfo, recordList);
-				var displayValue = function () {
-					var _p22 = model.record;
-					if (_p22.ctor === 'Just') {
-						var _p23 = A2(_ivanceras$diwata$Data_Window_Field$displayValues, model.field, _p22._0);
-						if (_p23.ctor === 'Just') {
-							return _p23._0;
-						} else {
-							return '';
-						}
+var _ivanceras$diwata$Views_Window_Field$viewWidget = function (model) {
+	var _p17 = model.widget;
+	switch (_p17.ctor) {
+		case 'HtmlWidget':
+			return _p17._0;
+		case 'FixDropdown':
+			var _p18 = _p17._0;
+			return A2(
+				_elm_lang$html$Html$map,
+				_ivanceras$diwata$Views_Window_Field$FixDropdownMsg(_p18),
+				_ivanceras$diwata$Widgets_FixDropdown$view(_p18));
+		default:
+			var _p28 = _p17._0;
+			var dropdownInfo = function () {
+				var _p19 = model.dropdownInfo;
+				if (_p19.ctor === 'Just') {
+					return _p19._0;
+				} else {
+					return _elm_lang$core$Native_Utils.crashCase(
+						'Views.Window.Field',
+						{
+							start: {line: 168, column: 21},
+							end: {line: 173, column: 77}
+						},
+						_p19)('There should be dropdown info here');
+				}
+			}();
+			var sourceTable = dropdownInfo.source;
+			var _p21 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, sourceTable, model.lookup);
+			var page = _p21._0;
+			var recordList = _p21._1;
+			var list = A2(_ivanceras$diwata$Views_Window_Field$listRecordToListString, dropdownInfo, recordList);
+			var displayValue = function () {
+				var _p22 = model.record;
+				if (_p22.ctor === 'Just') {
+					var _p23 = A2(_ivanceras$diwata$Data_Window_Field$displayValues, model.field, _p22._0);
+					if (_p23.ctor === 'Just') {
+						return _p23._0;
 					} else {
 						return '';
 					}
-				}();
-				var listWithSelected = function () {
-					var _p24 = model.value;
-					if (_p24.ctor === 'Just') {
-						var _p27 = _p24._0;
-						return A2(
-							_elm_lang$core$List$any,
-							function (_p25) {
-								var _p26 = _p25;
-								return _elm_lang$core$Native_Utils.eq(_p26._0, _p27);
-							},
-							list) ? list : {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: _p27, _1: displayValue},
-							_1: list
-						};
-					} else {
-						return list;
-					}
-				}();
-				return A2(
-					_elm_lang$html$Html$map,
-					_ivanceras$diwata$Views_Window_Field$DropdownDisplayMsg(_p28),
-					A2(_ivanceras$diwata$Widgets_DropdownDisplay$view, listWithSelected, _p28));
-		}
-	});
-var _ivanceras$diwata$Views_Window_Field$view = F2(
-	function (lookup, model) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('widget-value'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$classList(
-						{
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'is-modified',
-								_1: _ivanceras$diwata$Views_Window_Field$isModified(model)
-							},
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
+				} else {
+					return '';
 				}
-			},
-			{
+			}();
+			var listWithSelected = function () {
+				var _p24 = model.value;
+				if (_p24.ctor === 'Just') {
+					var _p27 = _p24._0;
+					return A2(
+						_elm_lang$core$List$any,
+						function (_p25) {
+							var _p26 = _p25;
+							return _elm_lang$core$Native_Utils.eq(_p26._0, _p27);
+						},
+						list) ? list : {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: _p27, _1: displayValue},
+						_1: list
+					};
+				} else {
+					return list;
+				}
+			}();
+			return A2(
+				_elm_lang$html$Html$map,
+				_ivanceras$diwata$Views_Window_Field$DropdownDisplayMsg(_p28),
+				A2(_ivanceras$diwata$Widgets_DropdownDisplay$view, listWithSelected, _p28));
+	}
+};
+var _ivanceras$diwata$Views_Window_Field$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('widget-value'),
+			_1: {
 				ctor: '::',
-				_0: A2(_ivanceras$diwata$Views_Window_Field$viewWidget, lookup, model),
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'is-modified',
+							_1: _ivanceras$diwata$Views_Window_Field$isModified(model)
+						},
+						_1: {ctor: '[]'}
+					}),
 				_1: {ctor: '[]'}
-			});
-	});
+			}
+		},
+		{
+			ctor: '::',
+			_0: _ivanceras$diwata$Views_Window_Field$viewWidget(model),
+			_1: {ctor: '[]'}
+		});
+};
 var _ivanceras$diwata$Views_Window_Field$HtmlWidget = function (a) {
 	return {ctor: 'HtmlWidget', _0: a};
 };
@@ -25734,8 +26692,8 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.Field',
 					{
-						start: {line: 293, column: 5},
-						end: {line: 652, column: 79}
+						start: {line: 297, column: 5},
+						end: {line: 656, column: 79}
 					},
 					_p34)(
 					A2(
@@ -25744,8 +26702,8 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 						_elm_lang$core$Basics$toString(controlWidget)));
 		}
 	});
-var _ivanceras$diwata$Views_Window_Field$init = F6(
-	function (allotedTabWidth, presentation, action, record, tab, field) {
+var _ivanceras$diwata$Views_Window_Field$init = F7(
+	function (allotedTabWidth, presentation, action, record, tab, lookup, field) {
 		var controlWidget = field.controlWidget;
 		var dropdownInfo = function () {
 			var _p48 = controlWidget.dropdown;
@@ -25780,7 +26738,20 @@ var _ivanceras$diwata$Views_Window_Field$init = F6(
 		var maybeValue = _p50._0;
 		var editValue = _p50._1;
 		var widget = A6(_ivanceras$diwata$Views_Window_Field$createWidget, allotedTabWidth, presentation, record, tab, field, editValue);
-		return {tab: tab, field: field, presentation: presentation, record: record, widget: widget, value: maybeValue, editValue: editValue, dropdownInfo: dropdownInfo, allotedTabWidth: allotedTabWidth, isFocused: false};
+		return {
+			tab: tab,
+			field: field,
+			presentation: presentation,
+			record: record,
+			widget: widget,
+			value: maybeValue,
+			editValue: editValue,
+			dropdownInfo: dropdownInfo,
+			allotedTabWidth: allotedTabWidth,
+			isFocused: false,
+			containerScroll: A2(_ivanceras$diwata$Util$Scroll, 0, 0),
+			lookup: lookup
+		};
 	});
 var _ivanceras$diwata$Views_Window_Field$updateWidgetValue = F2(
 	function (model, value) {
@@ -25792,25 +26763,47 @@ var _ivanceras$diwata$Views_Window_Field$updateWidgetValue = F2(
 		var widget = model.widget;
 		return A6(_ivanceras$diwata$Views_Window_Field$createWidget, allotedTabWidth, presentation, record, tab, field, value);
 	});
+var _ivanceras$diwata$Views_Window_Field$updateDropdownDisplay = F2(
+	function (dropdownMsg, model) {
+		var _p52 = model.widget;
+		if (_p52.ctor === 'TableDropdown') {
+			var _p53 = A2(_ivanceras$diwata$Widgets_DropdownDisplay$update, dropdownMsg, _p52._0);
+			var updatedDropdown = _p53._0;
+			var subCmd = _p53._1;
+			return A2(
+				_ivanceras$diwata$Util_ops['=>'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{
+						widget: _ivanceras$diwata$Views_Window_Field$TableDropdown(updatedDropdown)
+					}),
+				A2(
+					_elm_lang$core$Platform_Cmd$map,
+					_ivanceras$diwata$Views_Window_Field$DropdownDisplayMsg(updatedDropdown),
+					subCmd));
+		} else {
+			return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+		}
+	});
 var _ivanceras$diwata$Views_Window_Field$update = F2(
 	function (msg, model) {
-		var _p52 = msg;
-		switch (_p52.ctor) {
+		var _p54 = msg;
+		switch (_p54.ctor) {
 			case 'DropdownDisplayMsg':
-				if (_p52._1.ctor === 'SelectionChanged') {
-					var _p54 = _p52._1._0;
-					var _p53 = A2(
+				if (_p54._1.ctor === 'SelectionChanged') {
+					var _p56 = _p54._1._0;
+					var _p55 = A2(
 						_ivanceras$diwata$Widgets_DropdownDisplay$update,
-						_ivanceras$diwata$Widgets_DropdownDisplay$SelectionChanged(_p54),
-						_p52._0);
-					var newDropdown = _p53._0;
-					var subCmd = _p53._1;
+						_ivanceras$diwata$Widgets_DropdownDisplay$SelectionChanged(_p56),
+						_p54._0);
+					var newDropdown = _p55._0;
+					var subCmd = _p55._1;
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
 							model,
 							{
-								editValue: _elm_lang$core$Maybe$Just(_p54),
+								editValue: _elm_lang$core$Maybe$Just(_p56),
 								widget: _ivanceras$diwata$Views_Window_Field$TableDropdown(newDropdown)
 							}),
 						A2(
@@ -25818,9 +26811,9 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 							_ivanceras$diwata$Views_Window_Field$DropdownDisplayMsg(newDropdown),
 							subCmd));
 				} else {
-					var _p55 = A2(_ivanceras$diwata$Widgets_DropdownDisplay$update, _p52._1, _p52._0);
-					var newDropdown = _p55._0;
-					var subCmd = _p55._1;
+					var _p57 = A2(_ivanceras$diwata$Widgets_DropdownDisplay$update, _p54._1, _p54._0);
+					var newDropdown = _p57._0;
+					var subCmd = _p57._1;
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
@@ -25834,11 +26827,11 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 							subCmd));
 				}
 			case 'FixDropdownMsg':
-				var _p56 = model.widget;
-				if (_p56.ctor === 'FixDropdown') {
-					var _p57 = A2(_ivanceras$diwata$Widgets_FixDropdown$update, _p52._1, _p56._0);
-					var newFix = _p57._0;
-					var subCmd = _p57._1;
+				var _p58 = model.widget;
+				if (_p58.ctor === 'FixDropdown') {
+					var _p59 = A2(_ivanceras$diwata$Widgets_FixDropdown$update, _p54._1, _p58._0);
+					var newFix = _p59._0;
+					var subCmd = _p59._1;
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
@@ -25854,36 +26847,36 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 					return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 				}
 			case 'IntegerValueChanged':
-				var intValue = _elm_lang$core$String$toInt(_p52._0);
+				var intValue = _elm_lang$core$String$toInt(_p54._0);
 				var dataType = _ivanceras$diwata$Data_Window_Field$dataType(model.field);
 				var value = function () {
-					var _p58 = dataType;
-					switch (_p58.ctor) {
+					var _p60 = dataType;
+					switch (_p60.ctor) {
 						case 'Tinyint':
-							var _p59 = intValue;
-							if (_p59.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Int(_p59._0);
-							} else {
-								return _ivanceras$diwata$Data_Window_Value$Nil;
-							}
-						case 'Smallint':
-							var _p60 = intValue;
-							if (_p60.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Int(_p60._0);
-							} else {
-								return _ivanceras$diwata$Data_Window_Value$Nil;
-							}
-						case 'Int':
 							var _p61 = intValue;
 							if (_p61.ctor === 'Ok') {
 								return _ivanceras$diwata$Data_Window_Value$Int(_p61._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
-						case 'Bigint':
+						case 'Smallint':
 							var _p62 = intValue;
 							if (_p62.ctor === 'Ok') {
 								return _ivanceras$diwata$Data_Window_Value$Int(_p62._0);
+							} else {
+								return _ivanceras$diwata$Data_Window_Value$Nil;
+							}
+						case 'Int':
+							var _p63 = intValue;
+							if (_p63.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Int(_p63._0);
+							} else {
+								return _ivanceras$diwata$Data_Window_Value$Nil;
+							}
+						case 'Bigint':
+							var _p64 = intValue;
+							if (_p64.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Int(_p64._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
@@ -25900,36 +26893,36 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'DecimalValueChanged':
-				var floatValue = _elm_lang$core$String$toFloat(_p52._0);
+				var floatValue = _elm_lang$core$String$toFloat(_p54._0);
 				var dataType = _ivanceras$diwata$Data_Window_Field$dataType(model.field);
 				var value = function () {
-					var _p63 = dataType;
-					switch (_p63.ctor) {
+					var _p65 = dataType;
+					switch (_p65.ctor) {
 						case 'Double':
-							var _p64 = floatValue;
-							if (_p64.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Double(_p64._0);
+							var _p66 = floatValue;
+							if (_p66.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Double(_p66._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Float':
-							var _p65 = floatValue;
-							if (_p65.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Float(_p65._0);
+							var _p67 = floatValue;
+							if (_p67.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Float(_p67._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Real':
-							var _p66 = floatValue;
-							if (_p66.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Float(_p66._0);
+							var _p68 = floatValue;
+							if (_p68.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Float(_p68._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Numeric':
-							var _p67 = floatValue;
-							if (_p67.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$BigDecimal(_p67._0);
+							var _p69 = floatValue;
+							if (_p69.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$BigDecimal(_p69._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
@@ -25946,36 +26939,36 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'StringValueChanged':
-				var _p72 = _p52._0;
+				var _p74 = _p54._0;
 				var dataType = _ivanceras$diwata$Data_Window_Field$dataType(model.field);
 				var value = function () {
-					var _p68 = dataType;
-					switch (_p68.ctor) {
+					var _p70 = dataType;
+					switch (_p70.ctor) {
 						case 'Double':
-							var _p69 = _elm_lang$core$String$toFloat(_p72);
-							if (_p69.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Double(_p69._0);
+							var _p71 = _elm_lang$core$String$toFloat(_p74);
+							if (_p71.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Double(_p71._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Float':
-							var _p70 = _elm_lang$core$String$toFloat(_p72);
-							if (_p70.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Float(_p70._0);
+							var _p72 = _elm_lang$core$String$toFloat(_p74);
+							if (_p72.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Float(_p72._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Int':
-							var _p71 = _elm_lang$core$String$toInt(_p72);
-							if (_p71.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Int(_p71._0);
+							var _p73 = _elm_lang$core$String$toInt(_p74);
+							if (_p73.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Int(_p73._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Uuid':
-							return _ivanceras$diwata$Data_Window_Value$Uuid(_p72);
+							return _ivanceras$diwata$Data_Window_Value$Uuid(_p74);
 						default:
-							return _ivanceras$diwata$Data_Window_Value$Text(_p72);
+							return _ivanceras$diwata$Data_Window_Value$Text(_p74);
 					}
 				}();
 				return A2(
@@ -25988,21 +26981,21 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 					_elm_lang$core$Platform_Cmd$none);
 			case 'TimestampValueChanged':
 				var value = function () {
-					var _p73 = _elm_lang$core$Date$fromString(_p52._0);
-					if (_p73.ctor === 'Ok') {
-						return _p73._0;
+					var _p75 = _elm_lang$core$Date$fromString(_p54._0);
+					if (_p75.ctor === 'Ok') {
+						return _p75._0;
 					} else {
 						return _elm_lang$core$Native_Utils.crashCase(
 							'Views.Window.Field',
 							{
-								start: {line: 1008, column: 21},
-								end: {line: 1013, column: 79}
+								start: {line: 1014, column: 21},
+								end: {line: 1019, column: 79}
 							},
-							_p73)(
+							_p75)(
 							A2(
 								_elm_lang$core$Basics_ops['++'],
 								'unable to parse date',
-								_elm_lang$core$Basics$toString(_p73._0)));
+								_elm_lang$core$Basics$toString(_p75._0)));
 					}
 				}();
 				var dateValue = _ivanceras$diwata$Data_Window_Value$Timestamp(value);
@@ -26015,7 +27008,7 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'BoolValueChanged':
-				var value = _ivanceras$diwata$Data_Window_Value$Bool(_p52._0);
+				var value = _ivanceras$diwata$Data_Window_Value$Bool(_p54._0);
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -26033,17 +27026,17 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						{editValue: model.value, widget: updatedWidget}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'SetValue':
-				var _p75 = _p52._0;
+				var _p77 = _p54._0;
 				var updatedWidget = A2(
 					_ivanceras$diwata$Views_Window_Field$updateWidgetValue,
 					model,
-					_elm_lang$core$Maybe$Just(_p75));
+					_elm_lang$core$Maybe$Just(_p77));
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							editValue: _elm_lang$core$Maybe$Just(_p75),
+							editValue: _elm_lang$core$Maybe$Just(_p77),
 							widget: updatedWidget
 						}),
 					_elm_lang$core$Platform_Cmd$none);
@@ -26056,116 +27049,48 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						model,
 						{isFocused: true}),
 					_elm_lang$core$Platform_Cmd$none);
-			default:
+			case 'FieldBlurred':
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{isFocused: false}),
 					_elm_lang$core$Platform_Cmd$none);
+			case 'ContainerScrollChanged':
+				var _p78 = _p54._0;
+				var updatedModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{containerScroll: _p78});
+				return A2(
+					_ivanceras$diwata$Views_Window_Field$updateDropdownDisplay,
+					_ivanceras$diwata$Widgets_DropdownDisplay$ContainerScrollChanged(_p78),
+					updatedModel);
+			default:
+				return A2(
+					_ivanceras$diwata$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{lookup: _p54._0}),
+					_elm_lang$core$Platform_Cmd$none);
 		}
 	});
 
-var _ivanceras$diwata$Views_Window_LinkRow$dropdownPageRequestNeeded = F2(
-	function (lookup, model) {
-		var dropdownInfo = model.dropdownInfo;
-		var tableName = model.tab.tableName;
-		var _p0 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, tableName, lookup);
-		var page = _p0._0;
-		var listRecord = _p0._1;
-		var listValue = A2(_ivanceras$diwata$Views_Window_Field$listRecordToListString, dropdownInfo, listRecord);
-		var dropdownModel = model.dropdownModel;
-		return (A2(_ivanceras$diwata$Widgets_DropdownDisplay$pageRequestNeeded, listValue, dropdownModel) && (!A2(_ivanceras$diwata$Data_Window_Lookup$hasReachedLastPage, tableName, lookup))) ? _elm_lang$core$Maybe$Just(tableName) : _elm_lang$core$Maybe$Nothing;
-	});
-var _ivanceras$diwata$Views_Window_LinkRow$init = F2(
-	function (linkRowId, tab) {
-		var dropdownInfo = {
-			source: tab.tableName,
-			display: function () {
-				var _p1 = tab.display;
-				if (_p1.ctor === 'Just') {
-					return _p1._0;
-				} else {
-					return _elm_lang$core$Native_Utils.crashCase(
-						'Views.Window.LinkRow',
-						{
-							start: {line: 58, column: 17},
-							end: {line: 63, column: 74}
-						},
-						_p1)('This tab has no display for linkRow');
-				}
-			}()
-		};
-		var alignment = _ivanceras$diwata$Data_Window_Widget$Left;
-		var widgetWidth = 200;
-		var dropdownModel = A3(_ivanceras$diwata$Widgets_DropdownDisplay$init, alignment, widgetWidth, _elm_lang$core$Maybe$Nothing);
-		return {tab: tab, dropdownModel: dropdownModel, dropdownInfo: dropdownInfo, linkRowId: linkRowId};
-	});
-var _ivanceras$diwata$Views_Window_LinkRow$getLinkRow = function (model) {
-	var dropdownModel = model.dropdownModel;
-	var linkRow = _ivanceras$diwata$Widgets_DropdownDisplay$getSelected(dropdownModel);
-	return linkRow;
-};
-var _ivanceras$diwata$Views_Window_LinkRow$Model = F4(
-	function (a, b, c, d) {
-		return {tab: a, dropdownModel: b, dropdownInfo: c, linkRowId: d};
-	});
-var _ivanceras$diwata$Views_Window_LinkRow$DropdownDisplayMsg = function (a) {
-	return {ctor: 'DropdownDisplayMsg', _0: a};
-};
-var _ivanceras$diwata$Views_Window_LinkRow$view = F2(
-	function (lookup, model) {
-		var iconSize = _ivanceras$diwata$Constant$iconSize;
-		var iconColor = _ivanceras$diwata$Constant$iconColor;
-		var dropdownInfo = model.dropdownInfo;
-		var tab = model.tab;
-		var display = tab.display;
-		var tableName = tab.tableName;
-		var _p3 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, tableName, lookup);
-		var page = _p3._0;
-		var listRecord = _p3._1;
-		var listValue = A2(_ivanceras$diwata$Views_Window_Field$listRecordToListString, dropdownInfo, listRecord);
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('link-row'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$map,
-					_ivanceras$diwata$Views_Window_LinkRow$DropdownDisplayMsg,
-					A2(_ivanceras$diwata$Widgets_DropdownDisplay$view, listValue, model.dropdownModel)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$button,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: A2(_j_panasiuk$elm_ionicons$Ionicon$checkmark, iconSize, iconColor),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			});
-	});
-var _ivanceras$diwata$Views_Window_LinkRow$update = F2(
-	function (msg, model) {
-		var _p4 = msg;
-		var _p5 = A2(_ivanceras$diwata$Widgets_DropdownDisplay$update, _p4._0, model.dropdownModel);
-		var updatedDropdown = _p5._0;
-		var subCmd = _p5._1;
+var _ivanceras$diwata$Views_Window_Row$updateAllFields = F2(
+	function (fieldMsg, model) {
+		var _p0 = _elm_lang$core$List$unzip(
+			A2(
+				_elm_lang$core$List$map,
+				_ivanceras$diwata$Views_Window_Field$update(fieldMsg),
+				model.fields));
+		var updatedFields = _p0._0;
+		var subCmd = _p0._1;
 		return A2(
 			_ivanceras$diwata$Util_ops['=>'],
 			_elm_lang$core$Native_Utils.update(
 				model,
-				{dropdownModel: updatedDropdown}),
-			A2(_elm_lang$core$Platform_Cmd$map, _ivanceras$diwata$Views_Window_LinkRow$DropdownDisplayMsg, subCmd));
+				{fields: updatedFields}),
+			_elm_lang$core$Platform_Cmd$none);
 	});
-
 var _ivanceras$diwata$Views_Window_Row$updateFields = F2(
 	function (msg, model) {
 		return A2(
@@ -26173,37 +27098,39 @@ var _ivanceras$diwata$Views_Window_Row$updateFields = F2(
 			_ivanceras$diwata$Views_Window_Field$update(msg),
 			model.fields);
 	});
-var _ivanceras$diwata$Views_Window_Row$dropdownPageRequestNeeded = F2(
-	function (lookup, model) {
-		return _elm_lang$core$List$head(
-			A2(
-				_elm_lang$core$List$filterMap,
-				function (value) {
-					return A2(_ivanceras$diwata$Views_Window_Field$dropdownPageRequestNeeded, lookup, value);
-				},
-				model.fields));
-	});
-var _ivanceras$diwata$Views_Window_Row$createFields = F3(
-	function (action, record, tab) {
+var _ivanceras$diwata$Views_Window_Row$dropdownPageRequestNeeded = function (model) {
+	return _elm_lang$core$List$head(
+		A2(
+			_elm_lang$core$List$filterMap,
+			function (value) {
+				return _ivanceras$diwata$Views_Window_Field$dropdownPageRequestNeeded(value);
+			},
+			model.fields));
+};
+var _ivanceras$diwata$Views_Window_Row$createFields = F4(
+	function (action, record, tab, lookup) {
 		return A2(
 			_elm_lang$core$List$map,
-			A5(
+			A6(
 				_ivanceras$diwata$Views_Window_Field$init,
 				0,
 				_ivanceras$diwata$Data_Window_Presentation$InList,
 				action,
 				_elm_lang$core$Maybe$Just(record),
-				tab),
+				tab,
+				lookup),
 			tab.fields);
 	});
-var _ivanceras$diwata$Views_Window_Row$init = F4(
-	function (action, recordId, record, tab) {
+var _ivanceras$diwata$Views_Window_Row$init = F5(
+	function (action, recordId, record, tab, lookup) {
 		return {
 			selected: false,
 			recordId: recordId,
 			record: record,
 			tab: tab,
-			fields: A3(_ivanceras$diwata$Views_Window_Row$createFields, action, record, tab)
+			fields: A4(_ivanceras$diwata$Views_Window_Row$createFields, action, record, tab, lookup),
+			containerScroll: A2(_ivanceras$diwata$Util$Scroll, 0, 0),
+			lookup: lookup
 		};
 	});
 var _ivanceras$diwata$Views_Window_Row$isModified = function (model) {
@@ -26283,10 +27210,13 @@ var _ivanceras$diwata$Views_Window_Row$isRowFocused = function (model) {
 		},
 		model.fields);
 };
-var _ivanceras$diwata$Views_Window_Row$Model = F5(
-	function (a, b, c, d, e) {
-		return {selected: a, recordId: b, record: c, tab: d, fields: e};
+var _ivanceras$diwata$Views_Window_Row$Model = F7(
+	function (a, b, c, d, e, f, g) {
+		return {selected: a, recordId: b, record: c, tab: d, fields: e, containerScroll: f, lookup: g};
 	});
+var _ivanceras$diwata$Views_Window_Row$ContainerScrollChanged = function (a) {
+	return {ctor: 'ContainerScrollChanged', _0: a};
+};
 var _ivanceras$diwata$Views_Window_Row$ClickedCopyRecord = {ctor: 'ClickedCopyRecord'};
 var _ivanceras$diwata$Views_Window_Row$viewCopyControl = F2(
 	function (recordId, tab) {
@@ -26547,110 +27477,114 @@ var _ivanceras$diwata$Views_Window_Row$viewRowControls = F3(
 				}
 			});
 	});
+var _ivanceras$diwata$Views_Window_Row$AllFieldMsg = function (a) {
+	return {ctor: 'AllFieldMsg', _0: a};
+};
 var _ivanceras$diwata$Views_Window_Row$FieldMsg = F2(
 	function (a, b) {
 		return {ctor: 'FieldMsg', _0: a, _1: b};
 	});
-var _ivanceras$diwata$Views_Window_Row$view = F2(
-	function (lookup, model) {
-		var tab = model.tab;
-		var fields = tab.fields;
-		var record = model.record;
-		var recordId = model.recordId;
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('tab-row-wrapper'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
+var _ivanceras$diwata$Views_Window_Row$view = function (model) {
+	var tab = model.tab;
+	var fields = tab.fields;
+	var record = model.record;
+	var recordId = model.recordId;
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('tab-row-wrapper'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('tab-row'),
+					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('tab-row'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$classList(
-								{
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'is-modified',
+									_1: _ivanceras$diwata$Views_Window_Row$isModified(model)
+								},
+								_1: {
 									ctor: '::',
 									_0: {
 										ctor: '_Tuple2',
-										_0: 'is-modified',
-										_1: _ivanceras$diwata$Views_Window_Row$isModified(model)
+										_0: 'row-focused',
+										_1: _ivanceras$diwata$Views_Window_Row$isRowFocused(model)
 									},
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A2(
+					_elm_lang$core$List$map,
+					function (value) {
+						var _p1 = A3(_ivanceras$diwata$Views_Window_Field$calcWidgetSize, 0, _ivanceras$diwata$Data_Window_Presentation$InList, value.field);
+						var widthClass = _p1._0;
+						var widgetWidth = _p1._1;
+						var widgetHeight = _p1._2;
+						var rowWidth = widgetWidth + _ivanceras$diwata$Constant$columnPad;
+						return A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('tab-row-value'),
+								_1: {
+									ctor: '::',
+									_0: _ivanceras$diwata$Constant$tabRowValueStyle,
 									_1: {
 										ctor: '::',
-										_0: {
-											ctor: '_Tuple2',
-											_0: 'row-focused',
-											_1: _ivanceras$diwata$Views_Window_Row$isRowFocused(model)
-										},
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: 'width',
+													_1: _ivanceras$diwata$Util$px(rowWidth)
+												},
+												_1: {ctor: '[]'}
+											}),
 										_1: {ctor: '[]'}
 									}
-								}),
-							_1: {ctor: '[]'}
-						}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$map,
+									_ivanceras$diwata$Views_Window_Row$FieldMsg(value),
+									_ivanceras$diwata$Views_Window_Field$view(value)),
+								_1: {ctor: '[]'}
+							});
 					},
-					A2(
-						_elm_lang$core$List$map,
-						function (value) {
-							var _p0 = A3(_ivanceras$diwata$Views_Window_Field$calcWidgetSize, 0, _ivanceras$diwata$Data_Window_Presentation$InList, value.field);
-							var widthClass = _p0._0;
-							var widgetWidth = _p0._1;
-							var widgetHeight = _p0._2;
-							var rowWidth = widgetWidth + _ivanceras$diwata$Constant$columnPad;
-							return A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('tab-row-value'),
-									_1: {
-										ctor: '::',
-										_0: _ivanceras$diwata$Constant$tabRowValueStyle,
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$style(
-												{
-													ctor: '::',
-													_0: {
-														ctor: '_Tuple2',
-														_0: 'width',
-														_1: _ivanceras$diwata$Util$px(rowWidth)
-													},
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$map,
-										_ivanceras$diwata$Views_Window_Row$FieldMsg(value),
-										A2(_ivanceras$diwata$Views_Window_Field$view, lookup, value)),
-									_1: {ctor: '[]'}
-								});
-						},
-						model.fields)),
-				_1: {ctor: '[]'}
-			});
-	});
+					model.fields)),
+			_1: {ctor: '[]'}
+		});
+};
 var _ivanceras$diwata$Views_Window_Row$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
+			case 'AllFieldMsg':
+				return A2(_ivanceras$diwata$Views_Window_Row$updateAllFields, _p2._0, model);
 			case 'FieldMsg':
 				var updated = A2(
 					_elm_lang$core$List$map,
 					function (value) {
-						if (_elm_lang$core$Native_Utils.eq(_p1._0, value)) {
-							var _p2 = A2(_ivanceras$diwata$Views_Window_Field$update, _p1._1, value);
-							var newValue = _p2._0;
-							var subCmd = _p2._1;
+						if (_elm_lang$core$Native_Utils.eq(_p2._0, value)) {
+							var _p3 = A2(_ivanceras$diwata$Views_Window_Field$update, _p2._1, value);
+							var newValue = _p3._0;
+							var subCmd = _p3._1;
 							return {
 								ctor: '_Tuple2',
 								_0: newValue,
@@ -26664,9 +27598,9 @@ var _ivanceras$diwata$Views_Window_Row$update = F2(
 						}
 					},
 					model.fields);
-				var _p3 = _elm_lang$core$List$unzip(updated);
-				var updatedFields = _p3._0;
-				var subCmds = _p3._1;
+				var _p4 = _elm_lang$core$List$unzip(updated);
+				var updatedFields = _p4._0;
+				var subCmds = _p4._1;
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -26674,10 +27608,10 @@ var _ivanceras$diwata$Views_Window_Row$update = F2(
 						{fields: updatedFields}),
 					_elm_lang$core$Platform_Cmd$batch(subCmds));
 			case 'ResetChanges':
-				var _p4 = _elm_lang$core$List$unzip(
+				var _p5 = _elm_lang$core$List$unzip(
 					A2(_ivanceras$diwata$Views_Window_Row$updateFields, _ivanceras$diwata$Views_Window_Field$ResetChanges, model));
-				var newFields = _p4._0;
-				var subCmds = _p4._1;
+				var newFields = _p5._0;
+				var subCmds = _p5._1;
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -26700,13 +27634,161 @@ var _ivanceras$diwata$Views_Window_Row$update = F2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{selected: _p1._0}),
+						{selected: _p2._0}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'ClickedDetailedLink':
 				return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
-			default:
+			case 'ClickedCopyRecord':
 				return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+			default:
+				var _p6 = _p2._0;
+				var updatedModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{containerScroll: _p6});
+				return A2(
+					_ivanceras$diwata$Views_Window_Row$updateAllFields,
+					_ivanceras$diwata$Views_Window_Field$ContainerScrollChanged(_p6),
+					updatedModel);
 		}
+	});
+
+var _ivanceras$diwata$Request_Window_DataUpdate$updateTab = F4(
+	function (settings, maybeToken, tableName, container) {
+		var jsonBody = _ivanceras$diwata$Data_DataContainer$containerEncoder(container);
+		var _p0 = A2(_elm_lang$core$Debug$log, 'sending: ', jsonBody);
+		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_ivanceras$diwata$Data_AuthToken$withAuthorization,
+				maybeToken,
+				A2(
+					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
+					A2(
+						_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
+						jsonBody,
+						_lukewestby$elm_http_builder$HttpBuilder$post(
+							A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/tab_changeset/'))))));
+	});
+var _ivanceras$diwata$Request_Window_DataUpdate$updateRecord = F4(
+	function (settings, maybeToken, tableName, recordChangeset) {
+		var jsonBody = _ivanceras$diwata$Data_DataContainer$changesetEncoder(recordChangeset);
+		var _p1 = A2(_elm_lang$core$Debug$log, 'sending: ', jsonBody);
+		return _lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_ivanceras$diwata$Data_AuthToken$withAuthorization,
+				maybeToken,
+				A2(
+					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_RecordDetail$decoder),
+					A2(
+						_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
+						jsonBody,
+						_lukewestby$elm_http_builder$HttpBuilder$post(
+							A2(
+								_ivanceras$diwata$Request_Helpers$apiUrl,
+								settings,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'/record_changeset/',
+									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName))))))));
+	});
+
+var _ivanceras$diwata$Views_Window_LinkRow$dropdownPageRequestNeeded = function (model) {
+	var dropdownInfo = model.dropdownInfo;
+	var tableName = model.tab.tableName;
+	var _p0 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, tableName, model.lookup);
+	var page = _p0._0;
+	var listRecord = _p0._1;
+	var listValue = A2(_ivanceras$diwata$Views_Window_Field$listRecordToListString, dropdownInfo, listRecord);
+	var dropdownModel = model.dropdownModel;
+	return (A2(_ivanceras$diwata$Widgets_DropdownDisplay$pageRequestNeeded, listValue, dropdownModel) && (!A2(_ivanceras$diwata$Data_Window_Lookup$hasReachedLastPage, tableName, model.lookup))) ? _elm_lang$core$Maybe$Just(tableName) : _elm_lang$core$Maybe$Nothing;
+};
+var _ivanceras$diwata$Views_Window_LinkRow$init = F3(
+	function (linkRowId, tab, lookup) {
+		var dropdownInfo = {
+			source: tab.tableName,
+			display: function () {
+				var _p1 = tab.display;
+				if (_p1.ctor === 'Just') {
+					return _p1._0;
+				} else {
+					return _elm_lang$core$Native_Utils.crashCase(
+						'Views.Window.LinkRow',
+						{
+							start: {line: 59, column: 17},
+							end: {line: 64, column: 74}
+						},
+						_p1)('This tab has no display for linkRow');
+				}
+			}()
+		};
+		var alignment = _ivanceras$diwata$Data_Window_Widget$Left;
+		var widgetWidth = 200;
+		var dropdownModel = A3(_ivanceras$diwata$Widgets_DropdownDisplay$init, alignment, widgetWidth, _elm_lang$core$Maybe$Nothing);
+		return {tab: tab, dropdownModel: dropdownModel, dropdownInfo: dropdownInfo, linkRowId: linkRowId, lookup: lookup};
+	});
+var _ivanceras$diwata$Views_Window_LinkRow$getLinkRow = function (model) {
+	var dropdownModel = model.dropdownModel;
+	var linkRow = _ivanceras$diwata$Widgets_DropdownDisplay$getSelected(dropdownModel);
+	return linkRow;
+};
+var _ivanceras$diwata$Views_Window_LinkRow$Model = F5(
+	function (a, b, c, d, e) {
+		return {tab: a, dropdownModel: b, dropdownInfo: c, linkRowId: d, lookup: e};
+	});
+var _ivanceras$diwata$Views_Window_LinkRow$DropdownDisplayMsg = function (a) {
+	return {ctor: 'DropdownDisplayMsg', _0: a};
+};
+var _ivanceras$diwata$Views_Window_LinkRow$view = function (model) {
+	var iconSize = _ivanceras$diwata$Constant$iconSize;
+	var iconColor = _ivanceras$diwata$Constant$iconColor;
+	var dropdownInfo = model.dropdownInfo;
+	var tab = model.tab;
+	var display = tab.display;
+	var tableName = tab.tableName;
+	var _p3 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, tableName, model.lookup);
+	var page = _p3._0;
+	var listRecord = _p3._1;
+	var listValue = A2(_ivanceras$diwata$Views_Window_Field$listRecordToListString, dropdownInfo, listRecord);
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('link-row'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$map,
+				_ivanceras$diwata$Views_Window_LinkRow$DropdownDisplayMsg,
+				A2(_ivanceras$diwata$Widgets_DropdownDisplay$view, listValue, model.dropdownModel)),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(_j_panasiuk$elm_ionicons$Ionicon$checkmark, iconSize, iconColor),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _ivanceras$diwata$Views_Window_LinkRow$update = F2(
+	function (msg, model) {
+		var _p4 = msg;
+		var _p5 = A2(_ivanceras$diwata$Widgets_DropdownDisplay$update, _p4._0, model.dropdownModel);
+		var updatedDropdown = _p5._0;
+		var subCmd = _p5._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{dropdownModel: updatedDropdown}),
+			A2(_elm_lang$core$Platform_Cmd$map, _ivanceras$diwata$Views_Window_LinkRow$DropdownDisplayMsg, subCmd));
 	});
 
 var _ivanceras$diwata$Views_Window_Searchbox$update = F2(
@@ -28682,12 +29764,13 @@ var _ivanceras$diwata$Views_Window_Tab$insertNewRow = function (model) {
 	var emptyRecord = _ivanceras$diwata$Data_Window_Record$empty;
 	var newRowId = _elm_lang$core$List$length(model.newRows);
 	var newRecordId = _ivanceras$diwata$Data_Window_Record$TempLocal(newRowId);
-	var newRow = A4(
+	var newRow = A5(
 		_ivanceras$diwata$Views_Window_Row$init,
 		_ivanceras$diwata$Data_WindowArena$NewRecord(_ivanceras$diwata$Data_Window_Presentation$InList),
 		newRecordId,
 		emptyRecord,
-		model.tab);
+		model.tab,
+		model.lookup);
 	return A2(
 		_ivanceras$diwata$Util_ops['=>'],
 		_elm_lang$core$Native_Utils.update(
@@ -28845,38 +29928,37 @@ var _ivanceras$diwata$Views_Window_Tab$viewLoadingIndicator = function (model) {
 			_1: {ctor: '[]'}
 		}) : _elm_lang$html$Html$text('');
 };
-var _ivanceras$diwata$Views_Window_Tab$dropdownPageRequestNeeded = F2(
-	function (lookup, model) {
-		var newRowDropdown = A2(
-			_elm_lang$core$List$filterMap,
-			function (newRow) {
-				return A2(_ivanceras$diwata$Views_Window_Row$dropdownPageRequestNeeded, lookup, newRow);
-			},
-			model.newRows);
-		var linkRowDropdown = A2(
-			_elm_lang$core$List$filterMap,
-			function (linkRow) {
-				return A2(_ivanceras$diwata$Views_Window_LinkRow$dropdownPageRequestNeeded, lookup, linkRow);
-			},
-			model.linkRows);
-		var rowDropdown = A2(
-			_elm_lang$core$List$filterMap,
-			function (page) {
-				return _elm_lang$core$List$head(
-					A2(
-						_elm_lang$core$List$filterMap,
-						function (row) {
-							return A2(_ivanceras$diwata$Views_Window_Row$dropdownPageRequestNeeded, lookup, row);
-						},
-						page));
-			},
-			model.pageRows);
-		return _elm_lang$core$List$head(
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				rowDropdown,
-				A2(_elm_lang$core$Basics_ops['++'], newRowDropdown, linkRowDropdown)));
-	});
+var _ivanceras$diwata$Views_Window_Tab$dropdownPageRequestNeeded = function (model) {
+	var newRowDropdown = A2(
+		_elm_lang$core$List$filterMap,
+		function (newRow) {
+			return _ivanceras$diwata$Views_Window_Row$dropdownPageRequestNeeded(newRow);
+		},
+		model.newRows);
+	var linkRowDropdown = A2(
+		_elm_lang$core$List$filterMap,
+		function (linkRow) {
+			return _ivanceras$diwata$Views_Window_LinkRow$dropdownPageRequestNeeded(linkRow);
+		},
+		model.linkRows);
+	var rowDropdown = A2(
+		_elm_lang$core$List$filterMap,
+		function (page) {
+			return _elm_lang$core$List$head(
+				A2(
+					_elm_lang$core$List$filterMap,
+					function (row) {
+						return _ivanceras$diwata$Views_Window_Row$dropdownPageRequestNeeded(row);
+					},
+					page));
+		},
+		model.pageRows);
+	return _elm_lang$core$List$head(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			rowDropdown,
+			A2(_elm_lang$core$Basics_ops['++'], newRowDropdown, linkRowDropdown)));
+};
 var _ivanceras$diwata$Views_Window_Tab$numberOfRecords = function (model) {
 	return A3(
 		_elm_lang$core$List$foldl,
@@ -28905,19 +29987,19 @@ var _ivanceras$diwata$Views_Window_Tab$pageRequestNeeded = function (model) {
 	var needed = _ivanceras$diwata$Views_Window_Tab$isScrolledBottom(model) && ((!model.pageRequestInFlight) && (!model.reachedLastPage));
 	return needed;
 };
-var _ivanceras$diwata$Views_Window_Tab$createRowsModel = F3(
-	function (selectedRecordId, tab, rows) {
+var _ivanceras$diwata$Views_Window_Tab$createRowsModel = F4(
+	function (selectedRecordId, tab, rows, lookup) {
 		var recordList = _ivanceras$diwata$Data_Window_Record$rowsToRecordList(rows);
 		return A2(
 			_elm_lang$core$List$map,
 			function (record) {
 				var recordId = A2(_ivanceras$diwata$Data_Window_Tab$recordId, record, tab);
-				return A4(_ivanceras$diwata$Views_Window_Row$init, _ivanceras$diwata$Data_WindowArena$ListPage, recordId, record, tab);
+				return A5(_ivanceras$diwata$Views_Window_Row$init, _ivanceras$diwata$Data_WindowArena$ListPage, recordId, record, tab, lookup);
 			},
 			recordList);
 	});
-var _ivanceras$diwata$Views_Window_Tab$init = F8(
-	function (arenaArg, settings, selectedRecordId, size, query, tab, tabType, rows) {
+var _ivanceras$diwata$Views_Window_Tab$init = F9(
+	function (arenaArg, settings, selectedRecordId, size, query, tab, tabType, rows, lookup) {
 		return {
 			tab: tab,
 			tabType: tabType,
@@ -28925,7 +30007,7 @@ var _ivanceras$diwata$Views_Window_Tab$init = F8(
 			size: size,
 			pageRows: {
 				ctor: '::',
-				_0: A3(_ivanceras$diwata$Views_Window_Tab$createRowsModel, selectedRecordId, tab, rows),
+				_0: A4(_ivanceras$diwata$Views_Window_Tab$createRowsModel, selectedRecordId, tab, rows, lookup),
 				_1: {ctor: '[]'}
 			},
 			linkRows: {ctor: '[]'},
@@ -28954,7 +30036,8 @@ var _ivanceras$diwata$Views_Window_Tab$init = F8(
 			unlinked: {ctor: '[]'},
 			settings: settings,
 			arenaArg: arenaArg,
-			errors: {ctor: '[]'}
+			errors: {ctor: '[]'},
+			lookup: lookup
 		};
 	});
 var _ivanceras$diwata$Views_Window_Tab$getLinkExistingRows = function (model) {
@@ -28967,8 +30050,8 @@ var _ivanceras$diwata$Views_Window_Tab$getLinkExistingRows = function (model) {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Views.Window.Tab',
 				{
-					start: {line: 235, column: 13},
-					end: {line: 240, column: 77}
+					start: {line: 236, column: 13},
+					end: {line: 241, column: 77}
 				},
 				_p5)('This tab doesn\'t have a identifier display');
 		}
@@ -29102,7 +30185,9 @@ var _ivanceras$diwata$Views_Window_Tab$Model = function (a) {
 															return function (p) {
 																return function (q) {
 																	return function (r) {
-																		return {tab: a, tabType: b, scroll: c, size: d, pageRows: e, linkRows: f, newRows: g, pageRequestInFlight: h, currentPage: i, reachedLastPage: j, totalRecords: k, isMultiSort: l, query: m, selectedRecordId: n, unlinked: o, settings: p, arenaArg: q, errors: r};
+																		return function (s) {
+																			return {tab: a, tabType: b, scroll: c, size: d, pageRows: e, linkRows: f, newRows: g, pageRequestInFlight: h, currentPage: i, reachedLastPage: j, totalRecords: k, isMultiSort: l, query: m, selectedRecordId: n, unlinked: o, settings: p, arenaArg: q, errors: r, lookup: s};
+																		};
 																	};
 																};
 															};
@@ -29441,41 +30526,42 @@ var _ivanceras$diwata$Views_Window_Tab$LinkRowMsg = F2(
 	function (a, b) {
 		return {ctor: 'LinkRowMsg', _0: a, _1: b};
 	});
-var _ivanceras$diwata$Views_Window_Tab$viewLinkRows = F2(
-	function (lookup, model) {
-		var tab = model.tab;
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			A2(
-				_elm_lang$core$List$map,
-				function (linkRow) {
-					return A2(
-						_elm_lang$html$Html$map,
-						_ivanceras$diwata$Views_Window_Tab$LinkRowMsg(linkRow),
-						A2(_ivanceras$diwata$Views_Window_LinkRow$view, lookup, linkRow));
-				},
-				model.linkRows));
-	});
+var _ivanceras$diwata$Views_Window_Tab$viewLinkRows = function (model) {
+	var tab = model.tab;
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		A2(
+			_elm_lang$core$List$map,
+			function (linkRow) {
+				return A2(
+					_elm_lang$html$Html$map,
+					_ivanceras$diwata$Views_Window_Tab$LinkRowMsg(linkRow),
+					_ivanceras$diwata$Views_Window_LinkRow$view(linkRow));
+			},
+			model.linkRows));
+};
 var _ivanceras$diwata$Views_Window_Tab$NewRowMsg = F2(
 	function (a, b) {
 		return {ctor: 'NewRowMsg', _0: a, _1: b};
 	});
-var _ivanceras$diwata$Views_Window_Tab$viewNewRows = F2(
-	function (lookup, model) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			A2(
-				_elm_lang$core$List$map,
-				function (newRow) {
-					return A2(
-						_elm_lang$html$Html$map,
-						_ivanceras$diwata$Views_Window_Tab$NewRowMsg(newRow),
-						A2(_ivanceras$diwata$Views_Window_Row$view, lookup, newRow));
-				},
-				model.newRows));
-	});
+var _ivanceras$diwata$Views_Window_Tab$viewNewRows = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		A2(
+			_elm_lang$core$List$map,
+			function (newRow) {
+				return A2(
+					_elm_lang$html$Html$map,
+					_ivanceras$diwata$Views_Window_Tab$NewRowMsg(newRow),
+					_ivanceras$diwata$Views_Window_Row$view(newRow));
+			},
+			model.newRows));
+};
+var _ivanceras$diwata$Views_Window_Tab$AllRowMsg = function (a) {
+	return {ctor: 'AllRowMsg', _0: a};
+};
 var _ivanceras$diwata$Views_Window_Tab$RowMsg = F2(
 	function (a, b) {
 		return {ctor: 'RowMsg', _0: a, _1: b};
@@ -29575,79 +30661,46 @@ var _ivanceras$diwata$Views_Window_Tab$viewPage = F2(
 					return A2(
 						_elm_lang$html$Html$map,
 						_ivanceras$diwata$Views_Window_Tab$RowMsg(row),
-						A2(_ivanceras$diwata$Views_Window_Row$view, lookup, row));
+						_ivanceras$diwata$Views_Window_Row$view(row));
 				},
 				rowList));
 	});
-var _ivanceras$diwata$Views_Window_Tab$listViewRows = F2(
-	function (lookup, model) {
-		var tab = model.tab;
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('tab-page'),
-				_1: {ctor: '[]'}
-			},
-			(_elm_lang$core$Native_Utils.cmp(
-				_elm_lang$core$List$length(model.pageRows),
-				0) > 0) ? A2(
-				_elm_lang$core$List$map,
-				function (pageRow) {
-					return A2(_ivanceras$diwata$Views_Window_Tab$viewPage, lookup, pageRow);
-				},
-				model.pageRows) : {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('empty-list-view-rows'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Empty list view rows'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _ivanceras$diwata$Views_Window_Tab$resetPageRows = function (model) {
-	var _p14 = _elm_lang$core$List$unzip(
-		A2(
+var _ivanceras$diwata$Views_Window_Tab$listViewRows = function (model) {
+	var tab = model.tab;
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('tab-page'),
+			_1: {ctor: '[]'}
+		},
+		(_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(model.pageRows),
+			0) > 0) ? A2(
 			_elm_lang$core$List$map,
-			function (page) {
-				return _elm_lang$core$List$unzip(
-					A2(
-						_elm_lang$core$List$map,
-						function (row) {
-							var _p15 = A2(_ivanceras$diwata$Views_Window_Row$update, _ivanceras$diwata$Views_Window_Row$ResetChanges, row);
-							var updatedRow = _p15._0;
-							var rowCmd = _p15._1;
-							return {
-								ctor: '_Tuple2',
-								_0: updatedRow,
-								_1: A2(
-									_elm_lang$core$Platform_Cmd$map,
-									_ivanceras$diwata$Views_Window_Tab$RowMsg(updatedRow),
-									rowCmd)
-							};
-						},
-						page));
+			function (pageRow) {
+				return A2(_ivanceras$diwata$Views_Window_Tab$viewPage, model.lookup, pageRow);
 			},
-			model.pageRows));
-	var updatedPageRow = _p14._0;
-	var subCmd = _p14._1;
-	return {
-		ctor: '_Tuple2',
-		_0: updatedPageRow,
-		_1: _elm_lang$core$List$concat(subCmd)
-	};
+			model.pageRows) : {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('empty-list-view-rows'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Empty list view rows'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
 };
-var _ivanceras$diwata$Views_Window_Tab$toggleSelectAllRows = F2(
-	function (value, pageList) {
-		var _p16 = _elm_lang$core$List$unzip(
+var _ivanceras$diwata$Views_Window_Tab$updateAllRows = F2(
+	function (rowMsg, model) {
+		var _p14 = _elm_lang$core$List$unzip(
 			A2(
 				_elm_lang$core$List$map,
 				function (page) {
@@ -29655,12 +30708,9 @@ var _ivanceras$diwata$Views_Window_Tab$toggleSelectAllRows = F2(
 						A2(
 							_elm_lang$core$List$map,
 							function (row) {
-								var _p17 = A2(
-									_ivanceras$diwata$Views_Window_Row$update,
-									_ivanceras$diwata$Views_Window_Row$ToggleSelect(value),
-									row);
-								var updatedRow = _p17._0;
-								var rowCmd = _p17._1;
+								var _p15 = A2(_ivanceras$diwata$Views_Window_Row$update, rowMsg, row);
+								var updatedRow = _p15._0;
+								var rowCmd = _p15._1;
 								return {
 									ctor: '_Tuple2',
 									_0: updatedRow,
@@ -29672,14 +30722,16 @@ var _ivanceras$diwata$Views_Window_Tab$toggleSelectAllRows = F2(
 							},
 							page));
 				},
-				pageList));
-		var updatedRowModel = _p16._0;
-		var rowCmds = _p16._1;
-		return {
-			ctor: '_Tuple2',
-			_0: updatedRowModel,
-			_1: _elm_lang$core$List$concat(rowCmds)
-		};
+				model.pageRows));
+		var updatedPageRow = _p14._0;
+		var rowCmds = _p14._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{pageRows: updatedPageRow}),
+			_elm_lang$core$Platform_Cmd$batch(
+				_elm_lang$core$List$concat(rowCmds)));
 	});
 var _ivanceras$diwata$Views_Window_Tab$RefreshPageError = function (a) {
 	return {ctor: 'RefreshPageError', _0: a};
@@ -29695,13 +30747,13 @@ var _ivanceras$diwata$Views_Window_Tab$requestSaveTabRowsChanges = F3(
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p18 = A2(_elm_lang$core$Debug$log, 'save change result:', result);
-				var _p19 = result;
-				if (_p19.ctor === 'Ok') {
-					return _ivanceras$diwata$Views_Window_Tab$SaveChangesSucceed(_p19._0);
+				var _p16 = A2(_elm_lang$core$Debug$log, 'save change result:', result);
+				var _p17 = result;
+				if (_p17.ctor === 'Ok') {
+					return _ivanceras$diwata$Views_Window_Tab$SaveChangesSucceed(_p17._0);
 				} else {
 					return _ivanceras$diwata$Views_Window_Tab$SaveChangesErrored(
-						_elm_lang$core$Basics$toString(_p19._0));
+						_elm_lang$core$Basics$toString(_p17._0));
 				}
 			},
 			_elm_lang$http$Http$toTask(
@@ -29716,42 +30768,46 @@ var _ivanceras$diwata$Views_Window_Tab$refreshPageRows = function (model) {
 	var query = arenaArg.query;
 	var pageQuery = A2(_ivanceras$diwata$Data_Query$updatePage, 1, query);
 	var request = A4(_ivanceras$diwata$Request_Window_Records$listPageWithQuery, model.settings, _elm_lang$core$Maybe$Nothing, tab.tableName, pageQuery);
-	var _p20 = A2(_elm_lang$core$Debug$log, 'refreshing in tab', '');
+	var _p18 = A2(_elm_lang$core$Debug$log, 'refreshing in tab', '');
 	return A2(
 		_elm_lang$core$Task$attempt,
 		function (result) {
-			var _p21 = result;
-			if (_p21.ctor === 'Ok') {
-				return _ivanceras$diwata$Views_Window_Tab$RefreshPageReceived(_p21._0);
+			var _p19 = result;
+			if (_p19.ctor === 'Ok') {
+				return _ivanceras$diwata$Views_Window_Tab$RefreshPageReceived(_p19._0);
 			} else {
 				return _ivanceras$diwata$Views_Window_Tab$RefreshPageError(
-					_elm_lang$core$Basics$toString(_p21._0));
+					_elm_lang$core$Basics$toString(_p19._0));
 			}
 		},
 		_elm_lang$http$Http$toTask(request));
 };
 var _ivanceras$diwata$Views_Window_Tab$update = F2(
 	function (msg, model) {
-		var _p22 = msg;
-		switch (_p22.ctor) {
+		var _p20 = msg;
+		switch (_p20.ctor) {
+			case 'AllRowMsg':
+				return A2(_ivanceras$diwata$Views_Window_Tab$updateAllRows, _p20._0, model);
 			case 'SetSize':
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{size: _p22._0}),
+						{size: _p20._0}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'ListRowScrolled':
+				var _p21 = _p20._0;
+				var updatedModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{scroll: _p21});
 				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{scroll: _p22._0}),
-					_elm_lang$core$Platform_Cmd$none);
+					_ivanceras$diwata$Views_Window_Tab$updateAllRows,
+					_ivanceras$diwata$Views_Window_Row$ContainerScrollChanged(_p21),
+					updatedModel);
 			case 'NextPageReceived':
-				var _p23 = _p22._0;
+				var _p22 = _p20._0;
 				return (_elm_lang$core$Native_Utils.cmp(
-					_elm_lang$core$List$length(_p23.data),
+					_elm_lang$core$List$length(_p22.data),
 					0) > 0) ? A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -29762,7 +30818,7 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 								model.pageRows,
 								{
 									ctor: '::',
-									_0: A3(_ivanceras$diwata$Views_Window_Tab$createRowsModel, model.selectedRecordId, model.tab, _p23),
+									_0: A4(_ivanceras$diwata$Views_Window_Tab$createRowsModel, model.selectedRecordId, model.tab, _p22, model.lookup),
 									_1: {ctor: '[]'}
 								}),
 							pageRequestInFlight: false,
@@ -29775,7 +30831,7 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 						{reachedLastPage: true, pageRequestInFlight: false}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'NextPageError':
-				var _p24 = _elm_lang$core$Debug$log('Error receiving next page');
+				var _p23 = _elm_lang$core$Debug$log('Error receiving next page');
 				return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 			case 'RefreshPageReceived':
 				return A2(
@@ -29785,7 +30841,7 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 						{
 							pageRows: {
 								ctor: '::',
-								_0: A3(_ivanceras$diwata$Views_Window_Tab$createRowsModel, model.selectedRecordId, model.tab, _p22._0),
+								_0: A4(_ivanceras$diwata$Views_Window_Tab$createRowsModel, model.selectedRecordId, model.tab, _p20._0, model.lookup),
 								_1: {ctor: '[]'}
 							},
 							pageRequestInFlight: false,
@@ -29804,7 +30860,7 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 								model.errors,
 								{
 									ctor: '::',
-									_0: _p22._0,
+									_0: _p20._0,
 									_1: {ctor: '[]'}
 								})
 						}),
@@ -29830,7 +30886,7 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 								model.errors,
 								{
 									ctor: '::',
-									_0: _p22._0,
+									_0: _p20._0,
 									_1: {ctor: '[]'}
 								})
 						}),
@@ -29842,9 +30898,9 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 						return A2(
 							_elm_lang$core$List$map,
 							function (row) {
-								var _p25 = _elm_lang$core$Native_Utils.eq(row, _p22._0) ? A2(_ivanceras$diwata$Views_Window_Row$update, _p22._1, row) : {ctor: '_Tuple2', _0: row, _1: _elm_lang$core$Platform_Cmd$none};
-								var newRow = _p25._0;
-								var subCmd = _p25._1;
+								var _p24 = _elm_lang$core$Native_Utils.eq(row, _p20._0) ? A2(_ivanceras$diwata$Views_Window_Row$update, _p20._1, row) : {ctor: '_Tuple2', _0: row, _1: _elm_lang$core$Platform_Cmd$none};
+								var newRow = _p24._0;
+								var subCmd = _p24._1;
 								return {
 									ctor: '_Tuple2',
 									_0: newRow,
@@ -29857,25 +30913,25 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 							page);
 					},
 					model.pageRows);
-				var _p26 = A3(
+				var _p25 = A3(
 					_elm_lang$core$List$foldl,
 					F2(
-						function (listList, _p27) {
-							var _p28 = _p27;
-							var _p29 = _elm_lang$core$List$unzip(listList);
-							var page = _p29._0;
-							var cmd = _p29._1;
+						function (listList, _p26) {
+							var _p27 = _p26;
+							var _p28 = _elm_lang$core$List$unzip(listList);
+							var page = _p28._0;
+							var cmd = _p28._1;
 							return {
 								ctor: '_Tuple2',
 								_0: A2(
 									_elm_lang$core$Basics_ops['++'],
-									_p28._0,
+									_p27._0,
 									{
 										ctor: '::',
 										_0: page,
 										_1: {ctor: '[]'}
 									}),
-								_1: A2(_elm_lang$core$Basics_ops['++'], _p28._1, cmd)
+								_1: A2(_elm_lang$core$Basics_ops['++'], _p27._1, cmd)
 							};
 						}),
 					{
@@ -29884,8 +30940,8 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 						_1: {ctor: '[]'}
 					},
 					updatedPage);
-				var pageRows = _p26._0;
-				var subCmd = _p26._1;
+				var pageRows = _p25._0;
+				var subCmd = _p25._1;
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -29893,13 +30949,13 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 						{pageRows: pageRows}),
 					_elm_lang$core$Platform_Cmd$batch(subCmd));
 			case 'NewRowMsg':
-				var _p30 = _elm_lang$core$List$unzip(
+				var _p29 = _elm_lang$core$List$unzip(
 					A2(
 						_elm_lang$core$List$map,
 						function (newRow) {
-							var _p31 = _elm_lang$core$Native_Utils.eq(newRow, _p22._0) ? A2(_ivanceras$diwata$Views_Window_Row$update, _p22._1, newRow) : {ctor: '_Tuple2', _0: newRow, _1: _elm_lang$core$Platform_Cmd$none};
-							var updatedRow = _p31._0;
-							var cmd = _p31._1;
+							var _p30 = _elm_lang$core$Native_Utils.eq(newRow, _p20._0) ? A2(_ivanceras$diwata$Views_Window_Row$update, _p20._1, newRow) : {ctor: '_Tuple2', _0: newRow, _1: _elm_lang$core$Platform_Cmd$none};
+							var updatedRow = _p30._0;
+							var cmd = _p30._1;
 							return {
 								ctor: '_Tuple2',
 								_0: updatedRow,
@@ -29910,8 +30966,8 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 							};
 						},
 						model.newRows));
-				var updatedNewRows = _p30._0;
-				var subCmd = _p30._1;
+				var updatedNewRows = _p29._0;
+				var subCmd = _p29._1;
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -29919,20 +30975,20 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 						{newRows: updatedNewRows}),
 					_elm_lang$core$Platform_Cmd$batch(subCmd));
 			case 'LinkRowMsg':
-				var _p32 = _elm_lang$core$List$unzip(
+				var _p31 = _elm_lang$core$List$unzip(
 					A2(
 						_elm_lang$core$List$map,
 						function (linkRow) {
-							var _p33 = function () {
-								if (_elm_lang$core$Native_Utils.eq(linkRow, _p22._0)) {
-									var _p34 = _elm_lang$core$Debug$log('updating this linkRow');
-									return A2(_ivanceras$diwata$Views_Window_LinkRow$update, _p22._1, linkRow);
+							var _p32 = function () {
+								if (_elm_lang$core$Native_Utils.eq(linkRow, _p20._0)) {
+									var _p33 = _elm_lang$core$Debug$log('updating this linkRow');
+									return A2(_ivanceras$diwata$Views_Window_LinkRow$update, _p20._1, linkRow);
 								} else {
 									return {ctor: '_Tuple2', _0: linkRow, _1: _elm_lang$core$Platform_Cmd$none};
 								}
 							}();
-							var updatedRow = _p33._0;
-							var cmd = _p33._1;
+							var updatedRow = _p32._0;
+							var cmd = _p32._1;
 							return {
 								ctor: '_Tuple2',
 								_0: updatedRow,
@@ -29943,8 +30999,8 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 							};
 						},
 						model.linkRows));
-				var updatedLinkRows = _p32._0;
-				var subCmds = _p32._1;
+				var updatedLinkRows = _p31._0;
+				var subCmds = _p31._1;
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -29954,19 +31010,19 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 			case 'SearchboxMsg':
 				var query = model.query;
 				var filter = query.filter;
-				var _p35 = A2(_ivanceras$diwata$Views_Window_Searchbox$update, _p22._0, _p22._1);
-				var newSearchbox = _p35._0;
-				var subCmd = _p35._1;
+				var _p34 = A2(_ivanceras$diwata$Views_Window_Searchbox$update, _p20._0, _p20._1);
+				var newSearchbox = _p34._0;
+				var subCmd = _p34._1;
 				var field = newSearchbox.field;
 				var columnName = _ivanceras$diwata$Data_Window_Field$firstColumnName(field);
 				var searchValue = _ivanceras$diwata$Views_Window_Searchbox$getSearchText(newSearchbox);
 				var updatedQuery = function () {
-					var _p36 = searchValue;
-					if (_p36.ctor === 'Just') {
-						if (_p36._0 === '') {
+					var _p35 = searchValue;
+					if (_p35.ctor === 'Just') {
+						if (_p35._0 === '') {
 							return A2(_ivanceras$diwata$Data_Query$removeFromFilter, columnName, query);
 						} else {
-							return A3(_ivanceras$diwata$Data_Query$putToFilter, columnName, _p36._0, query);
+							return A3(_ivanceras$diwata$Data_Query$putToFilter, columnName, _p35._0, query);
 						}
 					} else {
 						return query;
@@ -29979,17 +31035,12 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 						{query: updatedQuery, currentPage: 0}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'ToggleSelectAllRows':
-				var _p37 = A2(_ivanceras$diwata$Views_Window_Tab$toggleSelectAllRows, _p22._0, model.pageRows);
-				var pageRows = _p37._0;
-				var cmds = _p37._1;
 				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{pageRows: pageRows}),
-					_elm_lang$core$Platform_Cmd$batch(cmds));
+					_ivanceras$diwata$Views_Window_Tab$updateAllRows,
+					_ivanceras$diwata$Views_Window_Row$ToggleSelect(_p20._0),
+					model);
 			case 'ToolbarMsg':
-				switch (_p22._0.ctor) {
+				switch (_p20._0.ctor) {
 					case 'ClickedSaveButton':
 						var tab = model.tab;
 						var tableName = tab.tableName;
@@ -29999,11 +31050,6 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 							_elm_lang$core$Json_Encode$encode,
 							4,
 							_ivanceras$diwata$Data_DataContainer$containerEncoder(forSave));
-						var _p38 = A2(
-							_elm_lang$core$Debug$log,
-							A2(_elm_lang$core$Basics_ops['++'], 'For Save:', json),
-							'');
-						var _p39 = A2(_elm_lang$core$Debug$log, 'for save:', forSave);
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							model,
@@ -30035,22 +31081,14 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 								}),
 							_elm_lang$core$Platform_Cmd$none);
 					case 'ClickedCancelOnMain':
-						var _p40 = _ivanceras$diwata$Views_Window_Tab$resetPageRows(model);
-						var updatedPageRows = _p40._0;
-						var subCmd = _p40._1;
-						return A2(
-							_ivanceras$diwata$Util_ops['=>'],
-							_elm_lang$core$Native_Utils.update(
-								model,
-								{pageRows: updatedPageRows}),
-							_elm_lang$core$Platform_Cmd$batch(subCmd));
+						return A2(_ivanceras$diwata$Views_Window_Tab$updateAllRows, _ivanceras$diwata$Views_Window_Row$ResetChanges, model);
 					case 'ClickedInsertNewButton':
 						return _ivanceras$diwata$Views_Window_Tab$insertNewRow(model);
 					case 'ClickedLinkNewRecord':
 						return _ivanceras$diwata$Views_Window_Tab$insertNewRow(model);
 					case 'ClickedLinkExisting':
 						var linkRowId = _elm_lang$core$List$length(model.linkRows);
-						var linkRow = A2(_ivanceras$diwata$Views_Window_LinkRow$init, linkRowId, model.tab);
+						var linkRow = A3(_ivanceras$diwata$Views_Window_LinkRow$init, linkRowId, model.tab, model.lookup);
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
@@ -30079,7 +31117,7 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 									page);
 							},
 							model.pageRows);
-						var _p41 = A2(_elm_lang$core$Debug$log, 'unlinked', selected);
+						var _p36 = A2(_elm_lang$core$Debug$log, 'unlinked', selected);
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
@@ -30087,14 +31125,14 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 								{unlinked: selected, pageRows: updatedPageRows}),
 							_elm_lang$core$Platform_Cmd$none);
 					default:
-						var _p42 = A2(_elm_lang$core$Debug$log, 'toolbarMsg', _p22._0);
+						var _p37 = A2(_elm_lang$core$Debug$log, 'toolbarMsg', _p20._0);
 						return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 				}
 			default:
-				var _p45 = _p22._0;
-				var updatedQuery = model.isMultiSort ? A2(_ivanceras$diwata$Data_Query$updateSort, _p45, model.query) : A2(_ivanceras$diwata$Data_Query$setColumnSort, _p45, model.query);
-				var _p43 = A2(_elm_lang$core$Debug$log, 'tab updatedQuery: ', updatedQuery);
-				var _p44 = A2(_elm_lang$core$Debug$log, 'toggleSort: ', _p45);
+				var _p40 = _p20._0;
+				var updatedQuery = model.isMultiSort ? A2(_ivanceras$diwata$Data_Query$updateSort, _p40, model.query) : A2(_ivanceras$diwata$Data_Query$setColumnSort, _p40, model.query);
+				var _p38 = A2(_elm_lang$core$Debug$log, 'tab updatedQuery: ', updatedQuery);
+				var _p39 = A2(_elm_lang$core$Debug$log, 'toggleSort: ', _p40);
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -30112,174 +31150,172 @@ var _ivanceras$diwata$Views_Window_Tab$NextPageReceived = function (a) {
 var _ivanceras$diwata$Views_Window_Tab$ListRowScrolled = function (a) {
 	return {ctor: 'ListRowScrolled', _0: a};
 };
-var _ivanceras$diwata$Views_Window_Tab$listView = F2(
-	function (lookup, model) {
-		var tabType = model.tabType;
-		var _p46 = model.size;
-		var width = _p46._0;
-		var height = _p46._1;
-		var adjustedWidth = A2(_ivanceras$diwata$Views_Window_Tab$adjustWidth, width, model);
-		var toolbarModel = {
-			selected: _ivanceras$diwata$Views_Window_Tab$selectedRowCount(model),
-			modified: _ivanceras$diwata$Views_Window_Tab$countAllModifiedRows(model),
-			showIconText: _elm_lang$core$Native_Utils.cmp(width, _ivanceras$diwata$Constant$showIconTextMinWidth) > 0,
-			moveDownIconText: (_elm_lang$core$Native_Utils.cmp(width, _ivanceras$diwata$Constant$showIconTextMinWidth) > 0) && (_elm_lang$core$Native_Utils.cmp(width, _ivanceras$diwata$Constant$moveDownIconTextMinWidth) < 0),
-			multiColumnSort: model.isMultiSort
-		};
-		var viewToolbar = function () {
-			var _p47 = tabType;
-			switch (_p47.ctor) {
-				case 'InMain':
-					return A2(
-						_elm_lang$html$Html$map,
-						_ivanceras$diwata$Views_Window_Tab$ToolbarMsg,
-						_ivanceras$diwata$Views_Window_Toolbar$viewForMain(toolbarModel));
-				case 'InHasMany':
-					return A2(
-						_elm_lang$html$Html$map,
-						_ivanceras$diwata$Views_Window_Tab$ToolbarMsg,
-						_ivanceras$diwata$Views_Window_Toolbar$viewForHasMany(toolbarModel));
-				default:
-					return A2(
-						_elm_lang$html$Html$map,
-						_ivanceras$diwata$Views_Window_Tab$ToolbarMsg,
-						_ivanceras$diwata$Views_Window_Toolbar$viewForIndirect(toolbarModel));
-			}
-		}();
-		var tab = model.tab;
-		var fields = tab.fields;
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
+var _ivanceras$diwata$Views_Window_Tab$view = function (model) {
+	var tabType = model.tabType;
+	var _p41 = model.size;
+	var width = _p41._0;
+	var height = _p41._1;
+	var adjustedWidth = A2(_ivanceras$diwata$Views_Window_Tab$adjustWidth, width, model);
+	var toolbarModel = {
+		selected: _ivanceras$diwata$Views_Window_Tab$selectedRowCount(model),
+		modified: _ivanceras$diwata$Views_Window_Tab$countAllModifiedRows(model),
+		showIconText: _elm_lang$core$Native_Utils.cmp(width, _ivanceras$diwata$Constant$showIconTextMinWidth) > 0,
+		moveDownIconText: (_elm_lang$core$Native_Utils.cmp(width, _ivanceras$diwata$Constant$showIconTextMinWidth) > 0) && (_elm_lang$core$Native_Utils.cmp(width, _ivanceras$diwata$Constant$moveDownIconTextMinWidth) < 0),
+		multiColumnSort: model.isMultiSort
+	};
+	var viewToolbar = function () {
+		var _p42 = tabType;
+		switch (_p42.ctor) {
+			case 'InMain':
+				return A2(
+					_elm_lang$html$Html$map,
+					_ivanceras$diwata$Views_Window_Tab$ToolbarMsg,
+					_ivanceras$diwata$Views_Window_Toolbar$viewForMain(toolbarModel));
+			case 'InHasMany':
+				return A2(
+					_elm_lang$html$Html$map,
+					_ivanceras$diwata$Views_Window_Tab$ToolbarMsg,
+					_ivanceras$diwata$Views_Window_Toolbar$viewForHasMany(toolbarModel));
+			default:
+				return A2(
+					_elm_lang$html$Html$map,
+					_ivanceras$diwata$Views_Window_Tab$ToolbarMsg,
+					_ivanceras$diwata$Views_Window_Toolbar$viewForIndirect(toolbarModel));
+		}
+	}();
+	var tab = model.tab;
+	var fields = tab.fields;
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('toolbar-area'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: viewToolbar,
+					_1: {ctor: '[]'}
+				}),
+			_1: {
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('toolbar-area'),
+						_0: _elm_lang$html$Html_Attributes$class('tab-list-view'),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
-						_0: viewToolbar,
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('tab-list-view'),
-							_1: {ctor: '[]'}
-						},
-						{
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('frozen-head-columns'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _ivanceras$diwata$Views_Window_Tab$viewFrozenHead(model),
+								_1: {
+									ctor: '::',
+									_0: A2(_ivanceras$diwata$Views_Window_Tab$viewColumns, model, fields),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
 							ctor: '::',
 							_0: A2(
 								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('frozen-head-columns'),
+									_0: _elm_lang$html$Html_Attributes$class('page-shadow-and-list-rows'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _ivanceras$diwata$Views_Window_Tab$viewFrozenHead(model),
+									_0: _ivanceras$diwata$Views_Window_Tab$viewPageShadow(model),
 									_1: {
 										ctor: '::',
-										_0: A2(_ivanceras$diwata$Views_Window_Tab$viewColumns, model, fields),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('page-shadow-and-list-rows'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _ivanceras$diwata$Views_Window_Tab$viewPageShadow(model),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$div,
-												{
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('list-view-rows'),
+												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('list-view-rows'),
+													_0: _ivanceras$diwata$Util$onScroll(_ivanceras$diwata$Views_Window_Tab$ListRowScrolled),
 													_1: {
 														ctor: '::',
-														_0: _ivanceras$diwata$Util$onScroll(_ivanceras$diwata$Views_Window_Tab$ListRowScrolled),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$style(
-																{
+														_0: _elm_lang$html$Html_Attributes$style(
+															{
+																ctor: '::',
+																_0: {
+																	ctor: '_Tuple2',
+																	_0: 'height',
+																	_1: _ivanceras$diwata$Util$px(height)
+																},
+																_1: {
 																	ctor: '::',
 																	_0: {
 																		ctor: '_Tuple2',
-																		_0: 'height',
-																		_1: _ivanceras$diwata$Util$px(height)
+																		_0: 'width',
+																		_1: _ivanceras$diwata$Util$px(adjustedWidth)
 																	},
-																	_1: {
-																		ctor: '::',
-																		_0: {
-																			ctor: '_Tuple2',
-																			_0: 'width',
-																			_1: _ivanceras$diwata$Util$px(adjustedWidth)
-																		},
-																		_1: {ctor: '[]'}
-																	}
-																}),
-															_1: {ctor: '[]'}
-														}
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
 													}
+												}
+											},
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												{
+													ctor: '::',
+													_0: _ivanceras$diwata$Views_Window_Tab$viewLinkRows(model),
+													_1: {ctor: '[]'}
 												},
 												A2(
 													_elm_lang$core$Basics_ops['++'],
 													{
 														ctor: '::',
-														_0: A2(_ivanceras$diwata$Views_Window_Tab$viewLinkRows, lookup, model),
+														_0: _ivanceras$diwata$Views_Window_Tab$viewNewRows(model),
 														_1: {ctor: '[]'}
 													},
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														{
-															ctor: '::',
-															_0: A2(_ivanceras$diwata$Views_Window_Tab$viewNewRows, lookup, model),
-															_1: {ctor: '[]'}
-														},
-														{
-															ctor: '::',
-															_0: A2(_ivanceras$diwata$Views_Window_Tab$listViewRows, lookup, model),
-															_1: {ctor: '[]'}
-														}))),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: _ivanceras$diwata$Views_Window_Tab$viewLoadingIndicator(model),
-						_1: {ctor: '[]'}
-					}
+													{
+														ctor: '::',
+														_0: _ivanceras$diwata$Views_Window_Tab$listViewRows(model),
+														_1: {ctor: '[]'}
+													}))),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _ivanceras$diwata$Views_Window_Tab$viewLoadingIndicator(model),
+					_1: {ctor: '[]'}
 				}
-			});
-	});
+			}
+		});
+};
 var _ivanceras$diwata$Views_Window_Tab$SetSize = function (a) {
 	return {ctor: 'SetSize', _0: a};
 };
 
-var _ivanceras$diwata$Views_Window$dropdownPageRequestNeeded = F2(
-	function (lookup, model) {
-		var sourceTable = A2(_ivanceras$diwata$Views_Window_Tab$dropdownPageRequestNeeded, lookup, model.mainTab);
-		return (!model.dropdownPageRequestInFlight) ? sourceTable : _elm_lang$core$Maybe$Nothing;
-	});
+var _ivanceras$diwata$Views_Window$dropdownPageRequestNeeded = function (model) {
+	var sourceTable = _ivanceras$diwata$Views_Window_Tab$dropdownPageRequestNeeded(model.mainTab);
+	return (!model.dropdownPageRequestInFlight) ? sourceTable : _elm_lang$core$Maybe$Nothing;
+};
 var _ivanceras$diwata$Views_Window$viewErrors = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -30364,7 +31400,7 @@ var _ivanceras$diwata$Views_Window$init = F5(
 				_elm_lang$core$Task$map3,
 				F3(
 					function (records, size, lookup) {
-						return A8(
+						return A9(
 							_ivanceras$diwata$Views_Window_Tab$init,
 							arenaArg,
 							settings,
@@ -30373,7 +31409,8 @@ var _ivanceras$diwata$Views_Window$init = F5(
 							query,
 							window.mainTab,
 							_ivanceras$diwata$Data_Window_Tab$InMain,
-							records);
+							records,
+							lookup);
 					}),
 				loadRecords,
 				getBrowserSize,
@@ -30423,7 +31460,7 @@ var _ivanceras$diwata$Views_Window$viewMainTab = function (model) {
 			_0: A2(
 				_elm_lang$html$Html$map,
 				_ivanceras$diwata$Views_Window$TabMsg,
-				A2(_ivanceras$diwata$Views_Window_Tab$listView, model.lookup, mainTab)),
+				_ivanceras$diwata$Views_Window_Tab$view(mainTab)),
 			_1: {ctor: '[]'}
 		});
 };
@@ -30447,6 +31484,18 @@ var _ivanceras$diwata$Views_Window$view = F2(
 				}
 			});
 	});
+var _ivanceras$diwata$Views_Window$updateMainTab = F2(
+	function (tabMsg, model) {
+		var _p2 = A2(_ivanceras$diwata$Views_Window_Tab$update, tabMsg, model.mainTab);
+		var updatedMainTab = _p2._0;
+		var subCmd = _p2._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{mainTab: updatedMainTab}),
+			A2(_elm_lang$core$Platform_Cmd$map, _ivanceras$diwata$Views_Window$TabMsg, subCmd));
+	});
 var _ivanceras$diwata$Views_Window$refreshPage = F2(
 	function (tab, model) {
 		var arenaArg = model.arenaArg;
@@ -30456,14 +31505,14 @@ var _ivanceras$diwata$Views_Window$refreshPage = F2(
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p2 = result;
-				if (_p2.ctor === 'Ok') {
+				var _p3 = result;
+				if (_p3.ctor === 'Ok') {
 					return _ivanceras$diwata$Views_Window$TabMsg(
-						_ivanceras$diwata$Views_Window_Tab$RefreshPageReceived(_p2._0));
+						_ivanceras$diwata$Views_Window_Tab$RefreshPageReceived(_p3._0));
 				} else {
 					return _ivanceras$diwata$Views_Window$TabMsg(
 						_ivanceras$diwata$Views_Window_Tab$RefreshPageError(
-							_elm_lang$core$Basics$toString(_p2._0)));
+							_elm_lang$core$Basics$toString(_p3._0)));
 				}
 			},
 			_elm_lang$http$Http$toTask(request));
@@ -30477,14 +31526,14 @@ var _ivanceras$diwata$Views_Window$requestNextPage = F2(
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p3 = result;
-				if (_p3.ctor === 'Ok') {
+				var _p4 = result;
+				if (_p4.ctor === 'Ok') {
 					return _ivanceras$diwata$Views_Window$TabMsg(
-						_ivanceras$diwata$Views_Window_Tab$NextPageReceived(_p3._0));
+						_ivanceras$diwata$Views_Window_Tab$NextPageReceived(_p4._0));
 				} else {
 					return _ivanceras$diwata$Views_Window$TabMsg(
 						_ivanceras$diwata$Views_Window_Tab$NextPageError(
-							_elm_lang$core$Basics$toString(_p3._0)));
+							_elm_lang$core$Basics$toString(_p4._0)));
 				}
 			},
 			_elm_lang$http$Http$toTask(
@@ -30522,12 +31571,12 @@ var _ivanceras$diwata$Views_Window$requestDeleteRecords = F3(
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p4 = result;
-				if (_p4.ctor === 'Ok') {
-					return _ivanceras$diwata$Views_Window$RecordsDeleted(_p4._0);
+				var _p5 = result;
+				if (_p5.ctor === 'Ok') {
+					return _ivanceras$diwata$Views_Window$RecordsDeleted(_p5._0);
 				} else {
 					return _ivanceras$diwata$Views_Window$RecordsDeleteError(
-						_elm_lang$core$Basics$toString(_p4._0));
+						_elm_lang$core$Basics$toString(_p5._0));
 				}
 			},
 			_elm_lang$http$Http$toTask(
@@ -30539,10 +31588,10 @@ var _ivanceras$diwata$Views_Window$update = F3(
 		var mainTab = model.mainTab;
 		var mainTableName = mainTab.tab.tableName;
 		var tableName = model.tableName;
-		var _p5 = msg;
+		var _p6 = msg;
 		_v3_7:
 		do {
-			switch (_p5.ctor) {
+			switch (_p6.ctor) {
 				case 'DismissErrors':
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
@@ -30553,14 +31602,14 @@ var _ivanceras$diwata$Views_Window$update = F3(
 							}),
 						_elm_lang$core$Platform_Cmd$none);
 				case 'RecordsDeleted':
-					var _p6 = A2(_elm_lang$core$Debug$log, 'records deleted: ', _p5._0);
+					var _p7 = A2(_elm_lang$core$Debug$log, 'records deleted: ', _p6._0);
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						model,
 						A2(_ivanceras$diwata$Views_Window$refreshPage, mainTab, model));
 				case 'RecordsDeleteError':
-					var _p8 = _p5._0;
-					var _p7 = A2(_elm_lang$core$Debug$log, 'error deleting records', _p8);
+					var _p9 = _p6._0;
+					var _p8 = A2(_elm_lang$core$Debug$log, 'error deleting records', _p9);
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
@@ -30571,7 +31620,7 @@ var _ivanceras$diwata$Views_Window$update = F3(
 									model.errors,
 									{
 										ctor: '::',
-										_0: _p8,
+										_0: _p9,
 										_1: {ctor: '[]'}
 									})
 							}),
@@ -30579,9 +31628,9 @@ var _ivanceras$diwata$Views_Window$update = F3(
 				case 'CloseWindow':
 					return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 				case 'TabMsg':
-					switch (_p5._0.ctor) {
+					switch (_p6._0.ctor) {
 						case 'ToolbarMsg':
-							if (_p5._0._0.ctor === 'ClickedMainDelete') {
+							if (_p6._0._0.ctor === 'ClickedMainDelete') {
 								var selectedRecordIdList = A2(
 									_elm_lang$core$List$map,
 									function (_) {
@@ -30590,7 +31639,7 @@ var _ivanceras$diwata$Views_Window$update = F3(
 									_ivanceras$diwata$Views_Window_Tab$selectedRows(mainTab));
 								var settings = model.settings;
 								var selectedCount = _ivanceras$diwata$Views_Window_Tab$selectedRowCount(model.mainTab);
-								var _p9 = A2(
+								var _p10 = A2(
 									_elm_lang$core$Debug$log,
 									A2(
 										_elm_lang$core$Basics_ops['++'],
@@ -30608,12 +31657,12 @@ var _ivanceras$diwata$Views_Window$update = F3(
 								break _v3_7;
 							}
 						case 'SearchboxMsg':
-							var _p10 = A2(
+							var _p11 = A2(
 								_ivanceras$diwata$Views_Window_Tab$update,
-								A2(_ivanceras$diwata$Views_Window_Tab$SearchboxMsg, _p5._0._0, _p5._0._1),
+								A2(_ivanceras$diwata$Views_Window_Tab$SearchboxMsg, _p6._0._0, _p6._0._1),
 								model.mainTab);
-							var updatedMainTab = _p10._0;
-							var subCmd = _p10._1;
+							var updatedMainTab = _p11._0;
+							var subCmd = _p11._1;
 							var tabQuery = updatedMainTab.query;
 							var newArenaArg = _elm_lang$core$Native_Utils.update(
 								arenaArg,
@@ -30635,18 +31684,18 @@ var _ivanceras$diwata$Views_Window$update = F3(
 										}
 									}));
 						case 'ToggleSort':
-							var _p14 = _p5._0._0;
-							var _p11 = A2(_elm_lang$core$Debug$log, 'toggle sort for', _p14);
-							var _p12 = A2(
+							var _p15 = _p6._0._0;
+							var _p12 = A2(_elm_lang$core$Debug$log, 'toggle sort for', _p15);
+							var _p13 = A2(
 								_ivanceras$diwata$Views_Window_Tab$update,
-								_ivanceras$diwata$Views_Window_Tab$ToggleSort(_p14),
+								_ivanceras$diwata$Views_Window_Tab$ToggleSort(_p15),
 								model.mainTab);
-							var updatedMainTab = _p12._0;
-							var subCmd = _p12._1;
+							var updatedMainTab = _p13._0;
+							var subCmd = _p13._1;
 							var updatedArenaArg = _elm_lang$core$Native_Utils.update(
 								arenaArg,
 								{query: updatedMainTab.query});
-							var _p13 = A2(_elm_lang$core$Debug$log, 'updatedArenaArg: ', updatedArenaArg);
+							var _p14 = A2(_elm_lang$core$Debug$log, 'updatedArenaArg: ', updatedArenaArg);
 							var updatedModel = _elm_lang$core$Native_Utils.update(
 								model,
 								{arenaArg: updatedArenaArg, mainTab: updatedMainTab});
@@ -30667,36 +31716,39 @@ var _ivanceras$diwata$Views_Window$update = F3(
 							break _v3_7;
 					}
 				case 'LookupNextPageReceived':
-					var updatedLookup = A3(_ivanceras$diwata$Data_Window_Lookup$addPage, _p5._0._0, _p5._0._1, model.lookup);
+					var updatedLookup = A3(_ivanceras$diwata$Data_Window_Lookup$addPage, _p6._0._0, _p6._0._1, model.lookup);
+					var updatedModel = _elm_lang$core$Native_Utils.update(
+						model,
+						{lookup: updatedLookup, dropdownPageRequestInFlight: false});
 					return A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{lookup: updatedLookup, dropdownPageRequestInFlight: false}),
-						_elm_lang$core$Platform_Cmd$none);
+						_ivanceras$diwata$Views_Window$updateMainTab,
+						_ivanceras$diwata$Views_Window_Tab$AllRowMsg(
+							_ivanceras$diwata$Views_Window_Row$AllFieldMsg(
+								_ivanceras$diwata$Views_Window_Field$LookupChanged(updatedLookup))),
+						updatedModel);
 				default:
 					return A2(
 						_elm_lang$core$Native_Utils.crash(
 							'Views.Window',
 							{
-								start: {line: 388, column: 13},
-								end: {line: 388, column: 24}
+								start: {line: 392, column: 13},
+								end: {line: 392, column: 24}
 							}),
 						'Error loading next page lookup',
-						_p5._0);
+						_p6._0);
 			}
 		} while(false);
-		var _p15 = A2(_ivanceras$diwata$Views_Window_Tab$update, _p5._0, model.mainTab);
-		var newMainTab = _p15._0;
-		var subCmd = _p15._1;
-		var _p16 = _ivanceras$diwata$Views_Window_Tab$pageRequestNeeded(newMainTab) ? A2(
+		var _p16 = A2(_ivanceras$diwata$Views_Window_Tab$update, _p6._0, model.mainTab);
+		var newMainTab = _p16._0;
+		var subCmd = _p16._1;
+		var _p17 = _ivanceras$diwata$Views_Window_Tab$pageRequestNeeded(newMainTab) ? A2(
 			_ivanceras$diwata$Util_ops['=>'],
 			_elm_lang$core$Native_Utils.update(
 				newMainTab,
 				{pageRequestInFlight: true}),
 			A2(_ivanceras$diwata$Views_Window$requestNextPage, newMainTab, model)) : A2(_ivanceras$diwata$Util_ops['=>'], newMainTab, _elm_lang$core$Platform_Cmd$none);
-		var updatedMainTab = _p16._0;
-		var tabCmd = _p16._1;
+		var updatedMainTab = _p17._0;
+		var tabCmd = _p17._1;
 		return A2(
 			_ivanceras$diwata$Util_ops['=>'],
 			_elm_lang$core$Native_Utils.update(
@@ -30797,45 +31849,44 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights = F4(
 var _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize = function (model) {
 	return A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, model.isMaximized, model.browserSize);
 };
-var _ivanceras$diwata$Views_Window_DetailedRecord$createFields = F4(
-	function (allotedTabWidth, action, tab, record) {
+var _ivanceras$diwata$Views_Window_DetailedRecord$createFields = F5(
+	function (allotedTabWidth, action, tab, lookup, record) {
 		return A2(
 			_elm_lang$core$List$map,
 			function (field) {
-				return A6(_ivanceras$diwata$Views_Window_Field$init, allotedTabWidth, _ivanceras$diwata$Data_Window_Presentation$InCard, action, record, tab, field);
+				return A7(_ivanceras$diwata$Views_Window_Field$init, allotedTabWidth, _ivanceras$diwata$Data_Window_Presentation$InCard, action, record, tab, lookup, field);
 			},
 			tab.fields);
 	});
-var _ivanceras$diwata$Views_Window_DetailedRecord$dropdownPageRequestNeeded = F2(
-	function (lookup, model) {
-		var indirectTabFields = A2(
-			_elm_lang$core$List$filterMap,
-			function (_p10) {
-				var _p11 = _p10;
-				return A2(_ivanceras$diwata$Views_Window_Tab$dropdownPageRequestNeeded, lookup, _p11._1);
-			},
-			model.indirectTabs);
-		var hasManyTabFields = A2(
-			_elm_lang$core$List$filterMap,
-			function (hasManyTab) {
-				return A2(_ivanceras$diwata$Views_Window_Tab$dropdownPageRequestNeeded, lookup, hasManyTab);
-			},
-			model.hasManyTabs);
-		var mainFields = A2(
-			_elm_lang$core$List$filterMap,
-			function (value) {
-				return A2(_ivanceras$diwata$Views_Window_Field$dropdownPageRequestNeeded, lookup, value);
-			},
-			model.values);
-		var sourceTable = _elm_lang$core$List$head(
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				mainFields,
-				A2(_elm_lang$core$Basics_ops['++'], hasManyTabFields, indirectTabFields)));
-		return (!model.dropdownPageRequestInFlight) ? sourceTable : _elm_lang$core$Maybe$Nothing;
-	});
-var _ivanceras$diwata$Views_Window_DetailedRecord$createOneOneFields = F4(
-	function (allotedTabWidth, action, oneOneTabs, oneOneRecords) {
+var _ivanceras$diwata$Views_Window_DetailedRecord$dropdownPageRequestNeeded = function (model) {
+	var indirectTabFields = A2(
+		_elm_lang$core$List$filterMap,
+		function (_p10) {
+			var _p11 = _p10;
+			return _ivanceras$diwata$Views_Window_Tab$dropdownPageRequestNeeded(_p11._1);
+		},
+		model.indirectTabs);
+	var hasManyTabFields = A2(
+		_elm_lang$core$List$filterMap,
+		function (hasManyTab) {
+			return _ivanceras$diwata$Views_Window_Tab$dropdownPageRequestNeeded(hasManyTab);
+		},
+		model.hasManyTabs);
+	var mainFields = A2(
+		_elm_lang$core$List$filterMap,
+		function (value) {
+			return _ivanceras$diwata$Views_Window_Field$dropdownPageRequestNeeded(value);
+		},
+		model.values);
+	var sourceTable = _elm_lang$core$List$head(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			mainFields,
+			A2(_elm_lang$core$Basics_ops['++'], hasManyTabFields, indirectTabFields)));
+	return (!model.dropdownPageRequestInFlight) ? sourceTable : _elm_lang$core$Maybe$Nothing;
+};
+var _ivanceras$diwata$Views_Window_DetailedRecord$createOneOneFields = F5(
+	function (allotedTabWidth, action, oneOneTabs, lookup, oneOneRecords) {
 		return A2(
 			_elm_lang$core$List$map,
 			function (_p12) {
@@ -30853,14 +31904,14 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$createOneOneFields = F4(
 					return {
 						ctor: '_Tuple2',
 						_0: _p15,
-						_1: A4(_ivanceras$diwata$Views_Window_DetailedRecord$createFields, allotedTabWidth, action, _p15, _p13._1)
+						_1: A5(_ivanceras$diwata$Views_Window_DetailedRecord$createFields, allotedTabWidth, action, _p15, lookup, _p13._1)
 					};
 				} else {
 					return _elm_lang$core$Native_Utils.crashCase(
 						'Views.Window.DetailedRecord',
 						{
-							start: {line: 546, column: 13},
-							end: {line: 551, column: 59}
+							start: {line: 544, column: 13},
+							end: {line: 549, column: 59}
 						},
 						_p14)('There should be a oneTab');
 				}
@@ -31020,8 +32071,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$getChangeset = function (model
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.DetailedRecord',
 					{
-						start: {line: 285, column: 13},
-						end: {line: 296, column: 30}
+						start: {line: 283, column: 13},
+						end: {line: 294, column: 30}
 					},
 					_p34)('unexpected action');
 			case 'Select':
@@ -31124,13 +32175,13 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 							}();
 							var _p42 = rows;
 							if (_p42.ctor === 'Just') {
-								return A8(_ivanceras$diwata$Views_Window_Tab$init, arenaArg, settings, _elm_lang$core$Maybe$Nothing, tabSize, sectionQuery, hasManyTab, _ivanceras$diwata$Data_Window_Tab$InHasMany, _p42._0);
+								return A9(_ivanceras$diwata$Views_Window_Tab$init, arenaArg, settings, _elm_lang$core$Maybe$Nothing, tabSize, sectionQuery, hasManyTab, _ivanceras$diwata$Data_Window_Tab$InHasMany, _p42._0, lookup);
 							} else {
 								return _elm_lang$core$Native_Utils.crashCase(
 									'Views.Window.DetailedRecord',
 									{
-										start: {line: 158, column: 29},
-										end: {line: 163, column: 60}
+										start: {line: 155, column: 29},
+										end: {line: 160, column: 60}
 									},
 									_p42)('Empty row');
 							}
@@ -31180,14 +32231,14 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 								return {
 									ctor: '_Tuple2',
 									_0: _p53,
-									_1: A8(_ivanceras$diwata$Views_Window_Tab$init, arenaArg, settings, _elm_lang$core$Maybe$Nothing, tabSize, sectionQuery, _p52, _ivanceras$diwata$Data_Window_Tab$InIndirect, _p50._0)
+									_1: A9(_ivanceras$diwata$Views_Window_Tab$init, arenaArg, settings, _elm_lang$core$Maybe$Nothing, tabSize, sectionQuery, _p52, _ivanceras$diwata$Data_Window_Tab$InIndirect, _p50._0, lookup)
 								};
 							} else {
 								return _elm_lang$core$Native_Utils.crashCase(
 									'Views.Window.DetailedRecord',
 									{
-										start: {line: 200, column: 29},
-										end: {line: 205, column: 60}
+										start: {line: 197, column: 29},
+										end: {line: 202, column: 60}
 									},
 									_p50)('Empty row');
 							}
@@ -31213,6 +32264,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 						indirectTabs: indirectTabs,
 						position: A3(_ivanceras$diwata$Views_Window_DetailedRecord$initialPosition, splitPercentage, isMaximized, browserSize),
 						drag: _elm_lang$core$Maybe$Nothing,
+						scroll: A2(_ivanceras$diwata$Util$Scroll, 0, 0),
 						browserSize: browserSize,
 						arenaArg: arenaArg,
 						lookup: lookup,
@@ -31220,18 +32272,20 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 							var _p55 = action;
 							switch (_p55.ctor) {
 								case 'NewRecord':
-									return A4(
+									return A5(
 										_ivanceras$diwata$Views_Window_DetailedRecord$createFields,
 										allotedTabWidth,
 										_ivanceras$diwata$Data_WindowArena$NewRecord(_p55._0),
 										window.mainTab,
+										lookup,
 										_elm_lang$core$Maybe$Nothing);
 								case 'Select':
-									return A4(
+									return A5(
 										_ivanceras$diwata$Views_Window_DetailedRecord$createFields,
 										allotedTabWidth,
 										action,
 										window.mainTab,
+										lookup,
 										A2(
 											_elm_lang$core$Maybe$map,
 											function (_) {
@@ -31239,11 +32293,12 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 											},
 											detail));
 								case 'Copy':
-									return A4(
+									return A5(
 										_ivanceras$diwata$Views_Window_DetailedRecord$createFields,
 										allotedTabWidth,
 										action,
 										window.mainTab,
+										lookup,
 										A2(
 											_elm_lang$core$Maybe$map,
 											function (_) {
@@ -31257,7 +32312,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 						oneOneValues: function () {
 							var _p56 = detail;
 							if (_p56.ctor === 'Just') {
-								return A4(_ivanceras$diwata$Views_Window_DetailedRecord$createOneOneFields, allotedTabWidth, action, window.oneOneTabs, _p56._0.oneOnes);
+								return A5(_ivanceras$diwata$Views_Window_DetailedRecord$createOneOneFields, allotedTabWidth, action, window.oneOneTabs, lookup, _p56._0.oneOnes);
 							} else {
 								return {ctor: '[]'};
 							}
@@ -31289,7 +32344,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$Model = function (a) {
 												return function (m) {
 													return function (n) {
 														return function (o) {
-															return {selectedRow: a, window: b, hasManyTabs: c, indirectTabs: d, position: e, drag: f, browserSize: g, arenaArg: h, lookup: i, values: j, oneOneValues: k, dropdownPageRequestInFlight: l, settings: m, isMaximized: n, errors: o};
+															return function (p) {
+																return {selectedRow: a, window: b, hasManyTabs: c, indirectTabs: d, position: e, drag: f, scroll: g, browserSize: h, arenaArg: i, lookup: j, values: k, oneOneValues: l, dropdownPageRequestInFlight: m, settings: n, isMaximized: o, errors: p};
+															};
 														};
 													};
 												};
@@ -31309,8 +32366,6 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$DragPosition = F2(
 	function (a, b) {
 		return {start: a, current: b};
 	});
-var _ivanceras$diwata$Views_Window_DetailedRecord$OneOne = {ctor: 'OneOne'};
-var _ivanceras$diwata$Views_Window_DetailedRecord$Detail = {ctor: 'Detail'};
 var _ivanceras$diwata$Views_Window_DetailedRecord$End = function (a) {
 	return {ctor: 'End', _0: a};
 };
@@ -31352,6 +32407,79 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$ToolbarMsg = function (a) {
 var _ivanceras$diwata$Views_Window_DetailedRecord$ChangeActiveTab = F3(
 	function (a, b, c) {
 		return {ctor: 'ChangeActiveTab', _0: a, _1: b, _2: c};
+	});
+var _ivanceras$diwata$Views_Window_DetailedRecord$RefreshTabPageError = function (a) {
+	return {ctor: 'RefreshTabPageError', _0: a};
+};
+var _ivanceras$diwata$Views_Window_DetailedRecord$RefreshTabPageReceived = function (a) {
+	return {ctor: 'RefreshTabPageReceived', _0: a};
+};
+var _ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage = F3(
+	function (section, tabModel, model) {
+		var sectionTable = tabModel.tab.tableName;
+		var mainTable = function () {
+			var _p58 = model.arenaArg.tableName;
+			if (_p58.ctor === 'Just') {
+				return _p58._0;
+			} else {
+				return _elm_lang$core$Native_Utils.crashCase(
+					'Views.Window.DetailedRecord',
+					{
+						start: {line: 1585, column: 13},
+						end: {line: 1590, column: 68}
+					},
+					_p58)('There has to be a main table here');
+			}
+		}();
+		var selectedRow = function () {
+			var _p60 = model.selectedRow;
+			if (_p60.ctor === 'Just') {
+				return A2(_ivanceras$diwata$Data_Window_Tab$getRecordIdString, _p60._0.record, model.window.mainTab);
+			} else {
+				return _elm_lang$core$Native_Utils.crashCase(
+					'Views.Window.DetailedRecord',
+					{
+						start: {line: 1574, column: 13},
+						end: {line: 1579, column: 67}
+					},
+					_p60)('There should be a selectedRecord');
+			}
+		}();
+		var _p62 = A2(_elm_lang$core$Debug$log, 'selected row: ', selectedRow);
+		var request = function () {
+			var _p63 = section;
+			if (_p63.ctor === 'HasMany') {
+				return A5(_ivanceras$diwata$Request_Window_Records$fetchHasManyRecords, model.settings, mainTable, selectedRow, sectionTable, tabModel.query);
+			} else {
+				return A5(_ivanceras$diwata$Request_Window_Records$fetchIndirectRecords, model.settings, mainTable, selectedRow, sectionTable, tabModel.query);
+			}
+		}();
+		var fetchCmd = A2(
+			_elm_lang$core$Task$attempt,
+			function (result) {
+				var _p64 = result;
+				if (_p64.ctor === 'Ok') {
+					return _ivanceras$diwata$Views_Window_DetailedRecord$RefreshTabPageReceived(
+						{ctor: '_Tuple3', _0: section, _1: tabModel, _2: _p64._0});
+				} else {
+					return _ivanceras$diwata$Views_Window_DetailedRecord$RefreshTabPageError(
+						_elm_lang$core$Basics$toString(_p64._0));
+				}
+			},
+			_elm_lang$http$Http$toTask(request));
+		var arenaArg = model.arenaArg;
+		var query = arenaArg.query;
+		var pageQuery = A2(_ivanceras$diwata$Data_Query$updatePage, 1, query);
+		var updatedArenaArg = _elm_lang$core$Native_Utils.update(
+			arenaArg,
+			{query: pageQuery});
+		var _p65 = A2(_elm_lang$core$Debug$log, 'refreshing in tab', tabModel.query);
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{arenaArg: updatedArenaArg}),
+			fetchCmd);
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$LookupNextPageErrored = function (a) {
 	return {ctor: 'LookupNextPageErrored', _0: a};
@@ -31426,7 +32554,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewFieldInCard = F4(
 							_0: A2(
 								_elm_lang$html$Html$map,
 								A2(_ivanceras$diwata$Views_Window_DetailedRecord$FieldMsg, container, value),
-								A2(_ivanceras$diwata$Views_Window_Field$view, lookup, value)),
+								_ivanceras$diwata$Views_Window_Field$view(value)),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -31435,12 +32563,12 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewFieldInCard = F4(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$cardViewRecord = F4(
 	function (container, values, tab, model) {
-		var _p58 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
-		var allotedWidth = _p58._0;
-		var allotedHeight = _p58._1;
+		var _p66 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
+		var allotedWidth = _p66._0;
+		var allotedHeight = _p66._1;
 		var cardWidth = function () {
-			var _p59 = container;
-			if (_p59.ctor === 'OneOne') {
+			var _p67 = container;
+			if (_p67.ctor === 'OneOne') {
 				return allotedWidth - 100;
 			} else {
 				return allotedWidth;
@@ -31452,9 +32580,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$cardViewRecord = F4(
 		var maxColumnLen = _elm_lang$core$List$maximum(
 			A2(_elm_lang$core$List$map, _elm_lang$core$String$length, columnNames));
 		var fieldLabelWidth = function () {
-			var _p60 = maxColumnLen;
-			if (_p60.ctor === 'Just') {
-				return _p60._0 * 12;
+			var _p68 = maxColumnLen;
+			if (_p68.ctor === 'Just') {
+				return _p68._0 * 12;
 			} else {
 				return 200;
 			}
@@ -31496,9 +32624,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$cardViewRecord = F4(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$oneOneCardView = F3(
 	function (oneOneValues, oneOneTab, model) {
-		var _p61 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
-		var allotedWidth = _p61._0;
-		var allotedHeight = _p61._1;
+		var _p69 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
+		var allotedWidth = _p69._0;
+		var allotedHeight = _p69._1;
 		var cardWidth = allotedWidth - 100;
 		return A2(
 			_elm_lang$html$Html$div,
@@ -31536,7 +32664,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$oneOneCardView = F3(
 					}),
 				_1: {
 					ctor: '::',
-					_0: A4(_ivanceras$diwata$Views_Window_DetailedRecord$cardViewRecord, _ivanceras$diwata$Views_Window_DetailedRecord$OneOne, oneOneValues, oneOneTab, model),
+					_0: A4(_ivanceras$diwata$Views_Window_DetailedRecord$cardViewRecord, _ivanceras$diwata$Data_Window_Field$OneOne, oneOneValues, oneOneTab, model),
 					_1: {ctor: '[]'}
 				}
 			});
@@ -31550,9 +32678,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewOneOneTabs = function (mod
 		{ctor: '[]'},
 		A2(
 			_elm_lang$core$List$map,
-			function (_p62) {
-				var _p63 = _p62;
-				return A3(_ivanceras$diwata$Views_Window_DetailedRecord$oneOneCardView, _p63._1, _p63._0, model);
+			function (_p70) {
+				var _p71 = _p70;
+				return A3(_ivanceras$diwata$Views_Window_DetailedRecord$oneOneCardView, _p71._1, _p71._0, model);
 			},
 			oneOneValues));
 };
@@ -31562,15 +32690,15 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateFields = F3(
 			_elm_lang$core$List$map,
 			function (value) {
 				if (_elm_lang$core$Native_Utils.eq(argValue, value)) {
-					var _p64 = A2(_ivanceras$diwata$Views_Window_Field$update, fieldMsg, value);
-					var newField = _p64._0;
-					var cmd = _p64._1;
+					var _p72 = A2(_ivanceras$diwata$Views_Window_Field$update, fieldMsg, value);
+					var newField = _p72._0;
+					var cmd = _p72._1;
 					return {
 						ctor: '_Tuple2',
 						_0: newField,
 						_1: A2(
 							_elm_lang$core$Platform_Cmd$map,
-							A2(_ivanceras$diwata$Views_Window_DetailedRecord$FieldMsg, _ivanceras$diwata$Views_Window_DetailedRecord$OneOne, newField),
+							A2(_ivanceras$diwata$Views_Window_DetailedRecord$FieldMsg, _ivanceras$diwata$Data_Window_Field$OneOne, newField),
 							cmd)
 					};
 				} else {
@@ -31585,9 +32713,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$resetFields = F2(
 			A2(
 				_elm_lang$core$List$map,
 				function (field) {
-					var _p65 = A2(_ivanceras$diwata$Views_Window_Field$update, _ivanceras$diwata$Views_Window_Field$ResetChanges, field);
-					var updatedField = _p65._0;
-					var subCmd = _p65._1;
+					var _p73 = A2(_ivanceras$diwata$Views_Window_Field$update, _ivanceras$diwata$Views_Window_Field$ResetChanges, field);
+					var updatedField = _p73._0;
+					var subCmd = _p73._1;
 					return {
 						ctor: '_Tuple2',
 						_0: updatedField,
@@ -31600,32 +32728,59 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$resetFields = F2(
 				fields));
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnValues = function (model) {
-	return A2(_ivanceras$diwata$Views_Window_DetailedRecord$resetFields, _ivanceras$diwata$Views_Window_DetailedRecord$Detail, model.values);
+	return A2(_ivanceras$diwata$Views_Window_DetailedRecord$resetFields, _ivanceras$diwata$Data_Window_Field$Detail, model.values);
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnOneOneValues = function (model) {
 	var updatedFields = A2(
 		_elm_lang$core$List$map,
-		function (_p66) {
-			var _p67 = _p66;
-			var _p68 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$resetFields, _ivanceras$diwata$Views_Window_DetailedRecord$OneOne, _p67._1);
-			var updatedFields = _p68._0;
-			var subCmd = _p68._1;
+		function (_p74) {
+			var _p75 = _p74;
+			var _p76 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$resetFields, _ivanceras$diwata$Data_Window_Field$OneOne, _p75._1);
+			var updatedFields = _p76._0;
+			var subCmd = _p76._1;
 			return {
 				ctor: '_Tuple2',
-				_0: {ctor: '_Tuple2', _0: _p67._0, _1: updatedFields},
+				_0: {ctor: '_Tuple2', _0: _p75._0, _1: updatedFields},
 				_1: subCmd
 			};
 		},
 		model.oneOneValues);
-	var _p69 = _elm_lang$core$List$unzip(updatedFields);
-	var oneOneValues = _p69._0;
-	var subCmds = _p69._1;
+	var _p77 = _elm_lang$core$List$unzip(updatedFields);
+	var oneOneValues = _p77._0;
+	var subCmds = _p77._1;
 	return {
 		ctor: '_Tuple2',
 		_0: oneOneValues,
 		_1: _elm_lang$core$List$concat(subCmds)
 	};
 };
+var _ivanceras$diwata$Views_Window_DetailedRecord$updateValues = F2(
+	function (fieldMsg, model) {
+		var _p78 = _elm_lang$core$List$unzip(
+			A2(
+				_elm_lang$core$List$map,
+				_ivanceras$diwata$Views_Window_Field$update(fieldMsg),
+				model.values));
+		var updatedValues = _p78._0;
+		var fieldSubCmd = _p78._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{values: updatedValues}),
+			_elm_lang$core$Platform_Cmd$batch(
+				A3(
+					_elm_lang$core$List$map2,
+					F2(
+						function (value, subCmd) {
+							return A2(
+								_elm_lang$core$Platform_Cmd$map,
+								A2(_ivanceras$diwata$Views_Window_DetailedRecord$FieldMsg, _ivanceras$diwata$Data_Window_Field$Detail, value),
+								subCmd);
+						}),
+					updatedValues,
+					fieldSubCmd)));
+	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$TabMsgAll = function (a) {
 	return {ctor: 'TabMsgAll', _0: a};
 };
@@ -31640,10 +32795,10 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$listView = F4(
 				return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
 					{ctor: '_Tuple3', _0: section, _1: tab, _2: tabMsg});
 			},
-			A2(_ivanceras$diwata$Views_Window_Tab$listView, lookup, tab));
+			_ivanceras$diwata$Views_Window_Tab$view(tab));
 		var styleDisplay = function () {
-			var _p70 = isTabActive;
-			if (_p70 === true) {
+			var _p79 = isTabActive;
+			if (_p79 === true) {
 				return _elm_lang$html$Html_Attributes$style(
 					{
 						ctor: '::',
@@ -31677,20 +32832,20 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$listView = F4(
 			});
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (model) {
-	var _p71 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
-	var allotedWidth = _p71._0;
-	var allotedHeight = _p71._1;
+	var _p80 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
+	var allotedWidth = _p80._0;
+	var allotedHeight = _p80._1;
 	var arenaArg = model.arenaArg;
 	var indirectTabs = model.indirectTabs;
 	var indirectDetailTabs = A2(
 		_elm_lang$core$List$map,
-		function (_p72) {
-			var _p73 = _p72;
+		function (_p81) {
+			var _p82 = _p81;
 			return {
 				ctor: '_Tuple3',
 				_0: _ivanceras$diwata$Data_WindowArena$Indirect,
-				_1: _p73._1,
-				_2: _elm_lang$core$Maybe$Just(_p73._0)
+				_1: _p82._1,
+				_2: _elm_lang$core$Maybe$Just(_p82._0)
 			};
 		},
 		indirectTabs);
@@ -31703,16 +32858,16 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 		hasManyTabs);
 	var detailTabs = A2(_elm_lang$core$Basics_ops['++'], hasManyDetailTabs, indirectDetailTabs);
 	var activeTab = function () {
-		var _p74 = arenaArg.sectionTable;
-		if (_p74.ctor === 'Just') {
+		var _p83 = arenaArg.sectionTable;
+		if (_p83.ctor === 'Just') {
 			return _elm_lang$core$Maybe$Just(
-				{ctor: '_Tuple3', _0: _p74._0._0, _1: _p74._0._1, _2: arenaArg.sectionViaLinker});
+				{ctor: '_Tuple3', _0: _p83._0._0, _1: _p83._0._1, _2: arenaArg.sectionViaLinker});
 		} else {
 			return A2(
 				_elm_lang$core$Maybe$map,
-				function (_p75) {
-					var _p76 = _p75;
-					return {ctor: '_Tuple3', _0: _p76._0, _1: _p76._1.tab.tableName, _2: _p76._2};
+				function (_p84) {
+					var _p85 = _p84;
+					return {ctor: '_Tuple3', _0: _p85._0, _1: _p85._1.tab.tableName, _2: _p85._2};
 				},
 				_elm_lang$core$List$head(detailTabs));
 		}
@@ -31723,9 +32878,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 			_elm_lang$core$List$map,
 			function (hasMany) {
 				var isActive = function () {
-					var _p77 = activeTab;
-					if (_p77.ctor === 'Just') {
-						return _elm_lang$core$Native_Utils.eq(_p77._0._0, _ivanceras$diwata$Data_WindowArena$HasMany) && _elm_lang$core$Native_Utils.eq(_p77._0._1, hasMany.tab.tableName);
+					var _p86 = activeTab;
+					if (_p86.ctor === 'Just') {
+						return _elm_lang$core$Native_Utils.eq(_p86._0._0, _ivanceras$diwata$Data_WindowArena$HasMany) && _elm_lang$core$Native_Utils.eq(_p86._0._1, hasMany.tab.tableName);
 					} else {
 						return false;
 					}
@@ -31735,20 +32890,20 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 			hasManyTabs),
 		A2(
 			_elm_lang$core$List$map,
-			function (_p78) {
-				var _p79 = _p78;
-				var _p81 = _p79._1;
+			function (_p87) {
+				var _p88 = _p87;
+				var _p90 = _p88._1;
 				var isActive = function () {
-					var _p80 = activeTab;
-					if (_p80.ctor === 'Just') {
-						return _elm_lang$core$Native_Utils.eq(_p80._0._0, _ivanceras$diwata$Data_WindowArena$Indirect) && (_elm_lang$core$Native_Utils.eq(_p80._0._1, _p81.tab.tableName) && _elm_lang$core$Native_Utils.eq(
-							_elm_lang$core$Maybe$Just(_p79._0),
-							_p80._0._2));
+					var _p89 = activeTab;
+					if (_p89.ctor === 'Just') {
+						return _elm_lang$core$Native_Utils.eq(_p89._0._0, _ivanceras$diwata$Data_WindowArena$Indirect) && (_elm_lang$core$Native_Utils.eq(_p89._0._1, _p90.tab.tableName) && _elm_lang$core$Native_Utils.eq(
+							_elm_lang$core$Maybe$Just(_p88._0),
+							_p89._0._2));
 					} else {
 						return false;
 					}
 				}();
-				return A4(_ivanceras$diwata$Views_Window_DetailedRecord$listView, isActive, model.lookup, _ivanceras$diwata$Data_WindowArena$Indirect, _p81);
+				return A4(_ivanceras$diwata$Views_Window_DetailedRecord$listView, isActive, model.lookup, _ivanceras$diwata$Data_WindowArena$Indirect, _p90);
 			},
 			indirectTabs));
 	var selectedRow = model.selectedRow;
@@ -31792,24 +32947,24 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 						},
 						A2(
 							_elm_lang$core$List$map,
-							function (_p82) {
-								var _p83 = _p82;
-								var _p87 = _p83._0;
-								var _p86 = _p83._2;
+							function (_p91) {
+								var _p92 = _p91;
+								var _p96 = _p92._0;
+								var _p95 = _p92._2;
 								var viaLinker = function () {
-									var _p84 = _p86;
-									if (_p84.ctor === 'Just') {
-										return A2(_elm_lang$core$Basics_ops['++'], ' , and are connected through ', _p84._0.name);
+									var _p93 = _p95;
+									if (_p93.ctor === 'Just') {
+										return A2(_elm_lang$core$Basics_ops['++'], ' , and are connected through ', _p93._0.name);
 									} else {
 										return '';
 									}
 								}();
 								var arenaArg = model.arenaArg;
-								var tab = _p83._1.tab;
+								var tab = _p92._1.tab;
 								var isActiveTab = function () {
-									var _p85 = activeTab;
-									if (_p85.ctor === 'Just') {
-										return _elm_lang$core$Native_Utils.eq(_p87, _p85._0._0) && (_elm_lang$core$Native_Utils.eq(_p85._0._1, tab.tableName) && _elm_lang$core$Native_Utils.eq(_p86, _p85._0._2));
+									var _p94 = activeTab;
+									if (_p94.ctor === 'Just') {
+										return _elm_lang$core$Native_Utils.eq(_p96, _p94._0._0) && (_elm_lang$core$Native_Utils.eq(_p94._0._1, tab.tableName) && _elm_lang$core$Native_Utils.eq(_p95, _p94._0._2));
 									} else {
 										return false;
 									}
@@ -31848,14 +33003,14 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 													_0: {
 														ctor: '_Tuple2',
 														_0: 'has-many-tab',
-														_1: _elm_lang$core$Native_Utils.eq(_p87, _ivanceras$diwata$Data_WindowArena$HasMany)
+														_1: _elm_lang$core$Native_Utils.eq(_p96, _ivanceras$diwata$Data_WindowArena$HasMany)
 													},
 													_1: {
 														ctor: '::',
 														_0: {
 															ctor: '_Tuple2',
 															_0: 'indirect-tab',
-															_1: _elm_lang$core$Native_Utils.eq(_p87, _ivanceras$diwata$Data_WindowArena$Indirect)
+															_1: _elm_lang$core$Native_Utils.eq(_p96, _ivanceras$diwata$Data_WindowArena$Indirect)
 														},
 														_1: {
 															ctor: '::',
@@ -31871,7 +33026,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 												_1: {
 													ctor: '::',
 													_0: _ivanceras$diwata$Util$onClickPreventDefault(
-														A3(_ivanceras$diwata$Views_Window_DetailedRecord$ChangeActiveTab, _p87, tab.tableName, _p86)),
+														A3(_ivanceras$diwata$Views_Window_DetailedRecord$ChangeActiveTab, _p96, tab.tableName, _p95)),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -31904,7 +33059,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 																		_0: {
 																			ctor: '_Tuple2',
 																			_0: 'ion-network',
-																			_1: _elm_lang$core$Native_Utils.eq(_p87, _ivanceras$diwata$Data_WindowArena$Indirect)
+																			_1: _elm_lang$core$Native_Utils.eq(_p96, _ivanceras$diwata$Data_WindowArena$Indirect)
 																		},
 																		_1: {ctor: '[]'}
 																	}),
@@ -31956,31 +33111,33 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage = F3(
 		var tabPage = tab.currentPage;
 		var arenaArg = model.arenaArg;
 		var recordId = function () {
-			var _p88 = arenaArg.action;
-			if (_p88.ctor === 'Select') {
-				return _elm_lang$core$Maybe$Just(_p88._0);
+			var _p97 = arenaArg.action;
+			if (_p97.ctor === 'Select') {
+				return _elm_lang$core$Maybe$Just(_p97._0);
 			} else {
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.DetailedRecord',
 					{
-						start: {line: 1530, column: 13},
-						end: {line: 1535, column: 97}
+						start: {line: 1509, column: 13},
+						end: {line: 1514, column: 97}
 					},
-					_p88)('Can not request next page on detail other than selected record');
+					_p97)('Can not request next page on detail other than selected record');
 			}
 		}();
+		var query = arenaArg.query;
+		var pageQuery = A2(_ivanceras$diwata$Data_Query$updatePage, tabPage + 1, query);
 		var mainTable = model.window.mainTab.tableName;
 		var httpRequest = function () {
-			var _p90 = recordId;
-			if (_p90.ctor === 'Just') {
-				var _p92 = _p90._0;
-				var _p91 = section;
-				if (_p91.ctor === 'HasMany') {
+			var _p99 = recordId;
+			if (_p99.ctor === 'Just') {
+				var _p101 = _p99._0;
+				var _p100 = section;
+				if (_p100.ctor === 'HasMany') {
 					return _elm_lang$http$Http$toTask(
-						A5(_ivanceras$diwata$Request_Window_Records$fetchHasManyRecords, model.settings, mainTable, _p92, sectionTable, tabPage + 1));
+						A5(_ivanceras$diwata$Request_Window_Records$fetchHasManyRecords, model.settings, mainTable, _p101, sectionTable, pageQuery));
 				} else {
 					return _elm_lang$http$Http$toTask(
-						A5(_ivanceras$diwata$Request_Window_Records$fetchIndirectRecords, model.settings, mainTable, _p92, sectionTable, tabPage + 1));
+						A5(_ivanceras$diwata$Request_Window_Records$fetchIndirectRecords, model.settings, mainTable, _p101, sectionTable, pageQuery));
 				}
 			} else {
 				return _elm_lang$core$Task$succeed(_ivanceras$diwata$Data_Window_Record$emptyRow);
@@ -31989,14 +33146,14 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage = F3(
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p93 = result;
-				if (_p93.ctor === 'Ok') {
+				var _p102 = result;
+				if (_p102.ctor === 'Ok') {
 					return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
 						{
 							ctor: '_Tuple3',
 							_0: section,
 							_1: tab,
-							_2: _ivanceras$diwata$Views_Window_Tab$NextPageReceived(_p93._0)
+							_2: _ivanceras$diwata$Views_Window_Tab$NextPageReceived(_p102._0)
 						});
 				} else {
 					return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
@@ -32005,334 +33162,527 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage = F3(
 							_0: section,
 							_1: tab,
 							_2: _ivanceras$diwata$Views_Window_Tab$NextPageError(
-								_elm_lang$core$Basics$toString(_p93._0))
+								_elm_lang$core$Basics$toString(_p102._0))
 						});
 				}
 			},
 			httpRequest);
 	});
+var _ivanceras$diwata$Views_Window_DetailedRecord$updateTab = F4(
+	function (section, tabModel, tabMsg, model) {
+		var action = model.arenaArg.action;
+		var _p103 = A2(_ivanceras$diwata$Views_Window_Tab$update, tabMsg, tabModel);
+		var newTabModel = _p103._0;
+		var subCmd = _p103._1;
+		var doRequestPage = function () {
+			var _p104 = action;
+			if (_p104.ctor === 'Select') {
+				return A3(_ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage, section, newTabModel, model);
+			} else {
+				return _elm_lang$core$Platform_Cmd$none;
+			}
+		}();
+		var _p105 = function () {
+			var _p106 = _ivanceras$diwata$Views_Window_Tab$pageRequestNeeded(newTabModel);
+			if (_p106 === true) {
+				return A2(
+					_ivanceras$diwata$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						newTabModel,
+						{pageRequestInFlight: true}),
+					doRequestPage);
+			} else {
+				return A2(_ivanceras$diwata$Util_ops['=>'], newTabModel, _elm_lang$core$Platform_Cmd$none);
+			}
+		}();
+		var updatedTabModel = _p105._0;
+		var tabCmd = _p105._1;
+		var _p107 = _elm_lang$core$List$unzip(
+			A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateTabModels, tabMsg, model.hasManyTabs, updatedTabModel));
+		var updatedHasManyTabs = _p107._0;
+		var hasManyCmds = _p107._1;
+		var _p108 = _elm_lang$core$List$unzip(
+			A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabModels, tabMsg, model.indirectTabs, updatedTabModel));
+		var updatedIndirectTabs = _p108._0;
+		var indirectCmds = _p108._1;
+		var detailTabCmds = _elm_lang$core$Platform_Cmd$batch(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				A3(
+					_elm_lang$core$List$map2,
+					F2(
+						function (hasManyModel, hasManyCmd) {
+							return A2(
+								_elm_lang$core$Platform_Cmd$map,
+								function (tabMsg) {
+									return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
+										{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$HasMany, _1: hasManyModel, _2: tabMsg});
+								},
+								hasManyCmd);
+						}),
+					updatedHasManyTabs,
+					hasManyCmds),
+				A3(
+					_elm_lang$core$List$map2,
+					F2(
+						function (_p109, hasManyCmd) {
+							var _p110 = _p109;
+							return A2(
+								_elm_lang$core$Platform_Cmd$map,
+								function (tabMsg) {
+									return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
+										{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$Indirect, _1: _p110._1, _2: tabMsg});
+								},
+								hasManyCmd);
+						}),
+					updatedIndirectTabs,
+					indirectCmds)));
+		var updatedTabCmd = A2(
+			_elm_lang$core$Platform_Cmd$map,
+			function (tabMsg) {
+				return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
+					{ctor: '_Tuple3', _0: section, _1: updatedTabModel, _2: tabMsg});
+			},
+			subCmd);
+		return {
+			ctor: '_Tuple3',
+			_0: updatedTabModel,
+			_1: _elm_lang$core$Native_Utils.update(
+				model,
+				{hasManyTabs: updatedHasManyTabs, indirectTabs: updatedIndirectTabs}),
+			_2: _elm_lang$core$Platform_Cmd$batch(
+				{
+					ctor: '::',
+					_0: tabCmd,
+					_1: {
+						ctor: '::',
+						_0: updatedTabCmd,
+						_1: {
+							ctor: '::',
+							_0: detailTabCmds,
+							_1: {ctor: '[]'}
+						}
+					}
+				})
+		};
+	});
+var _ivanceras$diwata$Views_Window_DetailedRecord$updateAndRefreshTab = F4(
+	function (section, tabModel, tabMsg, model) {
+		var _p111 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$updateTab, section, tabModel, tabMsg, model);
+		var updatedTabModel = _p111._0;
+		var updatedModel = _p111._1;
+		var subCmd = _p111._2;
+		var _p112 = A3(_ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage, section, updatedTabModel, updatedModel);
+		var updatedModel2 = _p112._0;
+		var subCmd2 = _p112._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			updatedModel2,
+			_elm_lang$core$Platform_Cmd$batch(
+				{
+					ctor: '::',
+					_0: subCmd,
+					_1: {
+						ctor: '::',
+						_0: subCmd2,
+						_1: {ctor: '[]'}
+					}
+				}));
+	});
+var _ivanceras$diwata$Views_Window_DetailedRecord$updateHasManyTabs = F2(
+	function (tabMsg, model) {
+		var _p113 = _elm_lang$core$List$unzip(
+			A2(
+				_elm_lang$core$List$map,
+				_ivanceras$diwata$Views_Window_Tab$update(tabMsg),
+				model.hasManyTabs));
+		var updatedTabs = _p113._0;
+		var tabSubCmd = _p113._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{hasManyTabs: updatedTabs}),
+			_elm_lang$core$Platform_Cmd$batch(
+				A3(
+					_elm_lang$core$List$map2,
+					F2(
+						function (tab, subCmd) {
+							return A2(
+								_elm_lang$core$Platform_Cmd$map,
+								function (subMsg) {
+									return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
+										{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$HasMany, _1: tab, _2: subMsg});
+								},
+								subCmd);
+						}),
+					updatedTabs,
+					tabSubCmd)));
+	});
+var _ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabs = F2(
+	function (tabMsg, model) {
+		var _p114 = _elm_lang$core$List$unzip(
+			A2(
+				_elm_lang$core$List$map,
+				function (_p115) {
+					var _p116 = _p115;
+					var _p117 = A2(_ivanceras$diwata$Views_Window_Tab$update, tabMsg, _p116._1);
+					var updatedTab = _p117._0;
+					var subCmd = _p117._1;
+					return {
+						ctor: '_Tuple2',
+						_0: {ctor: '_Tuple2', _0: _p116._0, _1: updatedTab},
+						_1: subCmd
+					};
+				},
+				model.indirectTabs));
+		var updatedTabs = _p114._0;
+		var tabSubCmd = _p114._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{indirectTabs: updatedTabs}),
+			_elm_lang$core$Platform_Cmd$batch(
+				A3(
+					_elm_lang$core$List$map2,
+					F2(
+						function (_p118, subCmd) {
+							var _p119 = _p118;
+							return A2(
+								_elm_lang$core$Platform_Cmd$map,
+								function (subMsg) {
+									return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
+										{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$Indirect, _1: _p119._1, _2: subMsg});
+								},
+								subCmd);
+						}),
+					updatedTabs,
+					tabSubCmd)));
+	});
+var _ivanceras$diwata$Views_Window_DetailedRecord$updateAllTabs = F2(
+	function (tabMsg, model) {
+		var _p120 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateHasManyTabs, tabMsg, model);
+		var updatedModel = _p120._0;
+		var cmd = _p120._1;
+		var _p121 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabs, tabMsg, updatedModel);
+		var updatedModel2 = _p121._0;
+		var cmd2 = _p121._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			updatedModel2,
+			_elm_lang$core$Platform_Cmd$batch(
+				{
+					ctor: '::',
+					_0: cmd,
+					_1: {
+						ctor: '::',
+						_0: cmd2,
+						_1: {ctor: '[]'}
+					}
+				}));
+	});
+var _ivanceras$diwata$Views_Window_DetailedRecord$updateAllFields = F2(
+	function (fieldMsg, model) {
+		var _p122 = _elm_lang$core$List$unzip(
+			A2(
+				_elm_lang$core$List$map,
+				function (_p123) {
+					var _p124 = _p123;
+					var _p125 = _elm_lang$core$List$unzip(
+						A2(
+							_elm_lang$core$List$map,
+							_ivanceras$diwata$Views_Window_Field$update(fieldMsg),
+							_p124._1));
+					var updatedFields = _p125._0;
+					var subCmd = _p125._1;
+					return {
+						ctor: '_Tuple2',
+						_0: {ctor: '_Tuple2', _0: _p124._0, _1: updatedFields},
+						_1: subCmd
+					};
+				},
+				model.oneOneValues));
+		var updatedOneOneValues = _p122._0;
+		var oneOnefieldSubCmd = _p122._1;
+		var _p126 = _elm_lang$core$List$unzip(
+			A2(
+				_elm_lang$core$List$map,
+				_ivanceras$diwata$Views_Window_Field$update(fieldMsg),
+				model.values));
+		var updatedValues = _p126._0;
+		var fieldSubCmd = _p126._1;
+		var updatedModel = _elm_lang$core$Native_Utils.update(
+			model,
+			{values: updatedValues, oneOneValues: updatedOneOneValues});
+		return A2(
+			_ivanceras$diwata$Views_Window_DetailedRecord$updateAllTabs,
+			_ivanceras$diwata$Views_Window_Tab$AllRowMsg(
+				_ivanceras$diwata$Views_Window_Row$AllFieldMsg(fieldMsg)),
+			updatedModel);
+	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 	function (session, msg, model) {
 		var drag = model.drag;
 		var position = model.position;
-		var _p94 = msg;
-		switch (_p94.ctor) {
-			case 'Drag':
-				return A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateDrag, session, _p94._0, model);
-			case 'WindowResized':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{browserSize: _p94._0});
-				var _p95 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, newModel);
-				var updatedModel = _p95._0;
-				var cmd = _p95._1;
-				return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
-			case 'TabMsgAll':
-				var _p101 = _p94._0;
-				var _p96 = _elm_lang$core$List$unzip(
-					A2(
-						_elm_lang$core$List$map,
-						function (_p97) {
-							var _p98 = _p97;
-							var _p99 = A2(_ivanceras$diwata$Views_Window_Tab$update, _p101, _p98._1);
-							var updatedTab = _p99._0;
-							var cmd = _p99._1;
-							return {
-								ctor: '_Tuple2',
-								_0: {ctor: '_Tuple2', _0: _p98._0, _1: updatedTab},
-								_1: cmd
-							};
-						},
-						model.indirectTabs));
-				var updatedIndirectTabs = _p96._0;
-				var indirectSubCmds = _p96._1;
-				var _p100 = _elm_lang$core$List$unzip(
-					A2(
-						_elm_lang$core$List$map,
-						_ivanceras$diwata$Views_Window_Tab$update(_p101),
-						model.hasManyTabs));
-				var updatedHasManyTabs = _p100._0;
-				var hasManySubCmds = _p100._1;
-				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					_elm_lang$core$Native_Utils.update(
+		var _p127 = msg;
+		_v52_6:
+		do {
+			switch (_p127.ctor) {
+				case 'Drag':
+					return A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateDrag, session, _p127._0, model);
+				case 'WindowResized':
+					var newModel = _elm_lang$core$Native_Utils.update(
 						model,
-						{hasManyTabs: updatedHasManyTabs, indirectTabs: updatedIndirectTabs}),
-					_elm_lang$core$Platform_Cmd$batch(
-						A2(
-							_elm_lang$core$List$map,
-							_elm_lang$core$Platform_Cmd$map(_ivanceras$diwata$Views_Window_DetailedRecord$TabMsgAll),
-							A2(_elm_lang$core$Basics_ops['++'], hasManySubCmds, indirectSubCmds))));
-			case 'TabMsg':
-				if ((_p94._0._2.ctor === 'ToolbarMsg') && (_p94._0._2._0.ctor === 'ClickedNewButton')) {
-					var _p102 = A2(_elm_lang$core$Debug$log, 'DetailedRecord: Clicked on NewRecordButton in tab:', _p94._0._1.tab.name);
-					return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
-				} else {
-					var _p112 = _p94._0._2;
-					var _p111 = _p94._0._0;
-					var action = model.arenaArg.action;
-					var _p103 = A2(_ivanceras$diwata$Views_Window_Tab$update, _p112, _p94._0._1);
-					var newTabModel = _p103._0;
-					var subCmd = _p103._1;
-					var doRequestPage = function () {
-						var _p104 = action;
-						if (_p104.ctor === 'Select') {
-							return A3(_ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage, _p111, newTabModel, model);
-						} else {
-							return _elm_lang$core$Platform_Cmd$none;
-						}
-					}();
-					var _p105 = function () {
-						var _p106 = _ivanceras$diwata$Views_Window_Tab$pageRequestNeeded(newTabModel);
-						if (_p106 === true) {
-							return A2(
-								_ivanceras$diwata$Util_ops['=>'],
-								_elm_lang$core$Native_Utils.update(
-									newTabModel,
-									{pageRequestInFlight: true}),
-								doRequestPage);
-						} else {
-							return A2(_ivanceras$diwata$Util_ops['=>'], newTabModel, _elm_lang$core$Platform_Cmd$none);
-						}
-					}();
-					var updatedTabModel = _p105._0;
-					var tabCmd = _p105._1;
-					var _p107 = _elm_lang$core$List$unzip(
-						A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateTabModels, _p112, model.hasManyTabs, updatedTabModel));
-					var updatedHasManyTabs = _p107._0;
-					var hasManyCmds = _p107._1;
-					var _p108 = _elm_lang$core$List$unzip(
-						A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabModels, _p112, model.indirectTabs, updatedTabModel));
-					var updatedIndirectTabs = _p108._0;
-					var indirectCmds = _p108._1;
-					return A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{hasManyTabs: updatedHasManyTabs, indirectTabs: updatedIndirectTabs}),
-						_elm_lang$core$Platform_Cmd$batch(
-							A2(
-								_elm_lang$core$Basics_ops['++'],
-								{
-									ctor: '::',
-									_0: tabCmd,
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$core$Platform_Cmd$map,
-											function (tabMsg) {
-												return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
-													{ctor: '_Tuple3', _0: _p111, _1: updatedTabModel, _2: tabMsg});
-											},
-											subCmd),
-										_1: {ctor: '[]'}
-									}
-								},
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									A3(
-										_elm_lang$core$List$map2,
-										F2(
-											function (hasManyModel, hasManyCmd) {
-												return A2(
-													_elm_lang$core$Platform_Cmd$map,
-													function (tabMsg) {
-														return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
-															{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$HasMany, _1: hasManyModel, _2: tabMsg});
-													},
-													hasManyCmd);
-											}),
-										updatedHasManyTabs,
-										hasManyCmds),
-									A3(
-										_elm_lang$core$List$map2,
-										F2(
-											function (_p109, hasManyCmd) {
-												var _p110 = _p109;
-												return A2(
-													_elm_lang$core$Platform_Cmd$map,
-													function (tabMsg) {
-														return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
-															{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$Indirect, _1: _p110._1, _2: tabMsg});
-													},
-													hasManyCmd);
-											}),
-										updatedIndirectTabs,
-										indirectCmds)))));
-				}
-			case 'FieldMsg':
-				if (_p94._0.ctor === 'Detail') {
-					var valueUpdate = A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateFields, _p94._2, _p94._1, model.values);
-					var _p113 = _elm_lang$core$List$unzip(valueUpdate);
-					var updatedFields = _p113._0;
-					var subCmd = _p113._1;
-					return A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{values: updatedFields}),
-						_elm_lang$core$Platform_Cmd$batch(subCmd));
-				} else {
-					var _p120 = _p94._1;
-					var oneOneValueUpdate = A2(
-						_elm_lang$core$List$map,
-						function (_p114) {
-							var _p115 = _p114;
-							var _p117 = _p115._0;
-							if (_elm_lang$core$Native_Utils.eq(_p117, _p120.tab)) {
-								var valueUpdate = A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateFields, _p94._2, _p120, _p115._1);
-								var _p116 = _elm_lang$core$List$unzip(valueUpdate);
-								var updatedValues = _p116._0;
-								var subCmd = _p116._1;
-								return {
-									ctor: '_Tuple2',
-									_0: {ctor: '_Tuple2', _0: _p117, _1: updatedValues},
-									_1: subCmd
-								};
+						{browserSize: _p127._0});
+					var _p128 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, newModel);
+					var updatedModel = _p128._0;
+					var cmd = _p128._1;
+					return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
+				case 'TabMsgAll':
+					return A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateAllTabs, _p127._0, model);
+				case 'TabMsg':
+					switch (_p127._0._2.ctor) {
+						case 'ToolbarMsg':
+							if (_p127._0._2._0.ctor === 'ClickedNewButton') {
+								var _p129 = A2(_elm_lang$core$Debug$log, 'DetailedRecord: Clicked on NewRecordButton in tab:', _p127._0._1.tab.name);
+								return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 							} else {
-								return {
-									ctor: '_Tuple2',
-									_0: {
-										ctor: '_Tuple2',
-										_0: _p117,
-										_1: {ctor: '[]'}
-									},
-									_1: {ctor: '[]'}
-								};
+								break _v52_6;
 							}
-						},
-						model.oneOneValues);
-					var _p118 = _elm_lang$core$List$unzip(oneOneValueUpdate);
-					var updatedOneOneValues = _p118._0;
-					var subCmds = _p118._1;
-					var subCmd = _elm_lang$core$List$concat(subCmds);
-					var _p119 = A2(_elm_lang$core$Debug$log, 'Field changed in OneOne in Tab: ', _p120.tab.name);
-					return A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{oneOneValues: updatedOneOneValues}),
-						_elm_lang$core$Platform_Cmd$batch(subCmd));
-				}
-			case 'LookupNextPageReceived':
-				var updatedLookup = A3(_ivanceras$diwata$Data_Window_Lookup$addPage, _p94._0._0, _p94._0._1, model.lookup);
-				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{lookup: updatedLookup, dropdownPageRequestInFlight: false}),
-					_elm_lang$core$Platform_Cmd$none);
-			case 'LookupNextPageErrored':
-				return A2(
-					_elm_lang$core$Native_Utils.crash(
-						'Views.Window.DetailedRecord',
-						{
-							start: {line: 1359, column: 13},
-							end: {line: 1359, column: 24}
-						}),
-					'Error loading next page lookup',
-					_p94._0);
-			case 'ChangeActiveTab':
-				var arenaArg = model.arenaArg;
-				var newArenaArg = _elm_lang$core$Native_Utils.update(
-					arenaArg,
-					{
-						sectionTable: _elm_lang$core$Maybe$Just(
-							{ctor: '_Tuple2', _0: _p94._0, _1: _p94._1}),
-						sectionViaLinker: _p94._2
-					});
-				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{arenaArg: newArenaArg}),
-					_elm_lang$core$Platform_Cmd$batch(
-						{ctor: '[]'}));
-			case 'ToolbarMsg':
-				switch (_p94._0.ctor) {
-					case 'ClickedSaveOnDetail':
-						var tab = model.window.mainTab;
-						var tableName = tab.tableName;
-						var settings = model.settings;
-						var changeset = _ivanceras$diwata$Views_Window_DetailedRecord$getChangeset(model);
-						var _p121 = A2(_elm_lang$core$Debug$log, 'Changeset:', changeset);
-						var json = A2(
-							_elm_lang$core$Json_Encode$encode,
-							4,
-							_ivanceras$diwata$Data_DataContainer$changesetEncoder(changeset));
-						var _p122 = A2(_elm_lang$core$Debug$log, 'json', json);
-						return A2(
-							_ivanceras$diwata$Util_ops['=>'],
-							model,
-							A3(_ivanceras$diwata$Views_Window_DetailedRecord$requestUpdateRecords, settings, tableName, changeset));
-					case 'ClickedCancelOnDetail':
-						var _p123 = _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnOneOneValues(model);
-						var updatedOneOneValues = _p123._0;
-						var oneOneCmd = _p123._1;
-						var _p124 = _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnValues(model);
-						var updatedValues = _p124._0;
-						var subCmd = _p124._1;
-						var _p125 = A2(_elm_lang$core$Debug$log, 'Cancel changes on this record', '');
+						case 'SearchboxMsg':
+							return A4(
+								_ivanceras$diwata$Views_Window_DetailedRecord$updateAndRefreshTab,
+								_p127._0._0,
+								_p127._0._1,
+								A2(_ivanceras$diwata$Views_Window_Tab$SearchboxMsg, _p127._0._2._0, _p127._0._2._1),
+								model);
+						case 'ToggleSort':
+							return A4(
+								_ivanceras$diwata$Views_Window_DetailedRecord$updateAndRefreshTab,
+								_p127._0._0,
+								_p127._0._1,
+								_ivanceras$diwata$Views_Window_Tab$ToggleSort(_p127._0._2._0),
+								model);
+						default:
+							break _v52_6;
+					}
+				case 'FieldMsg':
+					if (_p127._0.ctor === 'Detail') {
+						var valueUpdate = A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateFields, _p127._2, _p127._1, model.values);
+						var _p131 = _elm_lang$core$List$unzip(valueUpdate);
+						var updatedFields = _p131._0;
+						var subCmd = _p131._1;
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
 								model,
-								{values: updatedValues, oneOneValues: updatedOneOneValues}),
-							_elm_lang$core$Platform_Cmd$batch(
-								A2(_elm_lang$core$Basics_ops['++'], subCmd, oneOneCmd)));
-					default:
-						return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
-				}
-			case 'Maximize':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{isMaximized: _p94._0});
-				var _p126 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, newModel);
-				var updatedModel = _p126._0;
-				var cmd = _p126._1;
-				return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
-			case 'ClickedCloseButton':
-				return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
-			case 'RecordChangesetUpdated':
-				var _p128 = _p94._0;
-				var _p127 = A2(_elm_lang$core$Debug$log, 'updated record', _p128);
-				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					_elm_lang$core$Native_Utils.update(
+								{values: updatedFields}),
+							_elm_lang$core$Platform_Cmd$batch(subCmd));
+					} else {
+						var _p138 = _p127._1;
+						var oneOneValueUpdate = A2(
+							_elm_lang$core$List$map,
+							function (_p132) {
+								var _p133 = _p132;
+								var _p135 = _p133._0;
+								if (_elm_lang$core$Native_Utils.eq(_p135, _p138.tab)) {
+									var valueUpdate = A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateFields, _p127._2, _p138, _p133._1);
+									var _p134 = _elm_lang$core$List$unzip(valueUpdate);
+									var updatedValues = _p134._0;
+									var subCmd = _p134._1;
+									return {
+										ctor: '_Tuple2',
+										_0: {ctor: '_Tuple2', _0: _p135, _1: updatedValues},
+										_1: subCmd
+									};
+								} else {
+									return {
+										ctor: '_Tuple2',
+										_0: {
+											ctor: '_Tuple2',
+											_0: _p135,
+											_1: {ctor: '[]'}
+										},
+										_1: {ctor: '[]'}
+									};
+								}
+							},
+							model.oneOneValues);
+						var _p136 = _elm_lang$core$List$unzip(oneOneValueUpdate);
+						var updatedOneOneValues = _p136._0;
+						var subCmds = _p136._1;
+						var subCmd = _elm_lang$core$List$concat(subCmds);
+						var _p137 = A2(_elm_lang$core$Debug$log, 'Field changed in OneOne in Tab: ', _p138.tab.name);
+						return A2(
+							_ivanceras$diwata$Util_ops['=>'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{oneOneValues: updatedOneOneValues}),
+							_elm_lang$core$Platform_Cmd$batch(subCmd));
+					}
+				case 'LookupNextPageReceived':
+					var updatedLookup = A3(_ivanceras$diwata$Data_Window_Lookup$addPage, _p127._0._0, _p127._0._1, model.lookup);
+					var updatedModel = _elm_lang$core$Native_Utils.update(
 						model,
+						{lookup: updatedLookup, dropdownPageRequestInFlight: false});
+					return A2(
+						_ivanceras$diwata$Views_Window_DetailedRecord$updateAllFields,
+						_ivanceras$diwata$Views_Window_Field$LookupChanged(updatedLookup),
+						updatedModel);
+				case 'LookupNextPageErrored':
+					return A2(
+						_elm_lang$core$Native_Utils.crash(
+							'Views.Window.DetailedRecord',
+							{
+								start: {line: 1291, column: 13},
+								end: {line: 1291, column: 24}
+							}),
+						'Error loading next page lookup',
+						_p127._0);
+				case 'ChangeActiveTab':
+					var arenaArg = model.arenaArg;
+					var newArenaArg = _elm_lang$core$Native_Utils.update(
+						arenaArg,
 						{
-							selectedRow: _elm_lang$core$Maybe$Just(_p128)
-						}),
-					_elm_lang$core$Platform_Cmd$none);
-			default:
-				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					_elm_lang$core$Native_Utils.update(
+							sectionTable: _elm_lang$core$Maybe$Just(
+								{ctor: '_Tuple2', _0: _p127._0, _1: _p127._1}),
+							sectionViaLinker: _p127._2
+						});
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{arenaArg: newArenaArg}),
+						_elm_lang$core$Platform_Cmd$batch(
+							{ctor: '[]'}));
+				case 'ToolbarMsg':
+					switch (_p127._0.ctor) {
+						case 'ClickedSaveOnDetail':
+							var tab = model.window.mainTab;
+							var tableName = tab.tableName;
+							var settings = model.settings;
+							var changeset = _ivanceras$diwata$Views_Window_DetailedRecord$getChangeset(model);
+							var _p139 = A2(_elm_lang$core$Debug$log, 'Changeset:', changeset);
+							var json = A2(
+								_elm_lang$core$Json_Encode$encode,
+								4,
+								_ivanceras$diwata$Data_DataContainer$changesetEncoder(changeset));
+							var _p140 = A2(_elm_lang$core$Debug$log, 'json', json);
+							return A2(
+								_ivanceras$diwata$Util_ops['=>'],
+								model,
+								A3(_ivanceras$diwata$Views_Window_DetailedRecord$requestUpdateRecords, settings, tableName, changeset));
+						case 'ClickedCancelOnDetail':
+							var _p141 = _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnOneOneValues(model);
+							var updatedOneOneValues = _p141._0;
+							var oneOneCmd = _p141._1;
+							var _p142 = _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnValues(model);
+							var updatedValues = _p142._0;
+							var subCmd = _p142._1;
+							var _p143 = A2(_elm_lang$core$Debug$log, 'Cancel changes on this record', '');
+							return A2(
+								_ivanceras$diwata$Util_ops['=>'],
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{values: updatedValues, oneOneValues: updatedOneOneValues}),
+								_elm_lang$core$Platform_Cmd$batch(
+									A2(_elm_lang$core$Basics_ops['++'], subCmd, oneOneCmd)));
+						default:
+							return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+					}
+				case 'Maximize':
+					var newModel = _elm_lang$core$Native_Utils.update(
 						model,
-						{
-							errors: A2(
-								_elm_lang$core$Basics_ops['++'],
-								model.errors,
-								{
-									ctor: '::',
-									_0: _p94._0,
-									_1: {ctor: '[]'}
-								})
-						}),
-					_elm_lang$core$Platform_Cmd$none);
-		}
+						{isMaximized: _p127._0});
+					var _p144 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, newModel);
+					var updatedModel = _p144._0;
+					var cmd = _p144._1;
+					return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
+				case 'ClickedCloseButton':
+					return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+				case 'RecordChangesetUpdated':
+					var _p146 = _p127._0;
+					var _p145 = A2(_elm_lang$core$Debug$log, 'updated record', _p146);
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								selectedRow: _elm_lang$core$Maybe$Just(_p146)
+							}),
+						_elm_lang$core$Platform_Cmd$none);
+				case 'RecordChangesetUpdateError':
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								errors: A2(
+									_elm_lang$core$Basics_ops['++'],
+									model.errors,
+									{
+										ctor: '::',
+										_0: _p127._0,
+										_1: {ctor: '[]'}
+									})
+							}),
+						_elm_lang$core$Platform_Cmd$none);
+				case 'ViewScrolled':
+					var _p147 = _p127._0;
+					var updatedModel = _elm_lang$core$Native_Utils.update(
+						model,
+						{scroll: _p147});
+					return A2(
+						_ivanceras$diwata$Views_Window_DetailedRecord$updateAllFields,
+						_ivanceras$diwata$Views_Window_Field$ContainerScrollChanged(_p147),
+						updatedModel);
+				case 'RefreshTabPageReceived':
+					var _p148 = A4(
+						_ivanceras$diwata$Views_Window_DetailedRecord$updateTab,
+						_p127._0._0,
+						_p127._0._1,
+						_ivanceras$diwata$Views_Window_Tab$RefreshPageReceived(_p127._0._2),
+						model);
+					var updatedTabModel = _p148._0;
+					var updatedModel = _p148._1;
+					var cmd = _p148._2;
+					return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
+				default:
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								errors: A2(
+									_elm_lang$core$Basics_ops['++'],
+									model.errors,
+									{
+										ctor: '::',
+										_0: _p127._0,
+										_1: {ctor: '[]'}
+									})
+							}),
+						_elm_lang$core$Platform_Cmd$none);
+			}
+		} while(false);
+		var _p130 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$updateTab, _p127._0._0, _p127._0._1, _p127._0._2, model);
+		var updatedTabMode = _p130._0;
+		var updatedModel = _p130._1;
+		var cmd = _p130._2;
+		return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F3(
 	function (session, drag, model) {
-		var _p129 = drag;
-		switch (_p129.ctor) {
+		var _p149 = drag;
+		switch (_p149.ctor) {
 			case 'Start':
-				var _p130 = _p129._0;
+				var _p150 = _p149._0;
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
 						drag: _elm_lang$core$Maybe$Just(
-							A2(_ivanceras$diwata$Views_Window_DetailedRecord$DragPosition, _p130, _p130))
+							A2(_ivanceras$diwata$Views_Window_DetailedRecord$DragPosition, _p150, _p150))
 					});
 				return A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, newModel);
 			case 'At':
@@ -32341,9 +33691,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F3(
 					{
 						drag: A2(
 							_elm_lang$core$Maybe$map,
-							function (_p131) {
-								var _p132 = _p131;
-								return A2(_ivanceras$diwata$Views_Window_DetailedRecord$DragPosition, _p132.start, _p129._0);
+							function (_p151) {
+								var _p152 = _p151;
+								return A2(_ivanceras$diwata$Views_Window_DetailedRecord$DragPosition, _p152.start, _p149._0);
 							},
 							model.drag)
 					});
@@ -32363,9 +33713,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F3(
 				var updatedModel1 = _elm_lang$core$Native_Utils.update(
 					updatedModel0,
 					{arenaArg: updatedArenaArg});
-				var _p133 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, updatedModel1);
-				var updatedModel2 = _p133._0;
-				var subCmd = _p133._1;
+				var _p153 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, updatedModel1);
+				var updatedModel2 = _p153._0;
+				var subCmd = _p153._1;
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					updatedModel2,
@@ -32379,14 +33729,14 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F3(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$updateSizes = F2(
 	function (session, model) {
-		var _p134 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
-		var allotedWidth = _p134._0;
-		var allotedHeight = _p134._1;
+		var _p154 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
+		var allotedWidth = _p154._0;
+		var allotedHeight = _p154._1;
 		var window = model.window;
 		var realPosition = _ivanceras$diwata$Views_Window_DetailedRecord$getPosition(model);
-		var _p135 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights, window, realPosition, model.isMaximized, model.browserSize);
-		var mainRecordHeight = _p135._0;
-		var detailTabHeight = _p135._1;
+		var _p155 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights, window, realPosition, model.isMaximized, model.browserSize);
+		var mainRecordHeight = _p155._0;
+		var detailTabHeight = _p155._1;
 		var tabSize = {ctor: '_Tuple2', _0: allotedWidth, _1: detailTabHeight};
 		return A3(
 			_ivanceras$diwata$Views_Window_DetailedRecord$update,
@@ -32397,6 +33747,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateSizes = F2(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$WindowResized = function (a) {
 	return {ctor: 'WindowResized', _0: a};
+};
+var _ivanceras$diwata$Views_Window_DetailedRecord$ViewScrolled = function (a) {
+	return {ctor: 'ViewScrolled', _0: a};
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$Drag = function (a) {
 	return {ctor: 'Drag', _0: a};
@@ -32412,9 +33765,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$onMouseDown = A2(
 		},
 		_elm_lang$mouse$Mouse$position));
 var _ivanceras$diwata$Views_Window_DetailedRecord$view = function (model) {
-	var _p136 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
-	var allotedWidth = _p136._0;
-	var allotedHeight = _p136._1;
+	var _p156 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
+	var allotedWidth = _p156._0;
+	var allotedHeight = _p156._1;
 	var toolbarModel = {
 		selected: 0,
 		modified: _ivanceras$diwata$Views_Window_DetailedRecord$isModified(model) ? 1 : 0,
@@ -32428,9 +33781,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$view = function (model) {
 	var realPosition = _ivanceras$diwata$Views_Window_DetailedRecord$getPosition(model);
 	var window = model.window;
 	var mainTab = window.mainTab;
-	var _p137 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights, window, realPosition, isMaximized, browserSize);
-	var mainRecordHeight = _p137._0;
-	var detailTabHeight = _p137._1;
+	var _p157 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights, window, realPosition, isMaximized, browserSize);
+	var mainRecordHeight = _p157._0;
+	var detailTabHeight = _p157._1;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -32537,12 +33890,16 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$view = function (model) {
 									},
 									_1: {ctor: '[]'}
 								}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: _ivanceras$diwata$Util$onScroll(_ivanceras$diwata$Views_Window_DetailedRecord$ViewScrolled),
+								_1: {ctor: '[]'}
+							}
 						}
 					},
 					{
 						ctor: '::',
-						_0: A4(_ivanceras$diwata$Views_Window_DetailedRecord$cardViewRecord, _ivanceras$diwata$Views_Window_DetailedRecord$Detail, model.values, mainTab, model),
+						_0: A4(_ivanceras$diwata$Views_Window_DetailedRecord$cardViewRecord, _ivanceras$diwata$Data_Window_Field$Detail, model.values, mainTab, model),
 						_1: {
 							ctor: '::',
 							_0: _ivanceras$diwata$Views_Window_DetailedRecord$viewOneOneTabs(model),
@@ -32598,8 +33955,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$view = function (model) {
 		});
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$dividerHeightSubscriptions = function (model) {
-	var _p138 = model.drag;
-	if (_p138.ctor === 'Nothing') {
+	var _p158 = model.drag;
+	if (_p158.ctor === 'Nothing') {
 		return _elm_lang$core$Platform_Sub$none;
 	} else {
 		return _elm_lang$core$Platform_Sub$batch(
@@ -32952,6 +34309,23 @@ var _ivanceras$diwata$Page_WindowArena$viewLoadingIndicator = function (model) {
 			}));
 };
 var _ivanceras$diwata$Page_WindowArena$viewBanner = function (model) {
+	var _p0 = function () {
+		var _p1 = model.settings.dbName;
+		if (_p1.ctor === 'Just') {
+			var _p3 = _p1._0;
+			var db = _elm_community$string_extra$String_Extra$toTitleCase(_p3.name);
+			var _p2 = _p3.description;
+			if (_p2.ctor === 'Just') {
+				return {ctor: '_Tuple2', _0: db, _1: _p2._0};
+			} else {
+				return {ctor: '_Tuple2', _0: db, _1: 'Powered by Diwata - a user friendly database interface'};
+			}
+		} else {
+			return {ctor: '_Tuple2', _0: 'Diwata', _1: 'a user-friendly database interface'};
+		}
+	}();
+	var dbName = _p0._0;
+	var dbDescription = _p0._1;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -32983,12 +34357,12 @@ var _ivanceras$diwata$Page_WindowArena$viewBanner = function (model) {
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Diwata'),
+							_0: _elm_lang$html$Html$text(dbName),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('a user-friendly database interface'),
+						_0: _elm_lang$html$Html$text(dbDescription),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -33001,8 +34375,8 @@ var _ivanceras$diwata$Page_WindowArena$viewBanner = function (model) {
 };
 var _ivanceras$diwata$Page_WindowArena$viewTabNames = function (model) {
 	var inDetail = _ivanceras$diwata$Util$isJust(model.selectedRow);
-	var _p0 = model.activeWindow;
-	if (_p0.ctor === 'Just') {
+	var _p4 = model.activeWindow;
+	if (_p4.ctor === 'Just') {
 		return A2(
 			_elm_lang$html$Html$a,
 			{
@@ -33026,7 +34400,7 @@ var _ivanceras$diwata$Page_WindowArena$viewTabNames = function (model) {
 			},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text(_p0._0.mainTab.tab.name),
+				_0: _elm_lang$html$Html$text(_p4._0.mainTab.tab.name),
 				_1: {ctor: '[]'}
 			});
 	} else {
@@ -33044,7 +34418,11 @@ var _ivanceras$diwata$Page_WindowArena$handleLoadError = function (e) {
 };
 var _ivanceras$diwata$Page_WindowArena$init = F3(
 	function (settings, session, arenaArg) {
-		var _p1 = A2(_elm_lang$core$Debug$log, 'action is:', arenaArg.action);
+		var _p5 = A2(_elm_lang$core$Debug$log, 'action is:', arenaArg.action);
+		var getDbName = A2(
+			_elm_lang$core$Task$mapError,
+			_ivanceras$diwata$Page_WindowArena$handleLoadError,
+			_ivanceras$diwata$Request_Auth$dbName(settings));
 		var tableName = arenaArg.tableName;
 		var loadWindowList = A2(
 			_elm_lang$core$Task$mapError,
@@ -33057,8 +34435,8 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 			},
 			session.user);
 		var loadWindow = function () {
-			var _p2 = tableName;
-			if (_p2.ctor === 'Just') {
+			var _p6 = tableName;
+			if (_p6.ctor === 'Just') {
 				return A2(
 					_elm_lang$core$Task$mapError,
 					_ivanceras$diwata$Page_WindowArena$handleLoadError,
@@ -33066,26 +34444,26 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 						_elm_lang$core$Task$map,
 						_elm_lang$core$Maybe$Just,
 						_elm_lang$http$Http$toTask(
-							A3(_ivanceras$diwata$Request_Window$get, settings, maybeAuthToken, _p2._0))));
+							A3(_ivanceras$diwata$Request_Window$get, settings, maybeAuthToken, _p6._0))));
 			} else {
 				return _elm_lang$core$Task$succeed(_elm_lang$core$Maybe$Nothing);
 			}
 		}();
 		var loadActiveWindow = function () {
-			var _p3 = tableName;
-			if (_p3.ctor === 'Just') {
+			var _p7 = tableName;
+			if (_p7.ctor === 'Just') {
 				return A2(
 					_elm_lang$core$Task$andThen,
 					function (window) {
-						var _p4 = window;
-						if (_p4.ctor === 'Just') {
+						var _p8 = window;
+						if (_p8.ctor === 'Just') {
 							return A2(
 								_elm_lang$core$Task$mapError,
 								_ivanceras$diwata$Page_WindowArena$handleLoadError,
 								A2(
 									_elm_lang$core$Task$map,
 									_elm_lang$core$Maybe$Just,
-									A5(_ivanceras$diwata$Views_Window$init, settings, session, _p3._0, _p4._0, arenaArg)));
+									A5(_ivanceras$diwata$Views_Window$init, settings, session, _p7._0, _p8._0, arenaArg)));
 						} else {
 							return _elm_lang$core$Task$succeed(_elm_lang$core$Maybe$Nothing);
 						}
@@ -33097,15 +34475,15 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 		}();
 		var isDetailedRecordMaximized = _ivanceras$diwata$Constant$isDetailedRecordMaximized;
 		var loadSelectedRecord = function () {
-			var _p5 = tableName;
-			if (_p5.ctor === 'Just') {
+			var _p9 = tableName;
+			if (_p9.ctor === 'Just') {
 				return A2(
 					_elm_lang$core$Task$andThen,
 					function (window) {
-						var _p6 = window;
-						if (_p6.ctor === 'Just') {
-							var _p7 = arenaArg.action;
-							if (_p7.ctor === 'ListPage') {
+						var _p10 = window;
+						if (_p10.ctor === 'Just') {
+							var _p11 = arenaArg.action;
+							if (_p11.ctor === 'ListPage') {
 								return _elm_lang$core$Task$succeed(_elm_lang$core$Maybe$Nothing);
 							} else {
 								return A2(
@@ -33114,7 +34492,7 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 									A2(
 										_elm_lang$core$Task$map,
 										_elm_lang$core$Maybe$Just,
-										A6(_ivanceras$diwata$Views_Window_DetailedRecord$init, isDetailedRecordMaximized, settings, _p5._0, arenaArg.action, arenaArg, _p6._0)));
+										A6(_ivanceras$diwata$Views_Window_DetailedRecord$init, isDetailedRecordMaximized, settings, _p9._0, arenaArg.action, arenaArg, _p10._0)));
 							}
 						} else {
 							return _elm_lang$core$Task$succeed(_elm_lang$core$Maybe$Nothing);
@@ -33125,11 +34503,11 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 				return _elm_lang$core$Task$succeed(_elm_lang$core$Maybe$Nothing);
 			}
 		}();
-		var _p8 = A2(_elm_lang$core$Debug$log, 'window arena: ', arenaArg);
-		return A4(
-			_elm_lang$core$Task$map3,
-			F3(
-				function (activeWindow, groupedWindow, selectedRow) {
+		var _p12 = A2(_elm_lang$core$Debug$log, 'window arena: ', arenaArg);
+		return A5(
+			_elm_lang$core$Task$map4,
+			F4(
+				function (activeWindow, groupedWindow, selectedRow, dbName) {
 					return {
 						activeWindow: activeWindow,
 						groupedWindow: groupedWindow,
@@ -33143,7 +34521,8 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 				}),
 			loadActiveWindow,
 			loadWindowList,
-			loadSelectedRecord);
+			loadSelectedRecord,
+			getDbName);
 	});
 var _ivanceras$diwata$Page_WindowArena$Model = F8(
 	function (a, b, c, d, e, f, g, h) {
@@ -33161,12 +34540,12 @@ var _ivanceras$diwata$Page_WindowArena$DetailedRecordMsg = function (a) {
 };
 var _ivanceras$diwata$Page_WindowArena$viewSelectedRow = F2(
 	function (session, model) {
-		var _p9 = model.selectedRow;
-		if (_p9.ctor === 'Just') {
+		var _p13 = model.selectedRow;
+		if (_p13.ctor === 'Just') {
 			return A2(
 				_elm_lang$html$Html$map,
 				_ivanceras$diwata$Page_WindowArena$DetailedRecordMsg,
-				_ivanceras$diwata$Views_Window_DetailedRecord$view(_p9._0));
+				_ivanceras$diwata$Views_Window_DetailedRecord$view(_p13._0));
 		} else {
 			return _elm_lang$html$Html$text('');
 		}
@@ -33176,28 +34555,28 @@ var _ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForDetailedRecord 
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p10 = result;
-				if (_p10.ctor === 'Ok') {
-					var recordList = _ivanceras$diwata$Data_Window_Record$rowsToRecordList(_p10._0);
+				var _p14 = result;
+				if (_p14.ctor === 'Ok') {
+					var recordList = _ivanceras$diwata$Data_Window_Record$rowsToRecordList(_p14._0);
 					return _ivanceras$diwata$Page_WindowArena$DetailedRecordMsg(
 						_ivanceras$diwata$Views_Window_DetailedRecord$LookupNextPageReceived(
 							{ctor: '_Tuple2', _0: sourceTable, _1: recordList}));
 				} else {
 					return _ivanceras$diwata$Page_WindowArena$DetailedRecordMsg(
 						_ivanceras$diwata$Views_Window_DetailedRecord$LookupNextPageErrored(
-							_elm_lang$core$Basics$toString(_p10._0)));
+							_elm_lang$core$Basics$toString(_p14._0)));
 				}
 			},
 			_elm_lang$http$Http$toTask(
 				A4(_ivanceras$diwata$Request_Window_Records$lookupPage, settings, currentPage + 1, _elm_lang$core$Maybe$Nothing, sourceTable)));
 	});
 var _ivanceras$diwata$Page_WindowArena$detailedRecordSubscriptions = function (model) {
-	var _p11 = model.selectedRow;
-	if (_p11.ctor === 'Just') {
+	var _p15 = model.selectedRow;
+	if (_p15.ctor === 'Just') {
 		return A2(
 			_elm_lang$core$Platform_Sub$map,
 			_ivanceras$diwata$Page_WindowArena$DetailedRecordMsg,
-			_ivanceras$diwata$Views_Window_DetailedRecord$subscriptions(_p11._0));
+			_ivanceras$diwata$Views_Window_DetailedRecord$subscriptions(_p15._0));
 	} else {
 		return _elm_lang$core$Platform_Sub$none;
 	}
@@ -33207,8 +34586,8 @@ var _ivanceras$diwata$Page_WindowArena$WindowMsg = function (a) {
 };
 var _ivanceras$diwata$Page_WindowArena$viewWindow = F2(
 	function (session, activeWindow) {
-		var _p12 = activeWindow;
-		if (_p12.ctor === 'Just') {
+		var _p16 = activeWindow;
+		if (_p16.ctor === 'Just') {
 			return A2(
 				_elm_lang$html$Html$div,
 				{
@@ -33221,7 +34600,7 @@ var _ivanceras$diwata$Page_WindowArena$viewWindow = F2(
 					_0: A2(
 						_elm_lang$html$Html$map,
 						_ivanceras$diwata$Page_WindowArena$WindowMsg,
-						A2(_ivanceras$diwata$Views_Window$view, session, _p12._0)),
+						A2(_ivanceras$diwata$Views_Window$view, session, _p16._0)),
 					_1: {ctor: '[]'}
 				});
 		} else {
@@ -33230,12 +34609,12 @@ var _ivanceras$diwata$Page_WindowArena$viewWindow = F2(
 	});
 var _ivanceras$diwata$Page_WindowArena$viewWindowOrSelectedRow = F2(
 	function (session, model) {
-		var _p13 = model.selectedRow;
-		if (_p13.ctor === 'Just') {
+		var _p17 = model.selectedRow;
+		if (_p17.ctor === 'Just') {
 			return A2(
 				_elm_lang$html$Html$map,
 				_ivanceras$diwata$Page_WindowArena$DetailedRecordMsg,
-				_ivanceras$diwata$Views_Window_DetailedRecord$view(_p13._0));
+				_ivanceras$diwata$Views_Window_DetailedRecord$view(_p17._0));
 		} else {
 			return A2(_ivanceras$diwata$Page_WindowArena$viewWindow, session, model.activeWindow);
 		}
@@ -33245,28 +34624,28 @@ var _ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForWindow = F3(
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p14 = result;
-				if (_p14.ctor === 'Ok') {
-					var recordList = _ivanceras$diwata$Data_Window_Record$rowsToRecordList(_p14._0);
+				var _p18 = result;
+				if (_p18.ctor === 'Ok') {
+					var recordList = _ivanceras$diwata$Data_Window_Record$rowsToRecordList(_p18._0);
 					return _ivanceras$diwata$Page_WindowArena$WindowMsg(
 						_ivanceras$diwata$Views_Window$LookupNextPageReceived(
 							{ctor: '_Tuple2', _0: sourceTable, _1: recordList}));
 				} else {
 					return _ivanceras$diwata$Page_WindowArena$WindowMsg(
 						_ivanceras$diwata$Views_Window$LookupNextPageErrored(
-							_elm_lang$core$Basics$toString(_p14._0)));
+							_elm_lang$core$Basics$toString(_p18._0)));
 				}
 			},
 			_elm_lang$http$Http$toTask(
 				A4(_ivanceras$diwata$Request_Window_Records$lookupPage, settings, currentPage + 1, _elm_lang$core$Maybe$Nothing, sourceTable)));
 	});
 var _ivanceras$diwata$Page_WindowArena$windowSubscriptions = function (model) {
-	var _p15 = model.activeWindow;
-	if (_p15.ctor === 'Just') {
+	var _p19 = model.activeWindow;
+	if (_p19.ctor === 'Just') {
 		return A2(
 			_elm_lang$core$Platform_Sub$map,
 			_ivanceras$diwata$Page_WindowArena$WindowMsg,
-			_ivanceras$diwata$Views_Window$subscriptions(_p15._0));
+			_ivanceras$diwata$Views_Window$subscriptions(_p19._0));
 	} else {
 		return _elm_lang$core$Platform_Sub$none;
 	}
@@ -33293,8 +34672,8 @@ var _ivanceras$diwata$Page_WindowArena$GroupedWindowMsg = function (a) {
 var _ivanceras$diwata$Page_WindowArena$view = F2(
 	function (session, model) {
 		var recordSelected = function () {
-			var _p16 = model.selectedRow;
-			if (_p16.ctor === 'Just') {
+			var _p20 = model.selectedRow;
+			if (_p20.ctor === 'Just') {
 				return true;
 			} else {
 				return false;
@@ -33406,16 +34785,16 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 	function (session, msg, model) {
 		var arenaArg = model.arenaArg;
 		var isDetailedRecordMaximized = model.isDetailedRecordMaximized;
-		var _p17 = msg;
-		_v15_11:
+		var _p21 = msg;
+		_v17_11:
 		do {
-			_v15_7:
+			_v17_7:
 			do {
-				switch (_p17.ctor) {
+				switch (_p21.ctor) {
 					case 'GroupedWindowMsg':
-						var _p18 = A3(_ivanceras$diwata$Views_Window_GroupedWindow$update, session, _p17._0, model.groupedWindow);
-						var newFeed = _p18._0;
-						var subCmd = _p18._1;
+						var _p22 = A3(_ivanceras$diwata$Views_Window_GroupedWindow$update, session, _p21._0, model.groupedWindow);
+						var newFeed = _p22._0;
+						var subCmd = _p22._1;
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
@@ -33428,7 +34807,7 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 							_elm_lang$core$Native_Utils.update(
 								model,
 								{
-									selectedRow: _elm_lang$core$Maybe$Just(_p17._0._0),
+									selectedRow: _elm_lang$core$Maybe$Just(_p21._0._0),
 									loadingSelectedRecord: false
 								}),
 							_elm_lang$core$Platform_Cmd$none);
@@ -33443,28 +34822,28 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 								}),
 							_elm_lang$core$Platform_Cmd$none);
 					case 'WindowMsg':
-						if (_p17._0.ctor === 'TabMsg') {
-							switch (_p17._0._0.ctor) {
+						if (_p21._0.ctor === 'TabMsg') {
+							switch (_p21._0._0.ctor) {
 								case 'RowMsg':
-									switch (_p17._0._0._1.ctor) {
+									switch (_p21._0._0._1.ctor) {
 										case 'ClickedCopyRecord':
-											var _p22 = _p17._0._0._0;
+											var _p26 = _p21._0._0._0;
 											var activeWindow = function () {
-												var _p19 = model.activeWindow;
-												if (_p19.ctor === 'Just') {
-													return _p19._0.window;
+												var _p23 = model.activeWindow;
+												if (_p23.ctor === 'Just') {
+													return _p23._0.window;
 												} else {
 													return _elm_lang$core$Native_Utils.crashCase(
 														'Page.WindowArena',
 														{
-															start: {line: 327, column: 21},
-															end: {line: 332, column: 74}
+															start: {line: 353, column: 21},
+															end: {line: 358, column: 74}
 														},
-														_p19)('There should be an activeWindow');
+														_p23)('There should be an activeWindow');
 												}
 											}();
-											var tableName = _p22.tab.tableName;
-											var recordIdString = _ivanceras$diwata$Data_Window_Record$idToString(_p22.recordId);
+											var tableName = _p26.tab.tableName;
+											var recordIdString = _ivanceras$diwata$Data_Window_Record$idToString(_p26.recordId);
 											var copyArenaArg = _elm_lang$core$Native_Utils.update(
 												arenaArg,
 												{
@@ -33481,46 +34860,6 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 											var initSelectedRowTask = A2(
 												_elm_lang$core$Task$attempt,
 												function (result) {
-													var _p21 = result;
-													if (_p21.ctor === 'Ok') {
-														return _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow(
-															{
-																ctor: '_Tuple2',
-																_0: _p21._0,
-																_1: _elm_lang$core$Maybe$Just(_p22.recordId)
-															});
-													} else {
-														return _ivanceras$diwata$Page_WindowArena$FailedToInitializeSelectedRow;
-													}
-												},
-												initSelectedRow);
-											return A2(
-												_ivanceras$diwata$Util_ops['=>'],
-												_elm_lang$core$Native_Utils.update(
-													model,
-													{loadingSelectedRecord: true}),
-												initSelectedRowTask);
-										case 'ClickedDetailedLink':
-											var _p26 = _p17._0._0._0;
-											var activeWindow = function () {
-												var _p23 = model.activeWindow;
-												if (_p23.ctor === 'Just') {
-													return _p23._0.window;
-												} else {
-													return _elm_lang$core$Native_Utils.crashCase(
-														'Page.WindowArena',
-														{
-															start: {line: 364, column: 21},
-															end: {line: 369, column: 74}
-														},
-														_p23)('There should be an activeWindow');
-												}
-											}();
-											var tableName = _p26.tab.tableName;
-											var initSelectedRow = A6(_ivanceras$diwata$Views_Window_DetailedRecord$init, isDetailedRecordMaximized, model.settings, tableName, arenaArg.action, arenaArg, activeWindow);
-											var initSelectedRowTask = A2(
-												_elm_lang$core$Task$attempt,
-												function (result) {
 													var _p25 = result;
 													if (_p25.ctor === 'Ok') {
 														return _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow(
@@ -33534,7 +34873,47 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 													}
 												},
 												initSelectedRow);
-											var recordIdString = _ivanceras$diwata$Data_Window_Record$idToString(_p26.recordId);
+											return A2(
+												_ivanceras$diwata$Util_ops['=>'],
+												_elm_lang$core$Native_Utils.update(
+													model,
+													{loadingSelectedRecord: true}),
+												initSelectedRowTask);
+										case 'ClickedDetailedLink':
+											var _p30 = _p21._0._0._0;
+											var activeWindow = function () {
+												var _p27 = model.activeWindow;
+												if (_p27.ctor === 'Just') {
+													return _p27._0.window;
+												} else {
+													return _elm_lang$core$Native_Utils.crashCase(
+														'Page.WindowArena',
+														{
+															start: {line: 390, column: 21},
+															end: {line: 395, column: 74}
+														},
+														_p27)('There should be an activeWindow');
+												}
+											}();
+											var tableName = _p30.tab.tableName;
+											var initSelectedRow = A6(_ivanceras$diwata$Views_Window_DetailedRecord$init, isDetailedRecordMaximized, model.settings, tableName, arenaArg.action, arenaArg, activeWindow);
+											var initSelectedRowTask = A2(
+												_elm_lang$core$Task$attempt,
+												function (result) {
+													var _p29 = result;
+													if (_p29.ctor === 'Ok') {
+														return _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow(
+															{
+																ctor: '_Tuple2',
+																_0: _p29._0,
+																_1: _elm_lang$core$Maybe$Just(_p30.recordId)
+															});
+													} else {
+														return _ivanceras$diwata$Page_WindowArena$FailedToInitializeSelectedRow;
+													}
+												},
+												initSelectedRow);
+											var recordIdString = _ivanceras$diwata$Data_Window_Record$idToString(_p30.recordId);
 											return A2(
 												_ivanceras$diwata$Util_ops['=>'],
 												_elm_lang$core$Native_Utils.update(
@@ -33542,32 +34921,32 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 													{loadingSelectedRecord: true}),
 												initSelectedRowTask);
 										case 'FieldMsg':
-											if (_p17._0._0._1._1.ctor === 'PrimaryLinkClicked') {
+											if (_p21._0._0._1._1.ctor === 'PrimaryLinkClicked') {
 												var activeWindow = function () {
-													var _p27 = model.activeWindow;
-													if (_p27.ctor === 'Just') {
-														return _p27._0.window;
+													var _p31 = model.activeWindow;
+													if (_p31.ctor === 'Just') {
+														return _p31._0.window;
 													} else {
 														return _elm_lang$core$Native_Utils.crashCase(
 															'Page.WindowArena',
 															{
-																start: {line: 392, column: 21},
-																end: {line: 397, column: 74}
+																start: {line: 418, column: 21},
+																end: {line: 423, column: 74}
 															},
-															_p27)('There should be an activeWindow');
+															_p31)('There should be an activeWindow');
 													}
 												}();
-												var initSelectedRow = A6(_ivanceras$diwata$Views_Window_DetailedRecord$init, isDetailedRecordMaximized, model.settings, _p17._0._0._1._1._0, arenaArg.action, arenaArg, activeWindow);
+												var initSelectedRow = A6(_ivanceras$diwata$Views_Window_DetailedRecord$init, isDetailedRecordMaximized, model.settings, _p21._0._0._1._1._0, arenaArg.action, arenaArg, activeWindow);
 												var initSelectedRowTask = A2(
 													_elm_lang$core$Task$attempt,
 													function (result) {
-														var _p29 = result;
-														if (_p29.ctor === 'Ok') {
+														var _p33 = result;
+														if (_p33.ctor === 'Ok') {
 															return _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow(
 																{
 																	ctor: '_Tuple2',
-																	_0: _p29._0,
-																	_1: _elm_lang$core$Maybe$Just(_p17._0._0._0.recordId)
+																	_0: _p33._0,
+																	_1: _elm_lang$core$Maybe$Just(_p21._0._0._0.recordId)
 																});
 														} else {
 															return _ivanceras$diwata$Page_WindowArena$FailedToInitializeSelectedRow;
@@ -33581,44 +34960,44 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 														{loadingSelectedRecord: true}),
 													initSelectedRowTask);
 											} else {
-												break _v15_7;
+												break _v17_7;
 											}
 										default:
-											break _v15_7;
+											break _v17_7;
 									}
 								case 'ToolbarMsg':
-									if (_p17._0._0._0.ctor === 'ClickedNewButton') {
+									if (_p21._0._0._0.ctor === 'ClickedNewButton') {
 										var newArenaArg = _elm_lang$core$Native_Utils.update(
 											arenaArg,
 											{
 												action: _ivanceras$diwata$Data_WindowArena$NewRecord(_ivanceras$diwata$Data_Window_Presentation$InCard)
 											});
 										var tableName = function () {
-											var _p30 = arenaArg.tableName;
-											if (_p30.ctor === 'Just') {
-												return _p30._0;
+											var _p34 = arenaArg.tableName;
+											if (_p34.ctor === 'Just') {
+												return _p34._0;
 											} else {
 												return _elm_lang$core$Native_Utils.crashCase(
 													'Page.WindowArena',
 													{
-														start: {line: 442, column: 21},
-														end: {line: 447, column: 68}
+														start: {line: 468, column: 21},
+														end: {line: 473, column: 68}
 													},
-													_p30)('There should be tableName');
+													_p34)('There should be tableName');
 											}
 										}();
 										var activeWindow = function () {
-											var _p32 = model.activeWindow;
-											if (_p32.ctor === 'Just') {
-												return _p32._0.window;
+											var _p36 = model.activeWindow;
+											if (_p36.ctor === 'Just') {
+												return _p36._0.window;
 											} else {
 												return _elm_lang$core$Native_Utils.crashCase(
 													'Page.WindowArena',
 													{
-														start: {line: 434, column: 21},
-														end: {line: 439, column: 74}
+														start: {line: 460, column: 21},
+														end: {line: 465, column: 74}
 													},
-													_p32)('There should be an activeWindow');
+													_p36)('There should be an activeWindow');
 											}
 										}();
 										var initSelectedRow = A6(
@@ -33632,10 +35011,10 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 										var initNewRecordTask = A2(
 											_elm_lang$core$Task$attempt,
 											function (result) {
-												var _p34 = result;
-												if (_p34.ctor === 'Ok') {
+												var _p38 = result;
+												if (_p38.ctor === 'Ok') {
 													return _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow(
-														{ctor: '_Tuple2', _0: _p34._0, _1: _elm_lang$core$Maybe$Nothing});
+														{ctor: '_Tuple2', _0: _p38._0, _1: _elm_lang$core$Maybe$Nothing});
 												} else {
 													return _ivanceras$diwata$Page_WindowArena$FailedToInitializeSelectedRow;
 												}
@@ -33658,34 +35037,34 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 													}
 												}));
 									} else {
-										break _v15_7;
+										break _v17_7;
 									}
 								default:
-									break _v15_7;
+									break _v17_7;
 							}
 						} else {
-							break _v15_7;
+							break _v17_7;
 						}
 					case 'DetailedRecordMsg':
-						switch (_p17._0.ctor) {
+						switch (_p21._0.ctor) {
 							case 'ClickedCloseButton':
 								return _ivanceras$diwata$Page_WindowArena$closeRecord(model);
 							case 'ToolbarMsg':
-								switch (_p17._0._0.ctor) {
+								switch (_p21._0._0.ctor) {
 									case 'ClickedClose':
 										return _ivanceras$diwata$Page_WindowArena$closeRecord(model);
 									case 'ClickedMaximize':
-										var _p45 = _p17._0._0._0;
-										var _p42 = function () {
-											var _p43 = model.selectedRow;
-											if (_p43.ctor === 'Just') {
-												var _p44 = A3(
+										var _p49 = _p21._0._0._0;
+										var _p46 = function () {
+											var _p47 = model.selectedRow;
+											if (_p47.ctor === 'Just') {
+												var _p48 = A3(
 													_ivanceras$diwata$Views_Window_DetailedRecord$update,
 													session,
-													_ivanceras$diwata$Views_Window_DetailedRecord$Maximize(_p45),
-													_p43._0);
-												var detailedRecord = _p44._0;
-												var subCmd = _p44._1;
+													_ivanceras$diwata$Views_Window_DetailedRecord$Maximize(_p49),
+													_p47._0);
+												var detailedRecord = _p48._0;
+												var subCmd = _p48._1;
 												return {
 													ctor: '_Tuple2',
 													_0: _elm_lang$core$Maybe$Just(detailedRecord),
@@ -33695,50 +35074,50 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 												return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _elm_lang$core$Platform_Cmd$none};
 											}
 										}();
-										var updatedSelectedRow = _p42._0;
-										var cmd = _p42._1;
+										var updatedSelectedRow = _p46._0;
+										var cmd = _p46._1;
 										return A2(
 											_ivanceras$diwata$Util_ops['=>'],
 											_elm_lang$core$Native_Utils.update(
 												model,
-												{isDetailedRecordMaximized: _p45, selectedRow: updatedSelectedRow}),
+												{isDetailedRecordMaximized: _p49, selectedRow: updatedSelectedRow}),
 											cmd);
 									default:
-										break _v15_11;
+										break _v17_11;
 								}
 							default:
-								break _v15_11;
+								break _v17_11;
 						}
 					default:
 						return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 				}
 			} while(false);
-			var _p35 = model.activeWindow;
-			if (_p35.ctor === 'Just') {
-				var _p41 = _p35._0;
-				var _p36 = A3(_ivanceras$diwata$Views_Window$update, session, _p17._0, _p41);
-				var newWindow = _p36._0;
-				var subCmd = _p36._1;
-				var lookup = _p41.lookup;
-				var _p37 = function () {
-					var _p38 = A2(_ivanceras$diwata$Views_Window$dropdownPageRequestNeeded, lookup, _p41);
-					if (_p38.ctor === 'Just') {
-						var _p40 = _p38._0;
-						var _p39 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, _p40, lookup);
-						var currentPage = _p39._0;
-						var listRecord = _p39._1;
+			var _p39 = model.activeWindow;
+			if (_p39.ctor === 'Just') {
+				var _p45 = _p39._0;
+				var _p40 = A3(_ivanceras$diwata$Views_Window$update, session, _p21._0, _p45);
+				var newWindow = _p40._0;
+				var subCmd = _p40._1;
+				var lookup = _p45.lookup;
+				var _p41 = function () {
+					var _p42 = _ivanceras$diwata$Views_Window$dropdownPageRequestNeeded(_p45);
+					if (_p42.ctor === 'Just') {
+						var _p44 = _p42._0;
+						var _p43 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, _p44, lookup);
+						var currentPage = _p43._0;
+						var listRecord = _p43._1;
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
 								newWindow,
 								{dropdownPageRequestInFlight: true}),
-							A3(_ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForWindow, model.settings, currentPage, _p40));
+							A3(_ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForWindow, model.settings, currentPage, _p44));
 					} else {
 						return A2(_ivanceras$diwata$Util_ops['=>'], newWindow, _elm_lang$core$Platform_Cmd$none);
 					}
 				}();
-				var updatedWindow = _p37._0;
-				var windowCmd = _p37._1;
+				var updatedWindow = _p41._0;
+				var windowCmd = _p41._1;
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -33760,32 +35139,32 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 				return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 			}
 		} while(false);
-		var _p46 = model.selectedRow;
-		if (_p46.ctor === 'Just') {
-			var _p52 = _p46._0;
-			var _p47 = A3(_ivanceras$diwata$Views_Window_DetailedRecord$update, session, _p17._0, _p52);
-			var newDetailedRecord = _p47._0;
-			var subCmd = _p47._1;
-			var lookup = _p52.lookup;
-			var _p48 = function () {
-				var _p49 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$dropdownPageRequestNeeded, lookup, _p52);
-				if (_p49.ctor === 'Just') {
-					var _p51 = _p49._0;
-					var _p50 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, _p51, lookup);
-					var currentPage = _p50._0;
-					var listRecord = _p50._1;
+		var _p50 = model.selectedRow;
+		if (_p50.ctor === 'Just') {
+			var _p56 = _p50._0;
+			var _p51 = A3(_ivanceras$diwata$Views_Window_DetailedRecord$update, session, _p21._0, _p56);
+			var newDetailedRecord = _p51._0;
+			var subCmd = _p51._1;
+			var lookup = _p56.lookup;
+			var _p52 = function () {
+				var _p53 = _ivanceras$diwata$Views_Window_DetailedRecord$dropdownPageRequestNeeded(_p56);
+				if (_p53.ctor === 'Just') {
+					var _p55 = _p53._0;
+					var _p54 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, _p55, lookup);
+					var currentPage = _p54._0;
+					var listRecord = _p54._1;
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
 							newDetailedRecord,
 							{dropdownPageRequestInFlight: true}),
-						A3(_ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForDetailedRecord, model.settings, currentPage, _p51));
+						A3(_ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForDetailedRecord, model.settings, currentPage, _p55));
 				} else {
 					return A2(_ivanceras$diwata$Util_ops['=>'], newDetailedRecord, _elm_lang$core$Platform_Cmd$none);
 				}
 			}();
-			var updatedDetailedRecord = _p48._0;
-			var detailCmd = _p48._1;
+			var updatedDetailedRecord = _p52._0;
+			var detailCmd = _p52._1;
 			return A2(
 				_ivanceras$diwata$Util_ops['=>'],
 				_elm_lang$core$Native_Utils.update(
@@ -33831,6 +35210,11 @@ var _ivanceras$diwata$Main$decodeUserFromJson = function (json) {
 		_elm_lang$core$Result$toMaybe(
 			A2(_elm_lang$core$Json_Decode$decodeValue, _elm_lang$core$Json_Decode$string, json)));
 };
+var _ivanceras$diwata$Main$title = _elm_lang$core$Native_Platform.outgoingPort(
+	'title',
+	function (v) {
+		return v;
+	});
 var _ivanceras$diwata$Main$Model = F4(
 	function (a, b, c, d) {
 		return {session: a, pageState: b, settings: c, location: d};
@@ -33872,6 +35256,18 @@ var _ivanceras$diwata$Main$pageErrored = F3(
 var _ivanceras$diwata$Main$SetDbUrl = function (a) {
 	return {ctor: 'SetDbUrl', _0: a};
 };
+var _ivanceras$diwata$Main$WindowMsg = function (a) {
+	return {ctor: 'WindowMsg', _0: a};
+};
+var _ivanceras$diwata$Main$LoginMsg = function (a) {
+	return {ctor: 'LoginMsg', _0: a};
+};
+var _ivanceras$diwata$Main$SetDbName = function (a) {
+	return {ctor: 'SetDbName', _0: a};
+};
+var _ivanceras$diwata$Main$SetTitle = function (a) {
+	return {ctor: 'SetTitle', _0: a};
+};
 var _ivanceras$diwata$Main$init = F2(
 	function (val, location) {
 		var settings = _ivanceras$diwata$Settings$fromJson(val);
@@ -33883,28 +35279,82 @@ var _ivanceras$diwata$Main$init = F2(
 				return _elm_lang$core$Native_Utils.update(
 					settings,
 					{
-						apiEndPoint: _elm_lang$core$Maybe$Just(location.origin)
+						apiEndPoint: function () {
+							var _p4 = location.origin;
+							switch (_p4) {
+								case '':
+									return _elm_lang$core$Maybe$Nothing;
+								case 'null':
+									return _elm_lang$core$Maybe$Nothing;
+								default:
+									return _elm_lang$core$Maybe$Just(_p4);
+							}
+						}()
 					});
 			}
 		}();
-		var _p4 = A2(_elm_lang$core$Debug$log, 'corrected settings: ', correctedSettings);
+		var _p5 = A2(_elm_lang$core$Debug$log, 'corrected settings: ', correctedSettings);
 		var dbUrlCmd = A2(
 			_elm_lang$core$Task$attempt,
 			function (r) {
-				var _p5 = r;
-				if (_p5.ctor === 'Ok') {
-					return _elm_lang$core$Maybe$Just(_p5._0);
+				var _p6 = r;
+				if (_p6.ctor === 'Ok') {
+					return _elm_lang$core$Maybe$Just(_p6._0);
 				} else {
 					return _elm_lang$core$Maybe$Nothing;
 				}
 			},
-			_ivanceras$diwata$Request_User$dbUrl(correctedSettings));
+			_ivanceras$diwata$Request_Auth$dbUrl(correctedSettings));
 		var setDbUrlCmd = A2(
 			_elm_lang$core$Platform_Cmd$map,
 			function (a) {
 				return _ivanceras$diwata$Main$SetDbUrl(a);
 			},
 			dbUrlCmd);
+		var dbNameCmd = A2(
+			_elm_lang$core$Task$attempt,
+			function (r) {
+				var _p7 = r;
+				if (_p7.ctor === 'Ok') {
+					return _p7._0;
+				} else {
+					return _elm_lang$core$Maybe$Nothing;
+				}
+			},
+			_ivanceras$diwata$Request_Auth$dbName(correctedSettings));
+		var setTitleDbNameCmd = A2(
+			_elm_lang$core$Platform_Cmd$map,
+			function (dbName) {
+				var _p8 = dbName;
+				if (_p8.ctor === 'Just') {
+					var _p11 = _p8._0;
+					var _p9 = function () {
+						var _p10 = _p11.description;
+						if (_p10.ctor === 'Just') {
+							return {ctor: '_Tuple2', _0: _p11.name, _1: _p10._0};
+						} else {
+							return {ctor: '_Tuple2', _0: _p11.name, _1: 'Diwata'};
+						}
+					}();
+					var name = _p9._0;
+					var desc = _p9._1;
+					return _ivanceras$diwata$Main$SetTitle(
+						_elm_lang$core$Maybe$Just(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_community$string_extra$String_Extra$toTitleCase(name),
+								A2(_elm_lang$core$Basics_ops['++'], ' - ', desc))));
+				} else {
+					return _ivanceras$diwata$Main$SetTitle(_elm_lang$core$Maybe$Nothing);
+				}
+			},
+			dbNameCmd);
+		var setDbNameCmd = A2(
+			_elm_lang$core$Platform_Cmd$map,
+			function (dbName) {
+				return _ivanceras$diwata$Main$SetDbName(dbName);
+			},
+			dbNameCmd);
 		var model = {
 			pageState: _ivanceras$diwata$Main$Loaded(_ivanceras$diwata$Main$initialPage),
 			session: {
@@ -33920,15 +35370,17 @@ var _ivanceras$diwata$Main$init = F2(
 				{
 					ctor: '::',
 					_0: setDbUrlCmd,
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: setTitleDbNameCmd,
+						_1: {
+							ctor: '::',
+							_0: setDbNameCmd,
+							_1: {ctor: '[]'}
+						}
+					}
 				}));
 	});
-var _ivanceras$diwata$Main$WindowMsg = function (a) {
-	return {ctor: 'WindowMsg', _0: a};
-};
-var _ivanceras$diwata$Main$LoginMsg = function (a) {
-	return {ctor: 'LoginMsg', _0: a};
-};
 var _ivanceras$diwata$Main$SetUser = function (a) {
 	return {ctor: 'SetUser', _0: a};
 };
@@ -33938,8 +35390,8 @@ var _ivanceras$diwata$Main$WindowArenaMsg = function (a) {
 var _ivanceras$diwata$Main$viewPage = F3(
 	function (session, isLoading, page) {
 		var frame = A2(_ivanceras$diwata$Views_Page$frame, isLoading, session.user);
-		var _p6 = page;
-		switch (_p6.ctor) {
+		var _p12 = page;
+		switch (_p12.ctor) {
 			case 'NotFound':
 				return A2(
 					frame,
@@ -33954,7 +35406,7 @@ var _ivanceras$diwata$Main$viewPage = F3(
 				return A2(
 					frame,
 					_ivanceras$diwata$Views_Page$Other,
-					A2(_ivanceras$diwata$Page_Errored$view, session, _p6._0));
+					A2(_ivanceras$diwata$Page_Errored$view, session, _p12._0));
 			case 'WindowArena':
 				return A2(
 					_elm_lang$html$Html$map,
@@ -33962,7 +35414,7 @@ var _ivanceras$diwata$Main$viewPage = F3(
 					A2(
 						frame,
 						_ivanceras$diwata$Views_Page$WindowArena,
-						A2(_ivanceras$diwata$Page_WindowArena$view, session, _p6._0)));
+						A2(_ivanceras$diwata$Page_WindowArena$view, session, _p12._0)));
 			case 'Login':
 				return A2(
 					_elm_lang$html$Html$map,
@@ -33970,7 +35422,7 @@ var _ivanceras$diwata$Main$viewPage = F3(
 					A2(
 						frame,
 						_ivanceras$diwata$Views_Page$Other,
-						A2(_ivanceras$diwata$Page_Login$view, session, _p6._0)));
+						A2(_ivanceras$diwata$Page_Login$view, session, _p12._0)));
 			default:
 				return A2(
 					_elm_lang$html$Html$map,
@@ -33978,20 +35430,20 @@ var _ivanceras$diwata$Main$viewPage = F3(
 					A2(
 						frame,
 						_ivanceras$diwata$Views_Page$Other,
-						A2(_ivanceras$diwata$Views_Window$view, session, _p6._0)));
+						A2(_ivanceras$diwata$Views_Window$view, session, _p12._0)));
 		}
 	});
 var _ivanceras$diwata$Main$view = function (model) {
-	var _p7 = model.pageState;
-	if (_p7.ctor === 'Loaded') {
-		return A3(_ivanceras$diwata$Main$viewPage, model.session, false, _p7._0);
+	var _p13 = model.pageState;
+	if (_p13.ctor === 'Loaded') {
+		return A3(_ivanceras$diwata$Main$viewPage, model.session, false, _p13._0);
 	} else {
-		return A3(_ivanceras$diwata$Main$viewPage, model.session, true, _p7._0);
+		return A3(_ivanceras$diwata$Main$viewPage, model.session, true, _p13._0);
 	}
 };
 var _ivanceras$diwata$Main$pageSubscriptions = function (page) {
-	var _p8 = page;
-	switch (_p8.ctor) {
+	var _p14 = page;
+	switch (_p14.ctor) {
 		case 'Blank':
 			return _elm_lang$core$Platform_Sub$none;
 		case 'Errored':
@@ -34002,7 +35454,7 @@ var _ivanceras$diwata$Main$pageSubscriptions = function (page) {
 			return A2(
 				_elm_lang$core$Platform_Sub$map,
 				_ivanceras$diwata$Main$WindowArenaMsg,
-				_ivanceras$diwata$Page_WindowArena$subscriptions(_p8._0));
+				_ivanceras$diwata$Page_WindowArena$subscriptions(_p14._0));
 		case 'Login':
 			return _elm_lang$core$Platform_Sub$none;
 		default:
@@ -34033,11 +35485,11 @@ var _ivanceras$diwata$Main$setRoute = F2(
 		var errored = _ivanceras$diwata$Main$pageErrored(model);
 		var prevPage = _ivanceras$diwata$Main$getPage(model.pageState);
 		var updatedPrevPage = function () {
-			var _p9 = prevPage;
-			if (_p9.ctor === 'WindowArena') {
+			var _p15 = prevPage;
+			if (_p15.ctor === 'WindowArena') {
 				return _ivanceras$diwata$Main$WindowArena(
 					_elm_lang$core$Native_Utils.update(
-						_p9._0,
+						_p15._0,
 						{loadingSelectedRecord: true}));
 			} else {
 				return prevPage;
@@ -34056,16 +35508,16 @@ var _ivanceras$diwata$Main$setRoute = F2(
 			});
 		var settings = model.settings;
 		var correctedRoute = function () {
-			var _p10 = settings.dbUrl;
-			if (_p10.ctor === 'Just') {
+			var _p16 = settings.dbUrl;
+			if (_p16.ctor === 'Just') {
 				return maybeRoute;
 			} else {
 				return _elm_lang$core$Maybe$Just(_ivanceras$diwata$Route$Login);
 			}
 		}();
-		var _p11 = A2(_elm_lang$core$Debug$log, 'setting route', maybeRoute);
-		var _p12 = correctedRoute;
-		if (_p12.ctor === 'Nothing') {
+		var _p17 = A2(_elm_lang$core$Debug$log, 'setting route', maybeRoute);
+		var _p18 = correctedRoute;
+		if (_p18.ctor === 'Nothing') {
 			return A2(
 				_ivanceras$diwata$Util_ops['=>'],
 				_elm_lang$core$Native_Utils.update(
@@ -34075,12 +35527,12 @@ var _ivanceras$diwata$Main$setRoute = F2(
 					}),
 				_elm_lang$core$Platform_Cmd$none);
 		} else {
-			switch (_p12._0.ctor) {
+			switch (_p18._0.ctor) {
 				case 'WindowArena':
 					return A2(
 						transition,
 						_ivanceras$diwata$Main$HomeLoaded,
-						A3(_ivanceras$diwata$Page_WindowArena$init, model.settings, model.session, _p12._0._0));
+						A3(_ivanceras$diwata$Page_WindowArena$init, model.settings, model.session, _p18._0._0));
 				case 'Login':
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
@@ -34122,9 +35574,9 @@ var _ivanceras$diwata$Main$updatePage = F3(
 		var errored = _ivanceras$diwata$Main$pageErrored(model);
 		var toPage = F5(
 			function (toModel, toMsg, subUpdate, subMsg, subModel) {
-				var _p13 = A2(subUpdate, subMsg, subModel);
-				var newModel = _p13._0;
-				var newCmd = _p13._1;
+				var _p19 = A2(subUpdate, subMsg, subModel);
+				var newModel = _p19._0;
+				var newCmd = _p19._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -34137,33 +35589,33 @@ var _ivanceras$diwata$Main$updatePage = F3(
 				};
 			});
 		var session = model.session;
-		var _p14 = {ctor: '_Tuple2', _0: msg, _1: page};
-		_v9_12:
+		var _p20 = {ctor: '_Tuple2', _0: msg, _1: page};
+		_v13_14:
 		do {
-			_v9_11:
+			_v13_13:
 			do {
-				_v9_1:
+				_v13_1:
 				do {
-					switch (_p14._0.ctor) {
+					switch (_p20._0.ctor) {
 						case 'SetRoute':
-							switch (_p14._1.ctor) {
+							switch (_p20._1.ctor) {
 								case 'WindowArena':
-									return A2(_ivanceras$diwata$Main$setRoute, _p14._0._0, model);
+									return A2(_ivanceras$diwata$Main$setRoute, _p20._0._0, model);
 								case 'NotFound':
-									break _v9_1;
+									break _v13_1;
 								default:
-									break _v9_1;
+									break _v13_1;
 							}
 						case 'HomeLoaded':
-							if (_p14._0._0.ctor === 'Ok') {
-								var _p15 = A2(_elm_lang$core$Debug$log, 'WindowArena is now loaded', '');
+							if (_p20._0._0.ctor === 'Ok') {
+								var _p21 = A2(_elm_lang$core$Debug$log, 'WindowArena is now loaded', '');
 								return A2(
 									_ivanceras$diwata$Util_ops['=>'],
 									_elm_lang$core$Native_Utils.update(
 										model,
 										{
 											pageState: _ivanceras$diwata$Main$Loaded(
-												_ivanceras$diwata$Main$WindowArena(_p14._0._0._0))
+												_ivanceras$diwata$Main$WindowArena(_p20._0._0._0))
 										}),
 									_elm_lang$core$Platform_Cmd$none);
 							} else {
@@ -34173,19 +35625,19 @@ var _ivanceras$diwata$Main$updatePage = F3(
 										model,
 										{
 											pageState: _ivanceras$diwata$Main$Loaded(
-												_ivanceras$diwata$Main$Errored(_p14._0._0._0))
+												_ivanceras$diwata$Main$Errored(_p20._0._0._0))
 										}),
 									_elm_lang$core$Platform_Cmd$none);
 							}
 						case 'WindowLoaded':
-							if (_p14._0._0.ctor === 'Ok') {
+							if (_p20._0._0.ctor === 'Ok') {
 								return A2(
 									_ivanceras$diwata$Util_ops['=>'],
 									_elm_lang$core$Native_Utils.update(
 										model,
 										{
 											pageState: _ivanceras$diwata$Main$Loaded(
-												_ivanceras$diwata$Main$Window(_p14._0._0._0))
+												_ivanceras$diwata$Main$Window(_p20._0._0._0))
 										}),
 									_elm_lang$core$Platform_Cmd$none);
 							} else {
@@ -34195,14 +35647,14 @@ var _ivanceras$diwata$Main$updatePage = F3(
 										model,
 										{
 											pageState: _ivanceras$diwata$Main$Loaded(
-												_ivanceras$diwata$Main$Errored(_p14._0._0._0))
+												_ivanceras$diwata$Main$Errored(_p20._0._0._0))
 										}),
 									_elm_lang$core$Platform_Cmd$none);
 							}
 						case 'SetUser':
-							var _p16 = _p14._0._0;
+							var _p22 = _p20._0._0;
 							var session = model.session;
-							var cmd = ((!_elm_lang$core$Native_Utils.eq(session.user, _elm_lang$core$Maybe$Nothing)) && _elm_lang$core$Native_Utils.eq(_p16, _elm_lang$core$Maybe$Nothing)) ? _ivanceras$diwata$Route$modifyUrl(
+							var cmd = ((!_elm_lang$core$Native_Utils.eq(session.user, _elm_lang$core$Maybe$Nothing)) && _elm_lang$core$Native_Utils.eq(_p22, _elm_lang$core$Maybe$Nothing)) ? _ivanceras$diwata$Route$modifyUrl(
 								_ivanceras$diwata$Route$WindowArena(_ivanceras$diwata$Data_WindowArena$default)) : _elm_lang$core$Platform_Cmd$none;
 							return A2(
 								_ivanceras$diwata$Util_ops['=>'],
@@ -34211,24 +35663,45 @@ var _ivanceras$diwata$Main$updatePage = F3(
 									{
 										session: _elm_lang$core$Native_Utils.update(
 											session,
-											{user: _p16})
+											{user: _p22})
 									}),
 								cmd);
+						case 'SetTitle':
+							return A2(
+								_ivanceras$diwata$Util_ops['=>'],
+								model,
+								function () {
+									var _p23 = _p20._0._0;
+									if (_p23.ctor === 'Just') {
+										return _ivanceras$diwata$Main$title(_p23._0);
+									} else {
+										return _elm_lang$core$Platform_Cmd$none;
+									}
+								}());
+						case 'SetDbName':
+							return A2(
+								_ivanceras$diwata$Util_ops['=>'],
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{
+										settings: A2(_ivanceras$diwata$Settings$setDbName, model.settings, _p20._0._0)
+									}),
+								_elm_lang$core$Platform_Cmd$none);
 						case 'LoginMsg':
-							switch (_p14._1.ctor) {
+							switch (_p20._1.ctor) {
 								case 'Login':
-									var _p17 = A2(_ivanceras$diwata$Page_Login$update, _p14._0._0, _p14._1._0);
-									var pageModel = _p17._0._0;
-									var cmd = _p17._0._1;
-									var msgFromPage = _p17._1;
+									var _p24 = A2(_ivanceras$diwata$Page_Login$update, _p20._0._0, _p20._1._0);
+									var pageModel = _p24._0._0;
+									var cmd = _p24._0._1;
+									var msgFromPage = _p24._1;
 									var newModel = function () {
-										var _p18 = msgFromPage;
-										if (_p18.ctor === 'NoOp') {
+										var _p25 = msgFromPage;
+										if (_p25.ctor === 'NoOp') {
 											return model;
 										} else {
 											return _elm_lang$core$Native_Utils.update(
 												model,
-												{settings: _p18._0});
+												{settings: _p25._0});
 										}
 									}();
 									return A2(
@@ -34241,62 +35714,62 @@ var _ivanceras$diwata$Main$updatePage = F3(
 											}),
 										A2(_elm_lang$core$Platform_Cmd$map, _ivanceras$diwata$Main$LoginMsg, cmd));
 								case 'NotFound':
-									break _v9_11;
+									break _v13_13;
 								default:
-									break _v9_12;
+									break _v13_14;
 							}
 						case 'WindowArenaMsg':
-							switch (_p14._1.ctor) {
+							switch (_p20._1.ctor) {
 								case 'WindowArena':
 									return A5(
 										toPage,
 										_ivanceras$diwata$Main$WindowArena,
 										_ivanceras$diwata$Main$WindowArenaMsg,
 										_ivanceras$diwata$Page_WindowArena$update(session),
-										_p14._0._0,
-										_p14._1._0);
+										_p20._0._0,
+										_p20._1._0);
 								case 'NotFound':
-									break _v9_11;
+									break _v13_13;
 								default:
-									break _v9_12;
+									break _v13_14;
 							}
 						case 'WindowMsg':
-							switch (_p14._1.ctor) {
+							switch (_p20._1.ctor) {
 								case 'Window':
 									return A5(
 										toPage,
 										_ivanceras$diwata$Main$Window,
 										_ivanceras$diwata$Main$WindowMsg,
 										_ivanceras$diwata$Views_Window$update(model.session),
-										_p14._0._0,
-										_p14._1._0);
+										_p20._0._0,
+										_p20._1._0);
 								case 'NotFound':
-									break _v9_11;
+									break _v13_13;
 								default:
-									break _v9_12;
+									break _v13_14;
 							}
 						default:
-							var _p21 = _p14._0._0;
+							var _p28 = _p20._0._0;
 							var updatedModel = _elm_lang$core$Native_Utils.update(
 								model,
 								{
 									settings: function () {
-										var _p19 = _p21;
-										if (_p19.ctor === 'Just') {
-											return A2(_ivanceras$diwata$Settings$setDbUrl, model.settings, _p19._0);
+										var _p26 = _p28;
+										if (_p26.ctor === 'Just') {
+											return A2(_ivanceras$diwata$Settings$setDbUrl, model.settings, _p26._0);
 										} else {
 											return model.settings;
 										}
 									}()
 								});
-							var _p20 = A2(_elm_lang$core$Debug$log, 'Setting db_url ', _p21);
+							var _p27 = A2(_elm_lang$core$Debug$log, 'Setting db_url ', _p28);
 							return A2(
 								_ivanceras$diwata$Main$setRoute,
 								_ivanceras$diwata$Route$fromLocation(updatedModel.location),
 								updatedModel);
 					}
 				} while(false);
-				return A2(_ivanceras$diwata$Main$setRoute, _p14._0._0, model);
+				return A2(_ivanceras$diwata$Main$setRoute, _p20._0._0, model);
 			} while(false);
 			return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 		} while(false);
@@ -34315,9 +35788,9 @@ var _ivanceras$diwata$Main$SetRoute = function (a) {
 };
 var _ivanceras$diwata$Main$main = A2(
 	_elm_lang$navigation$Navigation$programWithFlags,
-	function (_p22) {
+	function (_p29) {
 		return _ivanceras$diwata$Main$SetRoute(
-			_ivanceras$diwata$Route$fromLocation(_p22));
+			_ivanceras$diwata$Route$fromLocation(_p29));
 	},
 	{init: _ivanceras$diwata$Main$init, view: _ivanceras$diwata$Main$view, update: _ivanceras$diwata$Main$update, subscriptions: _ivanceras$diwata$Main$subscriptions})(_elm_lang$core$Json_Decode$value);
 
