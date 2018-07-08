@@ -17644,6 +17644,9 @@ var _ivanceras$diwata$Util$onWheel = function (scrollMsg) {
 		A2(_elm_lang$core$Json_Decode$map, scrollMsg, _ivanceras$diwata$Util$scrollDecoder));
 };
 
+var _ivanceras$diwata$Constant$tabNameHeight = 41;
+var _ivanceras$diwata$Constant$bannerHeight = 100;
+var _ivanceras$diwata$Constant$sidebarWidth = 220;
 var _ivanceras$diwata$Constant$columnSearchIconSize = 14;
 var _ivanceras$diwata$Constant$rowControlIconSize = 16;
 var _ivanceras$diwata$Constant$iconSize = 20;
@@ -24801,6 +24804,42 @@ var _ivanceras$diwata$Ports$storeSession = _elm_lang$core$Native_Platform.outgoi
 	});
 var _ivanceras$diwata$Ports$onSessionChange = _elm_lang$core$Native_Platform.incomingPort('onSessionChange', _elm_lang$core$Json_Decode$value);
 
+var _ivanceras$diwata$Settings$setPassword = F2(
+	function (settings, password) {
+		var cred = function () {
+			var _p0 = settings.cred;
+			if (_p0.ctor === 'Just') {
+				return _elm_lang$core$Native_Utils.update(
+					_p0._0,
+					{password: password});
+			} else {
+				return {username: '', password: password};
+			}
+		}();
+		return _elm_lang$core$Native_Utils.update(
+			settings,
+			{
+				cred: _elm_lang$core$Maybe$Just(cred)
+			});
+	});
+var _ivanceras$diwata$Settings$setUsername = F2(
+	function (settings, username) {
+		var cred = function () {
+			var _p1 = settings.cred;
+			if (_p1.ctor === 'Just') {
+				return _elm_lang$core$Native_Utils.update(
+					_p1._0,
+					{username: username});
+			} else {
+				return {username: username, password: ''};
+			}
+		}();
+		return _elm_lang$core$Native_Utils.update(
+			settings,
+			{
+				cred: _elm_lang$core$Maybe$Just(cred)
+			});
+	});
 var _ivanceras$diwata$Settings$setDbName = F2(
 	function (settings, dbName) {
 		return _elm_lang$core$Native_Utils.update(
@@ -24808,49 +24847,66 @@ var _ivanceras$diwata$Settings$setDbName = F2(
 			{dbName: dbName});
 	});
 var _ivanceras$diwata$Settings$setDbUrl = F2(
-	function (settings, dbUrl) {
+	function (settings, loginRequired) {
 		return _elm_lang$core$Native_Utils.update(
 			settings,
-			{
-				dbUrl: _elm_lang$core$Maybe$Just(dbUrl)
-			});
+			{loginRequired: loginRequired});
 	});
-var _ivanceras$diwata$Settings$Settings = F4(
-	function (a, b, c, d) {
-		return {dbUrl: a, dbName: b, apiEndPoint: c, grouped: d};
+var _ivanceras$diwata$Settings$Settings = F5(
+	function (a, b, c, d, e) {
+		return {loginRequired: a, dbName: b, apiEndPoint: c, grouped: d, cred: e};
 	});
-var _ivanceras$diwata$Settings$decoder = A3(
+var _ivanceras$diwata$Settings$Cred = F2(
+	function (a, b) {
+		return {username: a, password: b};
+	});
+var _ivanceras$diwata$Settings$credDecoder = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'grouped',
-	_elm_lang$core$Json_Decode$bool,
+	'password',
+	_elm_lang$core$Json_Decode$string,
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'api_endpoint',
-		_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+		'username',
+		_elm_lang$core$Json_Decode$string,
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_ivanceras$diwata$Settings$Cred)));
+var _ivanceras$diwata$Settings$decoder = A4(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	'cred',
+	_elm_lang$core$Json_Decode$nullable(_ivanceras$diwata$Settings$credDecoder),
+	_elm_lang$core$Maybe$Nothing,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'grouped',
+		_elm_lang$core$Json_Decode$bool,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'db_name',
-			_elm_lang$core$Json_Decode$nullable(_ivanceras$diwata$Data_DatabaseName$decoder),
+			'api_endpoint',
+			_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
 			A3(
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'db_url',
-				_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_ivanceras$diwata$Settings$Settings)))));
+				'db_name',
+				_elm_lang$core$Json_Decode$nullable(_ivanceras$diwata$Data_DatabaseName$decoder),
+				A4(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+					'login_required',
+					_elm_lang$core$Json_Decode$bool,
+					false,
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_ivanceras$diwata$Settings$Settings))))));
 var _ivanceras$diwata$Settings$fromJson = function (json) {
 	var settings = A2(_elm_lang$core$Json_Decode$decodeValue, _ivanceras$diwata$Settings$decoder, json);
-	var _p0 = settings;
-	if (_p0.ctor === 'Ok') {
-		return _p0._0;
+	var _p2 = settings;
+	if (_p2.ctor === 'Ok') {
+		return _p2._0;
 	} else {
 		return A2(
 			_elm_lang$core$Native_Utils.crash(
 				'Settings',
 				{
-					start: {line: 47, column: 13},
-					end: {line: 47, column: 24}
+					start: {line: 85, column: 13},
+					end: {line: 85, column: 24}
 				}),
 			'Decoding settings should not be error',
-			_p0._0);
+			_p2._0);
 	}
 };
 
@@ -24867,10 +24923,22 @@ var _ivanceras$diwata$Request_Helpers$apiUrl = F2(
 
 var _ivanceras$diwata$Request_Window_Records$header = F2(
 	function (settings, request) {
-		var dbUrl = settings.dbUrl;
-		var _p0 = dbUrl;
+		var cred = settings.cred;
+		var _p0 = cred;
 		if (_p0.ctor === 'Just') {
-			return A3(_lukewestby$elm_http_builder$HttpBuilder$withHeader, 'db_url', _p0._0, request);
+			var _p1 = _p0._0;
+			return A2(
+				_lukewestby$elm_http_builder$HttpBuilder$withHeaders,
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'username', _1: _p1.username},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'password', _1: _p1.password},
+						_1: {ctor: '[]'}
+					}
+				},
+				request);
 		} else {
 			return request;
 		}
@@ -25076,10 +25144,14 @@ var _ivanceras$diwata$Request_Auth$dbName = function (settings) {
 					_lukewestby$elm_http_builder$HttpBuilder$get(
 						A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/database_name'))))));
 };
-var _ivanceras$diwata$Request_Auth$dbUrl = function (settings) {
+var _ivanceras$diwata$Request_Auth$loginRequired = function (settings) {
 	return _elm_lang$http$Http$toTask(
-		_elm_lang$http$Http$getString(
-			A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/db_url')));
+		_lukewestby$elm_http_builder$HttpBuilder$toRequest(
+			A2(
+				_lukewestby$elm_http_builder$HttpBuilder$withExpect,
+				_elm_lang$http$Http$expectJson(_elm_lang$core$Json_Decode$bool),
+				_lukewestby$elm_http_builder$HttpBuilder$get(
+					A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/is_login_required')))));
 };
 var _ivanceras$diwata$Request_Auth$login = function (settings) {
 	var _p0 = A2(_elm_lang$core$Debug$log, 'settings: ', settings);
@@ -25313,19 +25385,23 @@ var _ivanceras$diwata$Page_Login$errorsDecoder = A2(
 var _ivanceras$diwata$Page_Login$initialModel = function (settings) {
 	return {
 		errors: {ctor: '[]'},
-		dbUrl: '',
+		username: '',
+		password: '',
 		settings: settings
 	};
 };
-var _ivanceras$diwata$Page_Login$Model = F3(
-	function (a, b, c) {
-		return {errors: a, dbUrl: b, settings: c};
+var _ivanceras$diwata$Page_Login$Model = F4(
+	function (a, b, c, d) {
+		return {errors: a, username: b, password: c, settings: d};
 	});
 var _ivanceras$diwata$Page_Login$LoginCompleted = function (a) {
 	return {ctor: 'LoginCompleted', _0: a};
 };
-var _ivanceras$diwata$Page_Login$SetDbUrl = function (a) {
-	return {ctor: 'SetDbUrl', _0: a};
+var _ivanceras$diwata$Page_Login$SetPassword = function (a) {
+	return {ctor: 'SetPassword', _0: a};
+};
+var _ivanceras$diwata$Page_Login$SetUsername = function (a) {
+	return {ctor: 'SetUsername', _0: a};
 };
 var _ivanceras$diwata$Page_Login$SubmitForm = {ctor: 'SubmitForm'};
 var _ivanceras$diwata$Page_Login$viewForm = A2(
@@ -25344,10 +25420,10 @@ var _ivanceras$diwata$Page_Login$viewForm = A2(
 				_0: _elm_lang$html$Html_Attributes$class('form-control-lg'),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$placeholder('db url'),
+					_0: _elm_lang$html$Html_Attributes$placeholder('username'),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onInput(_ivanceras$diwata$Page_Login$SetDbUrl),
+						_0: _elm_lang$html$Html_Events$onInput(_ivanceras$diwata$Page_Login$SetUsername),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -25356,18 +25432,37 @@ var _ivanceras$diwata$Page_Login$viewForm = A2(
 		_1: {
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$button,
+				_ivanceras$diwata$Views_Form$input,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary pull-xs-right'),
-					_1: {ctor: '[]'}
+					_0: _elm_lang$html$Html_Attributes$class('form-control-lg'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$placeholder('password'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onInput(_ivanceras$diwata$Page_Login$SetPassword),
+							_1: {ctor: '[]'}
+						}
+					}
 				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Connect'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary pull-xs-right'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Connect'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
 		}
 	});
 var _ivanceras$diwata$Page_Login$view = F2(
@@ -25442,28 +25537,39 @@ var _ivanceras$diwata$Page_Login$SetSettings = function (a) {
 };
 var _ivanceras$diwata$Page_Login$NoOp = {ctor: 'NoOp'};
 var _ivanceras$diwata$Page_Login$Password = {ctor: 'Password'};
-var _ivanceras$diwata$Page_Login$Email = {ctor: 'Email'};
+var _ivanceras$diwata$Page_Login$Username = {ctor: 'Username'};
 var _ivanceras$diwata$Page_Login$validate = _rtfeldman$elm_validate$Validate$all(
 	{
 		ctor: '::',
 		_0: function (_p0) {
 			return A2(
 				_rtfeldman$elm_validate$Validate$ifBlank,
-				A2(_ivanceras$diwata$Util_ops['=>'], _ivanceras$diwata$Page_Login$Email, 'dbUrl can\'t be blank.'),
+				A2(_ivanceras$diwata$Util_ops['=>'], _ivanceras$diwata$Page_Login$Username, 'username can\'t be blank.'),
 				function (_) {
-					return _.dbUrl;
+					return _.username;
 				}(_p0));
 		},
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: function (_p1) {
+				return A2(
+					_rtfeldman$elm_validate$Validate$ifBlank,
+					A2(_ivanceras$diwata$Util_ops['=>'], _ivanceras$diwata$Page_Login$Password, 'password can\'t be blank.'),
+					function (_) {
+						return _.password;
+					}(_p1));
+			},
+			_1: {ctor: '[]'}
+		}
 	});
 var _ivanceras$diwata$Page_Login$Form = {ctor: 'Form'};
 var _ivanceras$diwata$Page_Login$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
 			case 'SubmitForm':
-				var _p2 = _ivanceras$diwata$Page_Login$validate(model);
-				if (_p2.ctor === '[]') {
+				var _p3 = _ivanceras$diwata$Page_Login$validate(model);
+				if (_p3.ctor === '[]') {
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						A2(
@@ -25485,42 +25591,43 @@ var _ivanceras$diwata$Page_Login$update = F2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
 								model,
-								{errors: _p2}),
+								{errors: _p3}),
 							_elm_lang$core$Platform_Cmd$none),
 						_ivanceras$diwata$Page_Login$NoOp);
 				}
-			case 'SetDbUrl':
-				var _p3 = _p1._0;
+			case 'SetUsername':
+				var _p4 = _p2._0;
+				var updatedModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						username: _p4,
+						settings: A2(_ivanceras$diwata$Settings$setUsername, model.settings, _p4)
+					});
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
-					A2(
-						_ivanceras$diwata$Util_ops['=>'],
-						_elm_lang$core$Native_Utils.update(
-							model,
-							{
-								dbUrl: _p3,
-								settings: A2(_ivanceras$diwata$Settings$setDbUrl, model.settings, _p3)
-							}),
-						_elm_lang$core$Platform_Cmd$none),
+					A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, _elm_lang$core$Platform_Cmd$none),
+					_ivanceras$diwata$Page_Login$NoOp);
+			case 'SetPassword':
+				var _p5 = _p2._0;
+				var updatedModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						password: _p5,
+						settings: A2(_ivanceras$diwata$Settings$setPassword, model.settings, _p5)
+					});
+				return A2(
+					_ivanceras$diwata$Util_ops['=>'],
+					A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, _elm_lang$core$Platform_Cmd$none),
 					_ivanceras$diwata$Page_Login$NoOp);
 			default:
-				if (_p1._0.ctor === 'Err') {
+				if (_p2._0.ctor === 'Err') {
 					var errorMessages = function () {
-						var _p4 = _p1._0._0;
-						if (_p4.ctor === 'BadStatus') {
-							return A2(
-								_elm_lang$core$Result$withDefault,
-								{ctor: '[]'},
-								A2(
-									_elm_lang$core$Json_Decode$decodeString,
-									A2(_elm_lang$core$Json_Decode$field, 'errors', _ivanceras$diwata$Page_Login$errorsDecoder),
-									_p4._0.body));
+						var _p6 = _p2._0._0;
+						if (_p6.ctor === 'BadStatus') {
+							var _p7 = _elm_lang$core$Debug$log('Its a bad status');
+							return _p6._0.body;
 						} else {
-							return {
-								ctor: '::',
-								_0: 'unable to process registration',
-								_1: {ctor: '[]'}
-							};
+							return 'unable to process registration';
 						}
 					}();
 					return A2(
@@ -25530,12 +25637,11 @@ var _ivanceras$diwata$Page_Login$update = F2(
 							_elm_lang$core$Native_Utils.update(
 								model,
 								{
-									errors: A2(
-										_elm_lang$core$List$map,
-										function (errorMessage) {
-											return A2(_ivanceras$diwata$Util_ops['=>'], _ivanceras$diwata$Page_Login$Form, errorMessage);
-										},
-										errorMessages)
+									errors: {
+										ctor: '::',
+										_0: A2(_ivanceras$diwata$Util_ops['=>'], _ivanceras$diwata$Page_Login$Form, errorMessages),
+										_1: {ctor: '[]'}
+									}
 								}),
 							_elm_lang$core$Platform_Cmd$none),
 						_ivanceras$diwata$Page_Login$NoOp);
@@ -25811,16 +25917,19 @@ var _ivanceras$diwata$Request_Window_Delete$deleteRecords = F4(
 					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
 					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
 					A2(
-						_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
-						jsonBody,
-						_lukewestby$elm_http_builder$HttpBuilder$delete(
-							A2(
-								_ivanceras$diwata$Request_Helpers$apiUrl,
-								settings,
+						_ivanceras$diwata$Request_Window_Records$header,
+						settings,
+						A2(
+							_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
+							jsonBody,
+							_lukewestby$elm_http_builder$HttpBuilder$delete(
 								A2(
-									_elm_lang$core$Basics_ops['++'],
-									'/delete/',
-									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName))))))));
+									_ivanceras$diwata$Request_Helpers$apiUrl,
+									settings,
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'/delete/',
+										_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName)))))))));
 	});
 
 var _ivanceras$diwata$Views_Errors$styles = _elm_lang$html$Html_Attributes$style(
@@ -26399,12 +26508,22 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$view = F2(
 
 var _ivanceras$diwata$Widgets_FixDropdown$init = F4(
 	function (alignment, width, selected, list) {
-		return {opened: false, list: list, selected: selected, alignment: alignment, width: width};
+		return {
+			opened: false,
+			list: list,
+			selected: selected,
+			alignment: alignment,
+			width: width,
+			containerScroll: A2(_ivanceras$diwata$Util$Scroll, 0, 0)
+		};
 	});
-var _ivanceras$diwata$Widgets_FixDropdown$Model = F5(
-	function (a, b, c, d, e) {
-		return {opened: a, list: b, selected: c, alignment: d, width: e};
+var _ivanceras$diwata$Widgets_FixDropdown$Model = F6(
+	function (a, b, c, d, e, f) {
+		return {opened: a, list: b, selected: c, alignment: d, width: e, containerScroll: f};
 	});
+var _ivanceras$diwata$Widgets_FixDropdown$ContainerScrollChanged = function (a) {
+	return {ctor: 'ContainerScrollChanged', _0: a};
+};
 var _ivanceras$diwata$Widgets_FixDropdown$SelectionChanged = function (a) {
 	return {ctor: 'SelectionChanged', _0: a};
 };
@@ -26486,7 +26605,7 @@ var _ivanceras$diwata$Widgets_FixDropdown$update = F2(
 							model,
 							{opened: false}),
 						_elm_lang$core$Platform_Cmd$none);
-				default:
+				case 'SelectionChanged':
 					var newModel = _elm_lang$core$Native_Utils.update(
 						model,
 						{
@@ -26497,6 +26616,13 @@ var _ivanceras$diwata$Widgets_FixDropdown$update = F2(
 					msg = _v1;
 					model = _v2;
 					continue update;
+				default:
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{containerScroll: _p0._0, opened: false}),
+						_elm_lang$core$Platform_Cmd$none);
 			}
 		}
 	});
@@ -26584,6 +26710,17 @@ var _ivanceras$diwata$Widgets_FixDropdown$viewInputButton = F2(
 			});
 	});
 var _ivanceras$diwata$Widgets_FixDropdown$view = function (model) {
+	var padTop = 2;
+	var _p3 = function () {
+		var _p4 = _coreytrampe$elm_vendor$Vendor$prefix;
+		if (_p4.ctor === 'Webkit') {
+			return {ctor: '_Tuple2', _0: (0 - model.containerScroll.top) + padTop, _1: 0 - model.containerScroll.left};
+		} else {
+			return {ctor: '_Tuple2', _0: padTop, _1: 0};
+		}
+	}();
+	var marginTop = _p3._0;
+	var marginLeft = _p3._1;
 	var widgetWidth = model.width;
 	var alignment = model.alignment;
 	var alignmentString = _ivanceras$diwata$Data_Window_Widget$alignmentToString(alignment);
@@ -26598,7 +26735,23 @@ var _ivanceras$diwata$Widgets_FixDropdown$view = function (model) {
 					_0: 'width',
 					_1: _ivanceras$diwata$Util$px(widgetWidth)
 				},
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'margin-top',
+						_1: _ivanceras$diwata$Util$px(marginTop)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'margin-left',
+							_1: _ivanceras$diwata$Util$px(marginLeft)
+						},
+						_1: {ctor: '[]'}
+					}
+				}
 			}
 		});
 	return A2(
@@ -26718,8 +26871,8 @@ var _ivanceras$diwata$Views_Window_Field$listRecordToListString = F2(
 						return _elm_lang$core$Native_Utils.crashCase(
 							'Views.Window.Field',
 							{
-								start: {line: 717, column: 21},
-								end: {line: 722, column: 73}
+								start: {line: 706, column: 21},
+								end: {line: 711, column: 73}
 							},
 							_p2)('Only 1 pk is supported for now');
 					}
@@ -26781,7 +26934,7 @@ var _ivanceras$diwata$Views_Window_Field$calcWidgetSize = F3(
 			if (_p11.ctor === 'Short') {
 				return {ctor: '_Tuple3', _0: _ivanceras$diwata$Data_Window_Field$Short, _1: 200, _2: fieldHeight};
 			} else {
-				return {ctor: '_Tuple3', _0: _ivanceras$diwata$Data_Window_Field$Long, _1: 1000, _2: fieldHeight};
+				return {ctor: '_Tuple3', _0: _ivanceras$diwata$Data_Window_Field$Long, _1: allotedTabWidth - 400, _2: fieldHeight};
 			}
 		} else {
 			var width = _ivanceras$diwata$Data_Window_Field$widgetWidthListValue(field);
@@ -26823,6 +26976,9 @@ var _ivanceras$diwata$Views_Window_Field$Model = function (a) {
 			};
 		};
 	};
+};
+var _ivanceras$diwata$Views_Window_Field$AllotedTabWidthChanged = function (a) {
+	return {ctor: 'AllotedTabWidthChanged', _0: a};
 };
 var _ivanceras$diwata$Views_Window_Field$LookupChanged = function (a) {
 	return {ctor: 'LookupChanged', _0: a};
@@ -26870,8 +27026,8 @@ var _ivanceras$diwata$Views_Window_Field$viewDatePicker = F2(
 						return _elm_lang$core$Native_Utils.crashCase(
 							'Views.Window.Field',
 							{
-								start: {line: 785, column: 21},
-								end: {line: 799, column: 93}
+								start: {line: 774, column: 21},
+								end: {line: 788, column: 93}
 							},
 							_p14)(
 							A2(
@@ -27033,24 +27189,46 @@ var _ivanceras$diwata$Views_Window_Field$HtmlWidget = function (a) {
 var _ivanceras$diwata$Views_Window_Field$FixDropdown = function (a) {
 	return {ctor: 'FixDropdown', _0: a};
 };
+var _ivanceras$diwata$Views_Window_Field$updateFixDropdown = F2(
+	function (dropdownMsg, model) {
+		var _p29 = model.widget;
+		if (_p29.ctor === 'FixDropdown') {
+			var _p30 = A2(_ivanceras$diwata$Widgets_FixDropdown$update, dropdownMsg, _p29._0);
+			var updatedDropdown = _p30._0;
+			var subCmd = _p30._1;
+			return A2(
+				_ivanceras$diwata$Util_ops['=>'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{
+						widget: _ivanceras$diwata$Views_Window_Field$FixDropdown(updatedDropdown)
+					}),
+				A2(
+					_elm_lang$core$Platform_Cmd$map,
+					_ivanceras$diwata$Views_Window_Field$FixDropdownMsg(updatedDropdown),
+					subCmd));
+		} else {
+			return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+		}
+	});
 var _ivanceras$diwata$Views_Window_Field$TableDropdown = function (a) {
 	return {ctor: 'TableDropdown', _0: a};
 };
 var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 	function (allotedTabWidth, presentation, record, tab, field, maybeValue) {
 		var dataType = _ivanceras$diwata$Data_Window_Field$dataType(field);
-		var _p29 = A3(_ivanceras$diwata$Views_Window_Field$calcWidgetSize, allotedTabWidth, presentation, field);
-		var widthClass = _p29._0;
-		var widgetWidth = _p29._1;
-		var widgetHeight = _p29._2;
+		var _p31 = A3(_ivanceras$diwata$Views_Window_Field$calcWidgetSize, allotedTabWidth, presentation, field);
+		var widthClass = _p31._0;
+		var widgetWidth = _p31._1;
+		var widgetHeight = _p31._2;
 		var maybeValueString = function () {
-			var _p30 = maybeValue;
-			if (_p30.ctor === 'Just') {
-				if (_p30._0.ctor === 'Nil') {
+			var _p32 = maybeValue;
+			if (_p32.ctor === 'Just') {
+				if (_p32._0.ctor === 'Nil') {
 					return _elm_lang$core$Maybe$Nothing;
 				} else {
 					return _elm_lang$core$Maybe$Just(
-						_ivanceras$diwata$Data_Window_Value$valueToString(_p30._0));
+						_ivanceras$diwata$Data_Window_Value$valueToString(_p32._0));
 				}
 			} else {
 				return _elm_lang$core$Maybe$Nothing;
@@ -27070,38 +27248,31 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'width',
-						_1: function () {
-							var _p31 = widthClass;
-							if (_p31.ctor === 'Long') {
-								return '90%';
-							} else {
-								return _ivanceras$diwata$Util$px(widgetWidth);
-							}
-						}()
+						_1: _ivanceras$diwata$Util$px(widgetWidth)
 					},
 					_1: {ctor: '[]'}
 				}
 			});
 		var recordId = function () {
-			var _p32 = record;
-			if (_p32.ctor === 'Just') {
+			var _p33 = record;
+			if (_p33.ctor === 'Just') {
 				return _elm_lang$core$Maybe$Just(
-					A2(_ivanceras$diwata$Data_Window_Tab$recordId, _p32._0, tab));
+					A2(_ivanceras$diwata$Data_Window_Tab$recordId, _p33._0, tab));
 			} else {
 				return _elm_lang$core$Maybe$Nothing;
 			}
 		}();
 		var recordIdString = function () {
-			var _p33 = recordId;
-			if (_p33.ctor === 'Just') {
-				return _ivanceras$diwata$Data_Window_Record$idToString(_p33._0);
+			var _p34 = recordId;
+			if (_p34.ctor === 'Just') {
+				return _ivanceras$diwata$Data_Window_Record$idToString(_p34._0);
 			} else {
 				return '';
 			}
 		}();
 		var columnName = _ivanceras$diwata$Data_Window_Field$columnName(field);
-		var _p34 = widget;
-		switch (_p34.ctor) {
+		var _p35 = widget;
+		switch (_p35.ctor) {
 			case 'IntegerTextbox':
 				return _ivanceras$diwata$Views_Window_Field$HtmlWidget(
 					A2(
@@ -27198,8 +27369,8 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 						{ctor: '[]'}));
 			case 'PrimaryUrlLink':
 				var tableName = tab.tableName;
-				var _p35 = presentation;
-				if (_p35.ctor === 'InList') {
+				var _p36 = presentation;
+				if (_p36.ctor === 'InList') {
 					return _ivanceras$diwata$Views_Window_Field$HtmlWidget(
 						A2(
 							_elm_lang$html$Html$div,
@@ -27279,8 +27450,8 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 							{ctor: '[]'}));
 				}
 			case 'MultilineText':
-				var _p36 = presentation;
-				if (_p36.ctor === 'InCard') {
+				var _p37 = presentation;
+				if (_p37.ctor === 'InCard') {
 					return _ivanceras$diwata$Views_Window_Field$HtmlWidget(
 						A2(
 							_elm_lang$html$Html$textarea,
@@ -27442,12 +27613,12 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 						{ctor: '[]'}));
 			case 'Checkbox':
 				var viewCheckbox = function () {
-					var _p37 = maybeValue;
-					if (_p37.ctor === 'Just') {
+					var _p38 = maybeValue;
+					if (_p38.ctor === 'Just') {
 						var checkedValue = function () {
-							var _p38 = _p37._0;
-							if (_p38.ctor === 'Bool') {
-								return _elm_lang$html$Html_Attributes$checked(_p38._0);
+							var _p39 = _p38._0;
+							if (_p39.ctor === 'Bool') {
+								return _elm_lang$html$Html_Attributes$checked(_p39._0);
 							} else {
 								return _elm_lang$html$Html_Attributes$checked(false);
 							}
@@ -27531,22 +27702,22 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 				return _ivanceras$diwata$Views_Window_Field$HtmlWidget(
 					A2(_ivanceras$diwata$Views_Window_Field$viewDatePicker, styles, maybeValue));
 			case 'FixDropdown':
-				var fixDropdownModel = A4(_ivanceras$diwata$Widgets_FixDropdown$init, alignment, widgetWidth, maybeValueString, _p34._0);
+				var fixDropdownModel = A4(_ivanceras$diwata$Widgets_FixDropdown$init, alignment, widgetWidth, maybeValueString, _p35._0);
 				return _ivanceras$diwata$Views_Window_Field$FixDropdown(fixDropdownModel);
 			case 'TagSelection':
 				var tags = function () {
-					var _p39 = maybeValue;
-					if (_p39.ctor === 'Just') {
-						var _p40 = _p39._0;
-						if (_p40.ctor === 'Array') {
-							var _p41 = _p40._0;
-							switch (_p41.ctor) {
+					var _p40 = maybeValue;
+					if (_p40.ctor === 'Just') {
+						var _p41 = _p40._0;
+						if (_p41.ctor === 'Array') {
+							var _p42 = _p41._0;
+							switch (_p42.ctor) {
 								case 'TextArray':
-									return _p41._0;
+									return _p42._0;
 								case 'IntArray':
-									return A2(_elm_lang$core$List$map, _elm_lang$core$Basics$toString, _p41._0);
+									return A2(_elm_lang$core$List$map, _elm_lang$core$Basics$toString, _p42._0);
 								default:
-									return A2(_elm_lang$core$List$map, _elm_lang$core$Basics$toString, _p41._0);
+									return A2(_elm_lang$core$List$map, _elm_lang$core$Basics$toString, _p42._0);
 							}
 						} else {
 							return {ctor: '[]'};
@@ -27568,7 +27739,6 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 				var fileInputLabel = A2(_elm_lang$core$Basics_ops['++'], 'file-input-', columnName);
 				var iconSize = 20;
 				var iconColor = _ivanceras$diwata$Constant$iconColor;
-				var _p42 = A2(_elm_lang$core$Debug$log, 'fileupload for', valueString);
 				var _p43 = presentation;
 				if (_p43.ctor === 'InList') {
 					return _ivanceras$diwata$Views_Window_Field$HtmlWidget(
@@ -27754,7 +27924,7 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 							}));
 				}
 			case 'Radiogroup':
-				var _p46 = _p34._0;
+				var _p46 = _p35._0;
 				var _p44 = presentation;
 				if (_p44.ctor === 'InCard') {
 					return _ivanceras$diwata$Views_Window_Field$HtmlWidget(
@@ -27881,10 +28051,10 @@ var _ivanceras$diwata$Views_Window_Field$createWidget = F6(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.Field',
 					{
-						start: {line: 297, column: 5},
-						end: {line: 656, column: 79}
+						start: {line: 289, column: 5},
+						end: {line: 645, column: 79}
 					},
-					_p34)(
+					_p35)(
 					A2(
 						_elm_lang$core$Basics_ops['++'],
 						'unable to handle widget:',
@@ -27942,16 +28112,6 @@ var _ivanceras$diwata$Views_Window_Field$init = F7(
 			lookup: lookup
 		};
 	});
-var _ivanceras$diwata$Views_Window_Field$updateWidgetValue = F2(
-	function (model, value) {
-		var allotedTabWidth = model.allotedTabWidth;
-		var field = model.field;
-		var tab = model.tab;
-		var record = model.record;
-		var presentation = model.presentation;
-		var widget = model.widget;
-		return A6(_ivanceras$diwata$Views_Window_Field$createWidget, allotedTabWidth, presentation, record, tab, field, value);
-	});
 var _ivanceras$diwata$Views_Window_Field$updateDropdownDisplay = F2(
 	function (dropdownMsg, model) {
 		var _p52 = model.widget;
@@ -27974,25 +28134,100 @@ var _ivanceras$diwata$Views_Window_Field$updateDropdownDisplay = F2(
 			return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 		}
 	});
+var _ivanceras$diwata$Views_Window_Field$updateWidgetValue = F2(
+	function (model, value) {
+		var allotedTabWidth = model.allotedTabWidth;
+		var field = model.field;
+		var tab = model.tab;
+		var record = model.record;
+		var presentation = model.presentation;
+		var widget = model.widget;
+		var _p54 = widget;
+		switch (_p54.ctor) {
+			case 'TableDropdown':
+				var updatedWidget = function () {
+					var _p55 = value;
+					if (_p55.ctor === 'Just') {
+						var _p56 = A2(
+							_ivanceras$diwata$Widgets_DropdownDisplay$update,
+							_ivanceras$diwata$Widgets_DropdownDisplay$SelectionChanged(_p55._0),
+							_p54._0);
+						var updatedWidget = _p56._0;
+						var subCmd = _p56._1;
+						return _ivanceras$diwata$Views_Window_Field$TableDropdown(updatedWidget);
+					} else {
+						return widget;
+					}
+				}();
+				return A2(
+					_ivanceras$diwata$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{widget: updatedWidget}),
+					_elm_lang$core$Platform_Cmd$none);
+			case 'FixDropdown':
+				var updatedWidget = function () {
+					var _p57 = value;
+					if (_p57.ctor === 'Just') {
+						var _p58 = function () {
+							var _p59 = _p57._0;
+							if (_p59.ctor === 'Text') {
+								return A2(
+									_ivanceras$diwata$Widgets_FixDropdown$update,
+									_ivanceras$diwata$Widgets_FixDropdown$SelectionChanged(_p59._0),
+									_p54._0);
+							} else {
+								return _elm_lang$core$Native_Utils.crashCase(
+									'Views.Window.Field',
+									{
+										start: {line: 1153, column: 37},
+										end: {line: 1158, column: 100}
+									},
+									_p59)('Fix dropdown other value is not supported');
+							}
+						}();
+						var updatedWidget = _p58._0;
+						var subCmd = _p58._1;
+						return _ivanceras$diwata$Views_Window_Field$FixDropdown(updatedWidget);
+					} else {
+						return widget;
+					}
+				}();
+				return A2(
+					_ivanceras$diwata$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{widget: updatedWidget}),
+					_elm_lang$core$Platform_Cmd$none);
+			default:
+				var updatedWidget = A6(_ivanceras$diwata$Views_Window_Field$createWidget, allotedTabWidth, presentation, record, tab, field, value);
+				return A2(
+					_ivanceras$diwata$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{widget: updatedWidget}),
+					_elm_lang$core$Platform_Cmd$none);
+		}
+	});
 var _ivanceras$diwata$Views_Window_Field$update = F2(
 	function (msg, model) {
-		var _p54 = msg;
-		switch (_p54.ctor) {
+		var _p61 = msg;
+		switch (_p61.ctor) {
 			case 'DropdownDisplayMsg':
-				if (_p54._1.ctor === 'SelectionChanged') {
-					var _p56 = _p54._1._0;
-					var _p55 = A2(
+				if (_p61._1.ctor === 'SelectionChanged') {
+					var _p63 = _p61._1._0;
+					var _p62 = A2(
 						_ivanceras$diwata$Widgets_DropdownDisplay$update,
-						_ivanceras$diwata$Widgets_DropdownDisplay$SelectionChanged(_p56),
-						_p54._0);
-					var newDropdown = _p55._0;
-					var subCmd = _p55._1;
+						_ivanceras$diwata$Widgets_DropdownDisplay$SelectionChanged(_p63),
+						_p61._0);
+					var newDropdown = _p62._0;
+					var subCmd = _p62._1;
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
 							model,
 							{
-								editValue: _elm_lang$core$Maybe$Just(_p56),
+								editValue: _elm_lang$core$Maybe$Just(_p63),
 								widget: _ivanceras$diwata$Views_Window_Field$TableDropdown(newDropdown)
 							}),
 						A2(
@@ -28000,9 +28235,9 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 							_ivanceras$diwata$Views_Window_Field$DropdownDisplayMsg(newDropdown),
 							subCmd));
 				} else {
-					var _p57 = A2(_ivanceras$diwata$Widgets_DropdownDisplay$update, _p54._1, _p54._0);
-					var newDropdown = _p57._0;
-					var subCmd = _p57._1;
+					var _p64 = A2(_ivanceras$diwata$Widgets_DropdownDisplay$update, _p61._1, _p61._0);
+					var newDropdown = _p64._0;
+					var subCmd = _p64._1;
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
@@ -28016,11 +28251,11 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 							subCmd));
 				}
 			case 'FixDropdownMsg':
-				var _p58 = model.widget;
-				if (_p58.ctor === 'FixDropdown') {
-					var _p59 = A2(_ivanceras$diwata$Widgets_FixDropdown$update, _p54._1, _p58._0);
-					var newFix = _p59._0;
-					var subCmd = _p59._1;
+				var _p65 = model.widget;
+				if (_p65.ctor === 'FixDropdown') {
+					var _p66 = A2(_ivanceras$diwata$Widgets_FixDropdown$update, _p61._1, _p65._0);
+					var newFix = _p66._0;
+					var subCmd = _p66._1;
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
@@ -28036,36 +28271,36 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 					return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 				}
 			case 'IntegerValueChanged':
-				var intValue = _elm_lang$core$String$toInt(_p54._0);
+				var intValue = _elm_lang$core$String$toInt(_p61._0);
 				var dataType = _ivanceras$diwata$Data_Window_Field$dataType(model.field);
 				var value = function () {
-					var _p60 = dataType;
-					switch (_p60.ctor) {
+					var _p67 = dataType;
+					switch (_p67.ctor) {
 						case 'Tinyint':
-							var _p61 = intValue;
-							if (_p61.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Int(_p61._0);
+							var _p68 = intValue;
+							if (_p68.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Int(_p68._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Smallint':
-							var _p62 = intValue;
-							if (_p62.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Int(_p62._0);
+							var _p69 = intValue;
+							if (_p69.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Int(_p69._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Int':
-							var _p63 = intValue;
-							if (_p63.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Int(_p63._0);
+							var _p70 = intValue;
+							if (_p70.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Int(_p70._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Bigint':
-							var _p64 = intValue;
-							if (_p64.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Int(_p64._0);
+							var _p71 = intValue;
+							if (_p71.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Int(_p71._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
@@ -28082,36 +28317,36 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'DecimalValueChanged':
-				var floatValue = _elm_lang$core$String$toFloat(_p54._0);
+				var floatValue = _elm_lang$core$String$toFloat(_p61._0);
 				var dataType = _ivanceras$diwata$Data_Window_Field$dataType(model.field);
 				var value = function () {
-					var _p65 = dataType;
-					switch (_p65.ctor) {
+					var _p72 = dataType;
+					switch (_p72.ctor) {
 						case 'Double':
-							var _p66 = floatValue;
-							if (_p66.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Double(_p66._0);
+							var _p73 = floatValue;
+							if (_p73.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Double(_p73._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Float':
-							var _p67 = floatValue;
-							if (_p67.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Float(_p67._0);
+							var _p74 = floatValue;
+							if (_p74.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Float(_p74._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Real':
-							var _p68 = floatValue;
-							if (_p68.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Float(_p68._0);
+							var _p75 = floatValue;
+							if (_p75.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Float(_p75._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Numeric':
-							var _p69 = floatValue;
-							if (_p69.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$BigDecimal(_p69._0);
+							var _p76 = floatValue;
+							if (_p76.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$BigDecimal(_p76._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
@@ -28128,36 +28363,36 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'StringValueChanged':
-				var _p74 = _p54._0;
+				var _p81 = _p61._0;
 				var dataType = _ivanceras$diwata$Data_Window_Field$dataType(model.field);
 				var value = function () {
-					var _p70 = dataType;
-					switch (_p70.ctor) {
+					var _p77 = dataType;
+					switch (_p77.ctor) {
 						case 'Double':
-							var _p71 = _elm_lang$core$String$toFloat(_p74);
-							if (_p71.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Double(_p71._0);
+							var _p78 = _elm_lang$core$String$toFloat(_p81);
+							if (_p78.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Double(_p78._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Float':
-							var _p72 = _elm_lang$core$String$toFloat(_p74);
-							if (_p72.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Float(_p72._0);
+							var _p79 = _elm_lang$core$String$toFloat(_p81);
+							if (_p79.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Float(_p79._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Int':
-							var _p73 = _elm_lang$core$String$toInt(_p74);
-							if (_p73.ctor === 'Ok') {
-								return _ivanceras$diwata$Data_Window_Value$Int(_p73._0);
+							var _p80 = _elm_lang$core$String$toInt(_p81);
+							if (_p80.ctor === 'Ok') {
+								return _ivanceras$diwata$Data_Window_Value$Int(_p80._0);
 							} else {
 								return _ivanceras$diwata$Data_Window_Value$Nil;
 							}
 						case 'Uuid':
-							return _ivanceras$diwata$Data_Window_Value$Uuid(_p74);
+							return _ivanceras$diwata$Data_Window_Value$Uuid(_p81);
 						default:
-							return _ivanceras$diwata$Data_Window_Value$Text(_p74);
+							return _ivanceras$diwata$Data_Window_Value$Text(_p81);
 					}
 				}();
 				return A2(
@@ -28170,21 +28405,21 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 					_elm_lang$core$Platform_Cmd$none);
 			case 'TimestampValueChanged':
 				var value = function () {
-					var _p75 = _elm_lang$core$Date$fromString(_p54._0);
-					if (_p75.ctor === 'Ok') {
-						return _p75._0;
+					var _p82 = _elm_lang$core$Date$fromString(_p61._0);
+					if (_p82.ctor === 'Ok') {
+						return _p82._0;
 					} else {
 						return _elm_lang$core$Native_Utils.crashCase(
 							'Views.Window.Field',
 							{
-								start: {line: 1014, column: 21},
-								end: {line: 1019, column: 79}
+								start: {line: 1004, column: 21},
+								end: {line: 1009, column: 79}
 							},
-							_p75)(
+							_p82)(
 							A2(
 								_elm_lang$core$Basics_ops['++'],
 								'unable to parse date',
-								_elm_lang$core$Basics$toString(_p75._0)));
+								_elm_lang$core$Basics$toString(_p82._0)));
 					}
 				}();
 				var dateValue = _ivanceras$diwata$Data_Window_Value$Timestamp(value);
@@ -28197,7 +28432,7 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'BoolValueChanged':
-				var value = _ivanceras$diwata$Data_Window_Value$Bool(_p54._0);
+				var value = _ivanceras$diwata$Data_Window_Value$Bool(_p61._0);
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -28207,28 +28442,21 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'ResetChanges':
-				var updatedWidget = A2(_ivanceras$diwata$Views_Window_Field$updateWidgetValue, model, model.value);
-				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{editValue: model.value, widget: updatedWidget}),
-					_elm_lang$core$Platform_Cmd$none);
-			case 'SetValue':
-				var _p77 = _p54._0;
-				var updatedWidget = A2(
-					_ivanceras$diwata$Views_Window_Field$updateWidgetValue,
+				var updatedModel = _elm_lang$core$Native_Utils.update(
 					model,
-					_elm_lang$core$Maybe$Just(_p77));
+					{editValue: model.value});
+				return A2(_ivanceras$diwata$Views_Window_Field$updateWidgetValue, updatedModel, updatedModel.value);
+			case 'SetValue':
+				var _p84 = _p61._0;
+				var updatedModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						editValue: _elm_lang$core$Maybe$Just(_p84)
+					});
 				return A2(
-					_ivanceras$diwata$Util_ops['=>'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{
-							editValue: _elm_lang$core$Maybe$Just(_p77),
-							widget: updatedWidget
-						}),
-					_elm_lang$core$Platform_Cmd$none);
+					_ivanceras$diwata$Views_Window_Field$updateWidgetValue,
+					updatedModel,
+					_elm_lang$core$Maybe$Just(_p84));
 			case 'PrimaryLinkClicked':
 				return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 			case 'FieldFocused':
@@ -28246,21 +28474,47 @@ var _ivanceras$diwata$Views_Window_Field$update = F2(
 						{isFocused: false}),
 					_elm_lang$core$Platform_Cmd$none);
 			case 'ContainerScrollChanged':
-				var _p78 = _p54._0;
+				var _p87 = _p61._0;
 				var updatedModel = _elm_lang$core$Native_Utils.update(
 					model,
-					{containerScroll: _p78});
-				return A2(
+					{containerScroll: _p87});
+				var _p85 = A2(
 					_ivanceras$diwata$Views_Window_Field$updateDropdownDisplay,
-					_ivanceras$diwata$Widgets_DropdownDisplay$ContainerScrollChanged(_p78),
+					_ivanceras$diwata$Widgets_DropdownDisplay$ContainerScrollChanged(_p87),
 					updatedModel);
-			default:
+				var updatedModel2 = _p85._0;
+				var subCmd2 = _p85._1;
+				var _p86 = A2(
+					_ivanceras$diwata$Views_Window_Field$updateFixDropdown,
+					_ivanceras$diwata$Widgets_FixDropdown$ContainerScrollChanged(_p87),
+					updatedModel2);
+				var updatedModel3 = _p86._0;
+				var subCmd3 = _p86._1;
+				return A2(
+					_ivanceras$diwata$Util_ops['=>'],
+					updatedModel3,
+					_elm_lang$core$Platform_Cmd$batch(
+						{
+							ctor: '::',
+							_0: subCmd2,
+							_1: {
+								ctor: '::',
+								_0: subCmd3,
+								_1: {ctor: '[]'}
+							}
+						}));
+			case 'LookupChanged':
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
 						model,
-						{lookup: _p54._0}),
+						{lookup: _p61._0}),
 					_elm_lang$core$Platform_Cmd$none);
+			default:
+				var updatedModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{allotedTabWidth: _p61._0});
+				return A2(_ivanceras$diwata$Views_Window_Field$updateWidgetValue, updatedModel, updatedModel.editValue);
 		}
 	});
 
@@ -28853,10 +29107,13 @@ var _ivanceras$diwata$Request_Window_DataUpdate$updateTab = F4(
 					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
 					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_Record$rowsDecoder),
 					A2(
-						_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
-						jsonBody,
-						_lukewestby$elm_http_builder$HttpBuilder$post(
-							A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/tab_changeset/'))))));
+						_ivanceras$diwata$Request_Window_Records$header,
+						settings,
+						A2(
+							_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
+							jsonBody,
+							_lukewestby$elm_http_builder$HttpBuilder$post(
+								A2(_ivanceras$diwata$Request_Helpers$apiUrl, settings, '/tab_changeset/')))))));
 	});
 var _ivanceras$diwata$Request_Window_DataUpdate$updateRecord = F4(
 	function (settings, maybeToken, tableName, recordChangeset) {
@@ -28870,16 +29127,19 @@ var _ivanceras$diwata$Request_Window_DataUpdate$updateRecord = F4(
 					_lukewestby$elm_http_builder$HttpBuilder$withExpect,
 					_elm_lang$http$Http$expectJson(_ivanceras$diwata$Data_Window_RecordDetail$decoder),
 					A2(
-						_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
-						jsonBody,
-						_lukewestby$elm_http_builder$HttpBuilder$post(
-							A2(
-								_ivanceras$diwata$Request_Helpers$apiUrl,
-								settings,
+						_ivanceras$diwata$Request_Window_Records$header,
+						settings,
+						A2(
+							_lukewestby$elm_http_builder$HttpBuilder$withJsonBody,
+							jsonBody,
+							_lukewestby$elm_http_builder$HttpBuilder$post(
 								A2(
-									_elm_lang$core$Basics_ops['++'],
-									'/record_changeset/',
-									_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName))))))));
+									_ivanceras$diwata$Request_Helpers$apiUrl,
+									settings,
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'/record_changeset/',
+										_ivanceras$diwata$Data_Window_TableName$tableNameToString(tableName)))))))));
 	});
 
 var _ivanceras$diwata$Views_Window_LinkRow$dropdownPageRequestNeeded = function (model) {
@@ -32306,7 +32566,6 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 									page);
 							},
 							model.pageRows);
-						var _p36 = A2(_elm_lang$core$Debug$log, 'unlinked', selected);
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
@@ -32314,14 +32573,14 @@ var _ivanceras$diwata$Views_Window_Tab$update = F2(
 								{unlinked: selected, pageRows: updatedPageRows}),
 							_elm_lang$core$Platform_Cmd$none);
 					default:
-						var _p37 = A2(_elm_lang$core$Debug$log, 'toolbarMsg', _p20._0);
+						var _p36 = A2(_elm_lang$core$Debug$log, 'toolbarMsg', _p20._0);
 						return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 				}
 			default:
-				var _p40 = _p20._0;
-				var updatedQuery = model.isMultiSort ? A2(_ivanceras$diwata$Data_Query$updateSort, _p40, model.query) : A2(_ivanceras$diwata$Data_Query$setColumnSort, _p40, model.query);
-				var _p38 = A2(_elm_lang$core$Debug$log, 'tab updatedQuery: ', updatedQuery);
-				var _p39 = A2(_elm_lang$core$Debug$log, 'toggleSort: ', _p40);
+				var _p39 = _p20._0;
+				var updatedQuery = model.isMultiSort ? A2(_ivanceras$diwata$Data_Query$updateSort, _p39, model.query) : A2(_ivanceras$diwata$Data_Query$setColumnSort, _p39, model.query);
+				var _p37 = A2(_elm_lang$core$Debug$log, 'tab updatedQuery: ', updatedQuery);
+				var _p38 = A2(_elm_lang$core$Debug$log, 'toggleSort: ', _p39);
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -32341,9 +32600,9 @@ var _ivanceras$diwata$Views_Window_Tab$ListRowScrolled = function (a) {
 };
 var _ivanceras$diwata$Views_Window_Tab$view = function (model) {
 	var tabType = model.tabType;
-	var _p41 = model.size;
-	var width = _p41._0;
-	var height = _p41._1;
+	var _p40 = model.size;
+	var width = _p40._0;
+	var height = _p40._1;
 	var adjustedWidth = A2(_ivanceras$diwata$Views_Window_Tab$adjustWidth, width, model);
 	var toolbarModel = {
 		selected: _ivanceras$diwata$Views_Window_Tab$selectedRowCount(model),
@@ -32353,8 +32612,8 @@ var _ivanceras$diwata$Views_Window_Tab$view = function (model) {
 		multiColumnSort: model.isMultiSort
 	};
 	var viewToolbar = function () {
-		var _p42 = tabType;
-		switch (_p42.ctor) {
+		var _p41 = tabType;
+		switch (_p41.ctor) {
 			case 'InMain':
 				return A2(
 					_elm_lang$html$Html$map,
@@ -32531,30 +32790,24 @@ var _ivanceras$diwata$Views_Window$viewErrors = function (model) {
 			},
 			model.errors));
 };
-var _ivanceras$diwata$Views_Window$calcMainWindowSize = function (browserSize) {
-	var browserWidth = _elm_lang$core$Basics$toFloat(browserSize.width);
-	var browserHeight = _elm_lang$core$Basics$toFloat(browserSize.height);
-	var sidebarWidth = 220;
-	var totalWidthDeductions = sidebarWidth;
-	var tabNameHeight = 41;
-	var bannerHeight = 100;
-	var totalHeightDeductions = bannerHeight + tabNameHeight;
-	return {ctor: '_Tuple2', _0: browserWidth - totalWidthDeductions, _1: browserHeight - totalHeightDeductions};
-};
-var _ivanceras$diwata$Views_Window$calcMainTabSize = function (browserSize) {
+var _ivanceras$diwata$Views_Window$calcMainTabSize = function (containerSize) {
 	var marginBottom = 60;
 	var sideMargins = 60;
 	var widthDeductions = sideMargins;
 	var tabColumnHeights = 70;
 	var toolbarHeight = 90.0;
 	var heightDeductions = (toolbarHeight + tabColumnHeights) + marginBottom;
-	var _p0 = _ivanceras$diwata$Views_Window$calcMainWindowSize(browserSize);
+	var _p0 = {
+		ctor: '_Tuple2',
+		_0: _elm_lang$core$Basics$toFloat(containerSize.width),
+		_1: _elm_lang$core$Basics$toFloat(containerSize.height)
+	};
 	var mainWindowWidth = _p0._0;
 	var mainWindowHeight = _p0._1;
 	return {ctor: '_Tuple2', _0: mainWindowWidth - widthDeductions, _1: mainWindowHeight - heightDeductions};
 };
-var _ivanceras$diwata$Views_Window$init = F5(
-	function (settings, session, tableName, window, arenaArg) {
+var _ivanceras$diwata$Views_Window$init = F6(
+	function (settings, session, tableName, window, arenaArg, containerSize) {
 		var handleLoadError = F2(
 			function (s, e) {
 				var _p1 = A2(
@@ -32563,7 +32816,6 @@ var _ivanceras$diwata$Views_Window$init = F5(
 					e);
 				return A2(_ivanceras$diwata$Page_Errored$pageLoadError, _ivanceras$diwata$Views_Page$Other, 'Window is currently unavailable.');
 			});
-		var getBrowserSize = _elm_lang$window$Window$size;
 		var query = arenaArg.query;
 		var selectedRecordId = _elm_lang$core$Maybe$Nothing;
 		var maybeAuthToken = A2(
@@ -32585,16 +32837,16 @@ var _ivanceras$diwata$Views_Window$init = F5(
 		var mainTabTask = A2(
 			_elm_lang$core$Task$mapError,
 			handleLoadError('in mainTabTask'),
-			A4(
-				_elm_lang$core$Task$map3,
-				F3(
-					function (records, size, lookup) {
+			A3(
+				_elm_lang$core$Task$map2,
+				F2(
+					function (records, lookup) {
 						return A9(
 							_ivanceras$diwata$Views_Window_Tab$init,
 							arenaArg,
 							settings,
 							selectedRecordId,
-							_ivanceras$diwata$Views_Window$calcMainTabSize(size),
+							_ivanceras$diwata$Views_Window$calcMainTabSize(containerSize),
 							query,
 							window.mainTab,
 							_ivanceras$diwata$Data_Window_Tab$InMain,
@@ -32602,7 +32854,6 @@ var _ivanceras$diwata$Views_Window$init = F5(
 							lookup);
 					}),
 				loadRecords,
-				getBrowserSize,
 				loadWindowLookups));
 		return A3(
 			_elm_lang$core$Task$map2,
@@ -32616,16 +32867,20 @@ var _ivanceras$diwata$Views_Window$init = F5(
 						lookup: lookup,
 						arenaArg: arenaArg,
 						dropdownPageRequestInFlight: false,
-						settings: settings
+						settings: settings,
+						containerSize: containerSize
 					};
 				}),
 			mainTabTask,
 			loadWindowLookups);
 	});
-var _ivanceras$diwata$Views_Window$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {errors: a, tableName: b, mainTab: c, window: d, lookup: e, arenaArg: f, dropdownPageRequestInFlight: g, settings: h};
+var _ivanceras$diwata$Views_Window$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {errors: a, tableName: b, mainTab: c, window: d, lookup: e, arenaArg: f, dropdownPageRequestInFlight: g, settings: h, containerSize: i};
 	});
+var _ivanceras$diwata$Views_Window$ContainerSizeChanged = function (a) {
+	return {ctor: 'ContainerSizeChanged', _0: a};
+};
 var _ivanceras$diwata$Views_Window$LookupNextPageErrored = function (a) {
 	return {ctor: 'LookupNextPageErrored', _0: a};
 };
@@ -32732,20 +32987,11 @@ var _ivanceras$diwata$Views_Window$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
 			ctor: '::',
-			_0: _elm_lang$window$Window$resizes(
-				function (size) {
-					return _ivanceras$diwata$Views_Window$TabMsg(
-						_ivanceras$diwata$Views_Window_Tab$SetSize(
-							_ivanceras$diwata$Views_Window$calcMainTabSize(size)));
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$core$Platform_Sub$map,
-					_ivanceras$diwata$Views_Window$TabMsg,
-					_ivanceras$diwata$Views_Window_Tab$subscriptions(model.mainTab)),
-				_1: {ctor: '[]'}
-			}
+			_0: A2(
+				_elm_lang$core$Platform_Sub$map,
+				_ivanceras$diwata$Views_Window$TabMsg,
+				_ivanceras$diwata$Views_Window_Tab$subscriptions(model.mainTab)),
+			_1: {ctor: '[]'}
 		});
 };
 var _ivanceras$diwata$Views_Window$CloseWindow = {ctor: 'CloseWindow'};
@@ -32771,8 +33017,8 @@ var _ivanceras$diwata$Views_Window$requestDeleteRecords = F3(
 			_elm_lang$http$Http$toTask(
 				A4(_ivanceras$diwata$Request_Window_Delete$deleteRecords, settings, _elm_lang$core$Maybe$Nothing, tableName, recordIds)));
 	});
-var _ivanceras$diwata$Views_Window$update = F3(
-	function (session, msg, model) {
+var _ivanceras$diwata$Views_Window$update = F2(
+	function (msg, model) {
 		var arenaArg = model.arenaArg;
 		var mainTab = model.mainTab;
 		var mainTableName = mainTab.tab.tableName;
@@ -32915,16 +33161,26 @@ var _ivanceras$diwata$Views_Window$update = F3(
 							_ivanceras$diwata$Views_Window_Row$AllFieldMsg(
 								_ivanceras$diwata$Views_Window_Field$LookupChanged(updatedLookup))),
 						updatedModel);
-				default:
+				case 'LookupNextPageErrored':
 					return A2(
 						_elm_lang$core$Native_Utils.crash(
 							'Views.Window',
 							{
-								start: {line: 392, column: 13},
-								end: {line: 392, column: 24}
+								start: {line: 353, column: 13},
+								end: {line: 353, column: 24}
 							}),
 						'Error loading next page lookup',
 						_p6._0);
+				default:
+					var _p18 = _p6._0;
+					var tabSize = _ivanceras$diwata$Views_Window$calcMainTabSize(_p18);
+					var updatedModel = _elm_lang$core$Native_Utils.update(
+						model,
+						{containerSize: _p18});
+					return A2(
+						_ivanceras$diwata$Views_Window$updateMainTab,
+						_ivanceras$diwata$Views_Window_Tab$SetSize(tabSize),
+						updatedModel);
 			}
 		} while(false);
 		var _p16 = A2(_ivanceras$diwata$Views_Window_Tab$update, _p6._0, model.mainTab);
@@ -33004,21 +33260,25 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$getPosition = function (model)
 	}
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$allotedSize = F2(
-	function (isMaximized, browserSize) {
+	function (isMaximized, containerSize) {
 		var fixMarginBottom = 60;
 		var marginBottom = isMaximized ? (fixMarginBottom + 0) : (fixMarginBottom + 40);
 		var totalHeightDeductions = marginBottom;
 		var sideMargins = 60;
 		var totalWidthDeductions = isMaximized ? sideMargins : (_ivanceras$diwata$Constant$detailedMarginLeft + sideMargins);
-		var _p8 = _ivanceras$diwata$Views_Window$calcMainWindowSize(browserSize);
+		var _p8 = {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Basics$toFloat(containerSize.width),
+			_1: _elm_lang$core$Basics$toFloat(containerSize.height)
+		};
 		var width = _p8._0;
 		var height = _p8._1;
 		return {ctor: '_Tuple2', _0: width - totalWidthDeductions, _1: height - totalHeightDeductions};
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights = F4(
-	function (window, position, isMaximized, browserSize) {
+	function (window, position, isMaximized, containerSize) {
 		var mainRecordHeight = _elm_lang$core$Basics$toFloat(position.y);
-		var _p9 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, browserSize);
+		var _p9 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, containerSize);
 		var width = _p9._0;
 		var height = _p9._1;
 		var margins = 0;
@@ -33036,7 +33296,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights = F4(
 		return {ctor: '_Tuple2', _0: clampMainRecordHeight, _1: clampDetailRecordHeight};
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize = function (model) {
-	return A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, model.isMaximized, model.browserSize);
+	return A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, model.isMaximized, model.containerSize);
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$createFields = F5(
 	function (allotedTabWidth, action, tab, lookup, record) {
@@ -33099,8 +33359,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$createOneOneFields = F5(
 					return _elm_lang$core$Native_Utils.crashCase(
 						'Views.Window.DetailedRecord',
 						{
-							start: {line: 544, column: 13},
-							end: {line: 549, column: 59}
+							start: {line: 538, column: 13},
+							end: {line: 543, column: 59}
 						},
 						_p14)('There should be a oneTab');
 				}
@@ -33152,8 +33412,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$splitPercentage = function (mo
 	return dragPosition / allotedHeight;
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$initialPosition = F3(
-	function (split, isMaximized, browserSize) {
-		var _p22 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, browserSize);
+	function (split, isMaximized, containerSize) {
+		var _p22 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, containerSize);
 		var allotedWidth = _p22._0;
 		var allotedHeight = _p22._1;
 		var allotedMainHeight = _elm_lang$core$Basics$round(allotedHeight * split);
@@ -33260,8 +33520,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$getChangeset = function (model
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.DetailedRecord',
 					{
-						start: {line: 283, column: 13},
-						end: {line: 294, column: 30}
+						start: {line: 277, column: 13},
+						end: {line: 288, column: 30}
 					},
 					_p34)('unexpected action');
 			case 'Select':
@@ -33292,8 +33552,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$getChangeset = function (model
 				_ivanceras$diwata$Views_Window_DetailedRecord$getIndirectUnlinkedRows(model)))
 	};
 };
-var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
-	function (isMaximized, settings, tableName, action, arenaArg, window) {
+var _ivanceras$diwata$Views_Window_DetailedRecord$init = F7(
+	function (isMaximized, settings, tableName, action, arenaArg, window, containerSize) {
 		var sectionQuery = arenaArg.sectionQuery;
 		var splitPercentage = function () {
 			var _p36 = arenaArg.sectionSplit;
@@ -33329,20 +33589,19 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 					return _elm_lang$core$Task$succeed(_elm_lang$core$Maybe$Nothing);
 			}
 		}();
-		var browserSize = _elm_lang$window$Window$size;
-		var initHasManyTabs = A4(
-			_elm_lang$core$Task$map3,
-			F3(
-				function (browserSize, detailRows, lookup) {
-					var _p38 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, browserSize);
+		var initHasManyTabs = A3(
+			_elm_lang$core$Task$map2,
+			F2(
+				function (detailRows, lookup) {
+					var _p38 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, containerSize);
 					var allotedWidth = _p38._0;
 					var allotedHeight = _p38._1;
 					var _p39 = A4(
 						_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights,
 						window,
-						A3(_ivanceras$diwata$Views_Window_DetailedRecord$initialPosition, splitPercentage, isMaximized, browserSize),
+						A3(_ivanceras$diwata$Views_Window_DetailedRecord$initialPosition, splitPercentage, isMaximized, containerSize),
 						isMaximized,
-						browserSize);
+						containerSize);
 					var mainRecordHeight = _p39._0;
 					var detailTabHeight = _p39._1;
 					var tabSize = {ctor: '_Tuple2', _0: allotedWidth, _1: detailTabHeight};
@@ -33369,30 +33628,29 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 								return _elm_lang$core$Native_Utils.crashCase(
 									'Views.Window.DetailedRecord',
 									{
-										start: {line: 155, column: 29},
-										end: {line: 160, column: 60}
+										start: {line: 152, column: 29},
+										end: {line: 157, column: 60}
 									},
 									_p42)('Empty row');
 							}
 						},
 						window.hasManyTabs);
 				}),
-			browserSize,
 			fetchSelected,
 			loadWindowLookups);
-		var initIndirectTabs = A4(
-			_elm_lang$core$Task$map3,
-			F3(
-				function (browserSize, detailRows, lookup) {
-					var _p44 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, browserSize);
+		var initIndirectTabs = A3(
+			_elm_lang$core$Task$map2,
+			F2(
+				function (detailRows, lookup) {
+					var _p44 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, containerSize);
 					var allotedWidth = _p44._0;
 					var allotedHeight = _p44._1;
 					var _p45 = A4(
 						_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights,
 						window,
-						A3(_ivanceras$diwata$Views_Window_DetailedRecord$initialPosition, splitPercentage, isMaximized, browserSize),
+						A3(_ivanceras$diwata$Views_Window_DetailedRecord$initialPosition, splitPercentage, isMaximized, containerSize),
 						isMaximized,
-						browserSize);
+						containerSize);
 					var mainRecordHeight = _p45._0;
 					var detailTabHeight = _p45._1;
 					var tabSize = {ctor: '_Tuple2', _0: allotedWidth, _1: detailTabHeight};
@@ -33426,22 +33684,21 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 								return _elm_lang$core$Native_Utils.crashCase(
 									'Views.Window.DetailedRecord',
 									{
-										start: {line: 197, column: 29},
-										end: {line: 202, column: 60}
+										start: {line: 193, column: 29},
+										end: {line: 198, column: 60}
 									},
 									_p50)('Empty row');
 							}
 						},
 						window.indirectTabs);
 				}),
-			browserSize,
 			fetchSelected,
 			loadWindowLookups);
-		return A6(
-			_elm_lang$core$Task$map5,
-			F5(
-				function (detail, hasManyTabs, indirectTabs, browserSize, lookup) {
-					var _p54 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, browserSize);
+		return A5(
+			_elm_lang$core$Task$map4,
+			F4(
+				function (detail, hasManyTabs, indirectTabs, lookup) {
+					var _p54 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$allotedSize, isMaximized, containerSize);
 					var allotedWidth = _p54._0;
 					var allotedHeight = _p54._1;
 					var allotedTabWidth = _elm_lang$core$Basics$round(allotedWidth);
@@ -33451,10 +33708,10 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 						window: window,
 						hasManyTabs: hasManyTabs,
 						indirectTabs: indirectTabs,
-						position: A3(_ivanceras$diwata$Views_Window_DetailedRecord$initialPosition, splitPercentage, isMaximized, browserSize),
+						position: A3(_ivanceras$diwata$Views_Window_DetailedRecord$initialPosition, splitPercentage, isMaximized, containerSize),
 						drag: _elm_lang$core$Maybe$Nothing,
 						scroll: A2(_ivanceras$diwata$Util$Scroll, 0, 0),
-						browserSize: browserSize,
+						containerSize: containerSize,
 						arenaArg: arenaArg,
 						lookup: lookup,
 						values: function () {
@@ -33515,7 +33772,6 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$init = F6(
 			fetchSelected,
 			initHasManyTabs,
 			initIndirectTabs,
-			browserSize,
 			loadWindowLookups);
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$Model = function (a) {
@@ -33534,7 +33790,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$Model = function (a) {
 													return function (n) {
 														return function (o) {
 															return function (p) {
-																return {selectedRow: a, window: b, hasManyTabs: c, indirectTabs: d, position: e, drag: f, scroll: g, browserSize: h, arenaArg: i, lookup: j, values: k, oneOneValues: l, dropdownPageRequestInFlight: m, settings: n, isMaximized: o, errors: p};
+																return {selectedRow: a, window: b, hasManyTabs: c, indirectTabs: d, position: e, drag: f, scroll: g, containerSize: h, arenaArg: i, lookup: j, values: k, oneOneValues: l, dropdownPageRequestInFlight: m, settings: n, isMaximized: o, errors: p};
 															};
 														};
 													};
@@ -33563,6 +33819,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$At = function (a) {
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$Start = function (a) {
 	return {ctor: 'Start', _0: a};
+};
+var _ivanceras$diwata$Views_Window_DetailedRecord$ContainerSizeChanged = function (a) {
+	return {ctor: 'ContainerSizeChanged', _0: a};
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$RecordChangesetUpdateError = function (a) {
 	return {ctor: 'RecordChangesetUpdateError', _0: a};
@@ -33614,8 +33873,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage = F3(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.DetailedRecord',
 					{
-						start: {line: 1585, column: 13},
-						end: {line: 1590, column: 68}
+						start: {line: 1579, column: 13},
+						end: {line: 1584, column: 68}
 					},
 					_p58)('There has to be a main table here');
 			}
@@ -33628,16 +33887,15 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage = F3(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.DetailedRecord',
 					{
-						start: {line: 1574, column: 13},
-						end: {line: 1579, column: 67}
+						start: {line: 1571, column: 13},
+						end: {line: 1576, column: 67}
 					},
 					_p60)('There should be a selectedRecord');
 			}
 		}();
-		var _p62 = A2(_elm_lang$core$Debug$log, 'selected row: ', selectedRow);
 		var request = function () {
-			var _p63 = section;
-			if (_p63.ctor === 'HasMany') {
+			var _p62 = section;
+			if (_p62.ctor === 'HasMany') {
 				return A5(_ivanceras$diwata$Request_Window_Records$fetchHasManyRecords, model.settings, mainTable, selectedRow, sectionTable, tabModel.query);
 			} else {
 				return A5(_ivanceras$diwata$Request_Window_Records$fetchIndirectRecords, model.settings, mainTable, selectedRow, sectionTable, tabModel.query);
@@ -33646,13 +33904,13 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage = F3(
 		var fetchCmd = A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p64 = result;
-				if (_p64.ctor === 'Ok') {
+				var _p63 = result;
+				if (_p63.ctor === 'Ok') {
 					return _ivanceras$diwata$Views_Window_DetailedRecord$RefreshTabPageReceived(
-						{ctor: '_Tuple3', _0: section, _1: tabModel, _2: _p64._0});
+						{ctor: '_Tuple3', _0: section, _1: tabModel, _2: _p63._0});
 				} else {
 					return _ivanceras$diwata$Views_Window_DetailedRecord$RefreshTabPageError(
-						_elm_lang$core$Basics$toString(_p64._0));
+						_elm_lang$core$Basics$toString(_p63._0));
 				}
 			},
 			_elm_lang$http$Http$toTask(request));
@@ -33662,7 +33920,6 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage = F3(
 		var updatedArenaArg = _elm_lang$core$Native_Utils.update(
 			arenaArg,
 			{query: pageQuery});
-		var _p65 = A2(_elm_lang$core$Debug$log, 'refreshing in tab', tabModel.query);
 		return A2(
 			_ivanceras$diwata$Util_ops['=>'],
 			_elm_lang$core$Native_Utils.update(
@@ -33752,26 +34009,26 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewFieldInCard = F4(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$cardViewRecord = F4(
 	function (container, values, tab, model) {
-		var _p66 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
-		var allotedWidth = _p66._0;
-		var allotedHeight = _p66._1;
+		var _p64 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
+		var allotedWidth = _p64._0;
+		var allotedHeight = _p64._1;
 		var cardWidth = function () {
-			var _p67 = container;
-			if (_p67.ctor === 'OneOne') {
+			var _p65 = container;
+			if (_p65.ctor === 'OneOne') {
 				return allotedWidth - 100;
 			} else {
 				return allotedWidth;
 			}
 		}();
-		var browserSize = model.browserSize;
+		var containerSize = model.containerSize;
 		var isMaximized = model.isMaximized;
 		var columnNames = _ivanceras$diwata$Data_Window_Tab$columnNames(tab);
 		var maxColumnLen = _elm_lang$core$List$maximum(
 			A2(_elm_lang$core$List$map, _elm_lang$core$String$length, columnNames));
 		var fieldLabelWidth = function () {
-			var _p68 = maxColumnLen;
-			if (_p68.ctor === 'Just') {
-				return _p68._0 * 12;
+			var _p66 = maxColumnLen;
+			if (_p66.ctor === 'Just') {
+				return _p66._0 * 12;
 			} else {
 				return 200;
 			}
@@ -33813,9 +34070,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$cardViewRecord = F4(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$oneOneCardView = F3(
 	function (oneOneValues, oneOneTab, model) {
-		var _p69 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
-		var allotedWidth = _p69._0;
-		var allotedHeight = _p69._1;
+		var _p67 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
+		var allotedWidth = _p67._0;
+		var allotedHeight = _p67._1;
 		var cardWidth = allotedWidth - 100;
 		return A2(
 			_elm_lang$html$Html$div,
@@ -33867,9 +34124,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewOneOneTabs = function (mod
 		{ctor: '[]'},
 		A2(
 			_elm_lang$core$List$map,
-			function (_p70) {
-				var _p71 = _p70;
-				return A3(_ivanceras$diwata$Views_Window_DetailedRecord$oneOneCardView, _p71._1, _p71._0, model);
+			function (_p68) {
+				var _p69 = _p68;
+				return A3(_ivanceras$diwata$Views_Window_DetailedRecord$oneOneCardView, _p69._1, _p69._0, model);
 			},
 			oneOneValues));
 };
@@ -33879,9 +34136,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateFields = F3(
 			_elm_lang$core$List$map,
 			function (value) {
 				if (_elm_lang$core$Native_Utils.eq(argValue, value)) {
-					var _p72 = A2(_ivanceras$diwata$Views_Window_Field$update, fieldMsg, value);
-					var newField = _p72._0;
-					var cmd = _p72._1;
+					var _p70 = A2(_ivanceras$diwata$Views_Window_Field$update, fieldMsg, value);
+					var newField = _p70._0;
+					var cmd = _p70._1;
 					return {
 						ctor: '_Tuple2',
 						_0: newField,
@@ -33902,9 +34159,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$resetFields = F2(
 			A2(
 				_elm_lang$core$List$map,
 				function (field) {
-					var _p73 = A2(_ivanceras$diwata$Views_Window_Field$update, _ivanceras$diwata$Views_Window_Field$ResetChanges, field);
-					var updatedField = _p73._0;
-					var subCmd = _p73._1;
+					var _p71 = A2(_ivanceras$diwata$Views_Window_Field$update, _ivanceras$diwata$Views_Window_Field$ResetChanges, field);
+					var updatedField = _p71._0;
+					var subCmd = _p71._1;
 					return {
 						ctor: '_Tuple2',
 						_0: updatedField,
@@ -33922,21 +34179,21 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnValues = functi
 var _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnOneOneValues = function (model) {
 	var updatedFields = A2(
 		_elm_lang$core$List$map,
-		function (_p74) {
-			var _p75 = _p74;
-			var _p76 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$resetFields, _ivanceras$diwata$Data_Window_Field$OneOne, _p75._1);
-			var updatedFields = _p76._0;
-			var subCmd = _p76._1;
+		function (_p72) {
+			var _p73 = _p72;
+			var _p74 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$resetFields, _ivanceras$diwata$Data_Window_Field$OneOne, _p73._1);
+			var updatedFields = _p74._0;
+			var subCmd = _p74._1;
 			return {
 				ctor: '_Tuple2',
-				_0: {ctor: '_Tuple2', _0: _p75._0, _1: updatedFields},
+				_0: {ctor: '_Tuple2', _0: _p73._0, _1: updatedFields},
 				_1: subCmd
 			};
 		},
 		model.oneOneValues);
-	var _p77 = _elm_lang$core$List$unzip(updatedFields);
-	var oneOneValues = _p77._0;
-	var subCmds = _p77._1;
+	var _p75 = _elm_lang$core$List$unzip(updatedFields);
+	var oneOneValues = _p75._0;
+	var subCmds = _p75._1;
 	return {
 		ctor: '_Tuple2',
 		_0: oneOneValues,
@@ -33945,13 +34202,13 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnOneOneValues = 
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$updateValues = F2(
 	function (fieldMsg, model) {
-		var _p78 = _elm_lang$core$List$unzip(
+		var _p76 = _elm_lang$core$List$unzip(
 			A2(
 				_elm_lang$core$List$map,
 				_ivanceras$diwata$Views_Window_Field$update(fieldMsg),
 				model.values));
-		var updatedValues = _p78._0;
-		var fieldSubCmd = _p78._1;
+		var updatedValues = _p76._0;
+		var fieldSubCmd = _p76._1;
 		return A2(
 			_ivanceras$diwata$Util_ops['=>'],
 			_elm_lang$core$Native_Utils.update(
@@ -33986,8 +34243,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$listView = F4(
 			},
 			_ivanceras$diwata$Views_Window_Tab$view(tab));
 		var styleDisplay = function () {
-			var _p79 = isTabActive;
-			if (_p79 === true) {
+			var _p77 = isTabActive;
+			if (_p77 === true) {
 				return _elm_lang$html$Html_Attributes$style(
 					{
 						ctor: '::',
@@ -34021,20 +34278,20 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$listView = F4(
 			});
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (model) {
-	var _p80 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
-	var allotedWidth = _p80._0;
-	var allotedHeight = _p80._1;
+	var _p78 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
+	var allotedWidth = _p78._0;
+	var allotedHeight = _p78._1;
 	var arenaArg = model.arenaArg;
 	var indirectTabs = model.indirectTabs;
 	var indirectDetailTabs = A2(
 		_elm_lang$core$List$map,
-		function (_p81) {
-			var _p82 = _p81;
+		function (_p79) {
+			var _p80 = _p79;
 			return {
 				ctor: '_Tuple3',
 				_0: _ivanceras$diwata$Data_WindowArena$Indirect,
-				_1: _p82._1,
-				_2: _elm_lang$core$Maybe$Just(_p82._0)
+				_1: _p80._1,
+				_2: _elm_lang$core$Maybe$Just(_p80._0)
 			};
 		},
 		indirectTabs);
@@ -34047,16 +34304,16 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 		hasManyTabs);
 	var detailTabs = A2(_elm_lang$core$Basics_ops['++'], hasManyDetailTabs, indirectDetailTabs);
 	var activeTab = function () {
-		var _p83 = arenaArg.sectionTable;
-		if (_p83.ctor === 'Just') {
+		var _p81 = arenaArg.sectionTable;
+		if (_p81.ctor === 'Just') {
 			return _elm_lang$core$Maybe$Just(
-				{ctor: '_Tuple3', _0: _p83._0._0, _1: _p83._0._1, _2: arenaArg.sectionViaLinker});
+				{ctor: '_Tuple3', _0: _p81._0._0, _1: _p81._0._1, _2: arenaArg.sectionViaLinker});
 		} else {
 			return A2(
 				_elm_lang$core$Maybe$map,
-				function (_p84) {
-					var _p85 = _p84;
-					return {ctor: '_Tuple3', _0: _p85._0, _1: _p85._1.tab.tableName, _2: _p85._2};
+				function (_p82) {
+					var _p83 = _p82;
+					return {ctor: '_Tuple3', _0: _p83._0, _1: _p83._1.tab.tableName, _2: _p83._2};
 				},
 				_elm_lang$core$List$head(detailTabs));
 		}
@@ -34067,9 +34324,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 			_elm_lang$core$List$map,
 			function (hasMany) {
 				var isActive = function () {
-					var _p86 = activeTab;
-					if (_p86.ctor === 'Just') {
-						return _elm_lang$core$Native_Utils.eq(_p86._0._0, _ivanceras$diwata$Data_WindowArena$HasMany) && _elm_lang$core$Native_Utils.eq(_p86._0._1, hasMany.tab.tableName);
+					var _p84 = activeTab;
+					if (_p84.ctor === 'Just') {
+						return _elm_lang$core$Native_Utils.eq(_p84._0._0, _ivanceras$diwata$Data_WindowArena$HasMany) && _elm_lang$core$Native_Utils.eq(_p84._0._1, hasMany.tab.tableName);
 					} else {
 						return false;
 					}
@@ -34079,20 +34336,20 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 			hasManyTabs),
 		A2(
 			_elm_lang$core$List$map,
-			function (_p87) {
-				var _p88 = _p87;
-				var _p90 = _p88._1;
+			function (_p85) {
+				var _p86 = _p85;
+				var _p88 = _p86._1;
 				var isActive = function () {
-					var _p89 = activeTab;
-					if (_p89.ctor === 'Just') {
-						return _elm_lang$core$Native_Utils.eq(_p89._0._0, _ivanceras$diwata$Data_WindowArena$Indirect) && (_elm_lang$core$Native_Utils.eq(_p89._0._1, _p90.tab.tableName) && _elm_lang$core$Native_Utils.eq(
-							_elm_lang$core$Maybe$Just(_p88._0),
-							_p89._0._2));
+					var _p87 = activeTab;
+					if (_p87.ctor === 'Just') {
+						return _elm_lang$core$Native_Utils.eq(_p87._0._0, _ivanceras$diwata$Data_WindowArena$Indirect) && (_elm_lang$core$Native_Utils.eq(_p87._0._1, _p88.tab.tableName) && _elm_lang$core$Native_Utils.eq(
+							_elm_lang$core$Maybe$Just(_p86._0),
+							_p87._0._2));
 					} else {
 						return false;
 					}
 				}();
-				return A4(_ivanceras$diwata$Views_Window_DetailedRecord$listView, isActive, model.lookup, _ivanceras$diwata$Data_WindowArena$Indirect, _p90);
+				return A4(_ivanceras$diwata$Views_Window_DetailedRecord$listView, isActive, model.lookup, _ivanceras$diwata$Data_WindowArena$Indirect, _p88);
 			},
 			indirectTabs));
 	var selectedRow = model.selectedRow;
@@ -34136,24 +34393,24 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 						},
 						A2(
 							_elm_lang$core$List$map,
-							function (_p91) {
-								var _p92 = _p91;
-								var _p96 = _p92._0;
-								var _p95 = _p92._2;
+							function (_p89) {
+								var _p90 = _p89;
+								var _p94 = _p90._0;
+								var _p93 = _p90._2;
 								var viaLinker = function () {
-									var _p93 = _p95;
-									if (_p93.ctor === 'Just') {
-										return A2(_elm_lang$core$Basics_ops['++'], ' , and are connected through ', _p93._0.name);
+									var _p91 = _p93;
+									if (_p91.ctor === 'Just') {
+										return A2(_elm_lang$core$Basics_ops['++'], ' , and are connected through ', _p91._0.name);
 									} else {
 										return '';
 									}
 								}();
 								var arenaArg = model.arenaArg;
-								var tab = _p92._1.tab;
+								var tab = _p90._1.tab;
 								var isActiveTab = function () {
-									var _p94 = activeTab;
-									if (_p94.ctor === 'Just') {
-										return _elm_lang$core$Native_Utils.eq(_p96, _p94._0._0) && (_elm_lang$core$Native_Utils.eq(_p94._0._1, tab.tableName) && _elm_lang$core$Native_Utils.eq(_p95, _p94._0._2));
+									var _p92 = activeTab;
+									if (_p92.ctor === 'Just') {
+										return _elm_lang$core$Native_Utils.eq(_p94, _p92._0._0) && (_elm_lang$core$Native_Utils.eq(_p92._0._1, tab.tableName) && _elm_lang$core$Native_Utils.eq(_p93, _p92._0._2));
 									} else {
 										return false;
 									}
@@ -34192,14 +34449,14 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 													_0: {
 														ctor: '_Tuple2',
 														_0: 'has-many-tab',
-														_1: _elm_lang$core$Native_Utils.eq(_p96, _ivanceras$diwata$Data_WindowArena$HasMany)
+														_1: _elm_lang$core$Native_Utils.eq(_p94, _ivanceras$diwata$Data_WindowArena$HasMany)
 													},
 													_1: {
 														ctor: '::',
 														_0: {
 															ctor: '_Tuple2',
 															_0: 'indirect-tab',
-															_1: _elm_lang$core$Native_Utils.eq(_p96, _ivanceras$diwata$Data_WindowArena$Indirect)
+															_1: _elm_lang$core$Native_Utils.eq(_p94, _ivanceras$diwata$Data_WindowArena$Indirect)
 														},
 														_1: {
 															ctor: '::',
@@ -34215,7 +34472,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 												_1: {
 													ctor: '::',
 													_0: _ivanceras$diwata$Util$onClickPreventDefault(
-														A3(_ivanceras$diwata$Views_Window_DetailedRecord$ChangeActiveTab, _p96, tab.tableName, _p95)),
+														A3(_ivanceras$diwata$Views_Window_DetailedRecord$ChangeActiveTab, _p94, tab.tableName, _p93)),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -34248,7 +34505,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$viewDetailTabs = function (mod
 																		_0: {
 																			ctor: '_Tuple2',
 																			_0: 'ion-network',
-																			_1: _elm_lang$core$Native_Utils.eq(_p96, _ivanceras$diwata$Data_WindowArena$Indirect)
+																			_1: _elm_lang$core$Native_Utils.eq(_p94, _ivanceras$diwata$Data_WindowArena$Indirect)
 																		},
 																		_1: {ctor: '[]'}
 																	}),
@@ -34300,9 +34557,9 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage = F3(
 		var tabPage = tab.currentPage;
 		var arenaArg = model.arenaArg;
 		var recordId = function () {
-			var _p97 = arenaArg.action;
-			if (_p97.ctor === 'Select') {
-				return _elm_lang$core$Maybe$Just(_p97._0);
+			var _p95 = arenaArg.action;
+			if (_p95.ctor === 'Select') {
+				return _elm_lang$core$Maybe$Just(_p95._0);
 			} else {
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.DetailedRecord',
@@ -34310,23 +34567,23 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage = F3(
 						start: {line: 1509, column: 13},
 						end: {line: 1514, column: 97}
 					},
-					_p97)('Can not request next page on detail other than selected record');
+					_p95)('Can not request next page on detail other than selected record');
 			}
 		}();
 		var query = arenaArg.query;
 		var pageQuery = A2(_ivanceras$diwata$Data_Query$updatePage, tabPage + 1, query);
 		var mainTable = model.window.mainTab.tableName;
 		var httpRequest = function () {
-			var _p99 = recordId;
-			if (_p99.ctor === 'Just') {
-				var _p101 = _p99._0;
-				var _p100 = section;
-				if (_p100.ctor === 'HasMany') {
+			var _p97 = recordId;
+			if (_p97.ctor === 'Just') {
+				var _p99 = _p97._0;
+				var _p98 = section;
+				if (_p98.ctor === 'HasMany') {
 					return _elm_lang$http$Http$toTask(
-						A5(_ivanceras$diwata$Request_Window_Records$fetchHasManyRecords, model.settings, mainTable, _p101, sectionTable, pageQuery));
+						A5(_ivanceras$diwata$Request_Window_Records$fetchHasManyRecords, model.settings, mainTable, _p99, sectionTable, pageQuery));
 				} else {
 					return _elm_lang$http$Http$toTask(
-						A5(_ivanceras$diwata$Request_Window_Records$fetchIndirectRecords, model.settings, mainTable, _p101, sectionTable, pageQuery));
+						A5(_ivanceras$diwata$Request_Window_Records$fetchIndirectRecords, model.settings, mainTable, _p99, sectionTable, pageQuery));
 				}
 			} else {
 				return _elm_lang$core$Task$succeed(_ivanceras$diwata$Data_Window_Record$emptyRow);
@@ -34335,14 +34592,14 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage = F3(
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p102 = result;
-				if (_p102.ctor === 'Ok') {
+				var _p100 = result;
+				if (_p100.ctor === 'Ok') {
 					return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
 						{
 							ctor: '_Tuple3',
 							_0: section,
 							_1: tab,
-							_2: _ivanceras$diwata$Views_Window_Tab$NextPageReceived(_p102._0)
+							_2: _ivanceras$diwata$Views_Window_Tab$NextPageReceived(_p100._0)
 						});
 				} else {
 					return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
@@ -34351,7 +34608,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage = F3(
 							_0: section,
 							_1: tab,
 							_2: _ivanceras$diwata$Views_Window_Tab$NextPageError(
-								_elm_lang$core$Basics$toString(_p102._0))
+								_elm_lang$core$Basics$toString(_p100._0))
 						});
 				}
 			},
@@ -34360,20 +34617,20 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage = F3(
 var _ivanceras$diwata$Views_Window_DetailedRecord$updateTab = F4(
 	function (section, tabModel, tabMsg, model) {
 		var action = model.arenaArg.action;
-		var _p103 = A2(_ivanceras$diwata$Views_Window_Tab$update, tabMsg, tabModel);
-		var newTabModel = _p103._0;
-		var subCmd = _p103._1;
+		var _p101 = A2(_ivanceras$diwata$Views_Window_Tab$update, tabMsg, tabModel);
+		var newTabModel = _p101._0;
+		var subCmd = _p101._1;
 		var doRequestPage = function () {
-			var _p104 = action;
-			if (_p104.ctor === 'Select') {
+			var _p102 = action;
+			if (_p102.ctor === 'Select') {
 				return A3(_ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage, section, newTabModel, model);
 			} else {
 				return _elm_lang$core$Platform_Cmd$none;
 			}
 		}();
-		var _p105 = function () {
-			var _p106 = _ivanceras$diwata$Views_Window_Tab$pageRequestNeeded(newTabModel);
-			if (_p106 === true) {
+		var _p103 = function () {
+			var _p104 = _ivanceras$diwata$Views_Window_Tab$pageRequestNeeded(newTabModel);
+			if (_p104 === true) {
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -34384,16 +34641,16 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateTab = F4(
 				return A2(_ivanceras$diwata$Util_ops['=>'], newTabModel, _elm_lang$core$Platform_Cmd$none);
 			}
 		}();
-		var updatedTabModel = _p105._0;
-		var tabCmd = _p105._1;
-		var _p107 = _elm_lang$core$List$unzip(
+		var updatedTabModel = _p103._0;
+		var tabCmd = _p103._1;
+		var _p105 = _elm_lang$core$List$unzip(
 			A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateTabModels, tabMsg, model.hasManyTabs, updatedTabModel));
-		var updatedHasManyTabs = _p107._0;
-		var hasManyCmds = _p107._1;
-		var _p108 = _elm_lang$core$List$unzip(
+		var updatedHasManyTabs = _p105._0;
+		var hasManyCmds = _p105._1;
+		var _p106 = _elm_lang$core$List$unzip(
 			A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabModels, tabMsg, model.indirectTabs, updatedTabModel));
-		var updatedIndirectTabs = _p108._0;
-		var indirectCmds = _p108._1;
+		var updatedIndirectTabs = _p106._0;
+		var indirectCmds = _p106._1;
 		var detailTabCmds = _elm_lang$core$Platform_Cmd$batch(
 			A2(
 				_elm_lang$core$Basics_ops['++'],
@@ -34414,13 +34671,13 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateTab = F4(
 				A3(
 					_elm_lang$core$List$map2,
 					F2(
-						function (_p109, hasManyCmd) {
-							var _p110 = _p109;
+						function (_p107, hasManyCmd) {
+							var _p108 = _p107;
 							return A2(
 								_elm_lang$core$Platform_Cmd$map,
 								function (tabMsg) {
 									return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
-										{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$Indirect, _1: _p110._1, _2: tabMsg});
+										{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$Indirect, _1: _p108._1, _2: tabMsg});
 								},
 								hasManyCmd);
 						}),
@@ -34457,13 +34714,13 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateTab = F4(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$updateAndRefreshTab = F4(
 	function (section, tabModel, tabMsg, model) {
-		var _p111 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$updateTab, section, tabModel, tabMsg, model);
-		var updatedTabModel = _p111._0;
-		var updatedModel = _p111._1;
-		var subCmd = _p111._2;
-		var _p112 = A3(_ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage, section, updatedTabModel, updatedModel);
-		var updatedModel2 = _p112._0;
-		var subCmd2 = _p112._1;
+		var _p109 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$updateTab, section, tabModel, tabMsg, model);
+		var updatedTabModel = _p109._0;
+		var updatedModel = _p109._1;
+		var subCmd = _p109._2;
+		var _p110 = A3(_ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage, section, updatedTabModel, updatedModel);
+		var updatedModel2 = _p110._0;
+		var subCmd2 = _p110._1;
 		return A2(
 			_ivanceras$diwata$Util_ops['=>'],
 			updatedModel2,
@@ -34480,13 +34737,13 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateAndRefreshTab = F4(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$updateHasManyTabs = F2(
 	function (tabMsg, model) {
-		var _p113 = _elm_lang$core$List$unzip(
+		var _p111 = _elm_lang$core$List$unzip(
 			A2(
 				_elm_lang$core$List$map,
 				_ivanceras$diwata$Views_Window_Tab$update(tabMsg),
 				model.hasManyTabs));
-		var updatedTabs = _p113._0;
-		var tabSubCmd = _p113._1;
+		var updatedTabs = _p111._0;
+		var tabSubCmd = _p111._1;
 		return A2(
 			_ivanceras$diwata$Util_ops['=>'],
 			_elm_lang$core$Native_Utils.update(
@@ -34510,23 +34767,23 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateHasManyTabs = F2(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabs = F2(
 	function (tabMsg, model) {
-		var _p114 = _elm_lang$core$List$unzip(
+		var _p112 = _elm_lang$core$List$unzip(
 			A2(
 				_elm_lang$core$List$map,
-				function (_p115) {
-					var _p116 = _p115;
-					var _p117 = A2(_ivanceras$diwata$Views_Window_Tab$update, tabMsg, _p116._1);
-					var updatedTab = _p117._0;
-					var subCmd = _p117._1;
+				function (_p113) {
+					var _p114 = _p113;
+					var _p115 = A2(_ivanceras$diwata$Views_Window_Tab$update, tabMsg, _p114._1);
+					var updatedTab = _p115._0;
+					var subCmd = _p115._1;
 					return {
 						ctor: '_Tuple2',
-						_0: {ctor: '_Tuple2', _0: _p116._0, _1: updatedTab},
+						_0: {ctor: '_Tuple2', _0: _p114._0, _1: updatedTab},
 						_1: subCmd
 					};
 				},
 				model.indirectTabs));
-		var updatedTabs = _p114._0;
-		var tabSubCmd = _p114._1;
+		var updatedTabs = _p112._0;
+		var tabSubCmd = _p112._1;
 		return A2(
 			_ivanceras$diwata$Util_ops['=>'],
 			_elm_lang$core$Native_Utils.update(
@@ -34536,13 +34793,13 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabs = F2(
 				A3(
 					_elm_lang$core$List$map2,
 					F2(
-						function (_p118, subCmd) {
-							var _p119 = _p118;
+						function (_p116, subCmd) {
+							var _p117 = _p116;
 							return A2(
 								_elm_lang$core$Platform_Cmd$map,
 								function (subMsg) {
 									return _ivanceras$diwata$Views_Window_DetailedRecord$TabMsg(
-										{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$Indirect, _1: _p119._1, _2: subMsg});
+										{ctor: '_Tuple3', _0: _ivanceras$diwata$Data_WindowArena$Indirect, _1: _p117._1, _2: subMsg});
 								},
 								subCmd);
 						}),
@@ -34551,12 +34808,12 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabs = F2(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$updateAllTabs = F2(
 	function (tabMsg, model) {
-		var _p120 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateHasManyTabs, tabMsg, model);
-		var updatedModel = _p120._0;
-		var cmd = _p120._1;
-		var _p121 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabs, tabMsg, updatedModel);
-		var updatedModel2 = _p121._0;
-		var cmd2 = _p121._1;
+		var _p118 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateHasManyTabs, tabMsg, model);
+		var updatedModel = _p118._0;
+		var cmd = _p118._1;
+		var _p119 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateIndirectTabs, tabMsg, updatedModel);
+		var updatedModel2 = _p119._0;
+		var cmd2 = _p119._1;
 		return A2(
 			_ivanceras$diwata$Util_ops['=>'],
 			updatedModel2,
@@ -34573,34 +34830,34 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateAllTabs = F2(
 	});
 var _ivanceras$diwata$Views_Window_DetailedRecord$updateAllFields = F2(
 	function (fieldMsg, model) {
-		var _p122 = _elm_lang$core$List$unzip(
+		var _p120 = _elm_lang$core$List$unzip(
 			A2(
 				_elm_lang$core$List$map,
-				function (_p123) {
-					var _p124 = _p123;
-					var _p125 = _elm_lang$core$List$unzip(
+				function (_p121) {
+					var _p122 = _p121;
+					var _p123 = _elm_lang$core$List$unzip(
 						A2(
 							_elm_lang$core$List$map,
 							_ivanceras$diwata$Views_Window_Field$update(fieldMsg),
-							_p124._1));
-					var updatedFields = _p125._0;
-					var subCmd = _p125._1;
+							_p122._1));
+					var updatedFields = _p123._0;
+					var subCmd = _p123._1;
 					return {
 						ctor: '_Tuple2',
-						_0: {ctor: '_Tuple2', _0: _p124._0, _1: updatedFields},
+						_0: {ctor: '_Tuple2', _0: _p122._0, _1: updatedFields},
 						_1: subCmd
 					};
 				},
 				model.oneOneValues));
-		var updatedOneOneValues = _p122._0;
-		var oneOnefieldSubCmd = _p122._1;
-		var _p126 = _elm_lang$core$List$unzip(
+		var updatedOneOneValues = _p120._0;
+		var oneOnefieldSubCmd = _p120._1;
+		var _p124 = _elm_lang$core$List$unzip(
 			A2(
 				_elm_lang$core$List$map,
 				_ivanceras$diwata$Views_Window_Field$update(fieldMsg),
 				model.values));
-		var updatedValues = _p126._0;
-		var fieldSubCmd = _p126._1;
+		var updatedValues = _p124._0;
+		var fieldSubCmd = _p124._1;
 		var updatedModel = _elm_lang$core$Native_Utils.update(
 			model,
 			{values: updatedValues, oneOneValues: updatedOneOneValues});
@@ -34610,58 +34867,50 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateAllFields = F2(
 				_ivanceras$diwata$Views_Window_Row$AllFieldMsg(fieldMsg)),
 			updatedModel);
 	});
-var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
-	function (session, msg, model) {
+var _ivanceras$diwata$Views_Window_DetailedRecord$update = F2(
+	function (msg, model) {
 		var drag = model.drag;
 		var position = model.position;
-		var _p127 = msg;
-		_v52_6:
+		var _p125 = msg;
+		_v52_5:
 		do {
-			switch (_p127.ctor) {
+			switch (_p125.ctor) {
 				case 'Drag':
-					return A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateDrag, session, _p127._0, model);
-				case 'WindowResized':
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{browserSize: _p127._0});
-					var _p128 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, newModel);
-					var updatedModel = _p128._0;
-					var cmd = _p128._1;
-					return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
+					return A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateDrag, _p125._0, model);
 				case 'TabMsgAll':
-					return A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateAllTabs, _p127._0, model);
+					return A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateAllTabs, _p125._0, model);
 				case 'TabMsg':
-					switch (_p127._0._2.ctor) {
+					switch (_p125._0._2.ctor) {
 						case 'ToolbarMsg':
-							if (_p127._0._2._0.ctor === 'ClickedNewButton') {
-								var _p129 = A2(_elm_lang$core$Debug$log, 'DetailedRecord: Clicked on NewRecordButton in tab:', _p127._0._1.tab.name);
+							if (_p125._0._2._0.ctor === 'ClickedNewButton') {
+								var _p126 = A2(_elm_lang$core$Debug$log, 'DetailedRecord: Clicked on NewRecordButton in tab:', _p125._0._1.tab.name);
 								return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 							} else {
-								break _v52_6;
+								break _v52_5;
 							}
 						case 'SearchboxMsg':
 							return A4(
 								_ivanceras$diwata$Views_Window_DetailedRecord$updateAndRefreshTab,
-								_p127._0._0,
-								_p127._0._1,
-								A2(_ivanceras$diwata$Views_Window_Tab$SearchboxMsg, _p127._0._2._0, _p127._0._2._1),
+								_p125._0._0,
+								_p125._0._1,
+								A2(_ivanceras$diwata$Views_Window_Tab$SearchboxMsg, _p125._0._2._0, _p125._0._2._1),
 								model);
 						case 'ToggleSort':
 							return A4(
 								_ivanceras$diwata$Views_Window_DetailedRecord$updateAndRefreshTab,
-								_p127._0._0,
-								_p127._0._1,
-								_ivanceras$diwata$Views_Window_Tab$ToggleSort(_p127._0._2._0),
+								_p125._0._0,
+								_p125._0._1,
+								_ivanceras$diwata$Views_Window_Tab$ToggleSort(_p125._0._2._0),
 								model);
 						default:
-							break _v52_6;
+							break _v52_5;
 					}
 				case 'FieldMsg':
-					if (_p127._0.ctor === 'Detail') {
-						var valueUpdate = A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateFields, _p127._2, _p127._1, model.values);
-						var _p131 = _elm_lang$core$List$unzip(valueUpdate);
-						var updatedFields = _p131._0;
-						var subCmd = _p131._1;
+					if (_p125._0.ctor === 'Detail') {
+						var valueUpdate = A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateFields, _p125._2, _p125._1, model.values);
+						var _p128 = _elm_lang$core$List$unzip(valueUpdate);
+						var updatedFields = _p128._0;
+						var subCmd = _p128._1;
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
@@ -34669,20 +34918,20 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 								{values: updatedFields}),
 							_elm_lang$core$Platform_Cmd$batch(subCmd));
 					} else {
-						var _p138 = _p127._1;
+						var _p135 = _p125._1;
 						var oneOneValueUpdate = A2(
 							_elm_lang$core$List$map,
-							function (_p132) {
-								var _p133 = _p132;
-								var _p135 = _p133._0;
-								if (_elm_lang$core$Native_Utils.eq(_p135, _p138.tab)) {
-									var valueUpdate = A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateFields, _p127._2, _p138, _p133._1);
-									var _p134 = _elm_lang$core$List$unzip(valueUpdate);
-									var updatedValues = _p134._0;
-									var subCmd = _p134._1;
+							function (_p129) {
+								var _p130 = _p129;
+								var _p132 = _p130._0;
+								if (_elm_lang$core$Native_Utils.eq(_p132, _p135.tab)) {
+									var valueUpdate = A3(_ivanceras$diwata$Views_Window_DetailedRecord$updateFields, _p125._2, _p135, _p130._1);
+									var _p131 = _elm_lang$core$List$unzip(valueUpdate);
+									var updatedValues = _p131._0;
+									var subCmd = _p131._1;
 									return {
 										ctor: '_Tuple2',
-										_0: {ctor: '_Tuple2', _0: _p135, _1: updatedValues},
+										_0: {ctor: '_Tuple2', _0: _p132, _1: updatedValues},
 										_1: subCmd
 									};
 								} else {
@@ -34690,7 +34939,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 										ctor: '_Tuple2',
 										_0: {
 											ctor: '_Tuple2',
-											_0: _p135,
+											_0: _p132,
 											_1: {ctor: '[]'}
 										},
 										_1: {ctor: '[]'}
@@ -34698,11 +34947,11 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 								}
 							},
 							model.oneOneValues);
-						var _p136 = _elm_lang$core$List$unzip(oneOneValueUpdate);
-						var updatedOneOneValues = _p136._0;
-						var subCmds = _p136._1;
+						var _p133 = _elm_lang$core$List$unzip(oneOneValueUpdate);
+						var updatedOneOneValues = _p133._0;
+						var subCmds = _p133._1;
 						var subCmd = _elm_lang$core$List$concat(subCmds);
-						var _p137 = A2(_elm_lang$core$Debug$log, 'Field changed in OneOne in Tab: ', _p138.tab.name);
+						var _p134 = A2(_elm_lang$core$Debug$log, 'Field changed in OneOne in Tab: ', _p135.tab.name);
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
@@ -34711,7 +34960,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 							_elm_lang$core$Platform_Cmd$batch(subCmd));
 					}
 				case 'LookupNextPageReceived':
-					var updatedLookup = A3(_ivanceras$diwata$Data_Window_Lookup$addPage, _p127._0._0, _p127._0._1, model.lookup);
+					var updatedLookup = A3(_ivanceras$diwata$Data_Window_Lookup$addPage, _p125._0._0, _p125._0._1, model.lookup);
 					var updatedModel = _elm_lang$core$Native_Utils.update(
 						model,
 						{lookup: updatedLookup, dropdownPageRequestInFlight: false});
@@ -34724,19 +34973,19 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 						_elm_lang$core$Native_Utils.crash(
 							'Views.Window.DetailedRecord',
 							{
-								start: {line: 1291, column: 13},
-								end: {line: 1291, column: 24}
+								start: {line: 1275, column: 13},
+								end: {line: 1275, column: 24}
 							}),
 						'Error loading next page lookup',
-						_p127._0);
+						_p125._0);
 				case 'ChangeActiveTab':
 					var arenaArg = model.arenaArg;
 					var newArenaArg = _elm_lang$core$Native_Utils.update(
 						arenaArg,
 						{
 							sectionTable: _elm_lang$core$Maybe$Just(
-								{ctor: '_Tuple2', _0: _p127._0, _1: _p127._1}),
-							sectionViaLinker: _p127._2
+								{ctor: '_Tuple2', _0: _p125._0, _1: _p125._1}),
+							sectionViaLinker: _p125._2
 						});
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
@@ -34746,30 +34995,30 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 						_elm_lang$core$Platform_Cmd$batch(
 							{ctor: '[]'}));
 				case 'ToolbarMsg':
-					switch (_p127._0.ctor) {
+					switch (_p125._0.ctor) {
 						case 'ClickedSaveOnDetail':
 							var tab = model.window.mainTab;
 							var tableName = tab.tableName;
 							var settings = model.settings;
 							var changeset = _ivanceras$diwata$Views_Window_DetailedRecord$getChangeset(model);
-							var _p139 = A2(_elm_lang$core$Debug$log, 'Changeset:', changeset);
+							var _p136 = A2(_elm_lang$core$Debug$log, 'Changeset:', changeset);
 							var json = A2(
 								_elm_lang$core$Json_Encode$encode,
 								4,
 								_ivanceras$diwata$Data_DataContainer$changesetEncoder(changeset));
-							var _p140 = A2(_elm_lang$core$Debug$log, 'json', json);
+							var _p137 = A2(_elm_lang$core$Debug$log, 'json', json);
 							return A2(
 								_ivanceras$diwata$Util_ops['=>'],
 								model,
 								A3(_ivanceras$diwata$Views_Window_DetailedRecord$requestUpdateRecords, settings, tableName, changeset));
 						case 'ClickedCancelOnDetail':
-							var _p141 = _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnOneOneValues(model);
-							var updatedOneOneValues = _p141._0;
-							var oneOneCmd = _p141._1;
-							var _p142 = _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnValues(model);
-							var updatedValues = _p142._0;
-							var subCmd = _p142._1;
-							var _p143 = A2(_elm_lang$core$Debug$log, 'Cancel changes on this record', '');
+							var _p138 = _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnOneOneValues(model);
+							var updatedOneOneValues = _p138._0;
+							var oneOneCmd = _p138._1;
+							var _p139 = _ivanceras$diwata$Views_Window_DetailedRecord$cancelChangesOnValues(model);
+							var updatedValues = _p139._0;
+							var subCmd = _p139._1;
+							var _p140 = A2(_elm_lang$core$Debug$log, 'Cancel changes on this record', '');
 							return A2(
 								_ivanceras$diwata$Util_ops['=>'],
 								_elm_lang$core$Native_Utils.update(
@@ -34783,22 +35032,22 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 				case 'Maximize':
 					var newModel = _elm_lang$core$Native_Utils.update(
 						model,
-						{isMaximized: _p127._0});
-					var _p144 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, newModel);
-					var updatedModel = _p144._0;
-					var cmd = _p144._1;
+						{isMaximized: _p125._0});
+					var _p141 = _ivanceras$diwata$Views_Window_DetailedRecord$updateSizes(newModel);
+					var updatedModel = _p141._0;
+					var cmd = _p141._1;
 					return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
 				case 'ClickedCloseButton':
 					return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 				case 'RecordChangesetUpdated':
-					var _p146 = _p127._0;
-					var _p145 = A2(_elm_lang$core$Debug$log, 'updated record', _p146);
+					var _p143 = _p125._0;
+					var _p142 = A2(_elm_lang$core$Debug$log, 'updated record', _p143);
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
 							model,
 							{
-								selectedRow: _elm_lang$core$Maybe$Just(_p146)
+								selectedRow: _elm_lang$core$Maybe$Just(_p143)
 							}),
 						_elm_lang$core$Platform_Cmd$none);
 				case 'RecordChangesetUpdateError':
@@ -34812,32 +35061,32 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 									model.errors,
 									{
 										ctor: '::',
-										_0: _p127._0,
+										_0: _p125._0,
 										_1: {ctor: '[]'}
 									})
 							}),
 						_elm_lang$core$Platform_Cmd$none);
 				case 'ViewScrolled':
-					var _p147 = _p127._0;
+					var _p144 = _p125._0;
 					var updatedModel = _elm_lang$core$Native_Utils.update(
 						model,
-						{scroll: _p147});
+						{scroll: _p144});
 					return A2(
 						_ivanceras$diwata$Views_Window_DetailedRecord$updateAllFields,
-						_ivanceras$diwata$Views_Window_Field$ContainerScrollChanged(_p147),
+						_ivanceras$diwata$Views_Window_Field$ContainerScrollChanged(_p144),
 						updatedModel);
 				case 'RefreshTabPageReceived':
-					var _p148 = A4(
+					var _p145 = A4(
 						_ivanceras$diwata$Views_Window_DetailedRecord$updateTab,
-						_p127._0._0,
-						_p127._0._1,
-						_ivanceras$diwata$Views_Window_Tab$RefreshPageReceived(_p127._0._2),
+						_p125._0._0,
+						_p125._0._1,
+						_ivanceras$diwata$Views_Window_Tab$RefreshPageReceived(_p125._0._2),
 						model);
-					var updatedTabModel = _p148._0;
-					var updatedModel = _p148._1;
-					var cmd = _p148._2;
+					var updatedTabModel = _p145._0;
+					var updatedModel = _p145._1;
+					var cmd = _p145._2;
 					return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
-				default:
+				case 'RefreshTabPageError':
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
@@ -34848,21 +35097,51 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F3(
 									model.errors,
 									{
 										ctor: '::',
-										_0: _p127._0,
+										_0: _p125._0,
 										_1: {ctor: '[]'}
 									})
 							}),
 						_elm_lang$core$Platform_Cmd$none);
+				default:
+					var updatedModel = _elm_lang$core$Native_Utils.update(
+						model,
+						{containerSize: _p125._0});
+					var _p146 = _ivanceras$diwata$Views_Window_DetailedRecord$updateSizes(updatedModel);
+					var updatedModel2 = _p146._0;
+					var subCmd2 = _p146._1;
+					var _p147 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(updatedModel2);
+					var allotedWidth = _p147._0;
+					var allotedHeight = _p147._1;
+					var _p148 = A2(
+						_ivanceras$diwata$Views_Window_DetailedRecord$updateAllFields,
+						_ivanceras$diwata$Views_Window_Field$AllotedTabWidthChanged(
+							_elm_lang$core$Basics$round(allotedWidth)),
+						updatedModel2);
+					var updatedModel3 = _p148._0;
+					var subCmd3 = _p148._1;
+					return A2(
+						_ivanceras$diwata$Util_ops['=>'],
+						updatedModel3,
+						_elm_lang$core$Platform_Cmd$batch(
+							{
+								ctor: '::',
+								_0: subCmd2,
+								_1: {
+									ctor: '::',
+									_0: subCmd3,
+									_1: {ctor: '[]'}
+								}
+							}));
 			}
 		} while(false);
-		var _p130 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$updateTab, _p127._0._0, _p127._0._1, _p127._0._2, model);
-		var updatedTabMode = _p130._0;
-		var updatedModel = _p130._1;
-		var cmd = _p130._2;
+		var _p127 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$updateTab, _p125._0._0, _p125._0._1, _p125._0._2, model);
+		var updatedTabMode = _p127._0;
+		var updatedModel = _p127._1;
+		var cmd = _p127._2;
 		return A2(_ivanceras$diwata$Util_ops['=>'], updatedModel, cmd);
 	});
-var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F3(
-	function (session, drag, model) {
+var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F2(
+	function (drag, model) {
 		var _p149 = drag;
 		switch (_p149.ctor) {
 			case 'Start':
@@ -34873,7 +35152,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F3(
 						drag: _elm_lang$core$Maybe$Just(
 							A2(_ivanceras$diwata$Views_Window_DetailedRecord$DragPosition, _p150, _p150))
 					});
-				return A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, newModel);
+				return _ivanceras$diwata$Views_Window_DetailedRecord$updateSizes(newModel);
 			case 'At':
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
@@ -34886,7 +35165,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F3(
 							},
 							model.drag)
 					});
-				return A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, newModel);
+				return _ivanceras$diwata$Views_Window_DetailedRecord$updateSizes(newModel);
 			default:
 				var updatedModel0 = _elm_lang$core$Native_Utils.update(
 					model,
@@ -34902,7 +35181,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F3(
 				var updatedModel1 = _elm_lang$core$Native_Utils.update(
 					updatedModel0,
 					{arenaArg: updatedArenaArg});
-				var _p153 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$updateSizes, session, updatedModel1);
+				var _p153 = _ivanceras$diwata$Views_Window_DetailedRecord$updateSizes(updatedModel1);
 				var updatedModel2 = _p153._0;
 				var subCmd = _p153._1;
 				return A2(
@@ -34916,26 +35195,21 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$updateDrag = F3(
 						}));
 		}
 	});
-var _ivanceras$diwata$Views_Window_DetailedRecord$updateSizes = F2(
-	function (session, model) {
-		var _p154 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
-		var allotedWidth = _p154._0;
-		var allotedHeight = _p154._1;
-		var window = model.window;
-		var realPosition = _ivanceras$diwata$Views_Window_DetailedRecord$getPosition(model);
-		var _p155 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights, window, realPosition, model.isMaximized, model.browserSize);
-		var mainRecordHeight = _p155._0;
-		var detailTabHeight = _p155._1;
-		var tabSize = {ctor: '_Tuple2', _0: allotedWidth, _1: detailTabHeight};
-		return A3(
-			_ivanceras$diwata$Views_Window_DetailedRecord$update,
-			session,
-			_ivanceras$diwata$Views_Window_DetailedRecord$TabMsgAll(
-				_ivanceras$diwata$Views_Window_Tab$SetSize(tabSize)),
-			model);
-	});
-var _ivanceras$diwata$Views_Window_DetailedRecord$WindowResized = function (a) {
-	return {ctor: 'WindowResized', _0: a};
+var _ivanceras$diwata$Views_Window_DetailedRecord$updateSizes = function (model) {
+	var _p154 = _ivanceras$diwata$Views_Window_DetailedRecord$detailAllotedSize(model);
+	var allotedWidth = _p154._0;
+	var allotedHeight = _p154._1;
+	var window = model.window;
+	var realPosition = _ivanceras$diwata$Views_Window_DetailedRecord$getPosition(model);
+	var _p155 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights, window, realPosition, model.isMaximized, model.containerSize);
+	var mainRecordHeight = _p155._0;
+	var detailTabHeight = _p155._1;
+	var tabSize = {ctor: '_Tuple2', _0: allotedWidth, _1: detailTabHeight};
+	return A2(
+		_ivanceras$diwata$Views_Window_DetailedRecord$update,
+		_ivanceras$diwata$Views_Window_DetailedRecord$TabMsgAll(
+			_ivanceras$diwata$Views_Window_Tab$SetSize(tabSize)),
+		model);
 };
 var _ivanceras$diwata$Views_Window_DetailedRecord$ViewScrolled = function (a) {
 	return {ctor: 'ViewScrolled', _0: a};
@@ -34965,12 +35239,12 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$view = function (model) {
 		multiColumnSort: false
 	};
 	var containerHeight = allotedHeight + 40;
-	var browserSize = model.browserSize;
+	var containerSize = model.containerSize;
 	var isMaximized = model.isMaximized || _ivanceras$diwata$Constant$isDetailedRecordMaximized;
 	var realPosition = _ivanceras$diwata$Views_Window_DetailedRecord$getPosition(model);
 	var window = model.window;
 	var mainTab = window.mainTab;
-	var _p157 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights, window, realPosition, isMaximized, browserSize);
+	var _p157 = A4(_ivanceras$diwata$Views_Window_DetailedRecord$splitTabHeights, window, realPosition, isMaximized, containerSize);
 	var mainRecordHeight = _p157._0;
 	var detailTabHeight = _p157._1;
 	return A2(
@@ -35171,11 +35445,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$subscriptions = function (mode
 		{
 			ctor: '::',
 			_0: _ivanceras$diwata$Views_Window_DetailedRecord$dividerHeightSubscriptions(model),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$window$Window$resizes(_ivanceras$diwata$Views_Window_DetailedRecord$WindowResized),
-				_1: {ctor: '[]'}
-			}
+			_1: {ctor: '[]'}
 		});
 };
 
@@ -35478,6 +35748,13 @@ var _ivanceras$diwata$Page_WindowArena$closeRecord = function (model) {
 		_ivanceras$diwata$Route$modifyUrl(
 			_ivanceras$diwata$Route$WindowArena(updatedArenaArg)));
 };
+var _ivanceras$diwata$Page_WindowArena$calcWindowSize = function (containerSize) {
+	var heightDeductions = _ivanceras$diwata$Constant$bannerHeight + _ivanceras$diwata$Constant$tabNameHeight;
+	return {width: containerSize.width - _ivanceras$diwata$Constant$sidebarWidth, height: containerSize.height - heightDeductions};
+};
+var _ivanceras$diwata$Page_WindowArena$calcDetailedRecordSize = function (containerSize) {
+	return _ivanceras$diwata$Page_WindowArena$calcWindowSize(containerSize);
+};
 var _ivanceras$diwata$Page_WindowArena$viewLoadingIndicator = function (model) {
 	var iconSize = 30;
 	var iconColor = _ivanceras$diwata$Constant$iconColor;
@@ -35605,8 +35882,8 @@ var _ivanceras$diwata$Page_WindowArena$handleLoadError = function (e) {
 			'WindowArena is currently unavailable. Error: ',
 			_elm_lang$core$Basics$toString(e)));
 };
-var _ivanceras$diwata$Page_WindowArena$init = F3(
-	function (settings, session, arenaArg) {
+var _ivanceras$diwata$Page_WindowArena$init = F4(
+	function (settings, session, arenaArg, containerSize) {
 		var _p5 = A2(_elm_lang$core$Debug$log, 'action is:', arenaArg.action);
 		var getDbName = A2(
 			_elm_lang$core$Task$mapError,
@@ -35652,7 +35929,14 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 								A2(
 									_elm_lang$core$Task$map,
 									_elm_lang$core$Maybe$Just,
-									A5(_ivanceras$diwata$Views_Window$init, settings, session, _p7._0, _p8._0, arenaArg)));
+									A6(
+										_ivanceras$diwata$Views_Window$init,
+										settings,
+										session,
+										_p7._0,
+										_p8._0,
+										arenaArg,
+										_ivanceras$diwata$Page_WindowArena$calcWindowSize(containerSize))));
 						} else {
 							return _elm_lang$core$Task$succeed(_elm_lang$core$Maybe$Nothing);
 						}
@@ -35681,7 +35965,15 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 									A2(
 										_elm_lang$core$Task$map,
 										_elm_lang$core$Maybe$Just,
-										A6(_ivanceras$diwata$Views_Window_DetailedRecord$init, isDetailedRecordMaximized, settings, _p9._0, arenaArg.action, arenaArg, _p10._0)));
+										A7(
+											_ivanceras$diwata$Views_Window_DetailedRecord$init,
+											isDetailedRecordMaximized,
+											settings,
+											_p9._0,
+											arenaArg.action,
+											arenaArg,
+											_p10._0,
+											_ivanceras$diwata$Page_WindowArena$calcDetailedRecordSize(containerSize))));
 							}
 						} else {
 							return _elm_lang$core$Task$succeed(_elm_lang$core$Maybe$Nothing);
@@ -35705,7 +35997,8 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 						settings: settings,
 						errors: {ctor: '[]'},
 						loadingSelectedRecord: false,
-						isDetailedRecordMaximized: isDetailedRecordMaximized
+						isDetailedRecordMaximized: isDetailedRecordMaximized,
+						containerSize: containerSize
 					};
 				}),
 			loadActiveWindow,
@@ -35713,16 +36006,16 @@ var _ivanceras$diwata$Page_WindowArena$init = F3(
 			loadSelectedRecord,
 			getDbName);
 	});
-var _ivanceras$diwata$Page_WindowArena$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {activeWindow: a, groupedWindow: b, selectedRow: c, arenaArg: d, settings: e, errors: f, loadingSelectedRecord: g, isDetailedRecordMaximized: h};
+var _ivanceras$diwata$Page_WindowArena$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {activeWindow: a, groupedWindow: b, selectedRow: c, arenaArg: d, settings: e, errors: f, loadingSelectedRecord: g, isDetailedRecordMaximized: h, containerSize: i};
 	});
 var _ivanceras$diwata$Page_WindowArena$FailedToInitializeSelectedRow = {ctor: 'FailedToInitializeSelectedRow'};
 var _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow = function (a) {
 	return {ctor: 'InitializedSelectedRow', _0: a};
 };
-var _ivanceras$diwata$Page_WindowArena$WindowResized = function (a) {
-	return {ctor: 'WindowResized', _0: a};
+var _ivanceras$diwata$Page_WindowArena$BrowserResized = function (a) {
+	return {ctor: 'BrowserResized', _0: a};
 };
 var _ivanceras$diwata$Page_WindowArena$DetailedRecordMsg = function (a) {
 	return {ctor: 'DetailedRecordMsg', _0: a};
@@ -35739,33 +36032,65 @@ var _ivanceras$diwata$Page_WindowArena$viewSelectedRow = F2(
 			return _elm_lang$html$Html$text('');
 		}
 	});
+var _ivanceras$diwata$Page_WindowArena$updateSelectedRow = F2(
+	function (detailMsg, model) {
+		var _p14 = function () {
+			var _p15 = model.selectedRow;
+			if (_p15.ctor === 'Just') {
+				return A2(
+					_elm_lang$core$Tuple$mapSecond,
+					_elm_lang$core$Platform_Cmd$map(_ivanceras$diwata$Page_WindowArena$DetailedRecordMsg),
+					A2(
+						_elm_lang$core$Tuple$mapFirst,
+						_elm_lang$core$Maybe$Just,
+						A2(_ivanceras$diwata$Views_Window_DetailedRecord$update, detailMsg, _p15._0)));
+			} else {
+				return {ctor: '_Tuple2', _0: model.selectedRow, _1: _elm_lang$core$Platform_Cmd$none};
+			}
+		}();
+		var selectedRow = _p14._0;
+		var subCmd = _p14._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{selectedRow: selectedRow}),
+			subCmd);
+	});
+var _ivanceras$diwata$Page_WindowArena$updateDetailedRecordSize = function (model) {
+	return A2(
+		_ivanceras$diwata$Page_WindowArena$updateSelectedRow,
+		_ivanceras$diwata$Views_Window_DetailedRecord$ContainerSizeChanged(
+			_ivanceras$diwata$Page_WindowArena$calcDetailedRecordSize(model.containerSize)),
+		model);
+};
 var _ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForDetailedRecord = F3(
 	function (settings, currentPage, sourceTable) {
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p14 = result;
-				if (_p14.ctor === 'Ok') {
-					var recordList = _ivanceras$diwata$Data_Window_Record$rowsToRecordList(_p14._0);
+				var _p16 = result;
+				if (_p16.ctor === 'Ok') {
+					var recordList = _ivanceras$diwata$Data_Window_Record$rowsToRecordList(_p16._0);
 					return _ivanceras$diwata$Page_WindowArena$DetailedRecordMsg(
 						_ivanceras$diwata$Views_Window_DetailedRecord$LookupNextPageReceived(
 							{ctor: '_Tuple2', _0: sourceTable, _1: recordList}));
 				} else {
 					return _ivanceras$diwata$Page_WindowArena$DetailedRecordMsg(
 						_ivanceras$diwata$Views_Window_DetailedRecord$LookupNextPageErrored(
-							_elm_lang$core$Basics$toString(_p14._0)));
+							_elm_lang$core$Basics$toString(_p16._0)));
 				}
 			},
 			_elm_lang$http$Http$toTask(
 				A4(_ivanceras$diwata$Request_Window_Records$lookupPage, settings, currentPage + 1, _elm_lang$core$Maybe$Nothing, sourceTable)));
 	});
 var _ivanceras$diwata$Page_WindowArena$detailedRecordSubscriptions = function (model) {
-	var _p15 = model.selectedRow;
-	if (_p15.ctor === 'Just') {
+	var _p17 = model.selectedRow;
+	if (_p17.ctor === 'Just') {
 		return A2(
 			_elm_lang$core$Platform_Sub$map,
 			_ivanceras$diwata$Page_WindowArena$DetailedRecordMsg,
-			_ivanceras$diwata$Views_Window_DetailedRecord$subscriptions(_p15._0));
+			_ivanceras$diwata$Views_Window_DetailedRecord$subscriptions(_p17._0));
 	} else {
 		return _elm_lang$core$Platform_Sub$none;
 	}
@@ -35775,8 +36100,8 @@ var _ivanceras$diwata$Page_WindowArena$WindowMsg = function (a) {
 };
 var _ivanceras$diwata$Page_WindowArena$viewWindow = F2(
 	function (session, activeWindow) {
-		var _p16 = activeWindow;
-		if (_p16.ctor === 'Just') {
+		var _p18 = activeWindow;
+		if (_p18.ctor === 'Just') {
 			return A2(
 				_elm_lang$html$Html$div,
 				{
@@ -35789,7 +36114,7 @@ var _ivanceras$diwata$Page_WindowArena$viewWindow = F2(
 					_0: A2(
 						_elm_lang$html$Html$map,
 						_ivanceras$diwata$Page_WindowArena$WindowMsg,
-						A2(_ivanceras$diwata$Views_Window$view, session, _p16._0)),
+						A2(_ivanceras$diwata$Views_Window$view, session, _p18._0)),
 					_1: {ctor: '[]'}
 				});
 		} else {
@@ -35798,43 +36123,75 @@ var _ivanceras$diwata$Page_WindowArena$viewWindow = F2(
 	});
 var _ivanceras$diwata$Page_WindowArena$viewWindowOrSelectedRow = F2(
 	function (session, model) {
-		var _p17 = model.selectedRow;
-		if (_p17.ctor === 'Just') {
+		var _p19 = model.selectedRow;
+		if (_p19.ctor === 'Just') {
 			return A2(
 				_elm_lang$html$Html$map,
 				_ivanceras$diwata$Page_WindowArena$DetailedRecordMsg,
-				_ivanceras$diwata$Views_Window_DetailedRecord$view(_p17._0));
+				_ivanceras$diwata$Views_Window_DetailedRecord$view(_p19._0));
 		} else {
 			return A2(_ivanceras$diwata$Page_WindowArena$viewWindow, session, model.activeWindow);
 		}
 	});
+var _ivanceras$diwata$Page_WindowArena$updateActiveWindow = F2(
+	function (windowMsg, model) {
+		var _p20 = function () {
+			var _p21 = model.activeWindow;
+			if (_p21.ctor === 'Just') {
+				return A2(
+					_elm_lang$core$Tuple$mapSecond,
+					_elm_lang$core$Platform_Cmd$map(_ivanceras$diwata$Page_WindowArena$WindowMsg),
+					A2(
+						_elm_lang$core$Tuple$mapFirst,
+						_elm_lang$core$Maybe$Just,
+						A2(_ivanceras$diwata$Views_Window$update, windowMsg, _p21._0)));
+			} else {
+				return {ctor: '_Tuple2', _0: model.activeWindow, _1: _elm_lang$core$Platform_Cmd$none};
+			}
+		}();
+		var activeWindow = _p20._0;
+		var subCmd = _p20._1;
+		return A2(
+			_ivanceras$diwata$Util_ops['=>'],
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{activeWindow: activeWindow}),
+			subCmd);
+	});
+var _ivanceras$diwata$Page_WindowArena$updateActiveWindowSize = function (model) {
+	var windowSize = _ivanceras$diwata$Page_WindowArena$calcWindowSize(model.containerSize);
+	return A2(
+		_ivanceras$diwata$Page_WindowArena$updateActiveWindow,
+		_ivanceras$diwata$Views_Window$ContainerSizeChanged(windowSize),
+		model);
+};
 var _ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForWindow = F3(
 	function (settings, currentPage, sourceTable) {
 		return A2(
 			_elm_lang$core$Task$attempt,
 			function (result) {
-				var _p18 = result;
-				if (_p18.ctor === 'Ok') {
-					var recordList = _ivanceras$diwata$Data_Window_Record$rowsToRecordList(_p18._0);
+				var _p22 = result;
+				if (_p22.ctor === 'Ok') {
+					var recordList = _ivanceras$diwata$Data_Window_Record$rowsToRecordList(_p22._0);
 					return _ivanceras$diwata$Page_WindowArena$WindowMsg(
 						_ivanceras$diwata$Views_Window$LookupNextPageReceived(
 							{ctor: '_Tuple2', _0: sourceTable, _1: recordList}));
 				} else {
 					return _ivanceras$diwata$Page_WindowArena$WindowMsg(
 						_ivanceras$diwata$Views_Window$LookupNextPageErrored(
-							_elm_lang$core$Basics$toString(_p18._0)));
+							_elm_lang$core$Basics$toString(_p22._0)));
 				}
 			},
 			_elm_lang$http$Http$toTask(
 				A4(_ivanceras$diwata$Request_Window_Records$lookupPage, settings, currentPage + 1, _elm_lang$core$Maybe$Nothing, sourceTable)));
 	});
 var _ivanceras$diwata$Page_WindowArena$windowSubscriptions = function (model) {
-	var _p19 = model.activeWindow;
-	if (_p19.ctor === 'Just') {
+	var _p23 = model.activeWindow;
+	if (_p23.ctor === 'Just') {
 		return A2(
 			_elm_lang$core$Platform_Sub$map,
 			_ivanceras$diwata$Page_WindowArena$WindowMsg,
-			_ivanceras$diwata$Views_Window$subscriptions(_p19._0));
+			_ivanceras$diwata$Views_Window$subscriptions(_p23._0));
 	} else {
 		return _elm_lang$core$Platform_Sub$none;
 	}
@@ -35847,11 +36204,7 @@ var _ivanceras$diwata$Page_WindowArena$subscriptions = function (model) {
 			_1: {
 				ctor: '::',
 				_0: _ivanceras$diwata$Page_WindowArena$windowSubscriptions(model),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$window$Window$resizes(_ivanceras$diwata$Page_WindowArena$WindowResized),
-					_1: {ctor: '[]'}
-				}
+				_1: {ctor: '[]'}
 			}
 		});
 };
@@ -35861,8 +36214,8 @@ var _ivanceras$diwata$Page_WindowArena$GroupedWindowMsg = function (a) {
 var _ivanceras$diwata$Page_WindowArena$view = F2(
 	function (session, model) {
 		var recordSelected = function () {
-			var _p20 = model.selectedRow;
-			if (_p20.ctor === 'Just') {
+			var _p24 = model.selectedRow;
+			if (_p24.ctor === 'Just') {
 				return true;
 			} else {
 				return false;
@@ -35974,16 +36327,16 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 	function (session, msg, model) {
 		var arenaArg = model.arenaArg;
 		var isDetailedRecordMaximized = model.isDetailedRecordMaximized;
-		var _p21 = msg;
-		_v17_11:
+		var _p25 = msg;
+		_v19_11:
 		do {
-			_v17_7:
+			_v19_7:
 			do {
-				switch (_p21.ctor) {
+				switch (_p25.ctor) {
 					case 'GroupedWindowMsg':
-						var _p22 = A3(_ivanceras$diwata$Views_Window_GroupedWindow$update, session, _p21._0, model.groupedWindow);
-						var newFeed = _p22._0;
-						var subCmd = _p22._1;
+						var _p26 = A3(_ivanceras$diwata$Views_Window_GroupedWindow$update, session, _p25._0, model.groupedWindow);
+						var newFeed = _p26._0;
+						var subCmd = _p26._1;
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
@@ -35996,7 +36349,7 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 							_elm_lang$core$Native_Utils.update(
 								model,
 								{
-									selectedRow: _elm_lang$core$Maybe$Just(_p21._0._0),
+									selectedRow: _elm_lang$core$Maybe$Just(_p25._0._0),
 									loadingSelectedRecord: false
 								}),
 							_elm_lang$core$Platform_Cmd$none);
@@ -36011,65 +36364,12 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 								}),
 							_elm_lang$core$Platform_Cmd$none);
 					case 'WindowMsg':
-						if (_p21._0.ctor === 'TabMsg') {
-							switch (_p21._0._0.ctor) {
+						if (_p25._0.ctor === 'TabMsg') {
+							switch (_p25._0._0.ctor) {
 								case 'RowMsg':
-									switch (_p21._0._0._1.ctor) {
+									switch (_p25._0._0._1.ctor) {
 										case 'ClickedCopyRecord':
-											var _p26 = _p21._0._0._0;
-											var activeWindow = function () {
-												var _p23 = model.activeWindow;
-												if (_p23.ctor === 'Just') {
-													return _p23._0.window;
-												} else {
-													return _elm_lang$core$Native_Utils.crashCase(
-														'Page.WindowArena',
-														{
-															start: {line: 353, column: 21},
-															end: {line: 358, column: 74}
-														},
-														_p23)('There should be an activeWindow');
-												}
-											}();
-											var tableName = _p26.tab.tableName;
-											var recordIdString = _ivanceras$diwata$Data_Window_Record$idToString(_p26.recordId);
-											var copyArenaArg = _elm_lang$core$Native_Utils.update(
-												arenaArg,
-												{
-													action: _ivanceras$diwata$Data_WindowArena$Copy(recordIdString)
-												});
-											var initSelectedRow = A6(
-												_ivanceras$diwata$Views_Window_DetailedRecord$init,
-												isDetailedRecordMaximized,
-												model.settings,
-												tableName,
-												_ivanceras$diwata$Data_WindowArena$Copy(recordIdString),
-												copyArenaArg,
-												activeWindow);
-											var initSelectedRowTask = A2(
-												_elm_lang$core$Task$attempt,
-												function (result) {
-													var _p25 = result;
-													if (_p25.ctor === 'Ok') {
-														return _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow(
-															{
-																ctor: '_Tuple2',
-																_0: _p25._0,
-																_1: _elm_lang$core$Maybe$Just(_p26.recordId)
-															});
-													} else {
-														return _ivanceras$diwata$Page_WindowArena$FailedToInitializeSelectedRow;
-													}
-												},
-												initSelectedRow);
-											return A2(
-												_ivanceras$diwata$Util_ops['=>'],
-												_elm_lang$core$Native_Utils.update(
-													model,
-													{loadingSelectedRecord: true}),
-												initSelectedRowTask);
-										case 'ClickedDetailedLink':
-											var _p30 = _p21._0._0._0;
+											var _p30 = _p25._0._0._0;
 											var activeWindow = function () {
 												var _p27 = model.activeWindow;
 												if (_p27.ctor === 'Just') {
@@ -36078,14 +36378,28 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 													return _elm_lang$core$Native_Utils.crashCase(
 														'Page.WindowArena',
 														{
-															start: {line: 390, column: 21},
-															end: {line: 395, column: 74}
+															start: {line: 355, column: 21},
+															end: {line: 360, column: 74}
 														},
 														_p27)('There should be an activeWindow');
 												}
 											}();
 											var tableName = _p30.tab.tableName;
-											var initSelectedRow = A6(_ivanceras$diwata$Views_Window_DetailedRecord$init, isDetailedRecordMaximized, model.settings, tableName, arenaArg.action, arenaArg, activeWindow);
+											var recordIdString = _ivanceras$diwata$Data_Window_Record$idToString(_p30.recordId);
+											var copyArenaArg = _elm_lang$core$Native_Utils.update(
+												arenaArg,
+												{
+													action: _ivanceras$diwata$Data_WindowArena$Copy(recordIdString)
+												});
+											var initSelectedRow = A7(
+												_ivanceras$diwata$Views_Window_DetailedRecord$init,
+												isDetailedRecordMaximized,
+												model.settings,
+												tableName,
+												_ivanceras$diwata$Data_WindowArena$Copy(recordIdString),
+												copyArenaArg,
+												activeWindow,
+												_ivanceras$diwata$Page_WindowArena$calcDetailedRecordSize(model.containerSize));
 											var initSelectedRowTask = A2(
 												_elm_lang$core$Task$attempt,
 												function (result) {
@@ -36102,7 +36416,55 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 													}
 												},
 												initSelectedRow);
-											var recordIdString = _ivanceras$diwata$Data_Window_Record$idToString(_p30.recordId);
+											return A2(
+												_ivanceras$diwata$Util_ops['=>'],
+												_elm_lang$core$Native_Utils.update(
+													model,
+													{loadingSelectedRecord: true}),
+												initSelectedRowTask);
+										case 'ClickedDetailedLink':
+											var _p34 = _p25._0._0._0;
+											var activeWindow = function () {
+												var _p31 = model.activeWindow;
+												if (_p31.ctor === 'Just') {
+													return _p31._0.window;
+												} else {
+													return _elm_lang$core$Native_Utils.crashCase(
+														'Page.WindowArena',
+														{
+															start: {line: 392, column: 21},
+															end: {line: 397, column: 74}
+														},
+														_p31)('There should be an activeWindow');
+												}
+											}();
+											var tableName = _p34.tab.tableName;
+											var initSelectedRow = A7(
+												_ivanceras$diwata$Views_Window_DetailedRecord$init,
+												isDetailedRecordMaximized,
+												model.settings,
+												tableName,
+												arenaArg.action,
+												arenaArg,
+												activeWindow,
+												_ivanceras$diwata$Page_WindowArena$calcDetailedRecordSize(model.containerSize));
+											var initSelectedRowTask = A2(
+												_elm_lang$core$Task$attempt,
+												function (result) {
+													var _p33 = result;
+													if (_p33.ctor === 'Ok') {
+														return _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow(
+															{
+																ctor: '_Tuple2',
+																_0: _p33._0,
+																_1: _elm_lang$core$Maybe$Just(_p34.recordId)
+															});
+													} else {
+														return _ivanceras$diwata$Page_WindowArena$FailedToInitializeSelectedRow;
+													}
+												},
+												initSelectedRow);
+											var recordIdString = _ivanceras$diwata$Data_Window_Record$idToString(_p34.recordId);
 											return A2(
 												_ivanceras$diwata$Util_ops['=>'],
 												_elm_lang$core$Native_Utils.update(
@@ -36110,32 +36472,40 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 													{loadingSelectedRecord: true}),
 												initSelectedRowTask);
 										case 'FieldMsg':
-											if (_p21._0._0._1._1.ctor === 'PrimaryLinkClicked') {
+											if (_p25._0._0._1._1.ctor === 'PrimaryLinkClicked') {
 												var activeWindow = function () {
-													var _p31 = model.activeWindow;
-													if (_p31.ctor === 'Just') {
-														return _p31._0.window;
+													var _p35 = model.activeWindow;
+													if (_p35.ctor === 'Just') {
+														return _p35._0.window;
 													} else {
 														return _elm_lang$core$Native_Utils.crashCase(
 															'Page.WindowArena',
 															{
-																start: {line: 418, column: 21},
-																end: {line: 423, column: 74}
+																start: {line: 420, column: 21},
+																end: {line: 425, column: 74}
 															},
-															_p31)('There should be an activeWindow');
+															_p35)('There should be an activeWindow');
 													}
 												}();
-												var initSelectedRow = A6(_ivanceras$diwata$Views_Window_DetailedRecord$init, isDetailedRecordMaximized, model.settings, _p21._0._0._1._1._0, arenaArg.action, arenaArg, activeWindow);
+												var initSelectedRow = A7(
+													_ivanceras$diwata$Views_Window_DetailedRecord$init,
+													isDetailedRecordMaximized,
+													model.settings,
+													_p25._0._0._1._1._0,
+													arenaArg.action,
+													arenaArg,
+													activeWindow,
+													_ivanceras$diwata$Page_WindowArena$calcDetailedRecordSize(model.containerSize));
 												var initSelectedRowTask = A2(
 													_elm_lang$core$Task$attempt,
 													function (result) {
-														var _p33 = result;
-														if (_p33.ctor === 'Ok') {
+														var _p37 = result;
+														if (_p37.ctor === 'Ok') {
 															return _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow(
 																{
 																	ctor: '_Tuple2',
-																	_0: _p33._0,
-																	_1: _elm_lang$core$Maybe$Just(_p21._0._0._0.recordId)
+																	_0: _p37._0,
+																	_1: _elm_lang$core$Maybe$Just(_p25._0._0._0.recordId)
 																});
 														} else {
 															return _ivanceras$diwata$Page_WindowArena$FailedToInitializeSelectedRow;
@@ -36149,61 +36519,62 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 														{loadingSelectedRecord: true}),
 													initSelectedRowTask);
 											} else {
-												break _v17_7;
+												break _v19_7;
 											}
 										default:
-											break _v17_7;
+											break _v19_7;
 									}
 								case 'ToolbarMsg':
-									if (_p21._0._0._0.ctor === 'ClickedNewButton') {
+									if (_p25._0._0._0.ctor === 'ClickedNewButton') {
 										var newArenaArg = _elm_lang$core$Native_Utils.update(
 											arenaArg,
 											{
 												action: _ivanceras$diwata$Data_WindowArena$NewRecord(_ivanceras$diwata$Data_Window_Presentation$InCard)
 											});
 										var tableName = function () {
-											var _p34 = arenaArg.tableName;
-											if (_p34.ctor === 'Just') {
-												return _p34._0;
+											var _p38 = arenaArg.tableName;
+											if (_p38.ctor === 'Just') {
+												return _p38._0;
 											} else {
 												return _elm_lang$core$Native_Utils.crashCase(
 													'Page.WindowArena',
 													{
-														start: {line: 468, column: 21},
-														end: {line: 473, column: 68}
+														start: {line: 470, column: 21},
+														end: {line: 475, column: 68}
 													},
-													_p34)('There should be tableName');
+													_p38)('There should be tableName');
 											}
 										}();
 										var activeWindow = function () {
-											var _p36 = model.activeWindow;
-											if (_p36.ctor === 'Just') {
-												return _p36._0.window;
+											var _p40 = model.activeWindow;
+											if (_p40.ctor === 'Just') {
+												return _p40._0.window;
 											} else {
 												return _elm_lang$core$Native_Utils.crashCase(
 													'Page.WindowArena',
 													{
-														start: {line: 460, column: 21},
-														end: {line: 465, column: 74}
+														start: {line: 462, column: 21},
+														end: {line: 467, column: 74}
 													},
-													_p36)('There should be an activeWindow');
+													_p40)('There should be an activeWindow');
 											}
 										}();
-										var initSelectedRow = A6(
+										var initSelectedRow = A7(
 											_ivanceras$diwata$Views_Window_DetailedRecord$init,
 											isDetailedRecordMaximized,
 											model.settings,
 											tableName,
 											_ivanceras$diwata$Data_WindowArena$NewRecord(_ivanceras$diwata$Data_Window_Presentation$InCard),
 											newArenaArg,
-											activeWindow);
+											activeWindow,
+											_ivanceras$diwata$Page_WindowArena$calcDetailedRecordSize(model.containerSize));
 										var initNewRecordTask = A2(
 											_elm_lang$core$Task$attempt,
 											function (result) {
-												var _p38 = result;
-												if (_p38.ctor === 'Ok') {
+												var _p42 = result;
+												if (_p42.ctor === 'Ok') {
 													return _ivanceras$diwata$Page_WindowArena$InitializedSelectedRow(
-														{ctor: '_Tuple2', _0: _p38._0, _1: _elm_lang$core$Maybe$Nothing});
+														{ctor: '_Tuple2', _0: _p42._0, _1: _elm_lang$core$Maybe$Nothing});
 												} else {
 													return _ivanceras$diwata$Page_WindowArena$FailedToInitializeSelectedRow;
 												}
@@ -36226,34 +36597,33 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 													}
 												}));
 									} else {
-										break _v17_7;
+										break _v19_7;
 									}
 								default:
-									break _v17_7;
+									break _v19_7;
 							}
 						} else {
-							break _v17_7;
+							break _v19_7;
 						}
 					case 'DetailedRecordMsg':
-						switch (_p21._0.ctor) {
+						switch (_p25._0.ctor) {
 							case 'ClickedCloseButton':
 								return _ivanceras$diwata$Page_WindowArena$closeRecord(model);
 							case 'ToolbarMsg':
-								switch (_p21._0._0.ctor) {
+								switch (_p25._0._0.ctor) {
 									case 'ClickedClose':
 										return _ivanceras$diwata$Page_WindowArena$closeRecord(model);
 									case 'ClickedMaximize':
-										var _p49 = _p21._0._0._0;
-										var _p46 = function () {
-											var _p47 = model.selectedRow;
-											if (_p47.ctor === 'Just') {
-												var _p48 = A3(
+										var _p53 = _p25._0._0._0;
+										var _p50 = function () {
+											var _p51 = model.selectedRow;
+											if (_p51.ctor === 'Just') {
+												var _p52 = A2(
 													_ivanceras$diwata$Views_Window_DetailedRecord$update,
-													session,
-													_ivanceras$diwata$Views_Window_DetailedRecord$Maximize(_p49),
-													_p47._0);
-												var detailedRecord = _p48._0;
-												var subCmd = _p48._1;
+													_ivanceras$diwata$Views_Window_DetailedRecord$Maximize(_p53),
+													_p51._0);
+												var detailedRecord = _p52._0;
+												var subCmd = _p52._1;
 												return {
 													ctor: '_Tuple2',
 													_0: _elm_lang$core$Maybe$Just(detailedRecord),
@@ -36263,50 +36633,73 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 												return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _elm_lang$core$Platform_Cmd$none};
 											}
 										}();
-										var updatedSelectedRow = _p46._0;
-										var cmd = _p46._1;
+										var updatedSelectedRow = _p50._0;
+										var cmd = _p50._1;
 										return A2(
 											_ivanceras$diwata$Util_ops['=>'],
 											_elm_lang$core$Native_Utils.update(
 												model,
-												{isDetailedRecordMaximized: _p49, selectedRow: updatedSelectedRow}),
+												{isDetailedRecordMaximized: _p53, selectedRow: updatedSelectedRow}),
 											cmd);
 									default:
-										break _v17_11;
+										break _v19_11;
 								}
 							default:
-								break _v17_11;
+								break _v19_11;
 						}
 					default:
-						return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
+						var _p64 = _p25._0;
+						var updatedModel = _elm_lang$core$Native_Utils.update(
+							model,
+							{containerSize: _p64});
+						var _p61 = _ivanceras$diwata$Page_WindowArena$updateActiveWindowSize(updatedModel);
+						var updatedModel2 = _p61._0;
+						var subCmd2 = _p61._1;
+						var _p62 = _ivanceras$diwata$Page_WindowArena$updateDetailedRecordSize(updatedModel2);
+						var updatedModel3 = _p62._0;
+						var subCmd3 = _p62._1;
+						var _p63 = A2(_elm_lang$core$Debug$log, 'updating containerSize in windowArena', _p64);
+						return A2(
+							_ivanceras$diwata$Util_ops['=>'],
+							updatedModel3,
+							_elm_lang$core$Platform_Cmd$batch(
+								{
+									ctor: '::',
+									_0: subCmd2,
+									_1: {
+										ctor: '::',
+										_0: subCmd2,
+										_1: {ctor: '[]'}
+									}
+								}));
 				}
 			} while(false);
-			var _p39 = model.activeWindow;
-			if (_p39.ctor === 'Just') {
-				var _p45 = _p39._0;
-				var _p40 = A3(_ivanceras$diwata$Views_Window$update, session, _p21._0, _p45);
-				var newWindow = _p40._0;
-				var subCmd = _p40._1;
-				var lookup = _p45.lookup;
-				var _p41 = function () {
-					var _p42 = _ivanceras$diwata$Views_Window$dropdownPageRequestNeeded(_p45);
-					if (_p42.ctor === 'Just') {
-						var _p44 = _p42._0;
-						var _p43 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, _p44, lookup);
-						var currentPage = _p43._0;
-						var listRecord = _p43._1;
+			var _p43 = model.activeWindow;
+			if (_p43.ctor === 'Just') {
+				var _p49 = _p43._0;
+				var _p44 = A2(_ivanceras$diwata$Views_Window$update, _p25._0, _p49);
+				var newWindow = _p44._0;
+				var subCmd = _p44._1;
+				var lookup = _p49.lookup;
+				var _p45 = function () {
+					var _p46 = _ivanceras$diwata$Views_Window$dropdownPageRequestNeeded(_p49);
+					if (_p46.ctor === 'Just') {
+						var _p48 = _p46._0;
+						var _p47 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, _p48, lookup);
+						var currentPage = _p47._0;
+						var listRecord = _p47._1;
 						return A2(
 							_ivanceras$diwata$Util_ops['=>'],
 							_elm_lang$core$Native_Utils.update(
 								newWindow,
 								{dropdownPageRequestInFlight: true}),
-							A3(_ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForWindow, model.settings, currentPage, _p44));
+							A3(_ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForWindow, model.settings, currentPage, _p48));
 					} else {
 						return A2(_ivanceras$diwata$Util_ops['=>'], newWindow, _elm_lang$core$Platform_Cmd$none);
 					}
 				}();
-				var updatedWindow = _p41._0;
-				var windowCmd = _p41._1;
+				var updatedWindow = _p45._0;
+				var windowCmd = _p45._1;
 				return A2(
 					_ivanceras$diwata$Util_ops['=>'],
 					_elm_lang$core$Native_Utils.update(
@@ -36328,32 +36721,32 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 				return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 			}
 		} while(false);
-		var _p50 = model.selectedRow;
-		if (_p50.ctor === 'Just') {
-			var _p56 = _p50._0;
-			var _p51 = A3(_ivanceras$diwata$Views_Window_DetailedRecord$update, session, _p21._0, _p56);
-			var newDetailedRecord = _p51._0;
-			var subCmd = _p51._1;
-			var lookup = _p56.lookup;
-			var _p52 = function () {
-				var _p53 = _ivanceras$diwata$Views_Window_DetailedRecord$dropdownPageRequestNeeded(_p56);
-				if (_p53.ctor === 'Just') {
-					var _p55 = _p53._0;
-					var _p54 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, _p55, lookup);
-					var currentPage = _p54._0;
-					var listRecord = _p54._1;
+		var _p54 = model.selectedRow;
+		if (_p54.ctor === 'Just') {
+			var _p60 = _p54._0;
+			var _p55 = A2(_ivanceras$diwata$Views_Window_DetailedRecord$update, _p25._0, _p60);
+			var newDetailedRecord = _p55._0;
+			var subCmd = _p55._1;
+			var lookup = _p60.lookup;
+			var _p56 = function () {
+				var _p57 = _ivanceras$diwata$Views_Window_DetailedRecord$dropdownPageRequestNeeded(_p60);
+				if (_p57.ctor === 'Just') {
+					var _p59 = _p57._0;
+					var _p58 = A2(_ivanceras$diwata$Data_Window_Lookup$tableLookup, _p59, lookup);
+					var currentPage = _p58._0;
+					var listRecord = _p58._1;
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
 							newDetailedRecord,
 							{dropdownPageRequestInFlight: true}),
-						A3(_ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForDetailedRecord, model.settings, currentPage, _p55));
+						A3(_ivanceras$diwata$Page_WindowArena$requestNextDropdownPageForDetailedRecord, model.settings, currentPage, _p59));
 				} else {
 					return A2(_ivanceras$diwata$Util_ops['=>'], newDetailedRecord, _elm_lang$core$Platform_Cmd$none);
 				}
 			}();
-			var updatedDetailedRecord = _p52._0;
-			var detailCmd = _p52._1;
+			var updatedDetailedRecord = _p56._0;
+			var detailCmd = _p56._1;
 			return A2(
 				_ivanceras$diwata$Util_ops['=>'],
 				_elm_lang$core$Native_Utils.update(
@@ -36404,13 +36797,38 @@ var _ivanceras$diwata$Main$title = _elm_lang$core$Native_Platform.outgoingPort(
 	function (v) {
 		return v;
 	});
-var _ivanceras$diwata$Main$Model = F4(
-	function (a, b, c, d) {
-		return {session: a, pageState: b, settings: c, location: d};
+var _ivanceras$diwata$Main$setUsername = _elm_lang$core$Native_Platform.outgoingPort(
+	'setUsername',
+	function (v) {
+		return v;
 	});
-var _ivanceras$diwata$Main$Window = function (a) {
-	return {ctor: 'Window', _0: a};
+var _ivanceras$diwata$Main$setPassword = _elm_lang$core$Native_Platform.outgoingPort(
+	'setPassword',
+	function (v) {
+		return v;
+	});
+var _ivanceras$diwata$Main$portCredentials = function (settings) {
+	var _p3 = settings.cred;
+	if (_p3.ctor === 'Just') {
+		var _p4 = _p3._0;
+		return _elm_lang$core$Platform_Cmd$batch(
+			{
+				ctor: '::',
+				_0: _ivanceras$diwata$Main$setUsername(_p4.username),
+				_1: {
+					ctor: '::',
+					_0: _ivanceras$diwata$Main$setPassword(_p4.password),
+					_1: {ctor: '[]'}
+				}
+			});
+	} else {
+		return _elm_lang$core$Platform_Cmd$none;
+	}
 };
+var _ivanceras$diwata$Main$Model = F5(
+	function (a, b, c, d, e) {
+		return {session: a, pageState: b, settings: c, location: d, browserSize: e};
+	});
 var _ivanceras$diwata$Main$Login = function (a) {
 	return {ctor: 'Login', _0: a};
 };
@@ -36442,11 +36860,11 @@ var _ivanceras$diwata$Main$pageErrored = F3(
 				}),
 			_elm_lang$core$Platform_Cmd$none);
 	});
-var _ivanceras$diwata$Main$SetDbUrl = function (a) {
-	return {ctor: 'SetDbUrl', _0: a};
+var _ivanceras$diwata$Main$BrowserResized = function (a) {
+	return {ctor: 'BrowserResized', _0: a};
 };
-var _ivanceras$diwata$Main$WindowMsg = function (a) {
-	return {ctor: 'WindowMsg', _0: a};
+var _ivanceras$diwata$Main$SetLoginRequired = function (a) {
+	return {ctor: 'SetLoginRequired', _0: a};
 };
 var _ivanceras$diwata$Main$LoginMsg = function (a) {
 	return {ctor: 'LoginMsg', _0: a};
@@ -36459,53 +36877,65 @@ var _ivanceras$diwata$Main$SetTitle = function (a) {
 };
 var _ivanceras$diwata$Main$init = F2(
 	function (val, location) {
+		var getBrowserSize = A2(
+			_elm_lang$core$Task$attempt,
+			function (r) {
+				var _p5 = r;
+				if (_p5.ctor === 'Ok') {
+					return _ivanceras$diwata$Main$BrowserResized(_p5._0);
+				} else {
+					return _elm_lang$core$Native_Utils.crashCase(
+						'Main',
+						{
+							start: {line: 158, column: 25},
+							end: {line: 163, column: 71}
+						},
+						_p5)('This should never happen');
+				}
+			},
+			_elm_lang$window$Window$size);
 		var settings = _ivanceras$diwata$Settings$fromJson(val);
 		var correctedSettings = function () {
-			var _p3 = settings.apiEndPoint;
-			if (_p3.ctor === 'Just') {
+			var _p7 = settings.apiEndPoint;
+			if (_p7.ctor === 'Just') {
 				return settings;
 			} else {
 				return _elm_lang$core$Native_Utils.update(
 					settings,
 					{
 						apiEndPoint: function () {
-							var _p4 = location.origin;
-							switch (_p4) {
+							var _p8 = location.origin;
+							switch (_p8) {
 								case '':
 									return _elm_lang$core$Maybe$Nothing;
 								case 'null':
 									return _elm_lang$core$Maybe$Nothing;
 								default:
-									return _elm_lang$core$Maybe$Just(_p4);
+									return _elm_lang$core$Maybe$Just(_p8);
 							}
 						}()
 					});
 			}
 		}();
-		var _p5 = A2(_elm_lang$core$Debug$log, 'corrected settings: ', correctedSettings);
-		var dbUrlCmd = A2(
+		var _p9 = A2(_elm_lang$core$Debug$log, 'corrected settings: ', correctedSettings);
+		var loginRequiredCmd = A2(
 			_elm_lang$core$Task$attempt,
 			function (r) {
-				var _p6 = r;
-				if (_p6.ctor === 'Ok') {
-					return _elm_lang$core$Maybe$Just(_p6._0);
+				var _p10 = r;
+				if (_p10.ctor === 'Ok') {
+					return _p10._0;
 				} else {
-					return _elm_lang$core$Maybe$Nothing;
+					return false;
 				}
 			},
-			_ivanceras$diwata$Request_Auth$dbUrl(correctedSettings));
-		var setDbUrlCmd = A2(
-			_elm_lang$core$Platform_Cmd$map,
-			function (a) {
-				return _ivanceras$diwata$Main$SetDbUrl(a);
-			},
-			dbUrlCmd);
+			_ivanceras$diwata$Request_Auth$loginRequired(correctedSettings));
+		var setLoginRequiredCmd = A2(_elm_lang$core$Platform_Cmd$map, _ivanceras$diwata$Main$SetLoginRequired, loginRequiredCmd);
 		var dbNameCmd = A2(
 			_elm_lang$core$Task$attempt,
 			function (r) {
-				var _p7 = r;
-				if (_p7.ctor === 'Ok') {
-					return _p7._0;
+				var _p11 = r;
+				if (_p11.ctor === 'Ok') {
+					return _p11._0;
 				} else {
 					return _elm_lang$core$Maybe$Nothing;
 				}
@@ -36514,19 +36944,19 @@ var _ivanceras$diwata$Main$init = F2(
 		var setTitleDbNameCmd = A2(
 			_elm_lang$core$Platform_Cmd$map,
 			function (dbName) {
-				var _p8 = dbName;
-				if (_p8.ctor === 'Just') {
-					var _p11 = _p8._0;
-					var _p9 = function () {
-						var _p10 = _p11.description;
-						if (_p10.ctor === 'Just') {
-							return {ctor: '_Tuple2', _0: _p11.name, _1: _p10._0};
+				var _p12 = dbName;
+				if (_p12.ctor === 'Just') {
+					var _p15 = _p12._0;
+					var _p13 = function () {
+						var _p14 = _p15.description;
+						if (_p14.ctor === 'Just') {
+							return {ctor: '_Tuple2', _0: _p15.name, _1: _p14._0};
 						} else {
-							return {ctor: '_Tuple2', _0: _p11.name, _1: 'Diwata'};
+							return {ctor: '_Tuple2', _0: _p15.name, _1: 'Diwata'};
 						}
 					}();
-					var name = _p9._0;
-					var desc = _p9._1;
+					var name = _p13._0;
+					var desc = _p13._1;
 					return _ivanceras$diwata$Main$SetTitle(
 						_elm_lang$core$Maybe$Just(
 							A2(
@@ -36550,7 +36980,8 @@ var _ivanceras$diwata$Main$init = F2(
 				user: _ivanceras$diwata$Main$decodeUserFromJson(val)
 			},
 			settings: correctedSettings,
-			location: location
+			location: location,
+			browserSize: A2(_elm_lang$window$Window$Size, 0, 0)
 		};
 		return A2(
 			_ivanceras$diwata$Util_ops['=>'],
@@ -36558,14 +36989,18 @@ var _ivanceras$diwata$Main$init = F2(
 			_elm_lang$core$Platform_Cmd$batch(
 				{
 					ctor: '::',
-					_0: setDbUrlCmd,
+					_0: setLoginRequiredCmd,
 					_1: {
 						ctor: '::',
 						_0: setTitleDbNameCmd,
 						_1: {
 							ctor: '::',
 							_0: setDbNameCmd,
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: getBrowserSize,
+								_1: {ctor: '[]'}
+							}
 						}
 					}
 				}));
@@ -36579,8 +37014,8 @@ var _ivanceras$diwata$Main$WindowArenaMsg = function (a) {
 var _ivanceras$diwata$Main$viewPage = F3(
 	function (session, isLoading, page) {
 		var frame = A2(_ivanceras$diwata$Views_Page$frame, isLoading, session.user);
-		var _p12 = page;
-		switch (_p12.ctor) {
+		var _p16 = page;
+		switch (_p16.ctor) {
 			case 'NotFound':
 				return A2(
 					frame,
@@ -36595,7 +37030,7 @@ var _ivanceras$diwata$Main$viewPage = F3(
 				return A2(
 					frame,
 					_ivanceras$diwata$Views_Page$Other,
-					A2(_ivanceras$diwata$Page_Errored$view, session, _p12._0));
+					A2(_ivanceras$diwata$Page_Errored$view, session, _p16._0));
 			case 'WindowArena':
 				return A2(
 					_elm_lang$html$Html$map,
@@ -36603,36 +37038,28 @@ var _ivanceras$diwata$Main$viewPage = F3(
 					A2(
 						frame,
 						_ivanceras$diwata$Views_Page$WindowArena,
-						A2(_ivanceras$diwata$Page_WindowArena$view, session, _p12._0)));
-			case 'Login':
+						A2(_ivanceras$diwata$Page_WindowArena$view, session, _p16._0)));
+			default:
 				return A2(
 					_elm_lang$html$Html$map,
 					_ivanceras$diwata$Main$LoginMsg,
 					A2(
 						frame,
 						_ivanceras$diwata$Views_Page$Other,
-						A2(_ivanceras$diwata$Page_Login$view, session, _p12._0)));
-			default:
-				return A2(
-					_elm_lang$html$Html$map,
-					_ivanceras$diwata$Main$WindowMsg,
-					A2(
-						frame,
-						_ivanceras$diwata$Views_Page$Other,
-						A2(_ivanceras$diwata$Views_Window$view, session, _p12._0)));
+						A2(_ivanceras$diwata$Page_Login$view, session, _p16._0)));
 		}
 	});
 var _ivanceras$diwata$Main$view = function (model) {
-	var _p13 = model.pageState;
-	if (_p13.ctor === 'Loaded') {
-		return A3(_ivanceras$diwata$Main$viewPage, model.session, false, _p13._0);
+	var _p17 = model.pageState;
+	if (_p17.ctor === 'Loaded') {
+		return A3(_ivanceras$diwata$Main$viewPage, model.session, false, _p17._0);
 	} else {
-		return A3(_ivanceras$diwata$Main$viewPage, model.session, true, _p13._0);
+		return A3(_ivanceras$diwata$Main$viewPage, model.session, true, _p17._0);
 	}
 };
 var _ivanceras$diwata$Main$pageSubscriptions = function (page) {
-	var _p14 = page;
-	switch (_p14.ctor) {
+	var _p18 = page;
+	switch (_p18.ctor) {
 		case 'Blank':
 			return _elm_lang$core$Platform_Sub$none;
 		case 'Errored':
@@ -36643,9 +37070,7 @@ var _ivanceras$diwata$Main$pageSubscriptions = function (page) {
 			return A2(
 				_elm_lang$core$Platform_Sub$map,
 				_ivanceras$diwata$Main$WindowArenaMsg,
-				_ivanceras$diwata$Page_WindowArena$subscriptions(_p14._0));
-		case 'Login':
-			return _elm_lang$core$Platform_Sub$none;
+				_ivanceras$diwata$Page_WindowArena$subscriptions(_p18._0));
 		default:
 			return _elm_lang$core$Platform_Sub$none;
 	}
@@ -36659,12 +37084,13 @@ var _ivanceras$diwata$Main$subscriptions = function (model) {
 			_1: {
 				ctor: '::',
 				_0: A2(_elm_lang$core$Platform_Sub$map, _ivanceras$diwata$Main$SetUser, _ivanceras$diwata$Main$sessionChange),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$window$Window$resizes(_ivanceras$diwata$Main$BrowserResized),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
-};
-var _ivanceras$diwata$Main$WindowLoaded = function (a) {
-	return {ctor: 'WindowLoaded', _0: a};
 };
 var _ivanceras$diwata$Main$HomeLoaded = function (a) {
 	return {ctor: 'HomeLoaded', _0: a};
@@ -36674,11 +37100,11 @@ var _ivanceras$diwata$Main$setRoute = F2(
 		var errored = _ivanceras$diwata$Main$pageErrored(model);
 		var prevPage = _ivanceras$diwata$Main$getPage(model.pageState);
 		var updatedPrevPage = function () {
-			var _p15 = prevPage;
-			if (_p15.ctor === 'WindowArena') {
+			var _p19 = prevPage;
+			if (_p19.ctor === 'WindowArena') {
 				return _ivanceras$diwata$Main$WindowArena(
 					_elm_lang$core$Native_Utils.update(
-						_p15._0,
+						_p19._0,
 						{loadingSelectedRecord: true}));
 			} else {
 				return prevPage;
@@ -36696,17 +37122,22 @@ var _ivanceras$diwata$Main$setRoute = F2(
 					A2(_elm_lang$core$Task$attempt, toMsg, task));
 			});
 		var settings = model.settings;
+		var _p20 = A2(_elm_lang$core$Debug$log, 'cred', settings.cred);
 		var correctedRoute = function () {
-			var _p16 = settings.dbUrl;
-			if (_p16.ctor === 'Just') {
-				return maybeRoute;
+			if (settings.loginRequired) {
+				var _p21 = settings.cred;
+				if (_p21.ctor === 'Just') {
+					return maybeRoute;
+				} else {
+					return _elm_lang$core$Maybe$Just(_ivanceras$diwata$Route$Login);
+				}
 			} else {
-				return _elm_lang$core$Maybe$Just(_ivanceras$diwata$Route$Login);
+				return maybeRoute;
 			}
 		}();
-		var _p17 = A2(_elm_lang$core$Debug$log, 'setting route', maybeRoute);
-		var _p18 = correctedRoute;
-		if (_p18.ctor === 'Nothing') {
+		var _p22 = A2(_elm_lang$core$Debug$log, 'setting route', maybeRoute);
+		var _p23 = correctedRoute;
+		if (_p23.ctor === 'Nothing') {
 			return A2(
 				_ivanceras$diwata$Util_ops['=>'],
 				_elm_lang$core$Native_Utils.update(
@@ -36716,12 +37147,12 @@ var _ivanceras$diwata$Main$setRoute = F2(
 					}),
 				_elm_lang$core$Platform_Cmd$none);
 		} else {
-			switch (_p18._0.ctor) {
+			switch (_p23._0.ctor) {
 				case 'WindowArena':
 					return A2(
 						transition,
 						_ivanceras$diwata$Main$HomeLoaded,
-						A3(_ivanceras$diwata$Page_WindowArena$init, model.settings, model.session, _p18._0._0));
+						A4(_ivanceras$diwata$Page_WindowArena$init, model.settings, model.session, _p23._0._0, model.browserSize));
 				case 'Login':
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
@@ -36763,9 +37194,9 @@ var _ivanceras$diwata$Main$updatePage = F3(
 		var errored = _ivanceras$diwata$Main$pageErrored(model);
 		var toPage = F5(
 			function (toModel, toMsg, subUpdate, subMsg, subModel) {
-				var _p19 = A2(subUpdate, subMsg, subModel);
-				var newModel = _p19._0;
-				var newCmd = _p19._1;
+				var _p24 = A2(subUpdate, subMsg, subModel);
+				var newModel = _p24._0;
+				var newCmd = _p24._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -36778,187 +37209,190 @@ var _ivanceras$diwata$Main$updatePage = F3(
 				};
 			});
 		var session = model.session;
-		var _p20 = {ctor: '_Tuple2', _0: msg, _1: page};
-		_v13_14:
+		var _p25 = {ctor: '_Tuple2', _0: msg, _1: page};
+		_v15_13:
 		do {
-			_v13_13:
+			_v15_12:
 			do {
-				_v13_1:
+				_v15_11:
 				do {
-					switch (_p20._0.ctor) {
-						case 'SetRoute':
-							switch (_p20._1.ctor) {
-								case 'WindowArena':
-									return A2(_ivanceras$diwata$Main$setRoute, _p20._0._0, model);
-								case 'NotFound':
-									break _v13_1;
-								default:
-									break _v13_1;
-							}
-						case 'HomeLoaded':
-							if (_p20._0._0.ctor === 'Ok') {
-								var _p21 = A2(_elm_lang$core$Debug$log, 'WindowArena is now loaded', '');
-								return A2(
-									_ivanceras$diwata$Util_ops['=>'],
-									_elm_lang$core$Native_Utils.update(
-										model,
-										{
-											pageState: _ivanceras$diwata$Main$Loaded(
-												_ivanceras$diwata$Main$WindowArena(_p20._0._0._0))
-										}),
-									_elm_lang$core$Platform_Cmd$none);
-							} else {
-								return A2(
-									_ivanceras$diwata$Util_ops['=>'],
-									_elm_lang$core$Native_Utils.update(
-										model,
-										{
-											pageState: _ivanceras$diwata$Main$Loaded(
-												_ivanceras$diwata$Main$Errored(_p20._0._0._0))
-										}),
-									_elm_lang$core$Platform_Cmd$none);
-							}
-						case 'WindowLoaded':
-							if (_p20._0._0.ctor === 'Ok') {
-								return A2(
-									_ivanceras$diwata$Util_ops['=>'],
-									_elm_lang$core$Native_Utils.update(
-										model,
-										{
-											pageState: _ivanceras$diwata$Main$Loaded(
-												_ivanceras$diwata$Main$Window(_p20._0._0._0))
-										}),
-									_elm_lang$core$Platform_Cmd$none);
-							} else {
-								return A2(
-									_ivanceras$diwata$Util_ops['=>'],
-									_elm_lang$core$Native_Utils.update(
-										model,
-										{
-											pageState: _ivanceras$diwata$Main$Loaded(
-												_ivanceras$diwata$Main$Errored(_p20._0._0._0))
-										}),
-									_elm_lang$core$Platform_Cmd$none);
-							}
-						case 'SetUser':
-							var _p22 = _p20._0._0;
-							var session = model.session;
-							var cmd = ((!_elm_lang$core$Native_Utils.eq(session.user, _elm_lang$core$Maybe$Nothing)) && _elm_lang$core$Native_Utils.eq(_p22, _elm_lang$core$Maybe$Nothing)) ? _ivanceras$diwata$Route$modifyUrl(
-								_ivanceras$diwata$Route$WindowArena(_ivanceras$diwata$Data_WindowArena$default)) : _elm_lang$core$Platform_Cmd$none;
-							return A2(
-								_ivanceras$diwata$Util_ops['=>'],
-								_elm_lang$core$Native_Utils.update(
-									model,
-									{
-										session: _elm_lang$core$Native_Utils.update(
-											session,
-											{user: _p22})
-									}),
-								cmd);
-						case 'SetTitle':
-							return A2(
-								_ivanceras$diwata$Util_ops['=>'],
-								model,
-								function () {
-									var _p23 = _p20._0._0;
-									if (_p23.ctor === 'Just') {
-										return _ivanceras$diwata$Main$title(_p23._0);
-									} else {
-										return _elm_lang$core$Platform_Cmd$none;
-									}
-								}());
-						case 'SetDbName':
-							return A2(
-								_ivanceras$diwata$Util_ops['=>'],
-								_elm_lang$core$Native_Utils.update(
-									model,
-									{
-										settings: A2(_ivanceras$diwata$Settings$setDbName, model.settings, _p20._0._0)
-									}),
-								_elm_lang$core$Platform_Cmd$none);
-						case 'LoginMsg':
-							switch (_p20._1.ctor) {
-								case 'Login':
-									var _p24 = A2(_ivanceras$diwata$Page_Login$update, _p20._0._0, _p20._1._0);
-									var pageModel = _p24._0._0;
-									var cmd = _p24._0._1;
-									var msgFromPage = _p24._1;
-									var newModel = function () {
-										var _p25 = msgFromPage;
-										if (_p25.ctor === 'NoOp') {
-											return model;
-										} else {
-											return _elm_lang$core$Native_Utils.update(
-												model,
-												{settings: _p25._0});
-										}
-									}();
+					_v15_1:
+					do {
+						switch (_p25._0.ctor) {
+							case 'SetRoute':
+								switch (_p25._1.ctor) {
+									case 'WindowArena':
+										return A2(_ivanceras$diwata$Main$setRoute, _p25._0._0, model);
+									case 'NotFound':
+										break _v15_1;
+									default:
+										break _v15_1;
+								}
+							case 'HomeLoaded':
+								if (_p25._0._0.ctor === 'Ok') {
+									var _p26 = A2(_elm_lang$core$Debug$log, 'WindowArena is now loaded', '');
 									return A2(
 										_ivanceras$diwata$Util_ops['=>'],
 										_elm_lang$core$Native_Utils.update(
-											newModel,
+											model,
 											{
 												pageState: _ivanceras$diwata$Main$Loaded(
-													_ivanceras$diwata$Main$Login(pageModel))
+													_ivanceras$diwata$Main$WindowArena(_p25._0._0._0))
 											}),
-										A2(_elm_lang$core$Platform_Cmd$map, _ivanceras$diwata$Main$LoginMsg, cmd));
-								case 'NotFound':
-									break _v13_13;
-								default:
-									break _v13_14;
-							}
-						case 'WindowArenaMsg':
-							switch (_p20._1.ctor) {
-								case 'WindowArena':
-									return A5(
-										toPage,
-										_ivanceras$diwata$Main$WindowArena,
-										_ivanceras$diwata$Main$WindowArenaMsg,
-										_ivanceras$diwata$Page_WindowArena$update(session),
-										_p20._0._0,
-										_p20._1._0);
-								case 'NotFound':
-									break _v13_13;
-								default:
-									break _v13_14;
-							}
-						case 'WindowMsg':
-							switch (_p20._1.ctor) {
-								case 'Window':
-									return A5(
-										toPage,
-										_ivanceras$diwata$Main$Window,
-										_ivanceras$diwata$Main$WindowMsg,
-										_ivanceras$diwata$Views_Window$update(model.session),
-										_p20._0._0,
-										_p20._1._0);
-								case 'NotFound':
-									break _v13_13;
-								default:
-									break _v13_14;
-							}
-						default:
-							var _p28 = _p20._0._0;
-							var updatedModel = _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									settings: function () {
-										var _p26 = _p28;
-										if (_p26.ctor === 'Just') {
-											return A2(_ivanceras$diwata$Settings$setDbUrl, model.settings, _p26._0);
+										_elm_lang$core$Platform_Cmd$none);
+								} else {
+									return A2(
+										_ivanceras$diwata$Util_ops['=>'],
+										_elm_lang$core$Native_Utils.update(
+											model,
+											{
+												pageState: _ivanceras$diwata$Main$Loaded(
+													_ivanceras$diwata$Main$Errored(_p25._0._0._0))
+											}),
+										_elm_lang$core$Platform_Cmd$none);
+								}
+							case 'SetUser':
+								var _p27 = _p25._0._0;
+								var session = model.session;
+								var cmd = ((!_elm_lang$core$Native_Utils.eq(session.user, _elm_lang$core$Maybe$Nothing)) && _elm_lang$core$Native_Utils.eq(_p27, _elm_lang$core$Maybe$Nothing)) ? _ivanceras$diwata$Route$modifyUrl(
+									_ivanceras$diwata$Route$WindowArena(_ivanceras$diwata$Data_WindowArena$default)) : _elm_lang$core$Platform_Cmd$none;
+								return A2(
+									_ivanceras$diwata$Util_ops['=>'],
+									_elm_lang$core$Native_Utils.update(
+										model,
+										{
+											session: _elm_lang$core$Native_Utils.update(
+												session,
+												{user: _p27})
+										}),
+									cmd);
+							case 'SetTitle':
+								return A2(
+									_ivanceras$diwata$Util_ops['=>'],
+									model,
+									function () {
+										var _p28 = _p25._0._0;
+										if (_p28.ctor === 'Just') {
+											return _ivanceras$diwata$Main$title(_p28._0);
 										} else {
-											return model.settings;
+											return _elm_lang$core$Platform_Cmd$none;
 										}
-									}()
-								});
-							var _p27 = A2(_elm_lang$core$Debug$log, 'Setting db_url ', _p28);
-							return A2(
-								_ivanceras$diwata$Main$setRoute,
-								_ivanceras$diwata$Route$fromLocation(updatedModel.location),
-								updatedModel);
-					}
+									}());
+							case 'SetDbName':
+								return A2(
+									_ivanceras$diwata$Util_ops['=>'],
+									_elm_lang$core$Native_Utils.update(
+										model,
+										{
+											settings: A2(_ivanceras$diwata$Settings$setDbName, model.settings, _p25._0._0)
+										}),
+									_elm_lang$core$Platform_Cmd$none);
+							case 'LoginMsg':
+								switch (_p25._1.ctor) {
+									case 'Login':
+										var _p29 = A2(_ivanceras$diwata$Page_Login$update, _p25._0._0, _p25._1._0);
+										var pageModel = _p29._0._0;
+										var cmd = _p29._0._1;
+										var msgFromPage = _p29._1;
+										var _p30 = function () {
+											var _p31 = msgFromPage;
+											if (_p31.ctor === 'NoOp') {
+												return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+											} else {
+												var _p32 = _p31._0;
+												return {
+													ctor: '_Tuple2',
+													_0: _elm_lang$core$Native_Utils.update(
+														model,
+														{settings: _p32}),
+													_1: _ivanceras$diwata$Main$portCredentials(_p32)
+												};
+											}
+										}();
+										var newModel = _p30._0;
+										var subCmd = _p30._1;
+										return A2(
+											_ivanceras$diwata$Util_ops['=>'],
+											_elm_lang$core$Native_Utils.update(
+												newModel,
+												{
+													pageState: _ivanceras$diwata$Main$Loaded(
+														_ivanceras$diwata$Main$Login(pageModel))
+												}),
+											_elm_lang$core$Platform_Cmd$batch(
+												{
+													ctor: '::',
+													_0: A2(_elm_lang$core$Platform_Cmd$map, _ivanceras$diwata$Main$LoginMsg, cmd),
+													_1: {
+														ctor: '::',
+														_0: subCmd,
+														_1: {ctor: '[]'}
+													}
+												}));
+									case 'NotFound':
+										break _v15_12;
+									default:
+										break _v15_13;
+								}
+							case 'WindowArenaMsg':
+								switch (_p25._1.ctor) {
+									case 'WindowArena':
+										return A5(
+											toPage,
+											_ivanceras$diwata$Main$WindowArena,
+											_ivanceras$diwata$Main$WindowArenaMsg,
+											_ivanceras$diwata$Page_WindowArena$update(session),
+											_p25._0._0,
+											_p25._1._0);
+									case 'NotFound':
+										break _v15_12;
+									default:
+										break _v15_13;
+								}
+							case 'SetLoginRequired':
+								var updatedModel = _elm_lang$core$Native_Utils.update(
+									model,
+									{
+										settings: A2(_ivanceras$diwata$Settings$setDbUrl, model.settings, _p25._0._0)
+									});
+								return A2(
+									_ivanceras$diwata$Main$setRoute,
+									_ivanceras$diwata$Route$fromLocation(updatedModel.location),
+									updatedModel);
+							default:
+								switch (_p25._1.ctor) {
+									case 'WindowArena':
+										var _p34 = _p25._0._0;
+										var _p33 = A5(
+											toPage,
+											_ivanceras$diwata$Main$WindowArena,
+											_ivanceras$diwata$Main$WindowArenaMsg,
+											_ivanceras$diwata$Page_WindowArena$update(session),
+											_ivanceras$diwata$Page_WindowArena$BrowserResized(_p34),
+											_p25._1._0);
+										var updatedModel2 = _p33._0;
+										var subCmd = _p33._1;
+										return A2(
+											_ivanceras$diwata$Util_ops['=>'],
+											_elm_lang$core$Native_Utils.update(
+												updatedModel2,
+												{browserSize: _p34}),
+											subCmd);
+									case 'NotFound':
+										break _v15_11;
+									default:
+										break _v15_11;
+								}
+						}
+					} while(false);
+					return A2(_ivanceras$diwata$Main$setRoute, _p25._0._0, model);
 				} while(false);
-				return A2(_ivanceras$diwata$Main$setRoute, _p20._0._0, model);
+				return A2(
+					_ivanceras$diwata$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{browserSize: _p25._0._0}),
+					_elm_lang$core$Platform_Cmd$none);
 			} while(false);
 			return A2(_ivanceras$diwata$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 		} while(false);
@@ -36977,9 +37411,9 @@ var _ivanceras$diwata$Main$SetRoute = function (a) {
 };
 var _ivanceras$diwata$Main$main = A2(
 	_elm_lang$navigation$Navigation$programWithFlags,
-	function (_p29) {
+	function (_p35) {
 		return _ivanceras$diwata$Main$SetRoute(
-			_ivanceras$diwata$Route$fromLocation(_p29));
+			_ivanceras$diwata$Route$fromLocation(_p35));
 	},
 	{init: _ivanceras$diwata$Main$init, view: _ivanceras$diwata$Main$view, update: _ivanceras$diwata$Main$update, subscriptions: _ivanceras$diwata$Main$subscriptions})(_elm_lang$core$Json_Decode$value);
 
@@ -37022,16 +37456,49 @@ for (var publicModule in Elm)
 </script>
     <script type="text/javascript">// the db_url and grouped is retrieved from the indexed db
 function init(){
+    var username = null;
+    var password = null;
+    if (window.localStorage){
+        username = localStorage.getItem('username');
+        password = localStorage.getItem('password');
+        console.log("username:", username);
+        console.log("password:", password);
+    }
+    else{
+        console.error("localStorage is not supported");
+    }
+    var cred = null;
+    if (username != null && password != null) {
+        cred = {username: username, password: password}
+    }
     app = Elm.Main.fullscreen(
-        { db_url: null,
+        { login_required: false,
           db_name: null,
           api_endpoint: null,
           grouped: true,
+          cred: cred 
         }
     );
 
     app.ports.title.subscribe(function(title) {
         document.title = title;
+    });
+
+    app.ports.setUsername.subscribe(function(username) {
+        if (window.localStorage){
+            localStorage.setItem('username', username);
+        }
+        else{
+            console.error("localStorage is not supported");
+        }
+    });
+    app.ports.setPassword.subscribe(function(password) {
+        if (window.localStorage){
+            localStorage.setItem('password', password);
+        }
+        else{
+            console.error("localStorage is not supported");
+        }
     });
 }
 window.onload = init
