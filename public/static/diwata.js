@@ -14411,9 +14411,6 @@ var _elm_community$string_extra$String_Extra$isBlank = function (string) {
 		_elm_lang$core$Regex$regex('^\\s*$'),
 		string);
 };
-var _elm_community$string_extra$String_Extra$nonBlank = function (string) {
-	return _elm_community$string_extra$String_Extra$isBlank(string) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(string);
-};
 var _elm_community$string_extra$String_Extra$clean = function (string) {
 	return _elm_lang$core$String$trim(
 		A4(
@@ -25039,21 +25036,14 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$viewOption = F2(
 var _ivanceras$diwata$Widgets_DropdownDisplay$viewDropdown = F3(
 	function (styles, list, model) {
 		var padTop = 2;
-		var _p19 = function () {
-			var _p20 = _coreytrampe$elm_vendor$Vendor$prefix;
-			if (_p20.ctor === 'Webkit') {
-				return {ctor: '_Tuple2', _0: (0 - model.containerScroll.top) + padTop, _1: 0 - model.containerScroll.left};
-			} else {
-				return {ctor: '_Tuple2', _0: padTop, _1: 0};
-			}
-		}();
+		var _p19 = {ctor: '_Tuple2', _0: (0 - model.containerScroll.top) + padTop, _1: 0 - model.containerScroll.left};
 		var marginTop = _p19._0;
 		var marginLeft = _p19._1;
 		var sorted = A2(
 			_elm_lang$core$List$sortBy,
-			function (_p21) {
-				var _p22 = _p21;
-				return _elm_lang$core$String$toLower(_p22._1);
+			function (_p20) {
+				var _p21 = _p20;
+				return _elm_lang$core$String$toLower(_p21._1);
 			},
 			list);
 		var pkWidth = _ivanceras$diwata$Widgets_DropdownDisplay$calcPkWidth(sorted);
@@ -25116,8 +25106,8 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$update = F2(
 	function (msg, model) {
 		update:
 		while (true) {
-			var _p23 = msg;
-			switch (_p23.ctor) {
+			var _p22 = msg;
+			switch (_p22.ctor) {
 				case 'ToggleDropdown':
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
@@ -25136,26 +25126,26 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$update = F2(
 					var newModel = _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							selected: _elm_lang$core$Maybe$Just(_p23._0)
+							selected: _elm_lang$core$Maybe$Just(_p22._0)
 						});
-					var _v10 = _ivanceras$diwata$Widgets_DropdownDisplay$CloseDropdown,
-						_v11 = newModel;
-					msg = _v10;
-					model = _v11;
+					var _v9 = _ivanceras$diwata$Widgets_DropdownDisplay$CloseDropdown,
+						_v10 = newModel;
+					msg = _v9;
+					model = _v10;
 					continue update;
 				case 'DropdownScrolled':
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{scroll: _p23._0}),
+							{scroll: _p22._0}),
 						_elm_lang$core$Platform_Cmd$none);
 				default:
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{containerScroll: _p23._0, opened: false}),
+							{containerScroll: _p22._0, opened: false}),
 						_elm_lang$core$Platform_Cmd$none);
 			}
 		}
@@ -25164,14 +25154,14 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$ToggleDropdown = {ctor: 'ToggleDro
 var _ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton = F3(
 	function (styles, list, model) {
 		var selectedValue = function () {
-			var _p24 = model.selected;
-			if (_p24.ctor === 'Just') {
+			var _p23 = model.selected;
+			if (_p23.ctor === 'Just') {
 				return _elm_lang$core$List$head(
 					A2(
 						_elm_lang$core$List$filter,
-						function (_p25) {
-							var _p26 = _p25;
-							return _elm_lang$core$Native_Utils.eq(_p26._0, _p24._0);
+						function (_p24) {
+							var _p25 = _p24;
+							return _elm_lang$core$Native_Utils.eq(_p25._0, _p23._0);
 						},
 						list));
 			} else {
@@ -25179,25 +25169,25 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton = F3(
 			}
 		}();
 		var selectedDisplay = function () {
-			var _p27 = selectedValue;
-			if (_p27.ctor === 'Just') {
-				var _p30 = _p27._0._0;
-				var _p29 = _p27._0._1;
+			var _p26 = selectedValue;
+			if (_p26.ctor === 'Just') {
+				var _p29 = _p26._0._0;
+				var _p28 = _p26._0._1;
 				var choiceWidth = _ivanceras$diwata$Widgets_DropdownDisplay$choiceCharWidth(list);
 				var choicePadded = A3(
 					_elm_lang$core$String$padLeft,
 					choiceWidth,
 					_elm_lang$core$Native_Utils.chr(' '),
-					_p29);
-				var pkString = _ivanceras$diwata$Data_Window_Value$valueToString(_p30);
+					_p28);
+				var pkString = _ivanceras$diwata$Data_Window_Value$valueToString(_p29);
 				var pkWidth = _ivanceras$diwata$Widgets_DropdownDisplay$pkCharWidth(list);
 				var pkPadded = A3(
 					_elm_lang$core$String$padLeft,
 					pkWidth,
 					_elm_lang$core$Native_Utils.chr(' '),
 					pkString);
-				var _p28 = _p30;
-				if (_p28.ctor === 'Uuid') {
+				var _p27 = _p29;
+				if (_p27.ctor === 'Uuid') {
 					return A2(
 						_elm_lang$core$Basics_ops['++'],
 						choicePadded,
@@ -25206,7 +25196,7 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton = F3(
 					return A2(
 						_elm_lang$core$Basics_ops['++'],
 						pkPadded,
-						A2(_elm_lang$core$Basics_ops['++'], '  |  ', _p29));
+						A2(_elm_lang$core$Basics_ops['++'], '  |  ', _p28));
 				}
 			} else {
 				return '';
@@ -25267,7 +25257,7 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton = F3(
 	});
 var _ivanceras$diwata$Widgets_DropdownDisplay$view = F2(
 	function (list, model) {
-		var widgetWidth = model.width;
+		var widgetWidth = model.width - 10;
 		var alignment = model.alignment;
 		var alignmentString = _ivanceras$diwata$Data_Window_Widget$alignmentToString(alignment);
 		var styles = _elm_lang$html$Html_Attributes$style(
@@ -25288,31 +25278,20 @@ var _ivanceras$diwata$Widgets_DropdownDisplay$view = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('dropdown-display-wrapper'),
+				_0: _elm_lang$html$Html_Attributes$class('dropdown-display'),
 				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('dropdown-display'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A3(_ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton, styles, list, model),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_ivanceras$diwata$Util$viewIf,
-								model.opened,
-								A3(_ivanceras$diwata$Widgets_DropdownDisplay$viewDropdown, styles, list, model)),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
+				_0: A3(_ivanceras$diwata$Widgets_DropdownDisplay$viewInputButton, styles, list, model),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_ivanceras$diwata$Util$viewIf,
+						model.opened,
+						A3(_ivanceras$diwata$Widgets_DropdownDisplay$viewDropdown, styles, list, model)),
+					_1: {ctor: '[]'}
+				}
 			});
 	});
 
@@ -25369,6 +25348,10 @@ var _ivanceras$diwata$Widgets_FixDropdown$viewOption = function (choice) {
 };
 var _ivanceras$diwata$Widgets_FixDropdown$viewDropdown = F2(
 	function (styles, model) {
+		var padTop = 2;
+		var _p0 = {ctor: '_Tuple2', _0: (0 - model.containerScroll.top) + padTop, _1: 0 - model.containerScroll.left};
+		var marginTop = _p0._0;
+		var marginLeft = _p0._1;
 		var sorted = A2(_elm_lang$core$List$sortBy, _elm_lang$core$String$toLower, model.list);
 		return A2(
 			_elm_lang$html$Html$div,
@@ -25378,7 +25361,28 @@ var _ivanceras$diwata$Widgets_FixDropdown$viewDropdown = F2(
 				_1: {
 					ctor: '::',
 					_0: styles,
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'margin-top',
+									_1: _ivanceras$diwata$Util$px(marginTop)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'margin-left',
+										_1: _ivanceras$diwata$Util$px(marginLeft)
+									},
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			},
 			{
@@ -25399,8 +25403,8 @@ var _ivanceras$diwata$Widgets_FixDropdown$update = F2(
 	function (msg, model) {
 		update:
 		while (true) {
-			var _p0 = msg;
-			switch (_p0.ctor) {
+			var _p1 = msg;
+			switch (_p1.ctor) {
 				case 'ToggleDropdown':
 					return A2(
 						_ivanceras$diwata$Util_ops['=>'],
@@ -25419,7 +25423,7 @@ var _ivanceras$diwata$Widgets_FixDropdown$update = F2(
 					var newModel = _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							selected: _elm_lang$core$Maybe$Just(_p0._0)
+							selected: _elm_lang$core$Maybe$Just(_p1._0)
 						});
 					var _v1 = _ivanceras$diwata$Widgets_FixDropdown$CloseDropdown,
 						_v2 = newModel;
@@ -25431,7 +25435,7 @@ var _ivanceras$diwata$Widgets_FixDropdown$update = F2(
 						_ivanceras$diwata$Util_ops['=>'],
 						_elm_lang$core$Native_Utils.update(
 							model,
-							{containerScroll: _p0._0, opened: false}),
+							{containerScroll: _p1._0, opened: false}),
 						_elm_lang$core$Platform_Cmd$none);
 			}
 		}
@@ -25440,13 +25444,13 @@ var _ivanceras$diwata$Widgets_FixDropdown$ToggleDropdown = {ctor: 'ToggleDropdow
 var _ivanceras$diwata$Widgets_FixDropdown$viewInputButton = F2(
 	function (styles, model) {
 		var selectedValue = function () {
-			var _p1 = model.selected;
-			if (_p1.ctor === 'Just') {
+			var _p2 = model.selected;
+			if (_p2.ctor === 'Just') {
 				return _elm_lang$core$List$head(
 					A2(
 						_elm_lang$core$List$filter,
 						function (choice) {
-							return _elm_lang$core$Native_Utils.eq(choice, _p1._0);
+							return _elm_lang$core$Native_Utils.eq(choice, _p2._0);
 						},
 						model.list));
 			} else {
@@ -25454,9 +25458,9 @@ var _ivanceras$diwata$Widgets_FixDropdown$viewInputButton = F2(
 			}
 		}();
 		var selectedDisplay = function () {
-			var _p2 = selectedValue;
-			if (_p2.ctor === 'Just') {
-				return _p2._0;
+			var _p3 = selectedValue;
+			if (_p3.ctor === 'Just') {
+				return _p3._0;
 			} else {
 				return '';
 			}
@@ -25520,18 +25524,7 @@ var _ivanceras$diwata$Widgets_FixDropdown$viewInputButton = F2(
 			});
 	});
 var _ivanceras$diwata$Widgets_FixDropdown$view = function (model) {
-	var padTop = 2;
-	var _p3 = function () {
-		var _p4 = _coreytrampe$elm_vendor$Vendor$prefix;
-		if (_p4.ctor === 'Webkit') {
-			return {ctor: '_Tuple2', _0: (0 - model.containerScroll.top) + padTop, _1: 0 - model.containerScroll.left};
-		} else {
-			return {ctor: '_Tuple2', _0: padTop, _1: 0};
-		}
-	}();
-	var marginTop = _p3._0;
-	var marginLeft = _p3._1;
-	var widgetWidth = model.width;
+	var widgetWidth = model.width - 10;
 	var alignment = model.alignment;
 	var alignmentString = _ivanceras$diwata$Data_Window_Widget$alignmentToString(alignment);
 	var styles = _elm_lang$html$Html_Attributes$style(
@@ -25545,23 +25538,7 @@ var _ivanceras$diwata$Widgets_FixDropdown$view = function (model) {
 					_0: 'width',
 					_1: _ivanceras$diwata$Util$px(widgetWidth)
 				},
-				_1: {
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'margin-top',
-						_1: _ivanceras$diwata$Util$px(marginTop)
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'margin-left',
-							_1: _ivanceras$diwata$Util$px(marginLeft)
-						},
-						_1: {ctor: '[]'}
-					}
-				}
+				_1: {ctor: '[]'}
 			}
 		});
 	return A2(
@@ -32683,8 +32660,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage = F3(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.DetailedRecord',
 					{
-						start: {line: 1579, column: 13},
-						end: {line: 1584, column: 68}
+						start: {line: 1585, column: 13},
+						end: {line: 1590, column: 68}
 					},
 					_p58)('There has to be a main table here');
 			}
@@ -32697,8 +32674,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$refreshTabPage = F3(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.DetailedRecord',
 					{
-						start: {line: 1571, column: 13},
-						end: {line: 1576, column: 67}
+						start: {line: 1577, column: 13},
+						end: {line: 1582, column: 67}
 					},
 					_p60)('There should be a selectedRecord');
 			}
@@ -33374,8 +33351,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$requestNextPage = F3(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Views.Window.DetailedRecord',
 					{
-						start: {line: 1509, column: 13},
-						end: {line: 1514, column: 97}
+						start: {line: 1515, column: 13},
+						end: {line: 1520, column: 97}
 					},
 					_p95)('Can not request next page on detail other than selected record');
 			}
@@ -33783,8 +33760,8 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$update = F2(
 						_elm_lang$core$Native_Utils.crash(
 							'Views.Window.DetailedRecord',
 							{
-								start: {line: 1275, column: 13},
-								end: {line: 1275, column: 24}
+								start: {line: 1281, column: 13},
+								end: {line: 1281, column: 24}
 							}),
 						'Error loading next page lookup',
 						_p125._0);
@@ -34049,6 +34026,7 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$view = function (model) {
 		multiColumnSort: false
 	};
 	var containerHeight = allotedHeight + 40;
+	var containerWidth = allotedWidth + 40;
 	var containerSize = model.containerSize;
 	var isMaximized = model.isMaximized || _ivanceras$diwata$Constant$isDetailedRecordMaximized;
 	var realPosition = _ivanceras$diwata$Views_Window_DetailedRecord$getPosition(model);
@@ -34072,7 +34050,15 @@ var _ivanceras$diwata$Views_Window_DetailedRecord$view = function (model) {
 							_0: 'height',
 							_1: _ivanceras$diwata$Util$px(containerHeight)
 						},
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'width',
+								_1: _ivanceras$diwata$Util$px(containerWidth)
+							},
+							_1: {ctor: '[]'}
+						}
 					}),
 				_1: {
 					ctor: '::',
@@ -34636,7 +34622,16 @@ var _ivanceras$diwata$Page_WindowArena$viewBanner = function (model) {
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$id('banner'),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$classList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'hide', _1: model.isWindowListHidden},
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		},
 		{
@@ -35247,8 +35242,8 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 													return _elm_lang$core$Native_Utils.crashCase(
 														'Page.WindowArena',
 														{
-															start: {line: 359, column: 21},
-															end: {line: 364, column: 74}
+															start: {line: 360, column: 21},
+															end: {line: 365, column: 74}
 														},
 														_p27)('There should be an activeWindow');
 												}
@@ -35301,8 +35296,8 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 													return _elm_lang$core$Native_Utils.crashCase(
 														'Page.WindowArena',
 														{
-															start: {line: 396, column: 21},
-															end: {line: 401, column: 74}
+															start: {line: 397, column: 21},
+															end: {line: 402, column: 74}
 														},
 														_p31)('There should be an activeWindow');
 												}
@@ -35350,8 +35345,8 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 														return _elm_lang$core$Native_Utils.crashCase(
 															'Page.WindowArena',
 															{
-																start: {line: 424, column: 21},
-																end: {line: 429, column: 74}
+																start: {line: 425, column: 21},
+																end: {line: 430, column: 74}
 															},
 															_p35)('There should be an activeWindow');
 													}
@@ -35408,8 +35403,8 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 												return _elm_lang$core$Native_Utils.crashCase(
 													'Page.WindowArena',
 													{
-														start: {line: 474, column: 21},
-														end: {line: 479, column: 68}
+														start: {line: 475, column: 21},
+														end: {line: 480, column: 68}
 													},
 													_p38)('There should be tableName');
 											}
@@ -35422,8 +35417,8 @@ var _ivanceras$diwata$Page_WindowArena$update = F3(
 												return _elm_lang$core$Native_Utils.crashCase(
 													'Page.WindowArena',
 													{
-														start: {line: 466, column: 21},
-														end: {line: 471, column: 74}
+														start: {line: 467, column: 21},
+														end: {line: 472, column: 74}
 													},
 													_p40)('There should be an activeWindow');
 											}
