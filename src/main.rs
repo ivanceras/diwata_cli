@@ -12,10 +12,11 @@ extern crate structopt;
 #[macro_use]
 extern crate structopt_derive;
 extern crate open;
+#[macro_use]
+extern crate include_dir;
 
 use futures::Future;
 use hyper::error::Error;
-use hyper::header::ContentType;
 use hyper::server::Http;
 use hyper::server::Response;
 use hyper::server::Service;
@@ -23,8 +24,15 @@ use hyper::Request;
 use server::handler::Server;
 use std::sync::{Arc, Mutex};
 use structopt::StructOpt;
+use hyper::header::ContentType;
+use hyper::StatusCode;
+use std::path::PathBuf;
+use include_dir::Dir;
 
-const HTML: &'static str = include_str!("../public/static/inline-cli.html");
+// TODO: put the static dir inside project code
+// TODO: also make it a feature in server, so it don't have
+// to bundle both for the server package and this package again
+static STATIC_DIR: Dir = include_dir!("../public/static");
 
 #[derive(Clone)]
 pub struct Instance {
@@ -51,22 +59,54 @@ impl Service for Instance {
         let query = uri.query();
 
         let trim_path = path.trim_matches('/');
-        let split_path: Vec<_> = trim_path.split('/').collect();
-        let head = split_path[0];
-
+        let parts: Vec<_> = trim_path.split('/').collect();
+        let head = parts[0];
+        let tail = &parts[1..];
         if head == "" {
             Box::new(futures::future::ok(handle_index(req)))
-        } else {
+        } else if head == "static" {
+            Box::new(futures::future::ok(handle_static(req, tail)))
+        } else{
             self.server.lock().unwrap().route(path, query, req)
         }
     }
 }
 
 fn handle_index(_req: Request) -> Response {
-    let mut res = Response::new();
-    res.headers_mut().set(ContentType::html());
-    return res.with_body(HTML.as_bytes());
+    handle_static(_req, &["index.html"])
 }
+
+fn handle_static(_req: Request, path: &[&str]) -> Response {
+    println!("handling static: {:?}", path);
+    let mut path_buf = PathBuf::new();
+    for p in path {
+        path_buf.push(p);
+    }
+
+    let content_type = match path_buf.extension() {
+        Some(s) if s.to_str().unwrap() == "html" => ContentType::html(),
+        Some(s) if s.to_str().unwrap() == "css" => ContentType("text/css".parse().unwrap()),
+        Some(s) if s.to_str().unwrap() == "json" => ContentType::json(),
+        _ => ContentType("application/octet-stream".parse().unwrap()),
+    };
+    if let Some(static_file) = STATIC_DIR.get_file(&path_buf){
+        if let Some(bytes) = static_file.contents_utf8(){
+            let mut res = Response::new();
+            res.headers_mut().set(content_type);
+            res.with_body(bytes)
+        }else{
+            handle_not_found(_req)
+        }
+    }
+    else{
+        handle_not_found(_req)
+    }
+}
+
+fn handle_not_found(_req: Request) -> Response {
+    Response::new().with_status(StatusCode::NotFound).with_body("Not Found")
+}
+
 
 /// TODO: using a port that is already in used doesn't seem to error in hyper
 fn run(ip: &str, port: u16) {

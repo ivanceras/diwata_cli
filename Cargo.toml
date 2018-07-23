@@ -15,6 +15,7 @@ structopt-derive = "0.1"
 hyper = "0.11"
 futures = "0.1.14"
 open = "1.2"
+include_dir = "0.2"
 
 [dependencies.diwata_intel]
 version = "0.1"
